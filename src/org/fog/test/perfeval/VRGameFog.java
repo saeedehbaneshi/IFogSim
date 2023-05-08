@@ -45,11 +45,13 @@ public class VRGameFog {
 	static List<Sensor> sensors = new ArrayList<Sensor>();
 	static List<Actuator> actuators = new ArrayList<Actuator>();
 	
+	static boolean USER_DEFINED = true;
 	static boolean CLOUD = false;
-	
-	static int numOfDepts = 2;
-	static int numOfMobilesPerDept = 5;
-	static double EEG_TRANSMISSION_TIME = 5;
+	//This was 2 I changed it to 1
+	static int numOfDepts = 1;
+	// This was 5 I changed it to 4 for benchmarking.
+	static int numOfMobilesPerDept = 4;
+	static double EEG_TRANSMISSION_TIME = 10;
 	
 	public static void main(String[] args) {
 
@@ -74,12 +76,26 @@ public class VRGameFog {
 			
 			ModuleMapping moduleMapping = ModuleMapping.createModuleMapping(); // initializing a module mapping
 			
+			//// Saeedeh added for her placement ////
+			if(USER_DEFINED) {
+				moduleMapping.addModuleToDevice("connector", "cloud");
+				
+				moduleMapping.addModuleToDevice("concentration_calculator", "d-0");
+				for(FogDevice device : fogDevices){
+					if(device.getName().startsWith("d")){
+						//moduleMapping.addModuleToDevice("client", device.getName(), 1);  // fixing all instances of the Client module to the Smartphones
+						moduleMapping.addModuleToDevice("client", device.getName());  // fixing all instances of the Client module to the Smartphones
+					}
+				}		
+			}
+			
 			if(CLOUD){
 				// if the mode of deployment is cloud-based
 				/*moduleMapping.addModuleToDevice("connector", "cloud", numOfDepts*numOfMobilesPerDept); // fixing all instances of the Connector module to the Cloud
 				moduleMapping.addModuleToDevice("concentration_calculator", "cloud", numOfDepts*numOfMobilesPerDept); // fixing all instances of the Concentration Calculator module to the Cloud
 */				moduleMapping.addModuleToDevice("connector", "cloud"); // fixing all instances of the Connector module to the Cloud
 				moduleMapping.addModuleToDevice("concentration_calculator", "cloud"); // fixing all instances of the Concentration Calculator module to the Cloud
+				//moduleMapping.addModuleToDevice("client", "proxy-server");
 				for(FogDevice device : fogDevices){
 					if(device.getName().startsWith("m")){
 						//moduleMapping.addModuleToDevice("client", device.getName(), 1);  // fixing all instances of the Client module to the Smartphones
@@ -91,6 +107,7 @@ public class VRGameFog {
 				//moduleMapping.addModuleToDevice("connector", "cloud", numOfDepts*numOfMobilesPerDept); // fixing all instances of the Connector module to the Cloud
 				moduleMapping.addModuleToDevice("connector", "cloud"); // fixing all instances of the Connector module to the Cloud
 				// rest of the modules will be placed by the Edge-ward placement policy
+				
 			}
 			
 			
@@ -98,7 +115,7 @@ public class VRGameFog {
 					actuators);
 			
 			controller.submitApplication(application, 0, 
-					(CLOUD)?(new ModulePlacementMapping(fogDevices, application, moduleMapping))
+					(CLOUD || USER_DEFINED)?(new ModulePlacementMapping(fogDevices, application, moduleMapping))
 							:(new ModulePlacementEdgewards(fogDevices, sensors, actuators, application, moduleMapping)));
 
 			TimeKeeper.getInstance().setSimulationStartTime(Calendar.getInstance().getTimeInMillis());
@@ -143,7 +160,7 @@ public class VRGameFog {
 		for(int i=0;i<numOfMobilesPerDept;i++){
 			String mobileId = id+"-"+i;
 			FogDevice mobile = addMobile(mobileId, userId, appId, dept.getId()); // adding mobiles to the physical topology. Smartphones have been modeled as fog devices as well.
-			mobile.setUplinkLatency(2); // latency of connection between the smartphone and proxy server is 4 ms
+			mobile.setUplinkLatency(2); // latency of connection between the smartphone and proxy server is 2 ms
 			fogDevices.add(mobile);
 		}
 		return dept;
@@ -253,7 +270,7 @@ public class VRGameFog {
 		if(EEG_TRANSMISSION_TIME==10)
 			application.addAppEdge("EEG", "client", 2000, 500, "EEG", Tuple.UP, AppEdge.SENSOR); // adding edge from EEG (sensor) to Client module carrying tuples of type EEG
 		else
-			application.addAppEdge("EEG", "client", 3000, 500, "EEG", Tuple.UP, AppEdge.SENSOR);
+			application.addAppEdge("EEG", "client", 2500, 500, "EEG", Tuple.UP, AppEdge.SENSOR);
 		application.addAppEdge("client", "concentration_calculator", 3500, 500, "_SENSOR", Tuple.UP, AppEdge.MODULE); // adding edge from Client to Concentration Calculator module carrying tuples of type _SENSOR
 		application.addAppEdge("concentration_calculator", "connector", 100, 1000, 1000, "PLAYER_GAME_STATE", Tuple.UP, AppEdge.MODULE); // adding periodic edge (period=1000ms) from Concentration Calculator to Connector module carrying tuples of type PLAYER_GAME_STATE
 		application.addAppEdge("concentration_calculator", "client", 14, 500, "CONCENTRATION", Tuple.DOWN, AppEdge.MODULE);  // adding edge from Concentration Calculator to Client module carrying tuples of type CONCENTRATION

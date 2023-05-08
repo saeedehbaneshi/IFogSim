@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.cloudbus.cloudsim.core.CloudSimTags;
@@ -122,6 +123,8 @@ public class Datacenter extends SimEntity {
 	@Override
 	public void processEvent(SimEvent ev) {
 		int srcId = -1;
+		//saeedeh//System.out.println("EVENT Source : "+CloudSim.getEntity(ev.getSource()).getName());
+		//saeedeh//System.out.println("EVENT TAG: "+ev.getTag());
 		switch (ev.getTag()) {
 		// Resource characteristics inquiry
 			case CloudSimTags.RESOURCE_CHARACTERISTICS:
@@ -251,6 +254,7 @@ public class Datacenter extends SimEntity {
 
 			// other unknown tags are processed by this method
 			default:
+				//saeedeh//System.out.println("hey I am this, my name is: "+this.getName());
 				processOtherEvent(ev);
 				break;
 		}
@@ -410,6 +414,9 @@ public class Datacenter extends SimEntity {
 	 * @post $none
 	 */
 	protected void processOtherEvent(SimEvent ev) {
+		Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Enter usernameeeeee");
+        String userName = myObj.nextLine();  // Read user input
 		if (ev == null) {
 			Log.printLine(getName() + ".processOtherEvent(): Error - an event is null.");
 		}
@@ -426,7 +433,12 @@ public class Datacenter extends SimEntity {
 	 */
 	protected void processVmCreate(SimEvent ev, boolean ack) {
 		Vm vm = (Vm) ev.getData();
-
+		//saeedeh//System.out.println(" ----------------------------------- we are in datacenter processVmCreate function -------------------------------------");
+		System.out.println(" IT IS VM Id :"+vm.getId()+" this data carried by this event ev= "+ev.getTag()+" for this destination : "+ev.getDestination());
+		//Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        //System.out.println("<><><><><><><><><3<><><><><><><><>");
+        //String userName = myObj.nextLine(); 
+		//saeedeh//System.out.println("''' Process vm create function '''");
 		boolean result = getVmAllocationPolicy().allocateHostForVm(vm);
 
 		if (ack) {
@@ -444,6 +456,7 @@ public class Datacenter extends SimEntity {
 
 		if (result) {
 			getVmList().add(vm);
+			System.out.println(" Vm list after creation : "+getVmList());
 
 			if (vm.isBeingInstantiated()) {
 				vm.setBeingInstantiated(false);
@@ -451,7 +464,7 @@ public class Datacenter extends SimEntity {
 			vm.updateVmProcessing(CloudSim.clock(), getVmAllocationPolicy().getHost(vm).getVmScheduler()
 					.getAllocatedMipsForVm(vm));
 		}
-
+		//saeedeh//System.out.println(" -------------------------------- Proccess vm creation and updating vm processing completed ----------------------------------------");
 	}
 
 	/**
@@ -686,6 +699,14 @@ public class Datacenter extends SimEntity {
 				Log.printLine("Therefore, it is not being executed again");
 				Log.printLine();
 
+				
+				
+				System.out.println(getName() + ": Warning - Cloudlet #" + cl.getCloudletId() + " owned by " + name
+						+ " is already completed/finished.");
+				System.out.println("Therefore, it is not being executed again");
+				
+				
+				
 				// NOTE: If a Cloudlet has finished, then it won't be processed.
 				// So, if ack is required, this method sends back a result.
 				// If ack is not required, this method don't send back a result.
@@ -1024,16 +1045,22 @@ public class Datacenter extends SimEntity {
 	 */
 	@Override
 	public void startEntity() {
+		//saeedeh//System.out.println(getName() + " is starting...");
 		Log.printLine(getName() + " is starting...");
 		// this resource should register to regional GIS.
 		// However, if not specified, then register to system GIS (the
 		// default CloudInformationService) entity.
 		int gisID = CloudSim.getEntityId(regionalCisName);
+		//saeedeh//System.out.println(" first gisID is : "+gisID);
+
 		if (gisID == -1) {
 			gisID = CloudSim.getCloudInfoServiceEntityId();
+			//saeedeh//System.out.println("second gisID is : "+gisID);
 		}
 
 		// send the registration to GIS
+		//saeedeh//System.out.println("get id is : "+getId());
+		//saeedeh//System.out.println("get name is : "+getName());
 		sendNow(gisID, CloudSimTags.REGISTER_RESOURCE, getId());
 		// Below method is for a child class to override
 		registerOtherEntity();

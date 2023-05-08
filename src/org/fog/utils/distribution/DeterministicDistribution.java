@@ -11,6 +11,7 @@ public class DeterministicDistribution extends Distribution{
 	
 	@Override
 	public double getNextValue() {
+		//System.out.println("@@ From deterministic distribution it is next value = "+value);
 		return value;
 	}
 	

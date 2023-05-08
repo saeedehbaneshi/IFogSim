@@ -456,6 +456,7 @@ public class ResCloudlet {
 	public void finalizeCloudlet() {
 		// Sets the wall clock time and actual CPU time
 		double wallClockTime = CloudSim.clock() - arrivalTime;
+		//sshh//System.out.println(" wallClockTime : "+wallClockTime);
 		cloudlet.setExecParam(wallClockTime, totalCompletionTime);
 
 		long finished = 0;

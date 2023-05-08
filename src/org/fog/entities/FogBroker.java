@@ -7,11 +7,14 @@ public class FogBroker extends PowerDatacenterBroker{
 
 	public FogBroker(String name) throws Exception {
 		super(name);
+		//System.out.println("FogBroker constructor called");
+		
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void startEntity() {
+		System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO");
 		// TODO Auto-generated method stub
 		
 	}

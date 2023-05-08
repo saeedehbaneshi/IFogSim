@@ -1,0 +1,2 @@
+rm -r test.txt
+out/production/iFogSim2/run.sh | tee -a test.txt

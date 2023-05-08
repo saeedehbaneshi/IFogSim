@@ -22,7 +22,7 @@ public class ModulePlacementMapping extends ModulePlacement{
 				AppModule module = getApplication().getModuleByName(moduleName);
 				if(module == null)
 					continue;
-				createModuleInstanceOnDevice(module, device);
+				createModuleInstanceOnDevice(module, device);//**Saeedeh**// if module can be created, create it and add device and module to maps (moduleToDeviceMap & DeviceToModuleMap)
 				//getModuleInstanceCountMap().get(device.getId()).put(moduleName, mapping.get(deviceName).get(moduleName));
 			}
 		}

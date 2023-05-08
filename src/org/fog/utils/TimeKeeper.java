@@ -42,21 +42,62 @@ public class TimeKeeper {
 	}
 	
 	public void tupleStartedExecution(Tuple tuple){
-		tupleIdToCpuStartTime.put(tuple.getCloudletId(), CloudSim.clock());
+		//saedeh//System.out.println("tuple started execution");
+		tupleIdToCpuStartTime.put(tuple.getCloudletId(), CloudSim.clock());	
+		//saeedeh//System.out.println("tupleIdToCpuStartTime : "+tupleIdToCpuStartTime);
 	}
 	
 	public void tupleEndedExecution(Tuple tuple){
+		
+		/*saeedeh
+		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();  
+        System.out.println("///////////////////////////Displaying Stack trace using StackTraceElement in Java//////////////////////////////");  
+        for(StackTraceElement st : stackTrace){
+        	// print the stack trace   
+            System.out.println(st);  
+        }saeedeh*/
+		
+		
 		if(!tupleIdToCpuStartTime.containsKey(tuple.getCloudletId()))
 			return;
 		double executionTime = CloudSim.clock() - tupleIdToCpuStartTime.get(tuple.getCloudletId());
+		//saeedeh//
+		//sshh//System.out.println("TuplE ID : "+tuple.getCloudletId()+" execution time is "+executionTime+" with Start time of : "+tupleIdToCpuStartTime.get(tuple.getCloudletId()));
 		if(!tupleTypeToAverageCpuTime.containsKey(tuple.getTupleType())){
 			tupleTypeToAverageCpuTime.put(tuple.getTupleType(), executionTime);
 			tupleTypeToExecutedTupleCount.put(tuple.getTupleType(), 1);
+			//saeedeh//System.out.println("Tuple name in if : "+tuple.getTupleType());
+			//saeedeh//System.out.println("execution time in if "+executionTime);
+
 		} else{
+
 			double currentAverage = tupleTypeToAverageCpuTime.get(tuple.getTupleType());
+			
 			int currentCount = tupleTypeToExecutedTupleCount.get(tuple.getTupleType());
+			
+			//saeedeh//System.out.println("Tuple name in else : "+tuple.getTupleType());
+			//saeedeh//System.out.println("Current average :" +currentAverage);
+			//saeedeh//System.out.println("Current count :" +currentCount);
+			//saeedeh//System.out.println("avg cpu time :" +(currentAverage*currentCount+executionTime)/(currentCount+1));
+
 			tupleTypeToAverageCpuTime.put(tuple.getTupleType(), (currentAverage*currentCount+executionTime)/(currentCount+1));
+			//saeedeh//System.out.println("tuple type to avg cpu time :" +tupleTypeToAverageCpuTime.get(tuple.getTupleType()));
+
 		}
+        /* Saeedeh
+        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();  
+        System.err.println("Displaying Stack trace using StackTraceElement in Java");  
+        for(StackTraceElement st : stackTrace){
+        	// print the stack trace   
+            System.out.println(st);  
+        }*/
+		//saeedeh//System.out.println("tuple type :" +tuple.getTupleType());
+		//saeedeh//System.out.println("tuple exec time :" +executionTime);
+		//saeedeh//System.out.println("tuple type to avg cpu time :" +tupleTypeToAverageCpuTime.get(tuple.getTupleType()));
+		//saeedeh//System.out.println("tuple type to avg cpu time :" +tupleTypeToAverageCpuTime);
+		//saeedeh//System.out.println("tuple type to executed tuple count :" +tupleTypeToExecutedTupleCount);
+		//saeedeh//System.out.println("tuple Id to cpu start time :" +tupleIdToCpuStartTime.get(tuple.getCloudletId()));
+
 	}
 	
 	public Map<Integer, List<Integer>> loopIdToTupleIds(){

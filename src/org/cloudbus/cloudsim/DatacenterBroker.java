@@ -410,6 +410,8 @@ public class DatacenterBroker extends SimEntity {
 	@Override
 	public void startEntity() {
 		Log.printLine(getName() + " is starting...");
+		System.out.println(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%From DATACENTER BROKER startEntity : "+getName() + " is starting...");
+
 		schedule(getId(), 0, CloudSimTags.RESOURCE_CHARACTERISTICS_REQUEST);
 	}
 

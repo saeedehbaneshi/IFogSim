@@ -110,8 +110,29 @@ public class Controller extends SimEntity{
 	}
 	
 	private void printNetworkUsageDetails() {
-		System.out.println("Total network usage = "+NetworkUsageMonitor.getNetworkUsage()/Config.MAX_SIMULATION_TIME);		
+		System.out.println("Total network usage = "+NetworkUsageMonitor.getNetworkUsage()/Config.MAX_SIMULATION_TIME);
+		//Saeedeh added energy model base on network usage
+		System.out.println("Network usage-based energy = "+NetworkUsageMonitor.getNetworkUsage()*Config.LINK_POWER);
+		//
+		System.out.println("links usage = "+NetworkUsageMonitor.getLinksUsage());
+		
+		for(String deviceId : NetworkUsageMonitor.getLinksUsageMap().keySet()) {
+			System.out.println("link usage of device Id : "+ deviceId +" --->= "+NetworkUsageMonitor.getLinksUsageMap().get(deviceId));
+		}
+		
+		for(String deviceId : NetworkUsageMonitor.getUpLinksEnergyMap().keySet()) {
+			System.out.println("Uplink energy of device Id : "+ deviceId +" --->= "+NetworkUsageMonitor.getUpLinksEnergyMap().get(deviceId));
+		}
+		
+		for(String deviceId : NetworkUsageMonitor.getDownLinksEnergyMap().keySet()) {
+			System.out.println("Downlink energy of device Id : "+ deviceId +" --->= "+NetworkUsageMonitor.getDownLinksEnergyMap().get(deviceId));
+		}
+		
+		for(String deviceId : NetworkUsageMonitor.getDownLinksEnergyMap().keySet()) {
+			System.out.println("Total link energy of device Id : "+ deviceId +" --->= "+NetworkUsageMonitor.getTotalLinksEnergyMap().get(deviceId));
+		}
 	}
+
 
 	private FogDevice getCloud(){
 		for(FogDevice dev : getFogDevices())
@@ -127,6 +148,8 @@ public class Controller extends SimEntity{
 	private void printPowerDetails() {
 		for(FogDevice fogDevice : getFogDevices()){
 			System.out.println(fogDevice.getName() + " : Energy Consumed = "+fogDevice.getEnergyConsumption());
+			//Saeedeh added this code for reporting application Energy
+			System.out.println(fogDevice.getName() + " : Application Energy Consumed = "+fogDevice.getApplicationEnergyConsumption());
 		}
 	}
 
@@ -144,7 +167,7 @@ public class Controller extends SimEntity{
 		System.out.println("=========================================");
 		System.out.println("============== RESULTS ==================");
 		System.out.println("=========================================");
-		System.out.println("EXECUTION TIME : "+ (Calendar.getInstance().getTimeInMillis() - TimeKeeper.getInstance().getSimulationStartTime()));
+		System.out.println("EXECUTION TIME = "+ (Calendar.getInstance().getTimeInMillis() - TimeKeeper.getInstance().getSimulationStartTime()));
 		System.out.println("=========================================");
 		System.out.println("APPLICATION LOOP DELAYS");
 		System.out.println("=========================================");
@@ -157,19 +180,41 @@ public class Controller extends SimEntity{
 					break;
 				average += endTime-startTime;
 				count += 1;
+				System.err.println(average);
 			}
-			System.out.println(getStringForLoopId(loopId) + " ---> "+(average/count));*/
-			System.out.println(getStringForLoopId(loopId) + " ---> "+TimeKeeper.getInstance().getLoopIdToCurrentAverage().get(loopId));
+			System.out.println(getStringForLoopId(loopId) + " --->= "+(average/count));*/
+			System.out.println(getStringForLoopId(loopId) + " --->= "+TimeKeeper.getInstance().getLoopIdToCurrentAverage().get(loopId));
 		}
 		System.out.println("=========================================");
 		System.out.println("TUPLE CPU EXECUTION DELAY");
 		System.out.println("=========================================");
 		
 		for(String tupleType : TimeKeeper.getInstance().getTupleTypeToAverageCpuTime().keySet()){
-			System.out.println(tupleType + " ---> "+TimeKeeper.getInstance().getTupleTypeToAverageCpuTime().get(tupleType));
+			System.out.println(tupleType + " --->= "+TimeKeeper.getInstance().getTupleTypeToAverageCpuTime().get(tupleType));
 		}
 		
 		System.out.println("=========================================");
+		
+		
+		
+		/*Saeedeh All Stack Traces Method:
+		Map<Thread,StackTraceElement[]> stackTrace = Thread.getAllStackTraces();
+        System.err.println("Displaying All Stack traces using StackTraceElement in Java By Saeedeh ");
+        for (Thread t : stackTrace.keySet()) {
+        	System.out.println("this is the name of thread : "+ t.getName());
+        	for(StackTraceElement st : stackTrace.get(t)){
+        		// print the stack trace   
+        		System.out.println(st);  
+        	}
+        }*/
+		
+		/*//Saeedeh Current Thread Stack Trace Method
+		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();  
+        System.err.println("Displaying Stack trace using StackTraceElement in Java");  
+        for(StackTraceElement st : stackTrace){
+        	// print the stack trace   
+            System.out.println(st);  
+        }*/
 	}
 
 	protected void manageResources(){
@@ -228,8 +273,13 @@ public class Controller extends SimEntity{
 		}
 		
 		Map<Integer, List<AppModule>> deviceToModuleMap = modulePlacement.getDeviceToModuleMap();
+
 		for(Integer deviceId : deviceToModuleMap.keySet()){
+			System.out.println("^^^^^^^^^^^^^^^DeviceId : "+deviceId);
+
 			for(AppModule module : deviceToModuleMap.get(deviceId)){
+				System.out.println("^^^^^^^^^^^^^^^ module : "+module.getName());
+
 				sendNow(deviceId, FogEvents.APP_SUBMIT, application);
 				sendNow(deviceId, FogEvents.LAUNCH_MODULE, module);
 			}

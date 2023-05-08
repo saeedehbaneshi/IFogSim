@@ -9,6 +9,7 @@ package org.cloudbus.cloudsim;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.fog.entities.Tuple;
@@ -32,7 +33,7 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 	/** The cloudlet finished list. */
 	private List<? extends ResCloudlet> cloudletFinishedList;
 
-	/** The current cp us. */
+	/** The current cpus. */
 	protected int currentCPUs;
 
 	/**
@@ -62,16 +63,19 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 	 */
 	@Override
 	public double updateVmProcessing(double currentTime, List<Double> mipsShare) {
+		
+		
+
 		setCurrentMipsShare(mipsShare);
 		double timeSpam = currentTime - getPreviousTime();
 
 		for (ResCloudlet rcl : getCloudletExecList()) {
-						
-			rcl.updateCloudletFinishedSoFar((long) (getCapacity(mipsShare) * timeSpam * rcl.getNumberOfPes() * Consts.MILLION));
-			//System.out.println(getTotalCurrentAllocatedMipsForCloudlet(rcl, getPreviousTime()));
-			//OLA System.out.println(CloudSim.clock()+ " : Remaining length of tuple ID "+((Tuple)rcl.getCloudlet()).getActualTupleId()+" = "+rcl.getRemainingCloudletLength());
 			
-		}
+			double bb=rcl.getCloudletArrivalTime();
+			rcl.updateCloudletFinishedSoFar((long) (getCapacity(mipsShare) * timeSpam * rcl.getNumberOfPes() * Consts.MILLION));
+					}
+		
+
 
 		if (getCloudletExecList().size() == 0) {
 			setPreviousTime(currentTime);
@@ -93,14 +97,19 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 
 		// estimate finish time of cloudlets
 		for (ResCloudlet rcl : getCloudletExecList()) {
+
+			
+			
 			double estimatedFinishTime = currentTime
 					+ (rcl.getRemainingCloudletLength() / (getCapacity(mipsShare) * rcl.getNumberOfPes()));
 			if (estimatedFinishTime - currentTime < CloudSim.getMinTimeBetweenEvents()) {
 				estimatedFinishTime = currentTime + CloudSim.getMinTimeBetweenEvents();
+
 			}
 
 			if (estimatedFinishTime < nextEvent) {
 				nextEvent = estimatedFinishTime;
+
 			}
 		}
 
@@ -361,8 +370,24 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 	@Override
 	public double getTotalUtilizationOfCpu(double time) {
 		double totalUtilization = 0;
+		if (getCloudletExecList().size()>0) {
+			//saeedeh//System.out.println(":size of cloudlet execlist is : "+getCloudletExecList().size());
+			//Scanner myObj = new Scanner(System.in);
+			//System.out.println("scheduler:totalu: "+totalUtilization);
+			//String userName = myObj.nextLine();
+		}
+		
 		for (ResCloudlet gl : getCloudletExecList()) {
 			totalUtilization += gl.getCloudlet().getUtilizationOfCpu(time);
+			//sshh//System.out.println(" ttime iis :: "+time);
+			//sshh//System.out.println(" ccurrent ttime iis :: "+CloudSim.clock());
+
+			//sshh//System.out.println(":gl.getCloudlet().getUtilizationOfCpu(time) is : "+gl.getCloudlet().getUtilizationOfCpu(time));
+
+			
+			/*Scanner myObj = new Scanner(System.in);
+			System.out.println("scheduler:totalu: "+totalUtilization);
+			String userName = myObj.nextLine();*/
 		}
 		return totalUtilization;
 	}
@@ -489,7 +514,9 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 	 */
 	@Override
 	public List<Double> getCurrentRequestedMips() {
+		//saeedeh//System.out.println("@@@@@@@@@@@@@@@@@@@ Cloudlet scheduler time shared: In get current requested mips function) @@@@@@@@@@@@@@@ = ");
 		List<Double> mipsShare = new ArrayList<Double>();
+		//saeedeh//System.out.println("(In get current requested mips function) It is mipsshared = "+mipsShare);
 		return mipsShare;
 	}
 

@@ -10,6 +10,7 @@ package org.cloudbus.cloudsim.power;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.cloudbus.cloudsim.CloudletScheduler;
 import org.cloudbus.cloudsim.Vm;
@@ -44,6 +45,8 @@ public class PowerVm extends Vm {
 
 	/** The scheduling interval. */
 	private double schedulingInterval;
+	
+	private double MYpreviousTime;
 
 	/**
 	 * Instantiates a new power vm.
@@ -91,8 +94,63 @@ public class PowerVm extends Vm {
 	@Override
 	public double updateVmProcessing(final double currentTime, final List<Double> mipsShare) {
 		double time = super.updateVmProcessing(currentTime, mipsShare);
-		if (currentTime > getPreviousTime() && (currentTime - 0.1) % getSchedulingInterval() == 0) {
-			double utilization = getTotalUtilizationOfCpu(getCloudletScheduler().getPreviousTime());
+		
+		
+		boolean debug=false;
+		/*double utilization = getTotalUtilizationOfCpu(getCloudletScheduler().getPreviousTime());
+		if (debug && currentTime!=getPreviousTime()){
+			
+			Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+	        System.out.println("PowerVM: Update VM processing scheduler interval utilization is: " + utilization + 
+	        					"\nPtime: " + getCloudletScheduler().getPreviousTime()+":"+getPreviousTime()+
+	        					"\nCurrent time: " + currentTime +
+	        					"\nMYprevious time: " + MYpreviousTime +
+	        					"\nScheduler interval: "+getSchedulingInterval());
+	        String userName = myObj.nextLine();  // Read user input
+			StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();  
+	        System.out.println("///////////////////////////Displaying Stack trace using StackTraceElement in Java//////////////////////////////");  
+	        for(StackTraceElement st : stackTrace){
+	        	// print the stack trace   
+	            System.out.println(st);  
+	        }
+	        myObj = new Scanner(System.in);  // Create a Scanner object
+	        System.out.println("berim?");
+	        userName = myObj.nextLine();  // Read user input
+	        MYpreviousTime=currentTime;
+		}*/
+
+		
+		
+		
+		
+		
+		//if (currentTime > getPreviousTime() && (currentTime - 0.1) % getSchedulingInterval() == 0) {
+		if (currentTime > getPreviousTime()) {
+			double utilization = getTotalUtilizationOfCpu(getCloudletScheduler().getPreviousTime());  
+			//saeedeh//
+			if(utilization!=0)
+				//sshh//  System.out.println(" utilization from power vm update vm processing :"+utilization);
+			//utilization = getTotalUtilizationOfCpu(getCloudletScheduler().getPreviousTime()); 
+			if (debug){
+				
+				Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+		        System.out.println("PowerVM: Update VM processing scheduler interval utilization is: " + utilization + 
+		        					"\nPtime: " + getCloudletScheduler().getPreviousTime()+":"+getPreviousTime()+
+		        					"\nCurrent time: " + currentTime +
+		        					"\nMYprevious time: " + MYpreviousTime +
+		        					"\nScheduler interval: "+getSchedulingInterval());
+		        String userName = myObj.nextLine();  // Read user input
+				StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();  
+		        System.out.println("///////////////////////////Displaying Stack trace using StackTraceElement in Java//////////////////////////////");  
+		        for(StackTraceElement st : stackTrace){
+		        	// print the stack trace   
+		            System.out.println(st);  
+		        }
+		        myObj = new Scanner(System.in);  // Create a Scanner object
+		        System.out.println("berim?");
+		        userName = myObj.nextLine();  // Read user input
+		        MYpreviousTime=currentTime;
+			}
 			if (CloudSim.clock() != 0 || utilization != 0) {
 				addUtilizationHistoryValue(utilization);
 			}

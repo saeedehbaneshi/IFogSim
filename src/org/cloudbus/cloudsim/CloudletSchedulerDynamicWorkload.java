@@ -69,6 +69,8 @@ public class CloudletSchedulerDynamicWorkload extends CloudletSchedulerTimeShare
 	 */
 	@Override
 	public double updateVmProcessing(double currentTime, List<Double> mipsShare) {
+		System.out.println("^^^^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&&& cloudlet scheduler DYNAMIC workload &&&&&&&&&&&&&&&&&&&&&&&&&&^^^^^^^^^^^^^^^^^^^");
+
 		setCurrentMipsShare(mipsShare);
 
 		double timeSpan = currentTime - getPreviousTime();

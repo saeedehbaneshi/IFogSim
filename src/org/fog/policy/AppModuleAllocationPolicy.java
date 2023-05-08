@@ -3,6 +3,7 @@ package org.fog.policy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.cloudbus.cloudsim.Host;
 import org.cloudbus.cloudsim.Vm;
@@ -24,10 +25,13 @@ public class AppModuleAllocationPolicy extends VmAllocationPolicy{
 
 	@Override
 	public boolean allocateHostForVm(Vm vm) {
+		//saeedeh//System.out.println("~~~~~~~~~~~~~~~!!!!!!!!!!!!!!!!! Appmodule allocation policy!!!!!!!!!!!~~~~~~~~~~~~~~~");
 		Host host = fogHost;
 		boolean result = host.vmCreate(vm);
 		if (result) { // if vm were succesfully created in the host
+			//saeedeh//System.out.println(" Vm: "+vm.getId()+" successfully created on host: "+host.getId());
 			getAppModuleIdsIds().add(vm.getId());
+			
 		}
 		
 		return result;

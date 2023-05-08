@@ -1,0 +1,94 @@
+Starting DCNS...
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+''' module motion_detector can be created on device m-0-2
+Creating motion_detector on device m-0-2
+''' module user_interface can be created on device cloud
+Creating user_interface on device cloud
+''' module object_detector can be created on device cloud
+Creating object_detector on device cloud
+''' module object_tracker can be created on device cloud
+Creating object_tracker on device cloud
+''' module motion_detector can be created on device m-0-1
+Creating motion_detector on device m-0-1
+''' module motion_detector can be created on device m-0-3
+Creating motion_detector on device m-0-3
+''' module motion_detector can be created on device m-0-0
+Creating motion_detector on device m-0-0
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+# SENSOR # gatewayDeviceId is : 6 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 7 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 6 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 9 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 10 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 9 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 12 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 13 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 12 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 15 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 16 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 15 Latency is: 1.0
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 6
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 12
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 15
+^^^^^^^^^^^^^^^ module : motion_detector
+ IT IS VM Id :4 this data carried by this event ev= 52 for this destination : 3
+ Vm list after creation : [org.fog.application.AppModule@5f184fc6]
+ IT IS VM Id :1 this data carried by this event ev= 52 for this destination : 3
+ Vm list after creation : [org.fog.application.AppModule@5f184fc6, org.fog.application.AppModule@3feba861]
+ IT IS VM Id :3 this data carried by this event ev= 52 for this destination : 3
+ Vm list after creation : [org.fog.application.AppModule@5f184fc6, org.fog.application.AppModule@3feba861, org.fog.application.AppModule@5b480cf9]
+periodic edge source (from initialize periodic tuple): object_tracker
+ IT IS VM Id :14 this data carried by this event ev= 52 for this destination : 6
+ Vm list after creation : [org.fog.application.AppModule@723279cf]
+ IT IS VM Id :12 this data carried by this event ev= 52 for this destination : 9
+ Vm list after creation : [org.fog.application.AppModule@10f87f48]
+ IT IS VM Id :2 this data carried by this event ev= 52 for this destination : 12
+ Vm list after creation : [org.fog.application.AppModule@b4c966a]
+ IT IS VM Id :13 this data carried by this event ev= 52 for this destination : 15
+ Vm list after creation : [org.fog.application.AppModule@2f4d3709]
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 33168
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+[motion_detector, object_detector, object_tracker] --->= 104.77857142727989
+[object_tracker, PTZ_CONTROL] --->= 105.11200000002837
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 0.2932380952949946
+DETECTED_OBJECT --->= 0.27857142861466855
+OBJECT_LOCATION --->= 0.18930615019339825
+CAMERA --->= 2.099999999976717
+=========================================
+cloud : Energy Consumed = 1.3664904823679583E9
+proxy-server : Energy Consumed = 8.343329999998586E7
+d-0 : Energy Consumed = 8.343329999998586E7
+m-0-0 : Energy Consumed = 8.462886237141448E7
+m-0-1 : Energy Consumed = 8.462886237141448E7
+m-0-2 : Energy Consumed = 8.462886237141448E7
+m-0-3 : Energy Consumed = 8.462886237141448E7
+Cost of execution in cloud = 4.889789904596117E7
+Total network usage = 166500.02

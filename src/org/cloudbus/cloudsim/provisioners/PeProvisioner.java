@@ -35,6 +35,7 @@ public abstract class PeProvisioner {
 	 * @post $none
 	 */
 	public PeProvisioner(double mips) {
+		//System.out.println();
 		setMips(mips);
 		setAvailableMips(mips);
 	}

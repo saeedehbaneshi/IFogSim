@@ -1,10 +1,15 @@
 package org.fog.test.perfeval;
 
+import org.fog.utils.TimeKeeper;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
+import org.apache.commons.math3.random.RandomGenerator;
 import org.cloudbus.cloudsim.Host;
 import org.cloudbus.cloudsim.Log;
 import org.cloudbus.cloudsim.Pe;
@@ -26,6 +31,7 @@ import org.fog.entities.Sensor;
 import org.fog.entities.Tuple;
 import org.fog.placement.Controller;
 import org.fog.placement.ModuleMapping;
+//import org.fog.placement.ModulePlacementEdgewardsOrginal;
 import org.fog.placement.ModulePlacementEdgewards;
 import org.fog.placement.ModulePlacementMapping;
 import org.fog.policy.AppModuleAllocationPolicy;
@@ -48,7 +54,9 @@ public class DCNSFog {
 	static int numOfCamerasPerArea = 4;
 	
 	private static boolean CLOUD = false;
-	
+	//private static boolean PROXY = true;
+	private static boolean USER_BASED = true;
+
 	public static void main(String[] args) {
 
 		Log.printLine("Starting DCNS...");
@@ -61,48 +69,83 @@ public class DCNSFog {
 
 			CloudSim.init(num_user, calendar, trace_flag);
 
-			String appId = "dcns"; // identifier of the application
+			String appId1 = "dcns"; // identifier of the application
+			//String appId2 = "dcns2";
 			
 			FogBroker broker = new FogBroker("broker");
 			
-			Application application = createApplication(appId, broker.getId());
+			Application application = createApplication(appId1, broker.getId());
 			application.setUserId(broker.getId());
 			
-			createFogDevices(broker.getId(), appId);
+			
+			createFogDevices(broker.getId(), appId1);
+
+			
 			
 			Controller controller = null;
-			
+			//*Saeedeh*//addModuleToDevice function add device name and module name to a map with name: moduleMapping <deviceName, list<moduleName>>
 			ModuleMapping moduleMapping = ModuleMapping.createModuleMapping(); // initializing a module mapping
+			
 			for(FogDevice device : fogDevices){
 				if(device.getName().startsWith("m")){ // names of all Smart Cameras start with 'm' 
 					moduleMapping.addModuleToDevice("motion_detector", device.getName());  // fixing 1 instance of the Motion Detector module to each Smart Camera
 				}
 			}
+			
 			moduleMapping.addModuleToDevice("user_interface", "cloud"); // fixing instances of User Interface module in the Cloud
+			
+			
+			//moduleMapping.addModuleToDevice("object_detector", "d-0"); // placing all instances of Object Detector module in the Cloud
+			//moduleMapping.addModuleToDevice("object_tracker", "d-0");
+			
+			
 			if(CLOUD){
 				// if the mode of deployment is cloud-based
 				moduleMapping.addModuleToDevice("object_detector", "cloud"); // placing all instances of Object Detector module in the Cloud
 				moduleMapping.addModuleToDevice("object_tracker", "cloud"); // placing all instances of Object Tracker module in the Cloud
+			
+			
 			}
+
+			if(USER_BASED){
+				// if the mode of deployment is User-based
+				moduleMapping.addModuleToDevice("object_detector", "d-0"); // placing all instances of Object Detector module in the Cloud
+				moduleMapping.addModuleToDevice("object_tracker", "d-0"); // placing all instances of Object Tracker module in the Cloud
+			}
+			
 			
 			controller = new Controller("master-controller", fogDevices, sensors, 
 					actuators);
-			
+			List<String> n=application.getModuleNames();
+			for (String name:n) {
+				System.out.println(name);
+			}
+			System.out.println("\n\n\n\n*****************************\n\n\n");
 			controller.submitApplication(application, 
-					(CLOUD)?(new ModulePlacementMapping(fogDevices, application, moduleMapping))
+					(CLOUD || USER_BASED)?(new ModulePlacementMapping(fogDevices, application, moduleMapping))
 							:(new ModulePlacementEdgewards(fogDevices, sensors, actuators, application, moduleMapping)));
+							//:(new ModulePlacementEdgewardsOrginal(fogDevices, sensors, actuators, application, moduleMapping)));
 			
 			TimeKeeper.getInstance().setSimulationStartTime(Calendar.getInstance().getTimeInMillis());
 			
+			
+			
+		   
+			
+			
+			
 			CloudSim.startSimulation();
 
+			
 			CloudSim.stopSimulation();
-
-			Log.printLine("VRGame finished!");
+		
+			
+			Log.printLine("DCNS finished!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.printLine("Unwanted errors happen");
-		}
+		}	
+		
 	}
 	
 	/**
@@ -110,39 +153,67 @@ public class DCNSFog {
 	 * @param userId
 	 * @param appId
 	 */
-	private static void createFogDevices(int userId, String appId) {
-		FogDevice cloud = createFogDevice("cloud", 44800, 40000, 100, 10000, 0, 0.01, 16*103, 16*83.25);
+	
+	
+	static boolean default_bands=false;
+	//Saeedeh changed this from 10000 to 100000
+	static int band=100000;
+	static int up=band;
+	static int down=band;
+	private static void createFogDevices(int userId, String appId1) {
+		int c_band_up=100;
+		int c_band_down=10000;
+		
+		int p_band_up=10000;
+		int p_band_down=10000;
+		
+		if(default_bands==false){
+			c_band_up=100;
+			c_band_down=down;			
+			p_band_up=up;
+			p_band_down=down;
+		}
+		
+		FogDevice cloud = createFogDevice("cloud", 44800, 40000, c_band_up, c_band_down, 0, 0.01, 16*103, 16*83.25);
 		cloud.setParentId(-1);
 		fogDevices.add(cloud);
-		FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, 10000, 10000, 1, 0.0, 107.339, 83.4333);
+		FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, p_band_up, p_band_down, 1, 0.0, 107.339, 83.4333);
 		proxy.setParentId(cloud.getId());
 		proxy.setUplinkLatency(100); // latency of connection between proxy server and cloud is 100 ms
 		fogDevices.add(proxy);
 		for(int i=0;i<numOfAreas;i++){
-			addArea(i+"", userId, appId, proxy.getId());
+			addArea(i+"", userId, appId1, proxy.getId());
 		}
 	}
 
-	private static FogDevice addArea(String id, int userId, String appId, int parentId){
-		FogDevice router = createFogDevice("d-"+id, 2800, 4000, 10000, 10000, 1, 0.0, 107.339, 83.4333);
+	private static FogDevice addArea(String id, int userId, String appId1, int parentId){
+		int r_band_up=10000;
+		int r_band_down=10000;
+		if(default_bands==false){
+			r_band_up=up;
+			r_band_down=down;
+		}
+		
+		FogDevice router = createFogDevice("d-"+id, 2800, 4000, r_band_up, r_band_down, 2, 0.0, 107.339, 83.4333);
 		fogDevices.add(router);
 		router.setUplinkLatency(2); // latency of connection between router and proxy server is 2 ms
 		for(int i=0;i<numOfCamerasPerArea;i++){
 			String mobileId = id+"-"+i;
-			FogDevice camera = addCamera(mobileId, userId, appId, router.getId()); // adding a smart camera to the physical topology. Smart cameras have been modeled as fog devices as well.
+			FogDevice camera = addCamera(mobileId, userId, appId1, router.getId()); // adding a smart camera to the physical topology. Smart cameras have been modeled as fog devices as well.
 			camera.setUplinkLatency(2); // latency of connection between camera and router is 2 ms
 			fogDevices.add(camera);
+
 		}
 		router.setParentId(parentId);
 		return router;
 	}
 	
-	private static FogDevice addCamera(String id, int userId, String appId, int parentId){
-		FogDevice camera = createFogDevice("m-"+id, 500, 1000, 10000, 10000, 3, 0, 87.53, 82.44);
+	private static FogDevice addCamera(String id, int userId, String appId1, int parentId){
+		FogDevice camera = createFogDevice("m-"+id, 500, 100000, 10000, 100, 3, 0, 87.53, 82.44);
 		camera.setParentId(parentId);
-		Sensor sensor = new Sensor("s-"+id, "CAMERA", userId, appId, new DeterministicDistribution(5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
+		Sensor sensor = new Sensor("s-"+id, "CAMERA", userId, appId1, new DeterministicDistribution(5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
 		sensors.add(sensor);
-		Actuator ptz = new Actuator("ptz-"+id, userId, appId, "PTZ_CONTROL");
+		Actuator ptz = new Actuator("ptz-"+id, userId, appId1, "PTZ_CONTROL");
 		actuators.add(ptz);
 		sensor.setGatewayDeviceId(camera.getId());
 		sensor.setLatency(1.0);  // latency of connection between camera (sensor) and the parent Smart Camera is 1 ms
@@ -166,6 +237,7 @@ public class DCNSFog {
 	 */
 	private static FogDevice createFogDevice(String nodeName, long mips,
 			int ram, long upBw, long downBw, int level, double ratePerMips, double busyPower, double idlePower) {
+		//saeedeh//System.out.println("nodeNme :"+nodeName);
 		
 		List<Pe> peList = new ArrayList<Pe>();
 
@@ -188,6 +260,17 @@ public class DCNSFog {
 
 		List<Host> hostList = new ArrayList<Host>();
 		hostList.add(host);
+		/*System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ host info ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("\n this is host Id : "+host.getId()+"\n");
+		System.out.println("this is host number of PEs: "+host.getNumberOfPes()+"\n");
+		System.out.println("this is host total MIPS : "+host.getTotalMips()+"\n");
+		System.out.println("this is host storage : "+host.getStorage()+"\n");
+		System.out.println("this is host utilization of CPU : "+host.getUtilizationOfCpu()+"\n");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ the end ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+
+
+
+		System.out.println("this is host list size : "+hostList.size());*/
 
 		String arch = "x86"; // system architecture
 		String os = "Linux"; // operating system
@@ -206,6 +289,7 @@ public class DCNSFog {
 				costPerStorage, costPerBw);
 
 		FogDevice fogdevice = null;
+		//Saeedeh: You can change scheduling interval here: 5 argument of FogDevice = 10
 		try {
 			fogdevice = new FogDevice(nodeName, characteristics, 
 					new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 0, ratePerMips);
@@ -224,9 +308,9 @@ public class DCNSFog {
 	 * @return
 	 */
 	@SuppressWarnings({"serial" })
-	private static Application createApplication(String appId, int userId){
+	private static Application createApplication(String appId1, int userId){
 		
-		Application application = Application.createApplication(appId, userId);
+		Application application = Application.createApplication(appId1, userId);
 		/*
 		 * Adding modules (vertices) to the application model (directed graph)
 		 */
@@ -242,14 +326,17 @@ public class DCNSFog {
 		application.addAppEdge("motion_detector", "object_detector", 2000, 2000, "MOTION_VIDEO_STREAM", Tuple.UP, AppEdge.MODULE); // adding edge from Motion Detector to Object Detector module carrying tuples of type MOTION_VIDEO_STREAM
 		application.addAppEdge("object_detector", "user_interface", 500, 2000, "DETECTED_OBJECT", Tuple.UP, AppEdge.MODULE); // adding edge from Object Detector to User Interface module carrying tuples of type DETECTED_OBJECT
 		application.addAppEdge("object_detector", "object_tracker", 1000, 100, "OBJECT_LOCATION", Tuple.UP, AppEdge.MODULE); // adding edge from Object Detector to Object Tracker module carrying tuples of type OBJECT_LOCATION
+		//*Saeedeh*//this edge from obj tracker to ptz control is periodic and third argument is the periodicity= 100 (it means every 10msec)
 		application.addAppEdge("object_tracker", "PTZ_CONTROL", 100, 28, 100, "PTZ_PARAMS", Tuple.DOWN, AppEdge.ACTUATOR); // adding edge from Object Tracker to PTZ CONTROL (actuator) carrying tuples of type PTZ_PARAMS
 		
 		/*
 		 * Defining the input-output relationships (represented by selectivity) of the application modules. 
 		 */
+		double UI_Frac=0.05;
+		//UI_Frac=0.005;
 		application.addTupleMapping("motion_detector", "CAMERA", "MOTION_VIDEO_STREAM", new FractionalSelectivity(1.0)); // 1.0 tuples of type MOTION_VIDEO_STREAM are emitted by Motion Detector module per incoming tuple of type CAMERA
 		application.addTupleMapping("object_detector", "MOTION_VIDEO_STREAM", "OBJECT_LOCATION", new FractionalSelectivity(1.0)); // 1.0 tuples of type OBJECT_LOCATION are emitted by Object Detector module per incoming tuple of type MOTION_VIDEO_STREAM
-		application.addTupleMapping("object_detector", "MOTION_VIDEO_STREAM", "DETECTED_OBJECT", new FractionalSelectivity(0.05)); // 0.05 tuples of type MOTION_VIDEO_STREAM are emitted by Object Detector module per incoming tuple of type MOTION_VIDEO_STREAM
+		application.addTupleMapping("object_detector", "MOTION_VIDEO_STREAM", "DETECTED_OBJECT", new FractionalSelectivity(UI_Frac)); // 0.05 tuples of type MOTION_VIDEO_STREAM are emitted by Object Detector module per incoming tuple of type MOTION_VIDEO_STREAM
 	
 		/*
 		 * Defining application loops (maybe incomplete loops) to monitor the latency of. 
@@ -257,6 +344,7 @@ public class DCNSFog {
 		 */
 		final AppLoop loop1 = new AppLoop(new ArrayList<String>(){{add("motion_detector");add("object_detector");add("object_tracker");}});
 		final AppLoop loop2 = new AppLoop(new ArrayList<String>(){{add("object_tracker");add("PTZ_CONTROL");}});
+
 		List<AppLoop> loops = new ArrayList<AppLoop>(){{add(loop1);add(loop2);}};
 		
 		application.setLoops(loops);

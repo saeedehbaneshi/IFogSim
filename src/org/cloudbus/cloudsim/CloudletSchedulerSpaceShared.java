@@ -73,6 +73,7 @@ public class CloudletSchedulerSpaceShared extends CloudletScheduler {
 	 */
 	@Override
 	public double updateVmProcessing(double currentTime, List<Double> mipsShare) {
+		System.out.println("^^^^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&&&&&&& cloudlet scheduler space shared &&&&&&&&&&&&&&&&&&&&&&&&&&^^^^^^^^^^^^^^^^^^^");
 		setCurrentMipsShare(mipsShare);
 		double timeSpam = currentTime - getPreviousTime(); // time since last update
 		double capacity = 0.0;
