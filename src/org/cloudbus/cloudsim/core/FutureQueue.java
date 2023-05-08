@@ -37,6 +37,13 @@ public class FutureQueue {
 	 * @param newEvent The event to be put in the queue.
 	 */
 	public void addEvent(SimEvent newEvent) {
+		Iterator<SimEvent> iterator = sortedSet.iterator();
+		/*while(iterator.hasNext()) {
+			SimEvent ee = (SimEvent) iterator.next();
+			if(ee.getDestination()==3) {
+				System.out.println(ee.eventTime());
+			}
+		}*/
 		newEvent.setSerial(serial++);
 		sortedSet.add(newEvent);
 	}

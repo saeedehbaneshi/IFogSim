@@ -38,9 +38,11 @@ public class PeProvisionerOverbooking extends PeProvisioner {
 	 */
 	public PeProvisionerOverbooking(double availableMips) {
 		super(availableMips);
-		
+		//saeedeh//System.out.println("First available mips : "+availableMips);
 		setAvailableMips(PeProvisionerOverbooking.getOverbookedMips(availableMips));
-
+		//saeedeh//System.out.println("this.tostring : "+this.toString());
+		
+		//saeedeh//System.out.println("Available Mips*4 : "+getAvailableMips());
 		setPeTable(new HashMap<String, ArrayList<Double>>());
 	}
 
@@ -72,8 +74,13 @@ public class PeProvisionerOverbooking extends PeProvisioner {
 		}
 
 		allocatedMips.add(mips);
+		//saeedeh//System.out.println(" first AvailableMips(pe provisioner) = "+getAvailableMips());
+		//saeedeh//System.out.println(" mips(pe provisioner) = "+mips);
+		//saeedeh//System.out.println("Allocated Mips(pe provisioner) = "+allocatedMips);
 
 		setAvailableMips(getAvailableMips() - mips);
+		//saeedeh//System.out.println("new AvailableMips(pe provisioner) = "+getAvailableMips());
+
 		getPeTable().put(vmUid, allocatedMips);
 
 		return true;

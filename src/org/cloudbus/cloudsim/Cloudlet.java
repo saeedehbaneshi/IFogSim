@@ -15,6 +15,8 @@ import java.util.List;
 
 import org.cloudbus.cloudsim.core.CloudSim;
 
+import java.util.Scanner;
+
 /**
  * Cloudlet is an extension to the cloudlet. It stores, despite all the information encapsulated in
  * the Cloudlet, the ID of the VM running it.
@@ -194,6 +196,26 @@ public class Cloudlet {
 		costPerBw = 0.0;
 
 		requiredFiles = new LinkedList<String>();
+		
+		
+		boolean debug=false;
+		if (utilizationModelCpu.getClass().getName()!="org.cloudbus.cloudsim.UtilizationModelFull") {
+			debug=true;
+		}
+		if(debug) {
+			Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+	        System.out.println("first cloudlet constructor\nUtilization Model: " + utilizationModelCpu.getClass().getName());
+	        String userName = myObj.nextLine();  // Read user input*/
+			StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();  
+	        System.out.println("///////////////////////////Displaying Stack trace using StackTraceElement in Java//////////////////////////////");  
+	        for(StackTraceElement st : stackTrace){
+	        	// print the stack trace   
+	            System.out.println(st);  
+	        }
+	        myObj = new Scanner(System.in);  // Create a Scanner object
+	        System.out.println("first cloudlet constructor ");
+	        userName = myObj.nextLine();  // Read user input*/
+		}
 	}
 
 	/**
@@ -245,6 +267,16 @@ public class Cloudlet {
 		costPerBw = 0.0;
 
 		requiredFiles = fileList;
+		
+		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();  
+        System.out.println("///////////////////////////Displaying Stack trace using StackTraceElement in Java//////////////////////////////");  
+        for(StackTraceElement st : stackTrace){
+        	// print the stack trace   
+            System.out.println(st);  
+        }
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("second cloudlet constructor ");
+        String userName = myObj.nextLine();  // Read user input*/
 	}
 
 	/**
@@ -294,6 +326,16 @@ public class Cloudlet {
 		costPerBw = 0.0;
 
 		requiredFiles = fileList;
+		
+		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();  
+        System.out.println("///////////////////////////Displaying Stack trace using StackTraceElement in Java//////////////////////////////");  
+        for(StackTraceElement st : stackTrace){
+        	// print the stack trace   
+            System.out.println(st);  
+        }
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("third cloudlet constructor ");
+        String userName = myObj.nextLine();  // Read user input*/
 	}
 
 	/**
@@ -358,6 +400,7 @@ public class Cloudlet {
 		setUtilizationModelCpu(utilizationModelCpu);
 		setUtilizationModelRam(utilizationModelRam);
 		setUtilizationModelBw(utilizationModelBw);
+		
 	}
 
 	// ////////////////////// INTERNAL CLASS ///////////////////////////////////
@@ -962,6 +1005,7 @@ public class Cloudlet {
 	 * @post $result >= 0.0
 	 */
 	public long getCloudletTotalLength() {
+		//sshh//System.out.println("getCloudletLength : "+getCloudletLength());
 		return getCloudletLength() * getNumberOfPes();
 	}
 

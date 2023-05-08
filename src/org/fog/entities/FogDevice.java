@@ -20,6 +20,7 @@ import org.fog.policy.AppModuleAllocationPolicy;
 import org.fog.scheduler.StreamOperatorScheduler;
 import org.fog.utils.*;
 import org.json.simple.JSONObject;
+ 
 
 import java.util.*;
 
@@ -70,6 +71,8 @@ public class FogDevice extends PowerDatacenter {
     protected List<Pair<Integer, Double>> associatedActuatorIds;
 
     protected double energyConsumption;
+    protected double applicationEnergyConsumption;
+
     protected double lastUtilizationUpdateTime;
     protected double lastUtilization;
     private int level;
@@ -137,6 +140,7 @@ public class FogDevice extends PowerDatacenter {
         this.lockTime = 0;
 
         this.energyConsumption = 0;
+        this.applicationEnergyConsumption = 0;
         this.lastUtilization = 0;
         setTotalCost(0);
         setModuleInstanceCount(new HashMap<String, Map<String, Integer>>());
@@ -225,6 +229,7 @@ public class FogDevice extends PowerDatacenter {
         this.lockTime = 0;
 
         this.energyConsumption = 0;
+        this.applicationEnergyConsumption = 0;
         this.lastUtilization = 0;
         setTotalCost(0);
         setChildToLatencyMap(new HashMap<Integer, Double>());
@@ -247,10 +252,42 @@ public class FogDevice extends PowerDatacenter {
 
     @Override
     protected void processOtherEvent(SimEvent ev) {
+    	/*StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();  
+        System.out.println("///////////////////////////Displaying Stack trace using StackTraceElement in Java//////////////////////////////");  
+        for(StackTraceElement st : stackTrace){
+        	// print the stack trace   
+            System.out.println(st);  
+        }*/
+    	boolean debug=false;
+        if(debug) {
+	        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+	        System.out.println("Enter username");
+	        String userName = myObj.nextLine();  // Read user in1put
+	    }
+        if(ev.getDestination()==5) {
+        	//sshh//  System.out.println(ev.getTag());
+        	//sshh//  System.out.println(CloudSim.clock());
+        	//debug=true;
+        	if(debug) {
+    	        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+    	        System.out.println("event for d0");
+    	        String userName = myObj.nextLine();  // Read user input
+    	    }
+        	
+        }
+        
+        
         switch (ev.getTag()) {
             case FogEvents.TUPLE_ARRIVAL:
-                processTupleArrival(ev);
-                break;
+            	/*if (getName().equals("d-0")) {
+                 	 System.out.println(" Current time : "+CloudSim.clock());
+                     processTupleArrival(ev);
+                     break;
+
+                 }else {*/
+                    processTupleArrival(ev);
+                	break;
+ 
             case FogEvents.LAUNCH_MODULE:
                 processModuleArrival(ev);
                 break;
@@ -402,6 +439,7 @@ public class FogDevice extends PowerDatacenter {
 
     protected void updateActiveApplications(SimEvent ev) {
         Application app = (Application) ev.getData();
+       //saeedeh// System.out.println(" This active app, app(data) :  "+app.getModuleNames()+" UPDATED");
         getActiveApplications().add(app.getAppId());
     }
 
@@ -453,7 +491,9 @@ public class FogDevice extends PowerDatacenter {
                         previousUtilizationOfCpu,
                         utilizationOfCpu,
                         timeDiff);
+                //saeedeh//System.out.println("SAEEDEH Time frame host energy = "+timeFrameHostEnergy);
                 timeFrameDatacenterEnergy += timeFrameHostEnergy;
+               //saeedeh// System.out.println("SAEEDEH Time frame datacenter energy = "+timeFrameDatacenterEnergy);
 
                 Log.printLine();
                 Log.formatLine(
@@ -477,7 +517,7 @@ public class FogDevice extends PowerDatacenter {
         }
 
         setPower(getPower() + timeFrameDatacenterEnergy);
-
+        //saeedehSystem.out.println("GET POWER = "+getPower());
         checkCloudletCompletion();
 
         /** Remove completed VMs **/
@@ -495,6 +535,9 @@ public class FogDevice extends PowerDatacenter {
         Log.printLine();
 
         setLastProcessTime(currentTime);
+        //saeedeh//System.out.println("\nLast process time is(output of updateCloudetProcessingWithoutSchedulingFutureEventsForce function) : "+getLastProcessTime()+"\n");
+        //saeedeh//System.out.println("\nmin time is(output of updateCloudetProcessingWithoutSchedulingFutureEventsForce function): "+minTime+"\n");
+
         return minTime;
     }
 
@@ -504,20 +547,25 @@ public class FogDevice extends PowerDatacenter {
         List<? extends Host> list = getVmAllocationPolicy().getHostList();
         for (int i = 0; i < list.size(); i++) {
             Host host = list.get(i);
+            //saeedeh//System.out.println("HOST ID : "+host.getId());
             for (Vm vm : host.getVmList()) {
+                //saeedeh//System.out.println("VM ID : "+vm.getId());
                 while (vm.getCloudletScheduler().isFinishedCloudlets()) {
                     Cloudlet cl = vm.getCloudletScheduler().getNextFinishedCloudlet();
                     if (cl != null) {
 
                         cloudletCompleted = true;
                         Tuple tuple = (Tuple) cl;
+                       //saeedeh// System.out.println("TUPLE TYPE : "+tuple.getTupleType());
                         TimeKeeper.getInstance().tupleEndedExecution(tuple);
                         Application application = getApplicationMap().get(tuple.getAppId());
-                        Logger.debug(getName(), "Completed execution of tuple " + tuple.getCloudletId() + "on " + tuple.getDestModuleName());
+                        Logger.error(getName(), "Completed execution of tuple " + tuple.getCloudletId() + "on " + tuple.getDestModuleName());
+                       //saeede// System.out.println(getName()+ "Completed execution of tuple " + tuple.getTupleType() + "on " + tuple.getDestModuleName());
                         List<Tuple> resultantTuples = application.getResultantTuples(tuple.getDestModuleName(), tuple, getId(), vm.getId());
                         for (Tuple resTuple : resultantTuples) {
                             resTuple.setModuleCopyMap(new HashMap<String, Integer>(tuple.getModuleCopyMap()));
                             resTuple.getModuleCopyMap().put(((AppModule) vm).getName(), vm.getId());
+                           //saeedeh// System.out.println("Get module copy map of tuple : "+resTuple.getModuleCopyMap());
                             updateTimingsOnSending(resTuple);
                             sendToSelf(resTuple);
                         }
@@ -569,6 +617,8 @@ public class FogDevice extends PowerDatacenter {
     }
 
     protected void updateAllocatedMips(String incomingOperator) {
+    	//saeedeh//System.out.println(" look at here Saeedeh! Updating alocated Mips");
+    	//saeedeh//System.out.println(" look at here Saeedeh! total mips :"+getHost().getTotalMips());
         getHost().getVmScheduler().deallocatePesForAllVms();
         for (final Vm vm : getHost().getVmList()) {
             if (vm.getCloudletScheduler().runningCloudlets() > 0 || ((AppModule) vm).getName().equals(incomingOperator)) {
@@ -589,6 +639,8 @@ public class FogDevice extends PowerDatacenter {
                 });
             }
         }
+        
+    	//saeedeh//System.out.println(" look at here Saeedeh! New total mips :"+getHost().getTotalMips());
 
         updateEnergyConsumption();
 
@@ -604,24 +656,45 @@ public class FogDevice extends PowerDatacenter {
         }
 
         double timeNow = CloudSim.clock();
+        
         double currentEnergyConsumption = getEnergyConsumption();
-        double newEnergyConsumption = currentEnergyConsumption + (timeNow - lastUtilizationUpdateTime) * getHost().getPowerModel().getPower(lastUtilization);
-        setEnergyConsumption(newEnergyConsumption);
-	
-		/*if(getName().equals("d-0")){
-			System.out.println("------------------------");
-			System.out.println("Utilization = "+lastUtilization);
-			System.out.println("Power = "+getHost().getPowerModel().getPower(lastUtilization));
-			System.out.println(timeNow-lastUtilizationUpdateTime);
-		}*/
+        double nn=getHost().getPowerModel().getPower(lastUtilization);
+        double newEnergyConsumption = currentEnergyConsumption + (timeNow - lastUtilizationUpdateTime) * nn;
 
+        setEnergyConsumption(newEnergyConsumption);
+        
+      //Saeedeh added this code to model the application energy consumption*****************
+        
+        double currentAppEnergyConsumption = getApplicationEnergyConsumption();
+        double newAppEnergyConsumption;
+        
+        if(lastUtilization!=0) {
+        	 
+        	 newAppEnergyConsumption = currentAppEnergyConsumption + (timeNow - lastUtilizationUpdateTime) * getHost().getPowerModel().getPower(lastUtilization);
+        }
+        else {
+        	 newAppEnergyConsumption = currentAppEnergyConsumption;
+        }
+        
+        setApplicationEnergyConsumption(newAppEnergyConsumption);
+        
+       //Saeedeh added last lines for modeling application energy****************************
+        
         double currentCost = getTotalCost();
+
         double newcost = currentCost + (timeNow - lastUtilizationUpdateTime) * getRatePerMips() * lastUtilization * getHost().getTotalMips();
+
+        
         setTotalCost(newcost);
 
         lastUtilization = Math.min(1, totalMipsAllocated / getHost().getTotalMips());
+
+        
         lastUtilizationUpdateTime = timeNow;
+
     }
+    
+    
 
     protected void processAppSubmit(SimEvent ev) {
         Application app = (Application) ev.getData();
@@ -675,21 +748,16 @@ public class FogDevice extends PowerDatacenter {
 
     protected void processTupleArrival(SimEvent ev) {
         Tuple tuple = (Tuple) ev.getData();
-
+      //saeedeh//  System.out.println("//////////////////////Process tuple Arrival function/////////////////////////////");
         if (getName().equals("cloud")) {
             updateCloudTraffic();
         }
+        
 		
-		/*if(getName().equals("d-0") && tuple.getTupleType().equals("_SENSOR")){
-			System.out.println(++numClients);
-		}*/
-        Logger.debug(getName(), "Received tuple " + tuple.getCloudletId() + "with tupleType = " + tuple.getTupleType() + "\t| Source : " +
+        Logger.debug(getName(), "Received tuple " + tuple.getCloudletId() + "with tupleType : " + tuple.getTupleType() + "\t| Source : " +
                 CloudSim.getEntityName(ev.getSource()) + "|Dest : " + CloudSim.getEntityName(ev.getDestination()));
 		
-		/*if(CloudSim.getEntityName(ev.getSource()).equals("drone_0")||CloudSim.getEntityName(ev.getDestination()).equals("drone_0"))
-			System.out.println(CloudSim.clock()+" "+getName()+" Received tuple "+tuple.getCloudletId()+" with tupleType = "+tuple.getTupleType()+"\t| Source : "+
-		CloudSim.getEntityName(ev.getSource())+"|Dest : "+CloudSim.getEntityName(ev.getDestination()));*/
-
+       
         send(ev.getSource(), CloudSim.getMinTimeBetweenEvents(), FogEvents.TUPLE_ACK);
 
         if (FogUtils.appIdToGeoCoverageMap.containsKey(tuple.getAppId())) {
@@ -699,9 +767,13 @@ public class FogDevice extends PowerDatacenter {
             sendTupleToActuator(tuple);
             return;
         }
-
+        int ss=getHost().getVmList().size();
+        
         if (getHost().getVmList().size() > 0) {
             final AppModule operator = (AppModule) getHost().getVmList().get(0);
+            final AppModule operator2 = (AppModule) getHost().getVmList().get(1);
+            
+
             if (CloudSim.clock() > 0) {
                 getHost().getVmScheduler().deallocatePesForVm(operator);
                 getHost().getVmScheduler().allocatePesForVm(operator, new ArrayList<Double>() {
@@ -720,6 +792,8 @@ public class FogDevice extends PowerDatacenter {
         }
 
         if (appToModulesMap.containsKey(tuple.getAppId())) {
+        	
+        	
             if (appToModulesMap.get(tuple.getAppId()).contains(tuple.getDestModuleName())) {
                 int vmId = -1;
                 for (Vm vm : getHost().getVmList()) {
@@ -737,6 +811,10 @@ public class FogDevice extends PowerDatacenter {
                 updateTimingsOnReceipt(tuple);
 
                 executeTuple(ev, tuple.getDestModuleName());
+            
+            
+            
+            
             } else if (tuple.getDestModuleName() != null) {
                 if (tuple.getDirection() == Tuple.UP)
                     sendUp(tuple);
@@ -747,6 +825,12 @@ public class FogDevice extends PowerDatacenter {
             } else {
                 sendUp(tuple);
             }
+       
+        
+        
+        
+        
+        
         } else {
             if (tuple.getDirection() == Tuple.UP)
                 sendUp(tuple);
@@ -758,13 +842,18 @@ public class FogDevice extends PowerDatacenter {
     }
 
     protected void updateTimingsOnReceipt(Tuple tuple) {
+    	//saeedeh//System.out.println("'''' Update timing on receipt tuple function ''''");
         Application app = getApplicationMap().get(tuple.getAppId());
         String srcModule = tuple.getSrcModuleName();
+       //saeedeh// System.out.println(" tuple SrcModuleName() : "+tuple.getSrcModuleName());
         String destModule = tuple.getDestModuleName();
+        //saeedeh//System.out.println(" tuple DestModuleName :"+tuple.getDestModuleName());
         List<AppLoop> loops = app.getLoops();
         for (AppLoop loop : loops) {
             if (loop.hasEdge(srcModule, destModule) && loop.isEndModule(destModule)) {
+            	//saeedeh//System.out.println(" loop Id: "+loop.getLoopId()+" loop modules :"+loop.getModules());
                 Double startTime = TimeKeeper.getInstance().getEmitTimes().get(tuple.getActualTupleId());
+                //saeedeh//System.out.println(" start time ="+startTime);
                 if (startTime == null)
                     break;
                 if (!TimeKeeper.getInstance().getLoopIdToCurrentAverage().containsKey(loop.getLoopId())) {
@@ -774,8 +863,38 @@ public class FogDevice extends PowerDatacenter {
                 double currentAverage = TimeKeeper.getInstance().getLoopIdToCurrentAverage().get(loop.getLoopId());
                 int currentCount = TimeKeeper.getInstance().getLoopIdToCurrentNum().get(loop.getLoopId());
                 double delay = CloudSim.clock() - TimeKeeper.getInstance().getEmitTimes().get(tuple.getActualTupleId());
+                
+                
+                //saeedeh//System.out.println(" currentAverage : "+currentAverage);
+               //saeedeh// System.out.println(" currentCount : "+currentCount);
+               //saeedeh// System.out.println(" delay : "+delay);
+
+                
                 TimeKeeper.getInstance().getEmitTimes().remove(tuple.getActualTupleId());
+                
+               
+                
                 double newAverage = (currentAverage * currentCount + delay) / (currentCount + 1);
+              //saeedeh//  System.out.println(" newAverage : "+newAverage);
+
+                /*
+                System.out.println(tuple.getDestModuleName());
+                Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+    	        System.out.println("event for d0");
+    	        String userName = myObj.nextLine();  // Read user input
+                if(tuple.getDestinationDeviceId()==5) {
+                	System.out.println("AVG(C): "+currentAverage+
+                						" C(C): "+currentCount+
+                						" delay: "+delay+
+                						" AVG(n): "+newAverage);
+                	boolean debug=true;
+                	if(debug) {
+            	        //Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+            	        System.out.println("event for d0");
+            	        userName = myObj.nextLine();  // Read user input
+            	    }
+                }*/
+                
                 TimeKeeper.getInstance().getLoopIdToCurrentAverage().put(loop.getLoopId(), newAverage);
                 TimeKeeper.getInstance().getLoopIdToCurrentNum().put(loop.getLoopId(), currentCount + 1);
                 break;
@@ -789,10 +908,12 @@ public class FogDevice extends PowerDatacenter {
 
     protected void executeTuple(SimEvent ev, String moduleName) {
         Logger.debug(getName(), "Executing tuple on module " + moduleName);
+       //sshh// System.out.println("\n\n"+getName()+ " Executing tuple on module " + moduleName);
+
         Tuple tuple = (Tuple) ev.getData();
 
         AppModule module = getModuleByName(moduleName);
-
+        //saeedeh//System.out.println(" Module down instance Id map :"+module.getDownInstanceIdsMaps());
         if (tuple.getDirection() == Tuple.UP) {
             String srcModule = tuple.getSrcModuleName();
             if (!module.getDownInstanceIdsMaps().containsKey(srcModule))
@@ -800,28 +921,35 @@ public class FogDevice extends PowerDatacenter {
             if (!module.getDownInstanceIdsMaps().get(srcModule).contains(tuple.getSourceModuleId()))
                 module.getDownInstanceIdsMaps().get(srcModule).add(tuple.getSourceModuleId());
 
+           //saeedeh// System.out.println(" Module down instance Id map2 :"+module.getDownInstanceIdsMaps());
+
+            
             int instances = -1;
             for (String _moduleName : module.getDownInstanceIdsMaps().keySet()) {
                 instances = Math.max(module.getDownInstanceIdsMaps().get(_moduleName).size(), instances);
             }
             module.setNumInstances(instances);
+           //saeedeh// System.out.println("module num instance :"+module.getNumInstances());
         }
 
         TimeKeeper.getInstance().tupleStartedExecution(tuple);
         updateAllocatedMips(moduleName);
         processCloudletSubmit(ev, false);
         updateAllocatedMips(moduleName);
-		/*for(Vm vm : getHost().getVmList()){
+		for(Vm vm : getHost().getVmList()){
 			Logger.error(getName(), "MIPS allocated to "+((AppModule)vm).getName()+" = "+getHost().getTotalAllocatedMipsForVm(vm));
-		}*/
+			//sshh//System.out.println(getName()+ " MIPS allocated to "+((AppModule)vm).getName()+" = "+getHost().getTotalAllocatedMipsForVm(vm));
+		}
     }
 
     protected void processModuleArrival(SimEvent ev) {
         AppModule module = (AppModule) ev.getData();
+       //saeedeh// System.out.println("WE ARE IN PROCESMODULEARRIVAL FUNCTION AND Data Module name is: "+module.getName());
         String appId = module.getAppId();
         if (!appToModulesMap.containsKey(appId)) {
             appToModulesMap.put(appId, new ArrayList<String>());
         }
+        //saeedeh//System.out.println("mmm: "+appToModulesMap.get(appId));
         appToModulesMap.get(appId).add(module.getName());
         processVmCreate(ev, false);
         if (module.isBeingInstantiated()) {
@@ -832,7 +960,8 @@ public class FogDevice extends PowerDatacenter {
 
         module.updateVmProcessing(CloudSim.clock(), getVmAllocationPolicy().getHost(module).getVmScheduler()
                 .getAllocatedMipsForVm(module));
-
+        
+        //saeedeh//System.out.println("_____________________________ It is the END of PROCESMODULEARRIVAL FUNCTION _________________________________________________________________\n");
     }
 
     protected void processModuleTermination(SimEvent ev) {
@@ -844,6 +973,7 @@ public class FogDevice extends PowerDatacenter {
         Application app = getApplicationMap().get(appId);
         List<AppEdge> periodicEdges = app.getPeriodicEdges(module.getName());
         for (AppEdge edge : periodicEdges) {
+        	System.out.println("periodic edge source (from initialize periodic tuple): "+edge.getSource());
             send(getId(), edge.getPeriodicity(), FogEvents.SEND_PERIODIC_TUPLE, edge);
         }
     }
@@ -862,12 +992,18 @@ public class FogDevice extends PowerDatacenter {
         }
     }
 
-    protected void sendUpFreeLink(Tuple tuple) {
+    protected void sendUpFreeLink(Tuple tuple) {	
         double networkDelay = tuple.getCloudletFileSize() / getUplinkBandwidth();
         setNorthLinkBusy(true);
         send(getId(), networkDelay, FogEvents.UPDATE_NORTH_TUPLE_QUEUE);
         send(parentId, networkDelay + getUplinkLatency(), FogEvents.TUPLE_ARRIVAL, tuple);
         NetworkUsageMonitor.sendingTuple(getUplinkLatency(), tuple.getCloudletFileSize());
+        NetworkUsageMonitor.busyUpLinkEnergy(getId(), networkDelay, getUplinkLatency(), tuple.getCloudletFileSize());
+        NetworkUsageMonitor.updateLinksUsageMap(getId(), networkDelay, getUplinkLatency(), tuple.getCloudletFileSize());
+        //NetworkUsageMonitor.updateLinkEnergy();
+        
+        
+        
     }
 
     protected void sendUp(Tuple tuple) {
@@ -899,6 +1035,8 @@ public class FogDevice extends PowerDatacenter {
         send(getId(), networkDelay, FogEvents.UPDATE_SOUTH_TUPLE_QUEUE);
         send(childId, networkDelay + latency, FogEvents.TUPLE_ARRIVAL, tuple);
         NetworkUsageMonitor.sendingTuple(latency, tuple.getCloudletFileSize());
+        NetworkUsageMonitor.busyDownLinkEnergy(childId, networkDelay, latency, tuple.getCloudletFileSize());
+        NetworkUsageMonitor.updateLinksUsageMap(childId, networkDelay, getUplinkLatency(), tuple.getCloudletFileSize());
     }
 
     protected void sendDown(Tuple tuple, int childId) {
@@ -1035,9 +1173,17 @@ public class FogDevice extends PowerDatacenter {
     public double getEnergyConsumption() {
         return energyConsumption;
     }
+    
+    public double getApplicationEnergyConsumption() {
+        return applicationEnergyConsumption;
+    }
 
     public void setEnergyConsumption(double energyConsumption) {
         this.energyConsumption = energyConsumption;
+    }
+    
+    public void setApplicationEnergyConsumption(double appEnergyConsumption) {
+        this.applicationEnergyConsumption = appEnergyConsumption;
     }
 
     public Map<Integer, Double> getChildToLatencyMap() {

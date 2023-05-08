@@ -8,6 +8,8 @@
 
 package org.cloudbus.cloudsim.core;
 
+import java.util.Scanner;
+
 import org.cloudbus.cloudsim.Log;
 import org.cloudbus.cloudsim.NetworkTopology;
 import org.cloudbus.cloudsim.core.predicates.Predicate;
@@ -54,6 +56,7 @@ public abstract class SimEntity implements Cloneable {
 		this.name = name;
 		id = -1;
 		state = RUNNABLE;
+		//saeedeh//System.out.println(this.name+"***********"+this.getName()+"***************"+this.getClass().getName());
 		CloudSim.addEntity(this);
 	}
 
@@ -90,6 +93,7 @@ public abstract class SimEntity implements Cloneable {
 		if (!CloudSim.running()) {
 			return;
 		}
+		//saeedeh//System.out.println("From schedule method id is = "+id+" dest is = "+dest+" tag is = "+tag+" data is : "+data);
 		CloudSim.send(id, dest, delay, tag, data);
 	}
 
@@ -401,8 +405,9 @@ public abstract class SimEntity implements Cloneable {
 
 	public void run() {
 		SimEvent ev = evbuf != null ? evbuf : getNextEvent();
-
+		
 		while (ev != null) {
+			//sshh//System.out.println("\n\n!! next event  = "+ev);
 			processEvent(ev);
 			if (state != RUNNABLE) {
 				break;
@@ -533,12 +538,18 @@ public abstract class SimEntity implements Cloneable {
 
 		if (entityId < 0) {
 			Log.printLine(getName() + ".send(): Error - " + "invalid entity id " + entityId);
+			System.out.println(getName() + ".send(): Error - " + "invalid entity id " + entityId);
 			return;
 		}
 
 		int srcId = getId();
+		//saeedeh//System.out.println("from send method it is src id name : "+getClass().getName()+" "+getName()+" and id is= "+getId());
 		if (entityId != srcId) {// does not delay self messages
+			//saeedeh//System.out.println("entity id != src id : "+entityId+" != "+srcId);
+
 			delay += getNetworkDelay(srcId, entityId);
+			//saeedeh//System.out.println("delay is = "+delay);
+
 		}
 
 		schedule(entityId, delay, cloudSimTag, data);
@@ -557,6 +568,10 @@ public abstract class SimEntity implements Cloneable {
 	 * @post $none
 	 */
 	protected void send(int entityId, double delay, int cloudSimTag) {
+		//saeedeh//System.out.println("from send function with 3 parameters entity id is = "+entityId+" and delay is = "+ delay);
+		if (delay==2.2) {
+			System.out.println("s");
+		}
 		send(entityId, delay, cloudSimTag, null);
 	}
 
@@ -609,6 +624,16 @@ public abstract class SimEntity implements Cloneable {
 	 * @post $none
 	 */
 	protected void sendNow(int entityId, int cloudSimTag, Object data) {
+		/*System.out.println("# ACTUATOR #################################\n\n\n\n\n");
+		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();  
+        System.out.println("///////////////////////////Displaying Stack trace using StackTraceElement in Java//////////////////////////////");  
+        for(StackTraceElement st : stackTrace){
+        	// print the stack trace   
+            System.out.println(st);  
+        }
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Enter usernameeeeee");
+        String userName = myObj.nextLine();  // Read user input*/
 		send(entityId, 0, cloudSimTag, data);
 	}
 

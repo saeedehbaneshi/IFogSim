@@ -1,0 +1,8 @@
+rm -r Report_Saeedeh/t.txt
+N=$2
+for i in $(seq 1 $N)
+do
+	out/production/iFogSim2/run_Vr.sh | tee -a Report_Saeedeh/t.txt
+done
+
+python3 res_Vr.py $1

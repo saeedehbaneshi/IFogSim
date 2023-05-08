@@ -94,10 +94,15 @@ public class Sensor extends SimEntity{
 		tuple.setSrcModuleName(getSensorName());
 		Logger.debug(getName(), "Sending tuple with tupleId = "+tuple.getCloudletId());
 
+		//sshh//System.out.println(" Sensor "+getName() +"Sending tuple with tupleId = "+tuple.getCloudletId());
+
+		
 		tuple.setDestinationDeviceId(getGatewayDeviceId());
 
 		int actualTupleId = updateTimings(getSensorName(), tuple.getDestModuleName());
 		tuple.setActualTupleId(actualTupleId);
+		
+		//sshh//System.out.println(" Sending TUPLR_ARRIVAL event with latency = "+getLatency());
 		
 		send(gatewayDeviceId, getLatency(), FogEvents.TUPLE_ARRIVAL,tuple);
 	}
@@ -120,7 +125,10 @@ public class Sensor extends SimEntity{
 	
 	@Override
 	public void startEntity() {
+		System.out.println("# SENSOR # "+"gatewayDeviceId is : "+gatewayDeviceId+" MinTimeBetweenEvents is: "+CloudSim.getMinTimeBetweenEvents());
 		send(gatewayDeviceId, CloudSim.getMinTimeBetweenEvents(), FogEvents.SENSOR_JOINED, geoLocation);
+		
+		System.out.println("# SENSOR # "+" Id is : "+getId()+" TransmitDistribution.getNextValue + transmissionStartDelay is= "+getTransmitDistribution().getNextValue()+" + "+transmissionStartDelay);
 		send(getId(), getTransmitDistribution().getNextValue() + transmissionStartDelay, FogEvents.EMIT_TUPLE);
 	}
 

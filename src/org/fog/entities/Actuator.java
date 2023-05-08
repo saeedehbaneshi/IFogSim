@@ -39,6 +39,7 @@ public class Actuator extends SimEntity{
 
 	@Override
 	public void startEntity() {
+		System.out.println("# ACTUATOR # "+"gatewayDeviceId is : "+gatewayDeviceId+" Latency is: "+getLatency());
 		sendNow(gatewayDeviceId, FogEvents.ACTUATOR_JOINED, getLatency());
 	}
 

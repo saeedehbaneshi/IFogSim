@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.cloudbus.cloudsim.lists.PeList;
 import org.cloudbus.cloudsim.provisioners.PeProvisioner;
@@ -50,6 +51,8 @@ public class VmSchedulerTimeShared extends VmScheduler {
 	 */
 	@Override
 	public boolean allocatePesForVm(Vm vm, List<Double> mipsShareRequested) {
+		//saeedeh//System.out.println("##########################$$$$$$$$$$$$$$$$$$$$$$$ Vm Scheduler TIME share (allocate Pe for Vm function)$$$$$$$$$$$$$$$$$$$$#################");
+
 		/**
 		 * TODO: add the same to RAM and BW provisioners
 		 */
@@ -62,8 +65,16 @@ public class VmSchedulerTimeShared extends VmScheduler {
 				getVmsMigratingOut().remove(vm.getUid());
 			}
 		}
+		//sshh//System.out.println(" vmUidd = "+vm.getUid());
+		//saeedeh//System.out.println(" mipsShareRequested(list) = "+mipsShareRequested);
+		/*Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("next entity...");
+        String userName = myObj.nextLine();*/
+
 		boolean result = allocatePesForVm(vm.getUid(), mipsShareRequested);
+		//saeedeh//System.out.println("this is boolean result: "+result);
 		updatePeProvisioning();
+		//saeedeh//System.out.println("##########################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$#################");
 		return result;
 	}
 
@@ -75,8 +86,17 @@ public class VmSchedulerTimeShared extends VmScheduler {
 	 * @return true, if successful
 	 */
 	protected boolean allocatePesForVm(String vmUid, List<Double> mipsShareRequested) {
+		/*System.out.println(" vvmUid = "+vmUid);
+		System.out.println(" mipsShareRequested(list) = "+mipsShareRequested);
+		Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("next entity...");
+        String userName = myObj.nextLine();*/
+
 		double totalRequestedMips = 0;
 		double peMips = getPeCapacity();
+		
+		//saeedeh//System.out.println(" peMips = "+peMips);
+
 		for (Double mips : mipsShareRequested) {
 			// each virtual PE of a VM must require not more than the capacity of a physical PE
 			if (mips > peMips) {
@@ -84,6 +104,7 @@ public class VmSchedulerTimeShared extends VmScheduler {
 			}
 			totalRequestedMips += mips;
 		}
+		//saeedeh//System.out.println(" totalRequestedMips(sumation of all mips numbers in mipsShareRequested list) = "+totalRequestedMips);
 
 		// This scheduler does not allow over-subscription
 		if (getAvailableMips() < totalRequestedMips) {
@@ -108,10 +129,15 @@ public class VmSchedulerTimeShared extends VmScheduler {
 				mipsRequested *= 0.1;
 			}
 			mipsShareAllocated.add(mipsRequested);
+			//saeedeh//System.out.println(" mipsShareAllocated = "+mipsShareAllocated);
+
 		}
 
 		getMipsMap().put(vmUid, mipsShareAllocated);
+		//sshh//System.out.println(" MipsMap = "+getMipsMap());
+
 		setAvailableMips(getAvailableMips() - totalRequestedMips);
+		//sshh//System.out.println(" AvailableMips = "+getAvailableMips());
 
 		return true;
 	}
@@ -120,7 +146,9 @@ public class VmSchedulerTimeShared extends VmScheduler {
 	 * Update allocation of VMs on PEs.
 	 */
 	protected void updatePeProvisioning() {
+		//saeedeh//System.out.println("++++++++++++++++++++++++++++++++++ Update pe provisioner function in vm scheduler time share file s++++++++++++++++++++++++++++++++++" );
 		getPeMap().clear();
+		//saeedeh//System.out.println(" Pe list : "+getPeList());
 		for (Pe pe : getPeList()) {
 			pe.getPeProvisioner().deallocateMipsForAllVms();
 		}
@@ -129,17 +157,20 @@ public class VmSchedulerTimeShared extends VmScheduler {
 		Pe pe = peIterator.next();
 		PeProvisioner peProvisioner = pe.getPeProvisioner();
 		double availableMips = peProvisioner.getAvailableMips();
+		//saeedeh//System.out.println("(From updatePeProvisioning function) availableMips1 (update pe provisioner)= "+availableMips);
 
 		for (Map.Entry<String, List<Double>> entry : getMipsMap().entrySet()) {
 			String vmUid = entry.getKey();
 			getPeMap().put(vmUid, new LinkedList<Pe>());
 
 			for (double mips : entry.getValue()) {
+			//saeedeh//System.out.println(" mips: "+mips);
 				while (mips >= 0.1) {
 					if (availableMips >= mips) {
 						peProvisioner.allocateMipsForVm(vmUid, mips);
 						getPeMap().get(vmUid).add(pe);
 						availableMips -= mips;
+						//saeedeh//System.out.println("available mips in if condition(available mips>= mips)"+availableMips);
 						break;
 					} else {
 						peProvisioner.allocateMipsForVm(vmUid, availableMips);
@@ -150,10 +181,13 @@ public class VmSchedulerTimeShared extends VmScheduler {
 						}
 						if (!peIterator.hasNext()) {
 							Log.printLine("There is no enough MIPS (" + mips + ") to accommodate VM " + vmUid);
+							System.err.println("There is no enough MIPS (" + mips + ") to accommodate VM " + vmUid);
 						}
 						pe = peIterator.next();
 						peProvisioner = pe.getPeProvisioner();
 						availableMips = peProvisioner.getAvailableMips();
+						//saeedeh//System.out.println(" availableMips in else condition = "+availableMips);
+
 					}
 				}
 			}
@@ -174,7 +208,7 @@ public class VmSchedulerTimeShared extends VmScheduler {
 		for (Pe pe : getPeList()) {
 			pe.getPeProvisioner().deallocateMipsForVm(vm);
 		}
-
+		//saeedeh//System.out.println(" Entry set of mips map requested: "+getMipsMapRequested().entrySet());
 		for (Map.Entry<String, List<Double>> entry : getMipsMapRequested().entrySet()) {
 			allocatePesForVm(entry.getKey(), entry.getValue());
 		}

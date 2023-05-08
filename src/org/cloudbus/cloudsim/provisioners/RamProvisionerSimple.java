@@ -43,6 +43,8 @@ public class RamProvisionerSimple extends RamProvisioner {
 	@Override
 	public boolean allocateRamForVm(Vm vm, int ram) {
 		int maxRam = vm.getRam();
+		//saeedeh//System.out.println("max ram = "+maxRam);
+		//saeedeh//System.out.println(" ram = "+ram);
 
 		if (ram >= maxRam) {
 			ram = maxRam;
@@ -54,6 +56,8 @@ public class RamProvisionerSimple extends RamProvisioner {
 			setAvailableRam(getAvailableRam() - ram);
 			getRamTable().put(vm.getUid(), ram);
 			vm.setCurrentAllocatedRam(getAllocatedRamForVm(vm));
+			//saeedeh//System.out.println(" Allocated Ram For Vm = "+getAllocatedRamForVm(vm));
+
 			return true;
 		}
 
@@ -82,7 +86,9 @@ public class RamProvisionerSimple extends RamProvisioner {
 	public void deallocateRamForVm(Vm vm) {
 		if (getRamTable().containsKey(vm.getUid())) {
 			int amountFreed = getRamTable().remove(vm.getUid());
+			//saeedeh//System.out.println("amount freed = "+amountFreed);
 			setAvailableRam(getAvailableRam() + amountFreed);
+			//saeedeh//System.out.println("available ram = "+getAvailableRam());
 			vm.setCurrentAllocatedRam(0);
 		}
 	}

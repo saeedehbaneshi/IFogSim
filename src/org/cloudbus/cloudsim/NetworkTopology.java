@@ -58,7 +58,7 @@ public class NetworkTopology {
 	 */
 	public static void buildNetworkTopology(String fileName) {
 		Log.printLine("Topology file: " + fileName);
-
+		System.err.println("Topology file: " + fileName);
 		// try to find the file
 		GraphReaderBrite reader = new GraphReaderBrite();
 
@@ -70,6 +70,7 @@ public class NetworkTopology {
 			// problem with the file. Does not simulate network
 			Log.printLine("Problem in processing BRITE file. Network simulation is disabled. Error: "
 					+ e.getMessage());
+			System.err.println("Problem in processing BRITE file. Network simulation is disabled. Error: ");
 		}
 
 	}

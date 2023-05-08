@@ -16,11 +16,14 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.cloudbus.cloudsim.Log;
 import org.cloudbus.cloudsim.core.predicates.Predicate;
 import org.cloudbus.cloudsim.core.predicates.PredicateAny;
 import org.cloudbus.cloudsim.core.predicates.PredicateNone;
+
+
 
 /**
  * This class extends the CloudSimCore to enable network simulation in CloudSim. Also, it disables
@@ -471,6 +474,15 @@ public class CloudSim {
 	 * @param e The new entity
 	 */
 	public static void addEntity(SimEntity e) {
+		/*StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();  
+        System.out.println("///////////////////////////Displaying Stack trace using StackTraceElement in Java//////////////////////////////");  
+        for(StackTraceElement st : stackTrace){
+        	// print the stack trace   
+            System.out.println(st);  
+        }
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Adding entity "+ e.getClass().getName());
+        String userName = myObj.nextLine();  // Read user input*/
 		SimEvent evt;
 		if (running) {
 			// Post an event to make this entity
@@ -509,14 +521,29 @@ public class CloudSim {
 	 * @return true, if successful otherwise
 	 */
 	public static boolean runClockTick() {
+		double cc=CloudSim.clock();
+		if (cc%1000==0) {
+			System.err.println("clock is "+cc);
+		}
 		SimEntity ent;
 		boolean queue_empty;
-		
+		//.saeedeh//System.out.println("------- run clock  ------");
 		int entities_size = entities.size();
-
+		//saeedeh//System.out.println("Size of entity list is : "+entities.size());
 		for (int i = 0; i < entities_size; i++) {
+			/*System.out.println(entities.get(i).getName());
+			System.out.println(entities.get(i).getClass().getName());
+			Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+	        System.out.println("next entity...");
+	        String userName = myObj.nextLine();  // Read user input*/
 			ent = entities.get(i);
+			//saeedeh//System.out.println("----------------"+ent.getName() + " state: "+ent.getState());
+			/*System.out.println(ent.getClass().getName());
+			Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+	        System.out.println("next entity...");
+	        String userName = myObj.nextLine();  // Read user input*/
 			if (ent.getState() == SimEntity.RUNNABLE) {
+				//saeedeh//System.out.println("This entity : "+ent.getName()+" Is Running Now");
 				ent.run();
 			}
 		}
@@ -534,14 +561,27 @@ public class CloudSim {
 
 			// Check if next events are at same time...
 			boolean trymore = fit.hasNext();
+			int c=0;
+			boolean debug=false;
 			while (trymore) {
+				c++;
 				SimEvent next = fit.next();
 				if (next.eventTime() == first.eventTime()) {
+					
 					processEvent(next);
 					toRemove.add(next);
 					trymore = fit.hasNext();
-				} else {
-					trymore = false;
+				} else {					
+					//sshh//System.out.println(next.eventTime()+ " count this burst of events is: "+c);
+					//Ehsan
+					if(debug) {
+						if(!fit.hasNext()) {
+							trymore=false;
+						}
+					}
+					else {
+						trymore = false;
+					}
 				}
 			}
 
@@ -561,6 +601,7 @@ public class CloudSim {
 	 */
 	public static void runStop() {
 		printMessage("Simulation completed.");
+		
 	}
 
 	/**
@@ -600,9 +641,25 @@ public class CloudSim {
 		if (delay < 0) {
 			throw new IllegalArgumentException("Send delay can't be negative.");
 		}
-
+		/*if ((clock + delay)==58.2) {
+			System.out.println("ss");
+			StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();  
+	        System.out.println("///////////////////////////Displaying Stack trace using StackTraceElement in Java//////////////////////////////");  
+	        for(StackTraceElement st : stackTrace){
+	        	// print the stack trace   
+	            System.out.println(st);  
+	        }
+	        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+	        System.out.println("event for d0");
+	        String userName = myObj.nextLine();  // Read user input
+		}*/
 		SimEvent e = new SimEvent(SimEvent.SEND, clock + delay, src, dest, tag, data);
 		future.addEvent(e);
+		//saeedeh//System.out.println("event e tag is "+e.getTag());
+		//saeedeh//
+		double cd=clock + delay;
+		//sshh//System.out.println("event: "+e.getTag() +" scheduled by : "+e.scheduledBy()+" At time : "+CloudSim.clock+" to dedtination of : "+e.getDestination()+" for time : "+cd);
+		//saeedeh//System.out.println("future list size is "+future.size());
 	}
 
 	/**
@@ -729,6 +786,7 @@ public class CloudSim {
 	 */
 	public static boolean cancelAll(int src, Predicate p) {
 		SimEvent ev = null;
+		double ccTime = clock();
 		int previousSize = future.size();
 		Iterator<SimEvent> iter = future.iterator();
 		while (iter.hasNext()) {
@@ -737,7 +795,9 @@ public class CloudSim {
 				iter.remove();
 			}
 		}
-		return previousSize < future.size();
+		//Saeedeh: error found: > --> <
+		//return previousSize < future.size();
+		return previousSize > future.size();
 	}
 
 	//
@@ -752,12 +812,17 @@ public class CloudSim {
 	private static void processEvent(SimEvent e) {
 		int dest, src;
 		SimEntity dest_ent;
+		//saeedeh//System.out.println(" from CLOUDSIM PROCESS EVENT, this is event tag :"+e.getTag()+" and destination is : "+e.getDestination()+" and source is : "+e.getSource()+" And data is : "+e.getData());
 		// Update the system's clock
 		if (e.eventTime() < clock) {
 			throw new IllegalArgumentException("Past event detected.");
 		}
 		clock = e.eventTime();
 
+		//saeedeh//System.out.println("-------> "+e.getType());
+		if(e.getType()!=SimEvent.SEND) {
+			System.out.println("injaaaaaaaaaaaaaaaaaaaaaaaaaaa\n\n\n\n\n");
+		}
 		// Ok now process it
 		switch (e.getType()) {
 			case SimEvent.ENULL:
@@ -777,6 +842,9 @@ public class CloudSim {
 					int tag = e.getTag();
 					dest_ent = entities.get(dest);
 					if (dest_ent.getState() == SimEntity.WAITING) {
+						//saeedeh//System.out.println("\n\n\n\n\nWWWWWWwwwwwwwwwwwwwwwwwwwwwwwwwwwwWWWWWWWWWWating \n");
+						System.out.println("The waited entity is : "+dest_ent.getName()+"\n\n");
+
 						Integer destObj = Integer.valueOf(dest);
 						Predicate p = waitPredicates.get(destObj);
 						if ((p == null) || (tag == 9999) || (p.match(e))) {
@@ -788,6 +856,7 @@ public class CloudSim {
 						}
 					} else {
 						deferred.addEvent(e);
+						//saeedehSystem.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& This is defered QUEUE size = "+deferred.size());
 					}
 				}
 				break;
@@ -814,7 +883,10 @@ public class CloudSim {
 		running = true;
 		// Start all the entities
 		for (SimEntity ent : entities) {
-			//System.out.println("From CloudSim.runStart(): Starting SimEntity "+ent.getName());
+			//saeedeh//System.out.println("From CloudSim.runStart(): Starting SimEntity "+ent.getName()+" and id = "+ent.getId());
+			//saeedeh//System.out.println(" Entity object type is : "+ent.getClass().getName());
+			//try{System.in.read();}
+	        //catch(Exception e){}
 			ent.startEntity();
 		}
 

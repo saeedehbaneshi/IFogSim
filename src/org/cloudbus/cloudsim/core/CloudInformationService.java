@@ -89,6 +89,7 @@ public class CloudInformationService extends SimEntity {
 
 			// A resource is requesting to register.
 			case CloudSimTags.REGISTER_RESOURCE:
+				//sshh//System.out.println("Resource registered");
 				resList.add((Integer) ev.getData());
 				break;
 

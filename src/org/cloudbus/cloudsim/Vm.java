@@ -158,6 +158,7 @@ public class Vm {
 				currentRequestedMips.add(getMips());
 			}
 		}
+		//System.out.println("(In vm get current requested mips function) It is mipsshared = "+ mipsShare);
 		return currentRequestedMips;
 	}
 

@@ -15,6 +15,8 @@ import java.util.Map;
 
 import org.cloudbus.cloudsim.core.CloudSim;
 
+import java.util.Scanner; 
+
 /**
  * VmAllocationPolicySimple is an VmAllocationPolicy that chooses, as the host for a VM, the host
  * with less PEs in use.
@@ -65,6 +67,18 @@ public class VmAllocationPolicySimple extends VmAllocationPolicy {
 	@Override
 	public boolean allocateHostForVm(Vm vm) {
 		int requiredPes = vm.getNumberOfPes();
+		System.out.println("NUMBER OF PES: "+vm.getNumberOfPes());
+		Scanner reader = new Scanner(System.in);
+		System.out.println("Enter a number: ");
+		int n = reader.nextInt(); // Scans the next token of the input as an int.
+		//once finished
+		reader.close();
+		/*try{
+			System.in.read();
+		}
+		catch{
+			System.out.println("NUMBER OF PES: "+vm.getNumberOfPes());
+		}*/
 		boolean result = false;
 		int tries = 0;
 		List<Integer> freePesTmp = new ArrayList<Integer>();

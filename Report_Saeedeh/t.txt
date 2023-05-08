@@ -1,0 +1,238 @@
+Starting VRGame...
+reversed_selectivity: 1.1111111111111112
+reversed_selectivity: 1.0
+reversed_selectivity: 1.0
+reversed_selectivity: 1.0
+{3=[connector], 4=[concentration_calculator], 5=[], 6=[client], 9=[client], 12=[client], 15=[client]}
+[6, 5, 4, 3]
+ModulePlacementEdgeward   client    Can be created on device   m-0-0
+ModulePlacementEdgeward   concentration_calculator    Can be created on device   proxy-server
+ModulePlacementEdgeward   connector    Can be created on device   cloud
+
+
+CurrentModuleLoadMap: {3={connector=0.0}, 4={concentration_calculator=0.0}, 5={}, 6={client=0.0}, 9={client=0.0}, 12={client=0.0}, 15={client=0.0}}
+CurrentInstances: {3={connector=1}, 4={concentration_calculator=1}, 5={}, 6={client=1}, 9={client=0}, 12={client=0}, 15={client=0}}
+CurrentCPULOAD: {3=10.0, 4=315.00000000000006, 5=0.0, 6=201.54, 9=0.0, 12=0.0, 15=0.0}\n\n{3=[connector], 4=[concentration_calculator], 5=[], 6=[client], 9=[client], 12=[client], 15=[client]}
+[9, 5, 4, 3]
+ModulePlacementEdgeward   client    Can be created on device   m-0-1
+ModulePlacementEdgeward   concentration_calculator    Can be created on device   proxy-server
+ModulePlacementEdgeward   connector    Can be created on device   cloud
+
+
+CurrentModuleLoadMap: {3={connector=0.0}, 4={concentration_calculator=0.0}, 5={}, 6={client=0.0}, 9={client=0.0}, 12={client=0.0}, 15={client=0.0}}
+CurrentInstances: {3={connector=2}, 4={concentration_calculator=2}, 5={}, 6={client=1}, 9={client=1}, 12={client=0}, 15={client=0}}
+CurrentCPULOAD: {3=20.0, 4=630.0000000000001, 5=0.0, 6=201.54, 9=201.54, 12=0.0, 15=0.0}\n\n{3=[connector], 4=[concentration_calculator], 5=[], 6=[client], 9=[client], 12=[client], 15=[client]}
+[12, 5, 4, 3]
+ModulePlacementEdgeward   client    Can be created on device   m-0-2
+ModulePlacementEdgeward   concentration_calculator    Can be created on device   proxy-server
+ModulePlacementEdgeward   connector    Can be created on device   cloud
+
+
+CurrentModuleLoadMap: {3={connector=0.0}, 4={concentration_calculator=0.0}, 5={}, 6={client=0.0}, 9={client=0.0}, 12={client=0.0}, 15={client=0.0}}
+CurrentInstances: {3={connector=3}, 4={concentration_calculator=3}, 5={}, 6={client=1}, 9={client=1}, 12={client=1}, 15={client=0}}
+CurrentCPULOAD: {3=30.0, 4=945.0000000000002, 5=0.0, 6=201.54, 9=201.54, 12=201.54, 15=0.0}\n\n{3=[connector], 4=[concentration_calculator], 5=[], 6=[client], 9=[client], 12=[client], 15=[client]}
+[15, 5, 4, 3]
+ModulePlacementEdgeward   client    Can be created on device   m-0-3
+ModulePlacementEdgeward   concentration_calculator    Can be created on device   proxy-server
+ModulePlacementEdgeward   connector    Can be created on device   cloud
+
+
+CurrentModuleLoadMap: {3={connector=0.0}, 4={concentration_calculator=0.0}, 5={}, 6={client=0.0}, 9={client=0.0}, 12={client=0.0}, 15={client=0.0}}
+CurrentInstances: {3={connector=4}, 4={concentration_calculator=4}, 5={}, 6={client=1}, 9={client=1}, 12={client=1}, 15={client=1}}
+CurrentCPULOAD: {3=40.0, 4=1260.0000000000002, 5=0.0, 6=201.54, 9=201.54, 12=201.54, 15=201.54}\n\nInstances:{3={connector=4}, 4={concentration_calculator=4}, 5={}, 6={client=1}, 9={client=1}, 12={client=1}, 15={client=1}}
+'''deviceId'''3
+'''module'''connector
+''' module connector can be created on device cloud
+Creating connector on device cloud
+'''deviceId'''4
+'''module'''concentration_calculator
+''' module concentration_calculator can be created on device proxy-server
+Creating concentration_calculator on device proxy-server
+'''deviceId'''5
+'''deviceId'''6
+'''module'''client
+''' module client can be created on device m-0-0
+Creating client on device m-0-0
+'''deviceId'''9
+'''module'''client
+''' module client can be created on device m-0-1
+Creating client on device m-0-1
+'''deviceId'''12
+'''module'''client
+''' module client can be created on device m-0-2
+Creating client on device m-0-2
+'''deviceId'''15
+'''module'''client
+''' module client can be created on device m-0-3
+Creating client on device m-0-3
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+# SENSOR # gatewayDeviceId is : 6 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 7 TransmitDistribution.getNextValue + transmissionStartDelay is= 10.0 + 50
+# ACTUATOR # gatewayDeviceId is : 6 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 9 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 10 TransmitDistribution.getNextValue + transmissionStartDelay is= 10.0 + 50
+# ACTUATOR # gatewayDeviceId is : 9 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 12 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 13 TransmitDistribution.getNextValue + transmissionStartDelay is= 10.0 + 50
+# ACTUATOR # gatewayDeviceId is : 12 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 15 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 16 TransmitDistribution.getNextValue + transmissionStartDelay is= 10.0 + 50
+# ACTUATOR # gatewayDeviceId is : 15 Latency is: 1.0
+0.0 Submitted application vr_game
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^ module : connector
+^^^^^^^^^^^^^^^DeviceId : 4
+^^^^^^^^^^^^^^^ module : concentration_calculator
+^^^^^^^^^^^^^^^DeviceId : 6
+^^^^^^^^^^^^^^^ module : client
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^ module : client
+^^^^^^^^^^^^^^^DeviceId : 12
+^^^^^^^^^^^^^^^ module : client
+^^^^^^^^^^^^^^^DeviceId : 15
+^^^^^^^^^^^^^^^ module : client
+ IT IS VM Id :3 this data carried by this event ev= 52 for this destination : 3
+ Vm list after creation : [org.fog.application.AppModule@7530d0a]
+periodic edge source (from initialize periodic tuple): connector
+ IT IS VM Id :2 this data carried by this event ev= 52 for this destination : 4
+ Vm list after creation : [org.fog.application.AppModule@27bc2616]
+periodic edge source (from initialize periodic tuple): concentration_calculator
+ IT IS VM Id :1 this data carried by this event ev= 52 for this destination : 6
+ Vm list after creation : [org.fog.application.AppModule@506e1b77]
+ IT IS VM Id :11 this data carried by this event ev= 52 for this destination : 9
+ Vm list after creation : [org.fog.application.AppModule@4fca772d]
+ IT IS VM Id :12 this data carried by this event ev= 52 for this destination : 12
+ Vm list after creation : [org.fog.application.AppModule@9807454]
+ IT IS VM Id :13 this data carried by this event ev= 52 for this destination : 15
+ Vm list after creation : [org.fog.application.AppModule@3d494fbf]
+m-0-2: Warning - Cloudlet #46 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #46 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #210 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #210 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #377 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #377 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #540 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #540 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #703 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #703 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #878 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #878 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #1045 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #1045 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #1212 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #1212 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #1379 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #1379 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #1546 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #1546 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #1713 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #1713 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #1880 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #1880 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #2047 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #2047 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #2214 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #2214 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #2381 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #2381 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #2548 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #2548 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #2715 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #2715 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-2: Warning - Cloudlet #2882 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+m-0-3: Warning - Cloudlet #2882 owned by broker is already completed/finished.
+Therefore, it is not being executed again
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 194
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+[EEG, client, concentration_calculator, client, DISPLAY] --->= 35.05539322916556
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+PLAYER_GAME_STATE --->= 0.04821428571434202
+EEG --->= 9.560845588234997
+CONCENTRATION --->= 0.15494715073535792
+_SENSOR --->= 5.28333333329906
+GLOBAL_GAME_STATE --->= 0.05600000000004002
+=========================================
+cloud : Energy Consumed = 2668276.1571428566
+cloud : Application Energy Consumed = 276808.11428571603
+proxy-server : Energy Consumed = 195134.9331553989
+proxy-server : Application Energy Consumed = 128698.83189799053
+d-0 : Energy Consumed = 166866.59999999995
+d-0 : Application Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 174502.2988799997
+m-0-0 : Application Energy Consumed = 165469.51295999953
+m-0-1 : Energy Consumed = 174673.2618000003
+m-0-1 : Application Energy Consumed = 168409.4706000002
+m-0-2 : Energy Consumed = 174916.42128000024
+m-0-2 : Application Energy Consumed = 172590.95376000018
+m-0-3 : Energy Consumed = 174780.66079999966
+m-0-3 : Application Energy Consumed = 170256.35359999977
+Cost of execution in cloud = 6062.400000000445
+Total network usage = 8320.0
+Network usage-based energy = 1.664E9
+links usage = 1.664E7
+link usage of device Id : 12 --->= 1801000.0
+link usage of device Id : 15 --->= 1801000.0
+link usage of device Id : 4 --->= 7600000.0
+link usage of device Id : 5 --->= 4.1744E7
+link usage of device Id : 6 --->= 1801000.0
+link usage of device Id : 9 --->= 1801000.0
+Uplink energy of device Id : 12 --->= 38600.0
+Uplink energy of device Id : 15 --->= 38600.0
+Uplink energy of device Id : 4 --->= 760000.0
+Uplink energy of device Id : 5 --->= 308800.0
+Uplink energy of device Id : 6 --->= 38600.0
+Uplink energy of device Id : 9 --->= 38600.0
+Downlink energy of device Id : 12 --->= 157200.0
+Downlink energy of device Id : 15 --->= 157200.0
+Downlink energy of device Id : 4 --->= 190000.0
+Downlink energy of device Id : 5 --->= 314400.0
+Downlink energy of device Id : 6 --->= 157200.0
+Downlink energy of device Id : 9 --->= 157200.0
+Total link energy of device Id : 12 --->= 195800.0
+Total link energy of device Id : 15 --->= 195800.0
+Total link energy of device Id : 4 --->= 940000.0
+Total link energy of device Id : 5 --->= 623200.0
+Total link energy of device Id : 6 --->= 195800.0
+Total link energy of device Id : 9 --->= 195800.0
