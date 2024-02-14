@@ -45,5 +45,6 @@ public class FogEvents {
     public static final int UPDATE_RESOURCE_INFO = BASE + 37;
     //---------------------------------------------
     public static final int START_DYNAMIC_CLUSTERING = BASE + 38;
+    public static final int LAST_UPDATE = BASE + 39;
 
 }

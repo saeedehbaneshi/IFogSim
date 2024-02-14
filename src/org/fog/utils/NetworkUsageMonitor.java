@@ -11,8 +11,14 @@ import java.util.HashMap;
 public class NetworkUsageMonitor {
 
 	private static double networkUsage = 0.0;
-	private static double totalNetworkEnergy = 0.0;
-	private static double busyPower= 100;
+	private static double networkTotalEnergy = 0.0;
+	private static double totalNetworkingTime = 0.0;
+	public static Map<Integer, Double>  totalTransmissionDelayUplinkMap = new HashMap<Integer, Double>();
+	public static Map<Integer, Double>  totalTransmissionDelayDownlinkMap = new HashMap<Integer, Double>();
+	//Saeedeh// private static double lastTime = 0.0;
+	protected static double wiredLinkEnergy;
+	
+	private static double totalPower= 3.72;
 	static Map<String, Double> upLinksEnergyMap = new HashMap<String, Double>();
 	static Map<String, Double> downLinksEnergyMap = new HashMap<String, Double>();
 	static Map<String, Double> totalLinksEnergyMap = new HashMap<String, Double>();
@@ -42,10 +48,32 @@ public class NetworkUsageMonitor {
 	}*/
 	
 	
+	//Saeedeh added this function to track total transmission delay of fog devices for Ecofen based models
+	public static void updateTotalTransmissionDelayUplinkMap(int id, double networkDelay){
+		if (totalTransmissionDelayUplinkMap.containsKey(id)) {
+            double currentDelay = totalTransmissionDelayUplinkMap.get(id);
+            totalTransmissionDelayUplinkMap.put(id, currentDelay + networkDelay);
+        } else {
+        	totalTransmissionDelayUplinkMap.put(id, networkDelay);
+        }
+	}
+
+	public static void updateTotalTransmissionDelayDownlinkMap(int id, double networkDelay){
+		if (totalTransmissionDelayDownlinkMap.containsKey(id)) {
+            double currentDelay = totalTransmissionDelayDownlinkMap.get(id);
+            totalTransmissionDelayDownlinkMap.put(id, currentDelay + networkDelay);
+        } else {
+        	totalTransmissionDelayDownlinkMap.put(id, networkDelay);
+        }
+	}
+	
 	
 	public static void busyUpLinkEnergy(int id, double delay, double latency, long dataSize){
 		double linkEnergy=0;
-		linkEnergy= latency* busyPower;
+		linkEnergy= (latency+delay)* totalPower;
+		//linkEnergy= delay* totalPower;
+		totalNetworkingTime +=delay;
+		networkTotalEnergy+= linkEnergy;
 		String newId = String.valueOf(id);
 		//String newChildId = String.valueOf(childId);
 		linksUsage+= dataSize*latency;
@@ -71,7 +99,10 @@ public class NetworkUsageMonitor {
 	
 	public static void busyDownLinkEnergy(int childId, double delay, double latency, long dataSize){
 		double linkEnergy=0;
-		linkEnergy= latency* busyPower;
+		linkEnergy= (latency+delay)* totalPower;
+		//linkEnergy= delay* totalPower;
+		totalNetworkingTime +=delay;
+		networkTotalEnergy+= linkEnergy;
 		String newId = String.valueOf(childId);
 		linksUsage+= dataSize*latency;
 		if(downLinksEnergyMap.containsKey(newId)) {
@@ -94,11 +125,20 @@ public class NetworkUsageMonitor {
 	}
 	
 	
-	/* Saeeddeh public static void updateLinkEnergy() {
+	// Saeeddeh 
+	
+	/* public static void updateWiredLinkEnergy(double idlePower, double busyPower, double tupleNwSize, double bw) {
 		double timeNow= CloudSim.clock();
+		double powerSlope= busyPower -idlePower;
+		double linkUsage= tupleNwSize/bw;
+		double linkDynamicPower= powerSlope*linkUsage;
 		
+		double LinkTotalPower=idlePower+linkDynamicPower;
+		double currentWiredLinkEnergy= getWiredLinkEnergy();
+		double newWiredLinkEnergy = currentWiredLinkEnergy + (timeNow-lastTime)*LinkTotalPower;
+		setWiredLinkEnergy(newWiredLinkEnergy);
 		
-		double Lasttime= CloudSim.clock();
+		lastTime= timeNow;
 		
 	}*/
 	
@@ -130,17 +170,38 @@ public class NetworkUsageMonitor {
 		return networkUsage;
 	}
 	
+	public static double getNetworkTotalEnergy(){
+		return networkTotalEnergy;
+	}
+	
+	public static double getWiredLinkEnergy(){
+		return wiredLinkEnergy;
+	}
+	
+	/* Saeedeh public static void setWiredLinkEnergy(double wiredLinkEnergy){
+		NetworkUsageMonitor.wiredLinkEnergy= wiredLinkEnergy;
+	}*/
+	
+	public static double getTotalNetworkingTime(){
+		return totalNetworkingTime;
+	}
+	
+	/*public static double getTotalTransmissionDelay(){
+		return totalTransmissionDelay;
+	}*/
+	
 	public static double getLinksUsage(){
 		return linksUsage;
 	}
 	
-	public static double getTotalNetworkEnergy(){
+	/*public static double getTotalNetworkEnergy(){
 		return totalNetworkEnergy;
-	}
+	}*/
 	//Saeedeh
 	public static Map<String, Double> getUpLinksEnergyMap(){
 		return upLinksEnergyMap;
 	}
+	
 	
 	public static Map<String, Double> getLinksUsageMap(){
 		return linksUsageMap;

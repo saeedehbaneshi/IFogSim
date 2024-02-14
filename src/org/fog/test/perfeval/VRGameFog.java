@@ -80,9 +80,9 @@ public class VRGameFog {
 			if(USER_DEFINED) {
 				moduleMapping.addModuleToDevice("connector", "cloud");
 				
-				moduleMapping.addModuleToDevice("concentration_calculator", "d-0");
+				moduleMapping.addModuleToDevice("concentration_calculator", "proxy-server");
 				for(FogDevice device : fogDevices){
-					if(device.getName().startsWith("d")){
+					if(device.getName().startsWith("m")){
 						//moduleMapping.addModuleToDevice("client", device.getName(), 1);  // fixing all instances of the Client module to the Smartphones
 						moduleMapping.addModuleToDevice("client", device.getName());  // fixing all instances of the Client module to the Smartphones
 					}
@@ -137,9 +137,9 @@ public class VRGameFog {
 	 * @param appId
 	 */
 	private static void createFogDevices(int userId, String appId) {
-		FogDevice cloud = createFogDevice("cloud", 44800, 40000, 100, 10000, 0, 0.01, 16*103, 16*83.25); // creates the fog device Cloud at the apex of the hierarchy with level=0
+		FogDevice cloud = createFogDevice("cloud", 44800, 40000, 100, 100000, 0, 0.01, 16*103, 16*83.25); // creates the fog device Cloud at the apex of the hierarchy with level=0
 		cloud.setParentId(-1);
-		FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, 10000, 10000, 1, 0.0, 107.339, 83.4333); // creates the fog device Proxy Server (level=1)
+		FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, 100000, 100000, 1, 0.0, 107.339, 83.4333); // creates the fog device Proxy Server (level=1)
 		proxy.setParentId(cloud.getId()); // setting Cloud as parent of the Proxy Server
 		proxy.setUplinkLatency(100); // latency of connection from Proxy Server to the Cloud is 100 ms
 		
@@ -153,7 +153,7 @@ public class VRGameFog {
 	}
 
 	private static FogDevice addGw(String id, int userId, String appId, int parentId){
-		FogDevice dept = createFogDevice("d-"+id, 2800, 4000, 10000, 10000, 1, 0.0, 107.339, 83.4333);
+		FogDevice dept = createFogDevice("d-"+id, 2800, 4000, 100000, 100000, 1, 0.0, 107.339, 83.4333);
 		fogDevices.add(dept);
 		dept.setParentId(parentId);
 		dept.setUplinkLatency(4); // latency of connection between gateways and proxy server is 4 ms

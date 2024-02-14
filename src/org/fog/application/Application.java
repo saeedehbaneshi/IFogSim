@@ -24,6 +24,9 @@ public class Application {
 	private int userId;
 	private GeoCoverage geoCoverage;
 
+	// Saeedeh added this attribute to have submission delay of applications
+	private int appSubmissionDelay;
+	//Saeedeh dded
 	/**
 	 * List of application modules in the application
 	 */
@@ -152,6 +155,9 @@ public class Application {
 	public Application(String appId, int userId) {
 		setAppId(appId);
 		setUserId(userId);
+		//Saeedeh Added:
+		setAppSubmissionDelay(0);
+		//
 		setModules(new ArrayList<AppModule>());
 		setEdges(new ArrayList<AppEdge>());
 		setGeoCoverage(null);
@@ -162,6 +168,9 @@ public class Application {
 	public Application(String appId, List<AppModule> modules,
 			List<AppEdge> edges, List<AppLoop> loops, GeoCoverage geoCoverage) {
 		setAppId(appId);
+		//Saeedeh Added:
+		setAppSubmissionDelay(0);
+		//
 		setModules(modules);
 		setEdges(edges);
 		setGeoCoverage(geoCoverage);
@@ -396,5 +405,15 @@ public class Application {
 
 	public DAG getDAG() {
 		return dag;
+	}
+	
+	
+	//SAeedeh added:
+	public void setAppSubmissionDelay(int delay) {
+		this.appSubmissionDelay = delay;
+	}
+	
+	public int getAppSubmissionDelay() {
+		return appSubmissionDelay;
 	}
 }

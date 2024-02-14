@@ -22,6 +22,11 @@ public class Tuple extends Cloudlet{
 	private int actuatorId;
 	private int sourceDeviceId;
 	private int sourceModuleId;
+	
+	/// Saeedeh added these two variable to track start and finish time of sending tuples for tracking networking energy consumption:
+	private double startSendingTupleTime;
+	private double estimatedFinishSendingTupleTime;
+	
 	/**
 	 * Map to keep track of which module instances has a tuple traversed.
 	 * 
@@ -159,5 +164,24 @@ public class Tuple extends Cloudlet{
 	public void setTraversedMicroservices(Map<String, Integer> traversed) {
 		traversedMicroservices = traversed;
 	}
+	
+	
+/// Saeedeh added these functions to have access to start and finish sending time of tuple in fog device class:
+	
+	public void setStartSendingTupleTime(double time) {
+		startSendingTupleTime = time;
+	}
 
+	public double getStartSendingTupleTime() {
+		return startSendingTupleTime;
+	}
+	
+	public void setEstimatedFinishSendingTupleTime(double time) {
+		estimatedFinishSendingTupleTime = time;
+	}
+
+	public double getEstimatedFinishSendingTupleTime() {
+		return estimatedFinishSendingTupleTime;
+	}
+/// Saeedeh added mentioned functions to this class(4 last functions)
 }

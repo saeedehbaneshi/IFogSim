@@ -51,11 +51,11 @@ public class DCNSFog {
 	static List<Sensor> sensors = new ArrayList<Sensor>();
 	static List<Actuator> actuators = new ArrayList<Actuator>();
 	static int numOfAreas = 1;
-	static int numOfCamerasPerArea = 4;
+	public static int numOfCamerasPerArea = 4;
 	
 	private static boolean CLOUD = false;
 	//private static boolean PROXY = true;
-	private static boolean USER_BASED = true;
+	private static boolean USER_BASED = false;
 
 	public static void main(String[] args) {
 
@@ -109,8 +109,8 @@ public class DCNSFog {
 
 			if(USER_BASED){
 				// if the mode of deployment is User-based
-				moduleMapping.addModuleToDevice("object_detector", "d-0"); // placing all instances of Object Detector module in the Cloud
-				moduleMapping.addModuleToDevice("object_tracker", "d-0"); // placing all instances of Object Tracker module in the Cloud
+				moduleMapping.addModuleToDevice("object_detector", "proxy-server"); // placing all instances of Object Detector module in the Cloud
+				moduleMapping.addModuleToDevice("object_tracker", "cloud"); // placing all instances of Object Tracker module in the Cloud
 			}
 			
 			
@@ -155,31 +155,41 @@ public class DCNSFog {
 	 */
 	
 	
-	static boolean default_bands=false;
+	static boolean modified_bw=true;
+	static int cloud_up_bw=100;
+	static int cloud_down_bw=100000;
+	static int proxy_up_bw=100000;
+	static int proxy_down_bw=100000;
 	//Saeedeh changed this from 10000 to 100000
-	static int band=100000;
-	static int up=band;
-	static int down=band;
+	static int router_up_bw=100000;//To prevent overflow (10000 will make this link botleneck when number of cameras increases)
+	static int router_down_bw=10000;
+	
 	private static void createFogDevices(int userId, String appId1) {
+		
+		//*********************Default(Original of iFogSim) for bandwidths****/
+		//********************Please do not touch these values****************/
 		int c_band_up=100;
 		int c_band_down=10000;
-		
 		int p_band_up=10000;
 		int p_band_down=10000;
+		//*********************************************************************/
 		
-		if(default_bands==false){
-			c_band_up=100;
-			c_band_down=down;			
-			p_band_up=up;
-			p_band_down=down;
+		if(modified_bw==true){
+			c_band_up=cloud_up_bw;
+			c_band_down=cloud_down_bw;			
+			p_band_up=proxy_up_bw;
+			p_band_down=proxy_down_bw;
 		}
 		
-		FogDevice cloud = createFogDevice("cloud", 44800, 40000, c_band_up, c_band_down, 0, 0.01, 16*103, 16*83.25);
+		FogDevice cloud = createFogDevice("cloud", 44800, 40000, c_band_up, c_band_down, 0, 0.01, 16*103, 16*83.25, "Shared",12300,11070);
 		cloud.setParentId(-1);
+		cloud.setDeviceType("Shared");// Saeedeh added
+		
 		fogDevices.add(cloud);
-		FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, p_band_up, p_band_down, 1, 0.0, 107.339, 83.4333);
+		FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, p_band_up, p_band_down, 1, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
 		proxy.setParentId(cloud.getId());
 		proxy.setUplinkLatency(100); // latency of connection between proxy server and cloud is 100 ms
+		proxy.setDeviceType("Shared");// Saeedeh added
 		fogDevices.add(proxy);
 		for(int i=0;i<numOfAreas;i++){
 			addArea(i+"", userId, appId1, proxy.getId());
@@ -189,14 +199,15 @@ public class DCNSFog {
 	private static FogDevice addArea(String id, int userId, String appId1, int parentId){
 		int r_band_up=10000;
 		int r_band_down=10000;
-		if(default_bands==false){
-			r_band_up=up;
-			r_band_down=down;
+		if(modified_bw==true){
+			r_band_up=router_up_bw;
+			r_band_down=router_down_bw;
 		}
 		
-		FogDevice router = createFogDevice("d-"+id, 2800, 4000, r_band_up, r_band_down, 2, 0.0, 107.339, 83.4333);
+		FogDevice router = createFogDevice("d-"+id, 2800, 4000, r_band_up, r_band_down, 2, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
 		fogDevices.add(router);
 		router.setUplinkLatency(2); // latency of connection between router and proxy server is 2 ms
+		router.setDeviceType("Shared");// Saeedeh added
 		for(int i=0;i<numOfCamerasPerArea;i++){
 			String mobileId = id+"-"+i;
 			FogDevice camera = addCamera(mobileId, userId, appId1, router.getId()); // adding a smart camera to the physical topology. Smart cameras have been modeled as fog devices as well.
@@ -209,8 +220,10 @@ public class DCNSFog {
 	}
 	
 	private static FogDevice addCamera(String id, int userId, String appId1, int parentId){
-		FogDevice camera = createFogDevice("m-"+id, 500, 100000, 10000, 100, 3, 0, 87.53, 82.44);
+		FogDevice camera = createFogDevice("m-"+id, 500, 100000, 10000, 100, 3, 0, 87.53, 82.44, "CPE", 4.6, 2.8);
 		camera.setParentId(parentId);
+		camera.setDeviceType("CPE");// Saeedeh added
+
 		Sensor sensor = new Sensor("s-"+id, "CAMERA", userId, appId1, new DeterministicDistribution(5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
 		sensors.add(sensor);
 		Actuator ptz = new Actuator("ptz-"+id, userId, appId1, "PTZ_CONTROL");
@@ -236,7 +249,7 @@ public class DCNSFog {
 	 * @return
 	 */
 	private static FogDevice createFogDevice(String nodeName, long mips,
-			int ram, long upBw, long downBw, int level, double ratePerMips, double busyPower, double idlePower) {
+			int ram, long upBw, long downBw, int level, double ratePerMips, double busyPower, double idlePower, String deviceType, double networkingMaxPower, double networkingIdlePower) {
 		//saeedeh//System.out.println("nodeNme :"+nodeName);
 		
 		List<Pe> peList = new ArrayList<Pe>();
@@ -292,7 +305,7 @@ public class DCNSFog {
 		//Saeedeh: You can change scheduling interval here: 5 argument of FogDevice = 10
 		try {
 			fogdevice = new FogDevice(nodeName, characteristics, 
-					new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 0, ratePerMips);
+					new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 0, ratePerMips, deviceType, networkingMaxPower, networkingIdlePower);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
