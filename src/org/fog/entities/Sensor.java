@@ -29,6 +29,9 @@ public class Sensor extends SimEntity{
 
 	private int transmissionStartDelay = Config.TRANSMISSION_START_DELAY;
 	
+	//Saeedeh added this for multi application correct support
+	//private int applicationStarSubmisssiontDelay;
+	
 	public Sensor(String name, int userId, String appId, int gatewayDeviceId, double latency, GeoLocation geoLocation, 
 			Distribution transmitDistribution, int cpuLength, int nwLength, String tupleType, String destModuleName) {
 		super(name);
@@ -128,8 +131,9 @@ public class Sensor extends SimEntity{
 		System.out.println("# SENSOR # "+"gatewayDeviceId is : "+gatewayDeviceId+" MinTimeBetweenEvents is: "+CloudSim.getMinTimeBetweenEvents());
 		send(gatewayDeviceId, CloudSim.getMinTimeBetweenEvents(), FogEvents.SENSOR_JOINED, geoLocation);
 		
+		//Saeedeh added second part in this term "transmissionStartDelay+app.getAppSubmissionDelay()" to support submission delay for multi application 
 		System.out.println("# SENSOR # "+" Id is : "+getId()+" TransmitDistribution.getNextValue + transmissionStartDelay is= "+getTransmitDistribution().getNextValue()+" + "+transmissionStartDelay);
-		send(getId(), getTransmitDistribution().getNextValue() + transmissionStartDelay, FogEvents.EMIT_TUPLE);
+		send(getId(), getTransmitDistribution().getNextValue() + transmissionStartDelay+app.getAppSubmissionDelay(), FogEvents.EMIT_TUPLE);
 	}
 
 	@Override

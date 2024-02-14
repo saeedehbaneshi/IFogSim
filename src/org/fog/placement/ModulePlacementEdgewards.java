@@ -408,7 +408,17 @@ public class ModulePlacementEdgewards extends ModulePlacement{
 				for(String module : _modulesToShift){
 					if(!modulesToShift.contains(module)){
 						// Add information of all newly added modules (to be shifted) 
-						moduleToNumInstances.put(module, getCurrentModuleInstanceNum().get(id).get(module)+moduleToNumInstances.get(module));
+						for (Map.Entry<String, Integer> entry : moduleToNumInstances.entrySet()) {
+						    String _module = entry.getKey();
+						    Integer numInstances = entry.getValue();
+						    System.out.println("Module: " + _module + ", Number of Instances: " + numInstances);
+						}
+						int aa=getCurrentModuleInstanceNum().get(id).get(module);
+						int bb=0;
+						if(moduleToNumInstances.containsKey(module)){
+							bb=moduleToNumInstances.get(module);
+						}
+						moduleToNumInstances.put(module, aa+bb);
 						loadMap.put(module, getCurrentModuleLoadMap().get(id).get(module));
 						//SaeedehCorrected: here also multiply load by num instances
 						cpuLoadShifted += getCurrentModuleLoadMap().get(id).get(module) * moduleToNumInstances.get(module);

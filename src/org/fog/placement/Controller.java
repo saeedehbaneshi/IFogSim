@@ -20,6 +20,7 @@ import org.fog.utils.FogEvents;
 import org.fog.utils.FogUtils;
 import org.fog.utils.NetworkUsageMonitor;
 import org.fog.utils.TimeKeeper;
+import org.fog.test.perfeval.DCNSFog;
 
 public class Controller extends SimEntity{
 	
@@ -78,6 +79,10 @@ public class Controller extends SimEntity{
 
 		send(getId(), Config.RESOURCE_MANAGE_INTERVAL, FogEvents.CONTROLLER_RESOURCE_MANAGE);
 		
+		//Saeedeh added this for last update of NIC:
+		send(getId(), Config.MAX_SIMULATION_TIME, FogEvents.LAST_UPDATE);
+		//
+		
 		send(getId(), Config.MAX_SIMULATION_TIME, FogEvents.STOP_SIMULATION);
 		
 		for(FogDevice dev : getFogDevices())
@@ -97,12 +102,25 @@ public class Controller extends SimEntity{
 		case FogEvents.CONTROLLER_RESOURCE_MANAGE:
 			manageResources();
 			break;
+			//Saeedeh added for last update of NIC state and tracking the time:
+		case FogEvents.LAST_UPDATE:
+			for (FogDevice fogDevice : getFogDevices()) {
+				fogDevice.lastUpdate();
+			}
+			break;
+			//
 		case FogEvents.STOP_SIMULATION:
 			CloudSim.stopSimulation();
 			printTimeDetails();
 			printPowerDetails();
 			printCostDetails();
 			printNetworkUsageDetails();
+			//Saeedeh added following links energy detail functions:
+			//printLinksEnergyDetailsCombinationWifiWired();
+			//printLinksEnergyDetailsSpecEcofenBased();
+			//printLinksEnergyDetailsMeasuredEcofenBased();
+			//printFlowBasedNetworkingEnergyDetails();
+			printEnergyTimeMapsDetailsForFlowBaseModel();
 			System.exit(0);
 			break;
 			
@@ -112,7 +130,12 @@ public class Controller extends SimEntity{
 	private void printNetworkUsageDetails() {
 		System.out.println("Total network usage = "+NetworkUsageMonitor.getNetworkUsage()/Config.MAX_SIMULATION_TIME);
 		//Saeedeh added energy model base on network usage
-		System.out.println("Network usage-based energy = "+NetworkUsageMonitor.getNetworkUsage()*Config.LINK_POWER);
+		
+		System.out.println("Total network Energy = "+NetworkUsageMonitor.getNetworkTotalEnergy());
+		
+		System.out.println("Total networking Time = "+NetworkUsageMonitor.getTotalNetworkingTime());
+		
+		/*System.out.println("Network usage-based energy = "+NetworkUsageMonitor.getNetworkUsage()*Config.LINK_POWER);
 		//
 		System.out.println("links usage = "+NetworkUsageMonitor.getLinksUsage());
 		
@@ -130,7 +153,7 @@ public class Controller extends SimEntity{
 		
 		for(String deviceId : NetworkUsageMonitor.getDownLinksEnergyMap().keySet()) {
 			System.out.println("Total link energy of device Id : "+ deviceId +" --->= "+NetworkUsageMonitor.getTotalLinksEnergyMap().get(deviceId));
-		}
+		}*/
 	}
 
 
@@ -150,9 +173,186 @@ public class Controller extends SimEntity{
 			System.out.println(fogDevice.getName() + " : Energy Consumed = "+fogDevice.getEnergyConsumption());
 			//Saeedeh added this code for reporting application Energy
 			System.out.println(fogDevice.getName() + " : Application Energy Consumed = "+fogDevice.getApplicationEnergyConsumption());
+			System.out.println(fogDevice.getName()+ " : Vms Energy Map of device : "+fogDevice.getName()+" "+fogDevice.getVmsEnergyMap());
+			
+			for (String applicationId : fogDevice.getVmsEnergyMap().keySet()) {
+				double totalVmsEnergy=0.0;
+					Map<String ,Double > innerMap= fogDevice.getVmsEnergyMap().get(applicationId);
+					for(String vmName : innerMap.keySet()) {
+						double VmsEnergy= innerMap.get(vmName);
+						totalVmsEnergy+=VmsEnergy;
+					}
+				System.out.println(fogDevice.getName()+" : Application " +applicationId+ " total Energy = "+ totalVmsEnergy);
+				}
+			if (fogDevice.getVmsEnergyMap().isEmpty()) {
+				double totalVmsEnergy=0.0;
+				System.out.println(fogDevice.getName()+" : Application total Energy = "+ totalVmsEnergy);
+
+
+			}
+			System.out.println(fogDevice.getName() + " : North Link Busy Time = "+fogDevice.getNorthLinkBusyTime());
+			System.out.println(fogDevice.getName() + " : North Link Idle Time = "+fogDevice.getNortLinkIdleTime());
+			System.out.println(fogDevice.getName() + " : South Link Busy Time = "+fogDevice.getSouthLinkBusyTime());
+			System.out.println(fogDevice.getName() + " : South Link Idle Time = "+fogDevice.getSouthLinkIdleTime());
 		}
 	}
+	
+	
+	//Saeedeh added
+	
+	private void printLinksEnergyDetailsCombinationWifiWired() {
+		for(FogDevice fogDevice : getFogDevices()){
+			if(fogDevice.getName().startsWith("m")) {
+				double staticEnergy=Config.MAX_SIMULATION_TIME*Config.WiFi_Idle_Power;
+				double dynamicEnergy=fogDevice.getNorthLinkBusyTime()*(Config.Wifi_Transmitter_Power+(DCNSFog.numOfCamerasPerArea*Config.Wifi_Reciever_Power));
+				double activeEnergy=fogDevice.getNorthLinkBusyTime()*(Config.WiFi_Idle_Power+Config.Wifi_Transmitter_Power+(DCNSFog.numOfCamerasPerArea*Config.Wifi_Reciever_Power));
+				//System.out.println(fogDevice.getName() + " : North Link Static Energy = "+staticEnergy);
+				//System.out.println(fogDevice.getName() + " : North Link Dynamic Energy = "+dynamicEnergy);
+				System.out.println(fogDevice.getName() + " : North Link Total Energy = "+(dynamicEnergy+staticEnergy));
+				System.out.println(fogDevice.getName() + " : Active Energy of North Link = "+activeEnergy);
+				//System.out.println(fogDevice.getName() + " : South Link Static Energy = "+staticEnergy);
+			}else if(fogDevice.getName().startsWith("d")) {
+				
+				double staticNorthLinkEnergy= Config.MAX_SIMULATION_TIME*Config.Wired_Min_Power;
+				double dynamicNorthLinkEnergy= fogDevice.getNorthLinkBusyTime()*(Config.Wired_Max_Power-Config.Wired_Min_Power);
+				double activeNorthEnergy=fogDevice.getNorthLinkBusyTime()*Config.Wired_Max_Power;
+				//System.out.println(fogDevice.getName() + " : North Link Static Energy = "+staticNorthLinkEnergy);
+				//System.out.println(fogDevice.getName() + " : North Link Dynamic Energy = "+dynamicNorthLinkEnergy);
+				System.out.println(fogDevice.getName() + " : North Link Total Energy = "+(dynamicNorthLinkEnergy+staticNorthLinkEnergy));
+				System.out.println(fogDevice.getName() + " : Active nergy of North Link = "+activeNorthEnergy);
+				
+				double staticSouthLinkEnergy= Config.MAX_SIMULATION_TIME*Config.WiFi_Idle_Power;
+				double dynamicSouthLinkEnergy= fogDevice.getSouthLinkBusyTime()*(Config.Wifi_Transmitter_Power+(DCNSFog.numOfCamerasPerArea*Config.Wifi_Reciever_Power));
+				double activeSouthEnergy=fogDevice.getSouthLinkBusyTime()*(Config.WiFi_Idle_Power+Config.Wifi_Transmitter_Power+(DCNSFog.numOfCamerasPerArea*Config.Wifi_Reciever_Power));
+				//System.out.println(fogDevice.getName() + " : South Link Static Energy = "+staticSouthLinkEnergy);
+				//System.out.println(fogDevice.getName() + " : South Link Static Energy = "+dynamicSouthLinkEnergy);
+				System.out.println(fogDevice.getName() + " : South Link Total Energy = "+(dynamicSouthLinkEnergy+staticSouthLinkEnergy));
+				System.out.println(fogDevice.getName() + " : Active Energy of South Link = "+activeSouthEnergy);
+				}else {
+					
+					double northLinkStaticEnergy= Config.MAX_SIMULATION_TIME*Config.Wired_Min_Power;
+					double northLinkDynamicEnergy= fogDevice.getNorthLinkBusyTime()*(Config.Wired_Max_Power-Config.Wired_Min_Power);
+					double northActiveEnergy= fogDevice.getNorthLinkBusyTime()*Config.Wired_Max_Power;
+					//System.out.println(fogDevice.getName() + " : North Link Static Energy = "+northLinkStaticEnergy);
+					//System.out.println(fogDevice.getName() + " : North Link Dynamic Energy = "+northLinkDynamicEnergy);
+					System.out.println(fogDevice.getName() + " : North Link Total Energy = "+(northLinkDynamicEnergy+northLinkStaticEnergy));
+					System.out.println(fogDevice.getName() + " : Active Energy of North Link = "+northActiveEnergy);
+					
+					double southLinkStaticEnergy= Config.MAX_SIMULATION_TIME*Config.Wired_Min_Power;
+					double southLinkDynamicEnergy= fogDevice.getSouthLinkBusyTime()*(Config.Wired_Max_Power-Config.Wired_Min_Power);
+					double southActiveEnergy= fogDevice.getSouthLinkBusyTime()*Config.Wired_Max_Power;
+					//System.out.println(fogDevice.getName() + " : South Link Static Energy = "+southLinkStaticEnergy);
+					//System.out.println(fogDevice.getName() + " : South Link Dynamic Energy = "+southLinkDynamicEnergy);
+					System.out.println(fogDevice.getName() + " : South Link Total Energy = "+(southLinkDynamicEnergy+southLinkStaticEnergy));
+					System.out.println(fogDevice.getName() + " : Active Energy of South Link = "+southActiveEnergy);
+				}
+			}
+		}
+	
+	
+	private void printLinksEnergyDetailsSpecEcofenBased() {
+		
+		System.out.println(" **** This is NIC time tracking results for ECOFEN based model with specification(Rated MAX power) power parameters **** ");
+		
+		
+		//System.out.println(" **** This is the energy results of simple ECOFEN based model **** ");
+		
+		for(FogDevice fogDevice : getFogDevices()){
+			System.out.println("Fog Device ID: " + fogDevice.getId());
+			
+			//System.out.println(" NIC Total Idle Time = "+fogDevice.getTotalNetworkInterfaceCardIdleTime());
+			//System.out.println(" NIC Total Busy Time = "+fogDevice.getTotalNetworkInterfaceCardBusyTime());
+			
+			//System.out.println("Uplink Map: " + NetworkUsageMonitor.totalTransmissionDelayUplinkMap);
+			//System.out.println("Downlink Map: " + NetworkUsageMonitor.totalTransmissionDelayDownlinkMap);
+			
+			if(fogDevice.getName().startsWith("m")) {
+				double NIC_Device_Total_Energy=fogDevice.getTotalNetworkInterfaceCardIdleTime()*Config.LowEnd_Hub_A_Measured_Idle_Power+fogDevice.getTotalNetworkInterfaceCardBusyTime()*(Config.LowEnd_Hub_A_Rated_Max_Power-Config.LowEnd_Hub_A_Measured_Idle_Power);
+				double NIC_App_ActiveEnergy=fogDevice.getTotalNetworkInterfaceCardBusyTime()*Config.LowEnd_Hub_A_Rated_Max_Power;
+				
+				System.out.println(fogDevice.getName() + " : NIC Device Total Energy = " + NIC_Device_Total_Energy);
+				System.out.println(fogDevice.getName() + " : NIC App Active Energy = "+ NIC_App_ActiveEnergy);
+					
+			}else if(fogDevice.getName().startsWith("c")) {
 
+					double NIC_Device_Total_Energy=fogDevice.getTotalNetworkInterfaceCardIdleTime()*Config.Core_Switch_E_Measured_Idle_Power+fogDevice.getTotalNetworkInterfaceCardBusyTime()*((Config.Core_Switch_E_Rated_Max_Power-Config.Core_Switch_E_Measured_Idle_Power));
+					double NIC_App_ActiveEnergy=fogDevice.getTotalNetworkInterfaceCardBusyTime()*Config.Core_Switch_E_Rated_Max_Power;
+					
+					System.out.println(fogDevice.getName() + " : NIC Device Total Energy = " + NIC_Device_Total_Energy);
+					System.out.println(fogDevice.getName() + " : NIC APP Active Energy = "+ NIC_App_ActiveEnergy);
+
+				}else {
+						double NIC_Device_Total_Energy=fogDevice.getTotalNetworkInterfaceCardIdleTime()*Config.Edge_Lan_Switch_D_Measured_Idle_Power+fogDevice.getTotalNetworkInterfaceCardBusyTime()*(Config.Edge_Lan_Switch_D_Rated_Max_Power-Config.Edge_Lan_Switch_D_Measured_Idle_Power);
+						double NIC_App_ActiveEnergy=fogDevice.getTotalNetworkInterfaceCardBusyTime()*Config.Edge_Lan_Switch_D_Rated_Max_Power;
+						
+						System.out.println(fogDevice.getName() + " : NIC Device Total Energy = " + NIC_Device_Total_Energy);
+						System.out.println(fogDevice.getName() + " : NIC App Active Energy = "+NIC_App_ActiveEnergy);
+				}
+			}
+		}
+
+	
+	private void printLinksEnergyDetailsMeasuredEcofenBased() {
+		
+		System.out.println(" **** This is NIC time tracking results for ECOFEN based model with Measured MAX power parameters **** ");
+
+		for(FogDevice fogDevice : getFogDevices()){
+			System.out.println("Fog Device ID: " + fogDevice.getId());
+			
+			//System.out.println(" NIC Total Idle Time = "+fogDevice.getTotalNetworkInterfaceCardIdleTime());
+			//System.out.println(" NIC Total Busy Time = "+fogDevice.getTotalNetworkInterfaceCardBusyTime());
+			
+			//System.out.println("Uplink Map: " + NetworkUsageMonitor.totalTransmissionDelayUplinkMap);
+			//System.out.println("Downlink Map: " + NetworkUsageMonitor.totalTransmissionDelayDownlinkMap);
+			
+			if(fogDevice.getName().startsWith("m")) {
+				double NIC_Device_Total_Energy=fogDevice.getTotalNetworkInterfaceCardIdleTime()*Config.LowEnd_Hub_A_Measured_Idle_Power+fogDevice.getTotalNetworkInterfaceCardBusyTime()*(Config.LowEnd_Hub_A_Measured_Max_Power-Config.LowEnd_Hub_A_Measured_Idle_Power);
+				double NIC_App_ActiveEnergy=fogDevice.getTotalNetworkInterfaceCardBusyTime()*Config.LowEnd_Hub_A_Measured_Max_Power;
+				
+				System.out.println(fogDevice.getName() + " : measured_NIC_Device_Total_Energy = " + NIC_Device_Total_Energy);
+				System.out.println(fogDevice.getName() + " : measured_NIC_App_Active_Energy = "+ NIC_App_ActiveEnergy);
+					
+			}else if(fogDevice.getName().startsWith("c")) {
+
+					double NIC_Device_Total_Energy=fogDevice.getTotalNetworkInterfaceCardIdleTime()*Config.Core_Switch_E_Measured_Idle_Power+fogDevice.getTotalNetworkInterfaceCardBusyTime()*((Config.Core_Switch_E_Measured_Max_Power-Config.Core_Switch_E_Measured_Idle_Power));
+					double NIC_App_ActiveEnergy=fogDevice.getTotalNetworkInterfaceCardBusyTime()*Config.Core_Switch_E_Measured_Max_Power;
+					
+					System.out.println(fogDevice.getName() + " : measured_NIC_Device_Total_Energy = " + NIC_Device_Total_Energy);
+					System.out.println(fogDevice.getName() + " : measured_NIC_App_Active_Energy = "+ NIC_App_ActiveEnergy);
+
+				}else {
+						double NIC_Device_Total_Energy=fogDevice.getTotalNetworkInterfaceCardIdleTime()*Config.Edge_Lan_Switch_D_Measured_Idle_Power+fogDevice.getTotalNetworkInterfaceCardBusyTime()*(Config.Edge_Lan_Switch_D_Measured_Max_Power-Config.Edge_Lan_Switch_D_Measured_Idle_Power);
+						double NIC_App_ActiveEnergy=fogDevice.getTotalNetworkInterfaceCardBusyTime()*Config.Edge_Lan_Switch_D_Measured_Max_Power;
+						
+						System.out.println(fogDevice.getName() + " : measured_NIC_Device_Total_Energy = " + NIC_Device_Total_Energy);
+						System.out.println(fogDevice.getName() + " : measured_NIC_App_Active_Energy = "+NIC_App_ActiveEnergy);
+					
+					
+				}
+			}
+		}
+	
+	private void printFlowBasedNetworkingEnergyDetails() {
+		System.out.println("\n=========================================");
+		System.out.println("============== SINGLE APPLICATION TIME & ENERGY MAP RESULTS ==================");
+		for(FogDevice fogDevice: getFogDevices()){
+			System.out.println(fogDevice.getName()+" Networking Time Map : "+ fogDevice.getNetworkingTimeMap());
+			System.out.println(fogDevice.getName()+" Networking Energy Map : "+ fogDevice.getNetworkingEnergyConsumptionMap());
+		}
+		System.out.println("=========================================\n");
+	}
+	
+	private void printEnergyTimeMapsDetailsForFlowBaseModel() {
+
+		System.out.println("\n=========================================");
+		System.out.println("============== TIME & ENERGY MAP RESULTS ==================");
+		for (FogDevice fogDevice: fogDevices) {
+			//System.out.println(fogDevice.getId()+" "+fogDevice.getName() + " Networking Tuples Time Map " + fogDevice.getNetworkingTuplesTimeMap());
+			System.out.println(fogDevice.getId()+" "+fogDevice.getName() + " Networking Tuples energy Map " + fogDevice.getNetworkingTuplesEnergyMap());
+
+		}
+	}
+	
 	private String getStringForLoopId(int loopId){
 		for(String appId : getApplications().keySet()){
 			Application app = getApplications().get(appId);
@@ -233,6 +433,7 @@ public class Controller extends SimEntity{
 		getApplications().put(application.getAppId(), application);
 		getAppLaunchDelays().put(application.getAppId(), delay);
 		getAppModulePlacementPolicy().put(application.getAppId(), modulePlacement);
+		application.setAppSubmissionDelay(delay);
 		
 		for(Sensor sensor : sensors){
 			sensor.setApp(getApplications().get(sensor.getAppId()));

@@ -73,7 +73,7 @@ mapping={'cloud : Energy Consumed':'Cloud Energy',
 	'_SENSOR':'SENSOR',
 	'GLOBAL_GAME_STATE':'GLOBAL_GAME_STATE',
 	'Cost of execution in cloud':'Cost of execution in cloud',
-	'Total network usage':'Total network usage',
+	'Total network usage':'Total network usage'
 	#'Network usage-based energy':'Network usage-based energy',
 	#'Uplink energy of device Id : 12':'UpLink energy of mobile device 12',
 	#'Uplink energy of device Id : 15':'UpLink energy of mobile device 15',

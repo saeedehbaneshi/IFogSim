@@ -146,11 +146,13 @@ public class TwoApps {
 	 * @param appId
 	 */
 	private static void createFogDevices() {
-		FogDevice cloud = createFogDevice("cloud", 44800, 40000, 100, 10000, 0, 0.01, 16*103, 16*83.25); // creates the fog device Cloud at the apex of the hierarchy with level=0
+		FogDevice cloud = createFogDevice("cloud", 44800, 40000, 100, 10000, 0, 0.01, 16*103, 16*83.25, "Shared", 1, 2); // creates the fog device Cloud at the apex of the hierarchy with level=0
 		cloud.setParentId(-1);
-		FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, 10000, 10000, 1, 0.0, 107.339, 83.4333); // creates the fog device Proxy Server (level=1)
+		cloud.setDeviceType("Shared");
+		FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, 10000, 10000, 1, 0.0, 107.339, 83.4333, "Shared", 1, 2); // creates the fog device Proxy Server (level=1)
 		proxy.setParentId(cloud.getId()); // setting Cloud as parent of the Proxy Server
 		proxy.setUplinkLatency(100); // latency of connection from Proxy Server to the Cloud is 100 ms
+		proxy.setDeviceType("Shared");
 		
 		fogDevices.add(cloud);
 		fogDevices.add(proxy);
@@ -162,9 +164,10 @@ public class TwoApps {
 	}
 
 	private static FogDevice addGw(String id, int parentId){
-		FogDevice dept = createFogDevice("d-"+id, 2800, 4000, 10000, 10000, 1, 0.0, 107.339, 83.4333);
+		FogDevice dept = createFogDevice("d-"+id, 2800, 4000, 10000, 10000, 1, 0.0, 107.339, 83.4333, "Shared", 1.0, 2.0);
 		fogDevices.add(dept);
 		dept.setParentId(parentId);
+		dept.setDeviceType("Shared");
 		dept.setUplinkLatency(4); // latency of connection between gateways and proxy server is 4 ms
 		for(int i=0;i<numOfMobilesPerDept;i++){
 			String mobileId = id+"-"+i;
@@ -177,8 +180,9 @@ public class TwoApps {
 	}
 	
 	private static FogDevice addMobile(String id, int parentId){
-		FogDevice mobile = createFogDevice("m-"+id, 1000, 1000, 10000, 270, 3, 0, 87.53, 82.44);
+		FogDevice mobile = createFogDevice("m-"+id, 1000, 1000, 10000, 270, 3, 0, 87.53, 82.44, "CPE", 1.0, 2.0);
 		mobile.setParentId(parentId);
+		mobile.setDeviceType("CPE");
 		mobiles.add(mobile);
 		/*Sensor eegSensor = new Sensor("s-"+id, "EEG", userId, appId, new DeterministicDistribution(EEG_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor follows a deterministic distribution
 		sensors.add(eegSensor);
@@ -205,7 +209,7 @@ public class TwoApps {
 	 * @return
 	 */
 	private static FogDevice createFogDevice(String nodeName, long mips,
-			int ram, long upBw, long downBw, int level, double ratePerMips, double busyPower, double idlePower) {
+			int ram, long upBw, long downBw, int level, double ratePerMips, double busyPower, double idlePower, String deviceType, double networkingMaxPower, double networkingIdlePow ) {
 		
 		List<Pe> peList = new ArrayList<Pe>();
 
@@ -248,7 +252,7 @@ public class TwoApps {
 		FogDevice fogdevice = null;
 		try {
 			fogdevice = new FogDevice(nodeName, characteristics, 
-					new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 0, ratePerMips);
+					new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 0, ratePerMips, "", 0, 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
