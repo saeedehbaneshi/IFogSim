@@ -45,7 +45,7 @@ import org.fog.utils.distribution.DeterministicDistribution;
  * @author Saeedeh 
  *
  */
-public class TwoDCNSApps {
+public class HighResTwoDCNSApp {
     static List<FogDevice> fogDevices = new ArrayList<FogDevice>();
 	static List<FogDevice> mobiles = new ArrayList<FogDevice>();
     static List<Sensor> sensors = new ArrayList<Sensor>();
@@ -57,7 +57,7 @@ public class TwoDCNSApps {
     private static boolean USER_BASED = false;
     
     //Saeedeeh added these scenarios
-    private static boolean Router_Only = false;
+    private static boolean Router_Only = true;
     private static boolean Router_Proxy = false;
     private static boolean Router_Cloud = false;
     private static boolean Proxy_Only = false;
@@ -68,7 +68,8 @@ public class TwoDCNSApps {
     
     
     public static void main(String[] args) {
-        Log.printLine("Starting TwoDCNSApps...");
+        Log.printLine("Starting HighResTwoDCNSApps...");
+        
         String stringValue="";
         if (args.length >= 1) {
             // Parse the first argument (string)
@@ -451,9 +452,9 @@ public class TwoDCNSApps {
 		/*
 		 * Connecting the application modules (vertices) in the application model (directed graph) with edges
 		 */
-		application.addAppEdge("CAMERA", "motion_detector", 1000, 20000, "CAMERA", Tuple.UP, AppEdge.SENSOR); // adding edge from CAMERA (sensor) to Motion Detector module carrying tuples of type CAMERA
-		application.addAppEdge("motion_detector", "object_detector", 2000, 2000, "MOTION_VIDEO_STREAM", Tuple.UP, AppEdge.MODULE); // adding edge from Motion Detector to Object Detector module carrying tuples of type MOTION_VIDEO_STREAM
-		application.addAppEdge("object_detector", "user_interface", 500, 2000, "DETECTED_OBJECT", Tuple.UP, AppEdge.MODULE); // adding edge from Object Detector to User Interface module carrying tuples of type DETECTED_OBJECT
+		application.addAppEdge("CAMERA", "motion_detector", 2000, 40000, "CAMERA", Tuple.UP, AppEdge.SENSOR); // adding edge from CAMERA (sensor) to Motion Detector module carrying tuples of type CAMERA
+		application.addAppEdge("motion_detector", "object_detector", 4000, 4000, "MOTION_VIDEO_STREAM", Tuple.UP, AppEdge.MODULE); // adding edge from Motion Detector to Object Detector module carrying tuples of type MOTION_VIDEO_STREAM
+		application.addAppEdge("object_detector", "user_interface", 1000, 4000, "DETECTED_OBJECT", Tuple.UP, AppEdge.MODULE); // adding edge from Object Detector to User Interface module carrying tuples of type DETECTED_OBJECT
 		application.addAppEdge("object_detector", "object_tracker", 1000, 100, "OBJECT_LOCATION", Tuple.UP, AppEdge.MODULE); // adding edge from Object Detector to Object Tracker module carrying tuples of type OBJECT_LOCATION
 		//*Saeedeh*//this edge from obj tracker to ptz control is periodic and third argument is the periodicity= 100 (it means every 10msec)
 		application.addAppEdge("object_tracker", "PTZ_CONTROL", 100, 28, 100, "PTZ_PARAMS", Tuple.DOWN, AppEdge.ACTUATOR); // adding edge from Object Tracker to PTZ CONTROL (actuator) carrying tuples of type PTZ_PARAMS

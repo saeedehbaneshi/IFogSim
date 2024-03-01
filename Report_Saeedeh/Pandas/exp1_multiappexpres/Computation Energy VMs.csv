@@ -1,0 +1,15 @@
+device,app,vm,energy,scenario
+cloud ,dcns_1,user_interface_1,12823.499999997002,Router_Proxy
+cloud ,dcns_0,user_interface,13373.078571425585,Router_Proxy
+proxy-server ,dcns_1,object_tracker_1,60871.94690000103,Router_Proxy
+proxy-server ,dcns_1,object_detector_1,120191.771859996,Router_Proxy
+d-0 ,dcns_0,object_tracker,63497.15215714387,Router_Proxy
+d-0 ,dcns_0,object_detector,123119.36641428557,Router_Proxy
+m-0-0 ,dcns_1,motion_detector_1,66925.43799999933,Router_Proxy
+m-0-0 ,dcns_0,motion_detector,69953.97599999934,Router_Proxy
+m-0-1 ,dcns_1,motion_detector_1,66925.43799999933,Router_Proxy
+m-0-1 ,dcns_0,motion_detector,69953.97599999934,Router_Proxy
+m-0-2 ,dcns_1,motion_detector_1,66925.43799999933,Router_Proxy
+m-0-2 ,dcns_0,motion_detector,69953.97599999934,Router_Proxy
+m-0-3 ,dcns_1,motion_detector_1,66925.43799999933,Router_Proxy
+m-0-3 ,dcns_0,motion_detector,69953.97599999934,Router_Proxy

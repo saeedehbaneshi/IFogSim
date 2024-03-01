@@ -1,0 +1,559 @@
+Starting TwoDCNSApps...
+Scenario Proxy_Only
+reversed_selectivity: 1.0
+reversed_selectivity: 1.0
+reversed_selectivity: 20.0
+reversed_selectivity: 1.0
+reversed_selectivity: 1.0
+reversed_selectivity: 20.0
+object_detector_1
+motion_detector_1
+object_tracker_1
+user_interface_1
+
+
+
+
+*****************************
+
+
+
+dcns_0 ''' module motion_detector can be created on device m-0-2
+Creating 0 instances of motion_detector on device m-0-2
+dcns_0 ''' module user_interface can be created on device cloud
+Creating 0 instances of user_interface on device cloud
+dcns_0 ''' module motion_detector can be created on device m-0-1
+Creating 0 instances of motion_detector on device m-0-1
+dcns_0 ''' module motion_detector can be created on device m-0-3
+Creating 0 instances of motion_detector on device m-0-3
+dcns_0 ''' module motion_detector can be created on device m-0-0
+Creating 0 instances of motion_detector on device m-0-0
+dcns_0 ''' module object_detector can be created on device proxy-server
+Creating 0 instances of object_detector on device proxy-server
+dcns_0 ''' module object_tracker can be created on device proxy-server
+Creating 0 instances of object_tracker on device proxy-server
+dcns_1 ''' module motion_detector_1 can be created on device m-0-2
+Creating 0 instances of motion_detector_1 on device m-0-2
+dcns_1 ''' module user_interface_1 can be created on device cloud
+Creating 0 instances of user_interface_1 on device cloud
+dcns_1 ''' module motion_detector_1 can be created on device m-0-1
+Creating 0 instances of motion_detector_1 on device m-0-1
+dcns_1 ''' module motion_detector_1 can be created on device m-0-3
+Creating 0 instances of motion_detector_1 on device m-0-3
+dcns_1 ''' module motion_detector_1 can be created on device m-0-0
+Creating 0 instances of motion_detector_1 on device m-0-0
+dcns_1 ''' module object_detector_1 can be created on device proxy-server
+Creating 0 instances of object_detector_1 on device proxy-server
+dcns_1 ''' module object_tracker_1 can be created on device proxy-server
+Creating 0 instances of object_tracker_1 on device proxy-server
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+# SENSOR # gatewayDeviceId is : 7 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 11 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 7 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 8 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 13 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 8 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 9 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 15 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 9 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 10 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 17 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 10 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 7 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 19 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 7 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 8 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 21 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 8 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 9 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 23 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 9 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 10 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 25 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 10 Latency is: 1.0
+0.0 Submitted application dcns_0
+^^^^^^^^^^^^^^^DeviceId : 4
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^DeviceId : 5
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 7
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 8
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 10
+^^^^^^^^^^^^^^^ module : motion_detector
+ IT IS VM Id :4 this data carried by this event ev= 52 for this destination : 4
+ Vm list after creation : [org.fog.application.AppModule@46f7f36a]
+ IT IS VM Id :1 this data carried by this event ev= 52 for this destination : 5
+ Vm list after creation : [org.fog.application.AppModule@421faab1]
+ IT IS VM Id :3 this data carried by this event ev= 52 for this destination : 5
+ Vm list after creation : [org.fog.application.AppModule@421faab1, org.fog.application.AppModule@2b71fc7e]
+periodic edge source (from initialize periodic tuple): object_tracker
+ IT IS VM Id :18 this data carried by this event ev= 52 for this destination : 7
+ Vm list after creation : [org.fog.application.AppModule@5ce65a89]
+ IT IS VM Id :16 this data carried by this event ev= 52 for this destination : 8
+ Vm list after creation : [org.fog.application.AppModule@25f38edc]
+ IT IS VM Id :2 this data carried by this event ev= 52 for this destination : 9
+ Vm list after creation : [org.fog.application.AppModule@1a86f2f1]
+ IT IS VM Id :17 this data carried by this event ev= 52 for this destination : 10
+ Vm list after creation : [org.fog.application.AppModule@3eb07fd3]
+80.0 Submitted application dcns_1
+^^^^^^^^^^^^^^^DeviceId : 4
+^^^^^^^^^^^^^^^ module : user_interface_1
+^^^^^^^^^^^^^^^DeviceId : 5
+^^^^^^^^^^^^^^^ module : object_detector_1
+^^^^^^^^^^^^^^^ module : object_tracker_1
+^^^^^^^^^^^^^^^DeviceId : 7
+^^^^^^^^^^^^^^^ module : motion_detector_1
+^^^^^^^^^^^^^^^DeviceId : 8
+^^^^^^^^^^^^^^^ module : motion_detector_1
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^ module : motion_detector_1
+^^^^^^^^^^^^^^^DeviceId : 10
+^^^^^^^^^^^^^^^ module : motion_detector_1
+ IT IS VM Id :8 this data carried by this event ev= 52 for this destination : 4
+ Vm list after creation : [org.fog.application.AppModule@46f7f36a, org.fog.application.AppModule@77a567e1]
+ IT IS VM Id :5 this data carried by this event ev= 52 for this destination : 5
+ Vm list after creation : [org.fog.application.AppModule@421faab1, org.fog.application.AppModule@2b71fc7e, org.fog.application.AppModule@736e9adb]
+ IT IS VM Id :7 this data carried by this event ev= 52 for this destination : 5
+ Vm list after creation : [org.fog.application.AppModule@421faab1, org.fog.application.AppModule@2b71fc7e, org.fog.application.AppModule@736e9adb, org.fog.application.AppModule@6d21714c]
+periodic edge source (from initialize periodic tuple): object_tracker_1
+ IT IS VM Id :21 this data carried by this event ev= 52 for this destination : 7
+ Vm list after creation : [org.fog.application.AppModule@5ce65a89, org.fog.application.AppModule@108c4c35]
+ IT IS VM Id :19 this data carried by this event ev= 52 for this destination : 8
+ Vm list after creation : [org.fog.application.AppModule@25f38edc, org.fog.application.AppModule@4ccabbaa]
+ IT IS VM Id :6 this data carried by this event ev= 52 for this destination : 9
+ Vm list after creation : [org.fog.application.AppModule@1a86f2f1, org.fog.application.AppModule@4bf558aa]
+ IT IS VM Id :20 this data carried by this event ev= 52 for this destination : 10
+ Vm list after creation : [org.fog.application.AppModule@3eb07fd3, org.fog.application.AppModule@2d38eb89]
+
+
+***************************************************
+
+cloud Total Idle Networking Energy with Flow-base model = 0.0
+cloud Total Active Networking Energy with Flow-base model = 0.0
+cloud Total Device Networking Energy with Flow-base model = 0.0
+
+
+***************************************************
+
+proxy-server Total Idle Networking Energy with Flow-base model = 4168.709999993485
+proxy-server Total Active Networking Energy with Flow-base model = 231.59499999963805
+proxy-server Total Device Networking Energy with Flow-base model = 4400.304999993124
+
+
+***************************************************
+
+d-0 Total Idle Networking Energy with Flow-base model = 255200.39999979385
+d-0 Total Active Networking Energy with Flow-base model = 25211.963636343306
+d-0 Total Device Networking Energy with Flow-base model = 280412.36363613716
+
+
+***************************************************
+
+m-0-0 Total Idle Networking Energy with Flow-base model = 5600.0
+m-0-0 Total Active Networking Energy with Flow-base model = 273.60000000004555
+m-0-0 Total Device Networking Energy with Flow-base model = 5873.600000000046
+
+
+***************************************************
+
+m-0-1 Total Idle Networking Energy with Flow-base model = 5600.0
+m-0-1 Total Active Networking Energy with Flow-base model = 273.60000000004555
+m-0-1 Total Device Networking Energy with Flow-base model = 5873.600000000046
+
+
+***************************************************
+
+m-0-2 Total Idle Networking Energy with Flow-base model = 5600.0
+m-0-2 Total Active Networking Energy with Flow-base model = 273.60000000004555
+m-0-2 Total Device Networking Energy with Flow-base model = 5873.600000000046
+
+
+***************************************************
+
+m-0-3 Total Idle Networking Energy with Flow-base model = 5600.0
+m-0-3 Total Active Networking Energy with Flow-base model = 273.60000000004555
+m-0-3 Total Device Networking Energy with Flow-base model = 5873.600000000046
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 25380
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+[motion_detector, object_detector, object_tracker] --->= 565.5347867803853
+[object_tracker, PTZ_CONTROL] --->= 5.110999999999937
+[motion_detector_1, object_detector_1, object_tracker_1] --->= 641.0111682808727
+[object_tracker_1, PTZ_CONTROL_1] --->= 5.1109999999999305
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 1254.2889310829992
+DETECTED_OBJECT --->= 0.1111607142856883
+OBJECT_LOCATION --->= 9.897924804684774
+CAMERA --->= 4.099999999999909
+OBJECT_LOCATION_1 --->= 9.898491210937227
+MOTION_VIDEO_STREAM_1 --->= 1254.0883646767466
+CAMERA_1 --->= 4.099999999999909
+DETECTED_OBJECT_1 --->= 0.1111607142856883
+=========================================
+cloud : Energy Consumed = 2415847.6789285713
+cloud : Application Energy Consumed = 8610.064285712413
+cloud : Vms Energy Map of device : cloud {dcns_1={user_interface_1=4030.242857141915}, dcns_0={user_interface=4579.821428570498}}
+cloud : Application dcns_1 total Energy = 4030.242857141915
+cloud : Application dcns_0 total Energy = 4579.821428570498
+cloud : North Link Busy Time = 0.0
+cloud : North Link Idle Time = 0.0
+cloud : South Link Busy Time = 0.0
+cloud : South Link Idle Time = 0.0
+proxy-server : Energy Consumed = 207945.31956600765
+proxy-server : Application Energy Consumed = 207831.61189715043
+proxy-server : Vms Energy Map of device : proxy-server {dcns_1={object_tracker_1=31288.77797146417, object_detector_1=68185.40839404344}, dcns_0={object_tracker=33896.88872614997, object_detector=74460.29299261558}}
+proxy-server : Application dcns_1 total Energy = 99474.1863655076
+proxy-server : Application dcns_0 total Energy = 108357.18171876555
+proxy-server : North Link Busy Time = 0.9799999999992224
+proxy-server : North Link Idle Time = 1933.7000000000003
+proxy-server : South Link Busy Time = 0.037999999999186684
+proxy-server : South Link Idle Time = 1980.0630000000006
+d-0 : Energy Consumed = 0.0
+d-0 : Application Energy Consumed = 0.0
+d-0 : Vms Energy Map of device : d-0 {}
+d-0 : Application total Energy = 0.0
+d-0 : North Link Busy Time = 60.799999999950984
+d-0 : North Link Idle Time = 1936.8800000000488
+d-0 : South Link Busy Time = 1.5199999999986744
+d-0 : South Link Idle Time = 1980.621000000001
+m-0-0 : Energy Consumed = 168223.1019999993
+m-0-0 : Application Energy Consumed = 136879.41399999865
+m-0-0 : Vms Energy Map of device : m-0-0 {dcns_1={motion_detector_1=66925.43799999933}, dcns_0={motion_detector=69953.97599999934}}
+m-0-0 : Application dcns_1 total Energy = 66925.43799999933
+m-0-0 : Application dcns_0 total Energy = 69953.97599999934
+m-0-0 : North Link Busy Time = 152.00000000002532
+m-0-0 : North Link Idle Time = 1843.5999999999744
+m-0-0 : South Link Busy Time = 0.0
+m-0-0 : South Link Idle Time = 0.0
+m-0-1 : Energy Consumed = 168223.1019999993
+m-0-1 : Application Energy Consumed = 136879.41399999865
+m-0-1 : Vms Energy Map of device : m-0-1 {dcns_1={motion_detector_1=66925.43799999933}, dcns_0={motion_detector=69953.97599999934}}
+m-0-1 : Application dcns_1 total Energy = 66925.43799999933
+m-0-1 : Application dcns_0 total Energy = 69953.97599999934
+m-0-1 : North Link Busy Time = 152.00000000002532
+m-0-1 : North Link Idle Time = 1843.5999999999744
+m-0-1 : South Link Busy Time = 0.0
+m-0-1 : South Link Idle Time = 0.0
+m-0-2 : Energy Consumed = 168223.1019999993
+m-0-2 : Application Energy Consumed = 136879.41399999865
+m-0-2 : Vms Energy Map of device : m-0-2 {dcns_1={motion_detector_1=66925.43799999933}, dcns_0={motion_detector=69953.97599999934}}
+m-0-2 : Application dcns_1 total Energy = 66925.43799999933
+m-0-2 : Application dcns_0 total Energy = 69953.97599999934
+m-0-2 : North Link Busy Time = 152.00000000002532
+m-0-2 : North Link Idle Time = 1843.5999999999744
+m-0-2 : South Link Busy Time = 0.0
+m-0-2 : South Link Idle Time = 0.0
+m-0-3 : Energy Consumed = 168223.1019999993
+m-0-3 : Application Energy Consumed = 136879.41399999865
+m-0-3 : Vms Energy Map of device : m-0-3 {dcns_1={motion_detector_1=66925.43799999933}, dcns_0={motion_detector=69953.97599999934}}
+m-0-3 : Application dcns_1 total Energy = 66925.43799999933
+m-0-3 : Application dcns_0 total Energy = 69953.97599999934
+m-0-3 : North Link Busy Time = 152.00000000002532
+m-0-3 : North Link Idle Time = 1843.5999999999744
+m-0-3 : South Link Busy Time = 0.0
+m-0-3 : South Link Idle Time = 0.0
+Cost of execution in cloud = 8842.19999999949
+Total network usage = 17079.0
+Total network Energy = 65954.78160000218
+Total networking Time = 669.7799999999844
+
+=========================================
+============== TIME & ENERGY MAP RESULTS ==================
+4 cloud Networking Tuples energy Map {}
+5 proxy-server Networking Tuples energy Map {dcns_1={PTZ_PARAMS_1=82.1274999981808, DETECTED_OBJECT_1=1988.3499999983144}, dcns_0={PTZ_PARAMS=82.12749999830365, DETECTED_OBJECT=2247.699999998324}}
+6 d-0 Networking Tuples energy Map {dcns_1={MOTION_VIDEO_STREAM_1=134177.01818170713, PTZ_PARAMS_1=3143.6363636335045}, dcns_0={PTZ_PARAMS=3143.636363633739, MOTION_VIDEO_STREAM=139948.07272716088}}
+7 m-0-0 Networking Tuples energy Map {dcns_1={MOTION_VIDEO_STREAM_1=2873.6466909849205}, dcns_0={MOTION_VIDEO_STREAM=2997.2443981240363}}
+8 m-0-1 Networking Tuples energy Map {dcns_1={MOTION_VIDEO_STREAM_1=2873.6466909849205}, dcns_0={MOTION_VIDEO_STREAM=2997.2443981240363}}
+9 m-0-2 Networking Tuples energy Map {dcns_1={MOTION_VIDEO_STREAM_1=2873.6466909849205}, dcns_0={MOTION_VIDEO_STREAM=2997.2443981240363}}
+10 m-0-3 Networking Tuples energy Map {dcns_1={MOTION_VIDEO_STREAM_1=2873.6466909849205}, dcns_0={MOTION_VIDEO_STREAM=2997.2443981240363}}
+Starting TwoDCNSApps...
+Scenario Router_Proxy
+reversed_selectivity: 1.0
+reversed_selectivity: 1.0
+reversed_selectivity: 20.0
+reversed_selectivity: 1.0
+reversed_selectivity: 1.0
+reversed_selectivity: 20.0
+object_detector_1
+motion_detector_1
+object_tracker_1
+user_interface_1
+
+
+
+
+*****************************
+
+
+
+dcns_0 ''' module motion_detector can be created on device m-0-2
+Creating 0 instances of motion_detector on device m-0-2
+dcns_0 ''' module user_interface can be created on device cloud
+Creating 0 instances of user_interface on device cloud
+dcns_0 ''' module motion_detector can be created on device m-0-1
+Creating 0 instances of motion_detector on device m-0-1
+dcns_0 ''' module motion_detector can be created on device m-0-3
+Creating 0 instances of motion_detector on device m-0-3
+dcns_0 ''' module motion_detector can be created on device m-0-0
+Creating 0 instances of motion_detector on device m-0-0
+dcns_0 ''' module object_detector can be created on device d-0
+Creating 0 instances of object_detector on device d-0
+dcns_0 ''' module object_tracker can be created on device d-0
+Creating 0 instances of object_tracker on device d-0
+dcns_1 ''' module motion_detector_1 can be created on device m-0-2
+Creating 0 instances of motion_detector_1 on device m-0-2
+dcns_1 ''' module user_interface_1 can be created on device cloud
+Creating 0 instances of user_interface_1 on device cloud
+dcns_1 ''' module motion_detector_1 can be created on device m-0-1
+Creating 0 instances of motion_detector_1 on device m-0-1
+dcns_1 ''' module motion_detector_1 can be created on device m-0-3
+Creating 0 instances of motion_detector_1 on device m-0-3
+dcns_1 ''' module motion_detector_1 can be created on device m-0-0
+Creating 0 instances of motion_detector_1 on device m-0-0
+dcns_1 ''' module object_detector_1 can be created on device proxy-server
+Creating 0 instances of object_detector_1 on device proxy-server
+dcns_1 ''' module object_tracker_1 can be created on device proxy-server
+Creating 0 instances of object_tracker_1 on device proxy-server
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+# SENSOR # gatewayDeviceId is : 7 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 11 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 7 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 8 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 13 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 8 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 9 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 15 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 9 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 10 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 17 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 10 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 7 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 19 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 7 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 8 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 21 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 8 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 9 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 23 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 9 Latency is: 1.0
+# SENSOR # gatewayDeviceId is : 10 MinTimeBetweenEvents is: 0.1
+# SENSOR #  Id is : 25 TransmitDistribution.getNextValue + transmissionStartDelay is= 5.0 + 50
+# ACTUATOR # gatewayDeviceId is : 10 Latency is: 1.0
+0.0 Submitted application dcns_0
+^^^^^^^^^^^^^^^DeviceId : 4
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^DeviceId : 6
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 7
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 8
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 10
+^^^^^^^^^^^^^^^ module : motion_detector
+ IT IS VM Id :4 this data carried by this event ev= 52 for this destination : 4
+ Vm list after creation : [org.fog.application.AppModule@46f7f36a]
+ IT IS VM Id :1 this data carried by this event ev= 52 for this destination : 6
+ Vm list after creation : [org.fog.application.AppModule@421faab1]
+ IT IS VM Id :3 this data carried by this event ev= 52 for this destination : 6
+ Vm list after creation : [org.fog.application.AppModule@421faab1, org.fog.application.AppModule@2b71fc7e]
+periodic edge source (from initialize periodic tuple): object_tracker
+ IT IS VM Id :18 this data carried by this event ev= 52 for this destination : 7
+ Vm list after creation : [org.fog.application.AppModule@5ce65a89]
+ IT IS VM Id :16 this data carried by this event ev= 52 for this destination : 8
+ Vm list after creation : [org.fog.application.AppModule@25f38edc]
+ IT IS VM Id :2 this data carried by this event ev= 52 for this destination : 9
+ Vm list after creation : [org.fog.application.AppModule@1a86f2f1]
+ IT IS VM Id :17 this data carried by this event ev= 52 for this destination : 10
+ Vm list after creation : [org.fog.application.AppModule@3eb07fd3]
+80.0 Submitted application dcns_1
+^^^^^^^^^^^^^^^DeviceId : 4
+^^^^^^^^^^^^^^^ module : user_interface_1
+^^^^^^^^^^^^^^^DeviceId : 5
+^^^^^^^^^^^^^^^ module : object_detector_1
+^^^^^^^^^^^^^^^ module : object_tracker_1
+^^^^^^^^^^^^^^^DeviceId : 7
+^^^^^^^^^^^^^^^ module : motion_detector_1
+^^^^^^^^^^^^^^^DeviceId : 8
+^^^^^^^^^^^^^^^ module : motion_detector_1
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^ module : motion_detector_1
+^^^^^^^^^^^^^^^DeviceId : 10
+^^^^^^^^^^^^^^^ module : motion_detector_1
+ IT IS VM Id :8 this data carried by this event ev= 52 for this destination : 4
+ Vm list after creation : [org.fog.application.AppModule@46f7f36a, org.fog.application.AppModule@77a567e1]
+ IT IS VM Id :5 this data carried by this event ev= 52 for this destination : 5
+ Vm list after creation : [org.fog.application.AppModule@736e9adb]
+ IT IS VM Id :7 this data carried by this event ev= 52 for this destination : 5
+ Vm list after creation : [org.fog.application.AppModule@736e9adb, org.fog.application.AppModule@6d21714c]
+periodic edge source (from initialize periodic tuple): object_tracker_1
+ IT IS VM Id :21 this data carried by this event ev= 52 for this destination : 7
+ Vm list after creation : [org.fog.application.AppModule@5ce65a89, org.fog.application.AppModule@108c4c35]
+ IT IS VM Id :19 this data carried by this event ev= 52 for this destination : 8
+ Vm list after creation : [org.fog.application.AppModule@25f38edc, org.fog.application.AppModule@4ccabbaa]
+ IT IS VM Id :6 this data carried by this event ev= 52 for this destination : 9
+ Vm list after creation : [org.fog.application.AppModule@1a86f2f1, org.fog.application.AppModule@4bf558aa]
+ IT IS VM Id :20 this data carried by this event ev= 52 for this destination : 10
+ Vm list after creation : [org.fog.application.AppModule@3eb07fd3, org.fog.application.AppModule@2d38eb89]
+
+
+***************************************************
+
+cloud Total Idle Networking Energy with Flow-base model = 0.0
+cloud Total Active Networking Energy with Flow-base model = 0.0
+cloud Total Device Networking Energy with Flow-base model = 0.0
+
+
+***************************************************
+
+proxy-server Total Idle Networking Energy with Flow-base model = 12444.704999988193
+proxy-server Total Active Networking Energy with Flow-base model = 691.3724999993441
+proxy-server Total Device Networking Energy with Flow-base model = 13136.077499987538
+
+
+***************************************************
+
+d-0 Total Idle Networking Energy with Flow-base model = 134397.8999998894
+d-0 Total Active Networking Energy with Flow-base model = 13009.690909080231
+d-0 Total Device Networking Energy with Flow-base model = 147407.59090896964
+
+
+***************************************************
+
+m-0-0 Total Idle Networking Energy with Flow-base model = 5600.0
+m-0-0 Total Active Networking Energy with Flow-base model = 273.60000000004555
+m-0-0 Total Device Networking Energy with Flow-base model = 5873.600000000046
+
+
+***************************************************
+
+m-0-1 Total Idle Networking Energy with Flow-base model = 5600.0
+m-0-1 Total Active Networking Energy with Flow-base model = 273.60000000004555
+m-0-1 Total Device Networking Energy with Flow-base model = 5873.600000000046
+
+
+***************************************************
+
+m-0-2 Total Idle Networking Energy with Flow-base model = 5600.0
+m-0-2 Total Active Networking Energy with Flow-base model = 273.60000000004555
+m-0-2 Total Device Networking Energy with Flow-base model = 5873.600000000046
+
+
+***************************************************
+
+m-0-3 Total Idle Networking Energy with Flow-base model = 5600.0
+m-0-3 Total Active Networking Energy with Flow-base model = 273.60000000004555
+m-0-3 Total Device Networking Energy with Flow-base model = 5873.600000000046
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 343
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+[motion_detector, object_detector, object_tracker] --->= 5.357142857142962
+[object_tracker, PTZ_CONTROL] --->= 3.1099999999999577
+[motion_detector_1, object_detector_1, object_tracker_1] --->= 7.63714285714261
+[object_tracker_1, PTZ_CONTROL_1] --->= 5.1109999999999305
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 2.9571428571427987
+DETECTED_OBJECT --->= 0.1111607142856883
+OBJECT_LOCATION --->= 1.5285714285714675
+CAMERA --->= 4.099999999999909
+OBJECT_LOCATION_1 --->= 1.5285714285714675
+MOTION_VIDEO_STREAM_1 --->= 2.971809523809452
+CAMERA_1 --->= 4.099999999999909
+DETECTED_OBJECT_1 --->= 0.1111607142856883
+=========================================
+cloud : Energy Consumed = 2421940.93607143
+cloud : Application Energy Consumed = 26196.578571422586
+cloud : Vms Energy Map of device : cloud {dcns_1={user_interface_1=12823.499999997002}, dcns_0={user_interface=13373.078571425585}}
+cloud : Application dcns_1 total Energy = 12823.499999997002
+cloud : Application dcns_0 total Energy = 13373.078571425585
+cloud : North Link Busy Time = 0.0
+cloud : North Link Idle Time = 0.0
+cloud : South Link Busy Time = 0.0
+cloud : South Link Idle Time = 0.0
+proxy-server : Energy Consumed = 195125.56714200202
+proxy-server : Application Energy Consumed = 181063.71875999979
+proxy-server : Vms Energy Map of device : proxy-server {dcns_1={object_tracker_1=60871.94690000103, object_detector_1=120191.771859996}}
+proxy-server : Application dcns_1 total Energy = 181063.71875999705
+proxy-server : North Link Busy Time = 3.0199999999975375
+proxy-server : North Link Idle Time = 1989.7371428571448
+proxy-server : South Link Busy Time = 0.01899999999957913
+proxy-server : South Link Idle Time = 1980.0820000000003
+d-0 : Energy Consumed = 203388.99568000098
+d-0 : Application Energy Consumed = 186616.51857142802
+d-0 : Vms Energy Map of device : d-0 {dcns_0={object_tracker=63497.15215714387, object_detector=123119.36641428557}}
+d-0 : Application dcns_0 total Energy = 186616.51857142945
+d-0 : North Link Busy Time = 31.299999999974318
+d-0 : North Link Idle Time = 1966.3800000000256
+d-0 : South Link Busy Time = 1.5199999999986744
+d-0 : South Link Idle Time = 1980.621000000001
+m-0-0 : Energy Consumed = 168223.1019999993
+m-0-0 : Application Energy Consumed = 136879.41399999865
+m-0-0 : Vms Energy Map of device : m-0-0 {dcns_1={motion_detector_1=66925.43799999933}, dcns_0={motion_detector=69953.97599999934}}
+m-0-0 : Application dcns_1 total Energy = 66925.43799999933
+m-0-0 : Application dcns_0 total Energy = 69953.97599999934
+m-0-0 : North Link Busy Time = 152.00000000002532
+m-0-0 : North Link Idle Time = 1843.5999999999744
+m-0-0 : South Link Busy Time = 0.0
+m-0-0 : South Link Idle Time = 0.0
+m-0-1 : Energy Consumed = 168223.1019999993
+m-0-1 : Application Energy Consumed = 136879.41399999865
+m-0-1 : Vms Energy Map of device : m-0-1 {dcns_1={motion_detector_1=66925.43799999933}, dcns_0={motion_detector=69953.97599999934}}
+m-0-1 : Application dcns_1 total Energy = 66925.43799999933
+m-0-1 : Application dcns_0 total Energy = 69953.97599999934
+m-0-1 : North Link Busy Time = 152.00000000002532
+m-0-1 : North Link Idle Time = 1843.5999999999744
+m-0-1 : South Link Busy Time = 0.0
+m-0-1 : South Link Idle Time = 0.0
+m-0-2 : Energy Consumed = 168223.1019999993
+m-0-2 : Application Energy Consumed = 136879.41399999865
+m-0-2 : Vms Energy Map of device : m-0-2 {dcns_1={motion_detector_1=66925.43799999933}, dcns_0={motion_detector=69953.97599999934}}
+m-0-2 : Application dcns_1 total Energy = 66925.43799999933
+m-0-2 : Application dcns_0 total Energy = 69953.97599999934
+m-0-2 : North Link Busy Time = 152.00000000002532
+m-0-2 : North Link Idle Time = 1843.5999999999744
+m-0-2 : South Link Busy Time = 0.0
+m-0-2 : South Link Idle Time = 0.0
+m-0-3 : Energy Consumed = 168223.1019999993
+m-0-3 : Application Energy Consumed = 136879.41399999865
+m-0-3 : Vms Energy Map of device : m-0-3 {dcns_1={motion_detector_1=66925.43799999933}, dcns_0={motion_detector=69953.97599999934}}
+m-0-3 : Application dcns_1 total Energy = 66925.43799999933
+m-0-3 : Application dcns_0 total Energy = 69953.97599999934
+m-0-3 : North Link Busy Time = 152.00000000002532
+m-0-3 : North Link Idle Time = 1843.5999999999744
+m-0-3 : South Link Busy Time = 0.0
+m-0-3 : South Link Idle Time = 0.0
+Cost of execution in cloud = 13541.285714284086
+Total network usage = 24327.1
+Total network Energy = 92822.630399996
+Total networking Time = 642.3199999999925
+
+=========================================
+============== TIME & ENERGY MAP RESULTS ==================
+4 cloud Networking Tuples energy Map {}
+5 proxy-server Networking Tuples energy Map {dcns_1={PTZ_PARAMS_1=82.1274999981808, DETECTED_OBJECT_1=6397.2999999946605}, dcns_0={DETECTED_OBJECT=6656.649999994668}}
+6 d-0 Networking Tuples energy Map {dcns_1={MOTION_VIDEO_STREAM_1=134177.01818170713, PTZ_PARAMS_1=3143.6363636335045}, dcns_0={PTZ_PARAMS=3143.636363633739, DETECTED_OBJECT=6943.299999994468}}
+7 m-0-0 Networking Tuples energy Map {dcns_1={MOTION_VIDEO_STREAM_1=2873.6466909849205}, dcns_0={MOTION_VIDEO_STREAM=2997.2443981240363}}
+8 m-0-1 Networking Tuples energy Map {dcns_1={MOTION_VIDEO_STREAM_1=2873.6466909849205}, dcns_0={MOTION_VIDEO_STREAM=2997.2443981240363}}
+9 m-0-2 Networking Tuples energy Map {dcns_1={MOTION_VIDEO_STREAM_1=2873.6466909849205}, dcns_0={MOTION_VIDEO_STREAM=2997.2443981240363}}
+10 m-0-3 Networking Tuples energy Map {dcns_1={MOTION_VIDEO_STREAM_1=2873.6466909849205}, dcns_0={MOTION_VIDEO_STREAM=2997.2443981240363}}
