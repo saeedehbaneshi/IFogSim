@@ -1,0 +1,61 @@
+scenario,tuple,execution_time
+Router_Proxy,"[motion_detector, object_detector, object_tracker]",{'5.357142857142962'}
+Router_Proxy,"[object_tracker, PTZ_CONTROL]",{'3.1099999999999577'}
+Router_Proxy,"[motion_detector_1, object_detector_1, object_tracker_1]",{'7.63714285714261'}
+Router_Proxy,"[object_tracker_1, PTZ_CONTROL_1]",{'5.1109999999999305'}
+Router_Proxy,MOTION_VIDEO_STREAM,{'2.9571428571427987'}
+Router_Proxy,DETECTED_OBJECT,{'0.1111607142856883'}
+Router_Proxy,OBJECT_LOCATION,{'1.5285714285714675'}
+Router_Proxy,CAMERA,{'4.099999999999909'}
+Router_Proxy,OBJECT_LOCATION_1,{'1.5285714285714675'}
+Router_Proxy,MOTION_VIDEO_STREAM_1,{'2.971809523809452'}
+Router_Proxy,CAMERA_1,{'4.099999999999909'}
+Router_Proxy,DETECTED_OBJECT_1,{'0.1111607142856883'}
+Router_Proxy,"[motion_detector, object_detector, object_tracker]",{'5.357142857142962'}
+Router_Proxy,"[object_tracker, PTZ_CONTROL]",{'3.1099999999999577'}
+Router_Proxy,"[motion_detector_1, object_detector_1, object_tracker_1]",{'7.63714285714261'}
+Router_Proxy,"[object_tracker_1, PTZ_CONTROL_1]",{'5.1109999999999305'}
+Router_Proxy,MOTION_VIDEO_STREAM,{'2.9571428571427987'}
+Router_Proxy,DETECTED_OBJECT,{'0.1111607142856883'}
+Router_Proxy,OBJECT_LOCATION,{'1.5285714285714675'}
+Router_Proxy,CAMERA,{'4.099999999999909'}
+Router_Proxy,OBJECT_LOCATION_1,{'1.5285714285714675'}
+Router_Proxy,MOTION_VIDEO_STREAM_1,{'2.971809523809452'}
+Router_Proxy,CAMERA_1,{'4.099999999999909'}
+Router_Proxy,DETECTED_OBJECT_1,{'0.1111607142856883'}
+Proxy_Only,"[motion_detector, object_detector, object_tracker]",{'565.5347867803853'}
+Proxy_Only,"[object_tracker, PTZ_CONTROL]",{'5.110999999999937'}
+Proxy_Only,"[motion_detector_1, object_detector_1, object_tracker_1]",{'641.0111682808727'}
+Proxy_Only,"[object_tracker_1, PTZ_CONTROL_1]",{'5.1109999999999305'}
+Proxy_Only,MOTION_VIDEO_STREAM,{'1254.2889310829992'}
+Proxy_Only,DETECTED_OBJECT,{'0.1111607142856883'}
+Proxy_Only,OBJECT_LOCATION,{'9.897924804684774'}
+Proxy_Only,CAMERA,{'4.099999999999909'}
+Proxy_Only,OBJECT_LOCATION_1,{'9.898491210937227'}
+Proxy_Only,MOTION_VIDEO_STREAM_1,{'1254.0883646767466'}
+Proxy_Only,CAMERA_1,{'4.099999999999909'}
+Proxy_Only,DETECTED_OBJECT_1,{'0.1111607142856883'}
+Proxy_Only,"[motion_detector, object_detector, object_tracker]",{'565.5347867803853'}
+Proxy_Only,"[object_tracker, PTZ_CONTROL]",{'5.110999999999937'}
+Proxy_Only,"[motion_detector_1, object_detector_1, object_tracker_1]",{'641.0111682808727'}
+Proxy_Only,"[object_tracker_1, PTZ_CONTROL_1]",{'5.1109999999999305'}
+Proxy_Only,MOTION_VIDEO_STREAM,{'1254.2889310829992'}
+Proxy_Only,DETECTED_OBJECT,{'0.1111607142856883'}
+Proxy_Only,OBJECT_LOCATION,{'9.897924804684774'}
+Proxy_Only,CAMERA,{'4.099999999999909'}
+Proxy_Only,OBJECT_LOCATION_1,{'9.898491210937227'}
+Proxy_Only,MOTION_VIDEO_STREAM_1,{'1254.0883646767466'}
+Proxy_Only,CAMERA_1,{'4.099999999999909'}
+Proxy_Only,DETECTED_OBJECT_1,{'0.1111607142856883'}
+Router_Proxy,"[motion_detector, object_detector, object_tracker]",{'5.357142857142962'}
+Router_Proxy,"[object_tracker, PTZ_CONTROL]",{'3.1099999999999577'}
+Router_Proxy,"[motion_detector_1, object_detector_1, object_tracker_1]",{'7.63714285714261'}
+Router_Proxy,"[object_tracker_1, PTZ_CONTROL_1]",{'5.1109999999999305'}
+Router_Proxy,MOTION_VIDEO_STREAM,{'2.9571428571427987'}
+Router_Proxy,DETECTED_OBJECT,{'0.1111607142856883'}
+Router_Proxy,OBJECT_LOCATION,{'1.5285714285714675'}
+Router_Proxy,CAMERA,{'4.099999999999909'}
+Router_Proxy,OBJECT_LOCATION_1,{'1.5285714285714675'}
+Router_Proxy,MOTION_VIDEO_STREAM_1,{'2.971809523809452'}
+Router_Proxy,CAMERA_1,{'4.099999999999909'}
+Router_Proxy,DETECTED_OBJECT_1,{'0.1111607142856883'}
