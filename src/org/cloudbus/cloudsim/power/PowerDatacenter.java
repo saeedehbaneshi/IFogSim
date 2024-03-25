@@ -22,6 +22,9 @@ import org.cloudbus.cloudsim.core.CloudSimTags;
 import org.cloudbus.cloudsim.core.SimEvent;
 import org.cloudbus.cloudsim.core.predicates.PredicateType;
 
+///////Saeedeh import thi here to track number of cancelled events from future queue:
+import org.cloudbus.cloudsim.core.FutureQueue;
+
 /**
  * PowerDatacenter is a class that enables simulation of power-aware data centers.
  * 
@@ -85,8 +88,13 @@ public class PowerDatacenter extends Datacenter {
 	 */
 	@Override
 	protected void updateCloudletProcessing() {
+		int removedEvents = 0;
 		if (getCloudletSubmitted() == -1 || getCloudletSubmitted() == CloudSim.clock()) {
-			CloudSim.cancelAll(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
+			removedEvents=CloudSim.cancelAllCount(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
+			///////////////// Saeedeh added this
+			//if (removedEvents>0)
+				//schedule(getId(), CloudSim.getMinTimeBetweenEvents(), CloudSimTags.VM_DATACENTER_EVENT);
+			///////////////// Saeedeh added
 			schedule(getId(), getSchedulingInterval(), CloudSimTags.VM_DATACENTER_EVENT);
 			return;
 		}
@@ -142,11 +150,91 @@ public class PowerDatacenter extends Datacenter {
 			if (minTime != Double.MAX_VALUE) {
 				CloudSim.cancelAll(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
 				send(getId(), getSchedulingInterval(), CloudSimTags.VM_DATACENTER_EVENT);
+				// Saeedeh commented up line and added bellow line to solve the problem of infinity estimated finish time
+				send(getId(), minTime, CloudSimTags.VM_DATACENTER_EVENT);
 			}
 
 			setLastProcessTime(currentTime);
 		}
 	}
+	
+	
+	
+	//////////////////// Saeedeh added this func with arg:
+	@Override
+	protected void updateCloudletProcessing(SimEvent ev) {
+		int removedEvents = 0;
+		if (getCloudletSubmitted() == -1 || getCloudletSubmitted() == CloudSim.clock()) {
+			removedEvents=CloudSim.cancelAllCount(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
+			///////////////// Saeedeh added this
+			//if (removedEvents>0)
+				//schedule(getId(), CloudSim.getMinTimeBetweenEvents(), CloudSimTags.VM_DATACENTER_EVENT);
+			///////////////// Saeedeh added
+			schedule(getId(), getSchedulingInterval(), CloudSimTags.VM_DATACENTER_EVENT);
+			return;
+		}
+		
+		double currentTime = CloudSim.clock();
+
+		// if some time passed since last processing
+		if (currentTime > getLastProcessTime()) {
+			
+			double minTime = updateCloudetProcessingWithoutSchedulingFutureEventsForce(ev);
+			if (!isDisableMigrations()) {
+				List<Map<String, Object>> migrationMap = getVmAllocationPolicy().optimizeAllocation(
+						getVmList());
+
+				if (migrationMap != null) {
+					for (Map<String, Object> migrate : migrationMap) {
+						Vm vm = (Vm) migrate.get("vm");
+						PowerHost targetHost = (PowerHost) migrate.get("host");
+						PowerHost oldHost = (PowerHost) vm.getHost();
+
+						if (oldHost == null) {
+							Log.formatLine(
+									"%.2f: Migration of VM #%d to Host #%d is started",
+									currentTime,
+									vm.getId(),
+									targetHost.getId());
+						} else {
+							Log.formatLine(
+									"%.2f: Migration of VM #%d from Host #%d to Host #%d is started",
+									currentTime,
+									vm.getId(),
+									oldHost.getId(),
+									targetHost.getId());
+						}
+
+						targetHost.addMigratingInVm(vm);
+						incrementMigrationCount();
+
+						/** VM migration delay = RAM / bandwidth **/
+						// we use BW / 2 to model BW available for migration purposes, the other
+						// half of BW is for VM communication
+						// around 16 seconds for 1024 MB using 1 Gbit/s network
+						send(
+								getId(),
+								vm.getRam() / ((double) targetHost.getBw() / (2 * 8000)),
+								CloudSimTags.VM_MIGRATE,
+								migrate);
+					}
+				}
+			}
+
+			// schedules an event to the next time
+			if (minTime != Double.MAX_VALUE) {
+				CloudSim.cancelAll(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
+				send(getId(), getSchedulingInterval(), CloudSimTags.VM_DATACENTER_EVENT);
+				// Saeedeh commented up line and added bellow line to solve the problem of infinity estimated finish time
+				send(getId(), minTime, CloudSimTags.VM_DATACENTER_EVENT);
+			}
+
+			setLastProcessTime(currentTime);
+		}
+	}
+	
+	
+	
 
 	/**
 	 * Update cloudet processing without scheduling future events.
@@ -244,6 +332,97 @@ public class PowerDatacenter extends Datacenter {
 		setLastProcessTime(currentTime);
 		return minTime;
 	}
+	
+	
+	
+	//////// Saeedeh added this func with arg
+	protected double updateCloudetProcessingWithoutSchedulingFutureEventsForce(SimEvent ev) {
+		double currentTime = CloudSim.clock();
+		double minTime = Double.MAX_VALUE;
+		double timeDiff = currentTime - getLastProcessTime();
+		double timeFrameDatacenterEnergy = 0.0;
+
+		Log.printLine("\n\n--------------------------------------------------------------\n\n");
+		Log.formatLine("New resource usage for the time frame starting at %.2f:", currentTime);
+
+		for (PowerHost host : this.<PowerHost> getHostList()) {
+			Log.printLine();
+
+			double time = host.updateVmsProcessing(currentTime); // inform VMs to update processing
+			if (time < minTime) {
+				minTime = time;
+			}
+
+			Log.formatLine(
+					"%.2f: [Host #%d] utilization is %.2f%%",
+					currentTime,
+					host.getId(),
+					host.getUtilizationOfCpu() * 100);
+		}
+
+		if (timeDiff > 0) {
+			Log.formatLine(
+					"\nEnergy consumption for the last time frame from %.2f to %.2f:",
+					getLastProcessTime(),
+					currentTime);
+
+			for (PowerHost host : this.<PowerHost> getHostList()) {
+				double previousUtilizationOfCpu = host.getPreviousUtilizationOfCpu();
+				double utilizationOfCpu = host.getUtilizationOfCpu();
+				double timeFrameHostEnergy = host.getEnergyLinearInterpolation(
+						previousUtilizationOfCpu,
+						utilizationOfCpu,
+						timeDiff);
+				timeFrameDatacenterEnergy += timeFrameHostEnergy;
+
+				Log.printLine();
+				Log.formatLine(
+						"%.2f: [Host #%d] utilization at %.2f was %.2f%%, now is %.2f%%",
+						currentTime,
+						host.getId(),
+						getLastProcessTime(),
+						previousUtilizationOfCpu * 100,
+						utilizationOfCpu * 100);
+				Log.formatLine(
+						"%.2f: [Host #%d] energy is %.2f W*sec",
+						currentTime,
+						host.getId(),
+						timeFrameHostEnergy);
+			}
+
+			Log.formatLine(
+					"\n%.2f: Data center's energy is %.2f W*sec\n",
+					currentTime,
+					timeFrameDatacenterEnergy);
+		}
+
+		setPower(getPower() + timeFrameDatacenterEnergy);
+
+		checkCloudletCompletion(ev);
+
+		/** Remove completed VMs **/
+		
+		for (PowerHost host : this.<PowerHost> getHostList()) {
+			for (Vm vm : host.getCompletedVms()) {
+				getVmAllocationPolicy().deallocateHostForVm(vm);
+				getVmList().remove(vm);
+				Log.printLine("VM #" + vm.getId() + " has been deallocated from host #" + host.getId());
+			}
+		}
+		
+		Log.printLine();
+
+		setLastProcessTime(currentTime);
+		return minTime;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/*
 	 * (non-Javadoc)

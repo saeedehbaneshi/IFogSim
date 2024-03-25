@@ -5,6 +5,7 @@ import org.cloudbus.cloudsim.*;
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.cloudbus.cloudsim.core.CloudSimTags;
 import org.cloudbus.cloudsim.core.SimEvent;
+import org.cloudbus.cloudsim.core.predicates.PredicateType;
 import org.cloudbus.cloudsim.power.PowerDatacenter;
 import org.cloudbus.cloudsim.power.PowerHost;
 import org.cloudbus.cloudsim.power.models.PowerModel;
@@ -400,7 +401,9 @@ public class FogDevice extends PowerDatacenter {
                 processModuleTermination(ev);
                 break;
             case FogEvents.RESOURCE_MGMT:
+            	//updateCloudetProcessingWithoutSchedulingFutureEventsForce();
                 manageResources(ev);
+                
                 break;
             case FogEvents.UPDATE_CLUSTER_TUPLE_QUEUE:
                 updateClusterTupleQueue();
@@ -408,6 +411,16 @@ public class FogDevice extends PowerDatacenter {
             case FogEvents.START_DYNAMIC_CLUSTERING:
                 //This message is received by the devices to start their clustering
                 processClustering(this.getParentId(), this.getId(), ev);
+                break;
+            case FogEvents.INFINITY_RESOURCE_MGMT:
+            	//updateCloudletProcessing();
+            	double mintime=updateCloudetProcessingWithoutSchedulingFutureEventsForce();
+            	/*if (mintime != Double.MAX_VALUE) {
+    				CloudSim.cancelAll(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
+            		send(getId(), mintime, CloudSimTags.VM_DATACENTER_EVENT);
+            	}*/
+                infinityManageResources(ev);
+                //updateCloudetProcessingWithoutSchedulingFutureEventsForce();
                 break;
             default:
                 break;
@@ -450,7 +463,16 @@ public class FogDevice extends PowerDatacenter {
         updateEnergyConsumption();
         send(getId(), Config.RESOURCE_MGMT_INTERVAL, FogEvents.RESOURCE_MGMT);
     }
-
+    
+///////////////////Saeedeh added for case infinity estimated finish time
+    protected void infinityManageResources(SimEvent ev) {
+        updateEnergyConsumption();
+        //send(getId(), Config.RESOURCE_MGMT_INTERVAL, FogEvents.RESOURCE_MGMT);
+    }
+///////////////////Saeedeh added for case infinity estimated finish time
+    
+    
+    
     /**
      * Updating the number of modules of an application module on this device
      *
@@ -612,10 +634,101 @@ public class FogDevice extends PowerDatacenter {
 
         return minTime;
     }
+    
+    
+    
+    ////// Saeedeh added this func with arg
+    protected double updateCloudetProcessingWithoutSchedulingFutureEventsForce(SimEvent ev) {
+        double currentTime = CloudSim.clock();
+        double minTime = Double.MAX_VALUE;
+        double timeDiff = currentTime - getLastProcessTime();
+        double timeFrameDatacenterEnergy = 0.0;
+
+        for (PowerHost host : this.<PowerHost>getHostList()) {
+            Log.printLine();
+
+            double time = host.updateVmsProcessing(currentTime); // inform VMs to update processing
+            if (time < minTime) {
+                minTime = time;
+            }
+
+            Log.formatLine(
+                    "%.2f: [Host #%d] utilization is %.2f%%",
+                    currentTime,
+                    host.getId(),
+                    host.getUtilizationOfCpu() * 100);
+        }
+
+        if (timeDiff > 0) {
+            Log.formatLine(
+                    "\nEnergy consumption for the last time frame from %.2f to %.2f:",
+                    getLastProcessTime(),
+                    currentTime);
+
+            for (PowerHost host : this.<PowerHost>getHostList()) {
+                double previousUtilizationOfCpu = host.getPreviousUtilizationOfCpu();
+                double utilizationOfCpu = host.getUtilizationOfCpu();
+                double timeFrameHostEnergy = host.getEnergyLinearInterpolation(
+                        previousUtilizationOfCpu,
+                        utilizationOfCpu,
+                        timeDiff);
+                //saeedeh//System.out.println("SAEEDEH Time frame host energy = "+timeFrameHostEnergy);
+                timeFrameDatacenterEnergy += timeFrameHostEnergy;
+               //saeedeh// System.out.println("SAEEDEH Time frame datacenter energy = "+timeFrameDatacenterEnergy);
+
+                Log.printLine();
+                Log.formatLine(
+                        "%.2f: [Host #%d] utilization at %.2f was %.2f%%, now is %.2f%%",
+                        currentTime,
+                        host.getId(),
+                        getLastProcessTime(),
+                        previousUtilizationOfCpu * 100,
+                        utilizationOfCpu * 100);
+                Log.formatLine(
+                        "%.2f: [Host #%d] energy is %.2f W*sec",
+                        currentTime,
+                        host.getId(),
+                        timeFrameHostEnergy);
+            }
+
+            Log.formatLine(
+                    "\n%.2f: Data center's energy is %.2f W*sec\n",
+                    currentTime,
+                    timeFrameDatacenterEnergy);
+        }
+
+        setPower(getPower() + timeFrameDatacenterEnergy);
+        //saeedehSystem.out.println("GET POWER = "+getPower());
+        checkCloudletCompletion(ev);
+
+        /** Remove completed VMs **/
+        /**
+         * Change made by HARSHIT GUPTA
+         */
+		/*for (PowerHost host : this.<PowerHost> getHostList()) {
+			for (Vm vm : host.getCompletedVms()) {
+				getVmAllocationPolicy().deallocateHostForVm(vm);
+				getVmList().remove(vm);
+				Log.printLine("VM #" + vm.getId() + " has been deallocated from host #" + host.getId());
+			}
+		}*/
+
+        Log.printLine();
+
+        setLastProcessTime(currentTime);
+        //saeedeh//System.out.println("\nLast process time is(output of updateCloudetProcessingWithoutSchedulingFutureEventsForce function) : "+getLastProcessTime()+"\n");
+        //saeedeh//System.out.println("\nmin time is(output of updateCloudetProcessingWithoutSchedulingFutureEventsForce function): "+minTime+"\n");
+
+        return minTime;
+    }
+    
+    
 
 
-    protected void checkCloudletCompletion() {
+    protected void checkCloudletCompletion(SimEvent ev) {
         boolean cloudletCompleted = false;
+        ////// Saeedeh added ev as input arg and cast it to cl to call updateAllocatedMips with destination of this event
+        Tuple arrivingTuple = (Tuple) ev.getData();
         List<? extends Host> list = getVmAllocationPolicy().getHostList();
         for (int i = 0; i < list.size(); i++) {
             Host host = list.get(i);
@@ -647,7 +760,8 @@ public class FogDevice extends PowerDatacenter {
             }
         }
         if (cloudletCompleted)
-            updateAllocatedMips(null);
+            //updateAllocatedMips(null);
+        	updateAllocatedMips(arrivingTuple.getDestModuleName());
     }
 
     protected void updateTimingsOnSending(Tuple resTuple) {
@@ -687,7 +801,7 @@ public class FogDevice extends PowerDatacenter {
         }
         return -1;
     }
-
+//////Saeedeh made the type of updateAllocatedMips function public instead of protected to use in cloudletschedulertimesharedclass
     protected void updateAllocatedMips(String incomingOperator) {
     	//saeedeh//System.out.println(" look at here Saeedeh! Updating alocated Mips");
     	//saeedeh//System.out.println(" look at here Saeedeh! total mips :"+getHost().getTotalMips());
@@ -787,7 +901,15 @@ public class FogDevice extends PowerDatacenter {
 	        		
 	        	double currentVmEnergy = innerMap.get(operator.getName());
 	        	
+	           
+	        	
 	        	double VM_share=getLastVmsMipsMap().get(vm)/getHost().getTotalMips();
+	        	
+	        	 boolean checkEnergy=false;
+		            if (operator.getName()=="object_detector") {
+		            	checkEnergy=true;
+		            }
+	        	
 	        	//if(lastUtilizationUpdateTime!=0 | totalMipsAllocated%1000!=0 && lastUtilizationUpdateTime%100!=0) {
 	        	double newVmEnergy=0;
         		if(ComputationEnergyEstimationTracking)
@@ -897,10 +1019,8 @@ public class FogDevice extends PowerDatacenter {
         }
         int ss=getHost().getVmList().size();
         
-        if (getHost().getVmList().size() > 0) {
-            final AppModule operator = (AppModule) getHost().getVmList().get(0);
-            final AppModule operator2 = (AppModule) getHost().getVmList().get(1);
-            
+        /*if (getHost().getVmList().size() > 0) {
+            final AppModule operator = (AppModule) getHost().getVmList().get(0);            
 
             if (CloudSim.clock() > 0) {
                 getHost().getVmScheduler().deallocatePesForVm(operator);
@@ -912,7 +1032,8 @@ public class FogDevice extends PowerDatacenter {
                     }
                 });
             }
-        }
+        }*/
+        
 
 
         if (getName().equals("cloud") && tuple.getDestModuleName() == null) {
@@ -997,7 +1118,9 @@ public class FogDevice extends PowerDatacenter {
                 //saeedeh//System.out.println(" currentAverage : "+currentAverage);
                //saeedeh// System.out.println(" currentCount : "+currentCount);
                //saeedeh// System.out.println(" delay : "+delay);
-
+                System.out.println(app.getAppId());
+                System.out.println(" Tuple actual Id "+tuple.getActualTupleId());
+                System.out.println(" Loop count is "+currentCount+" and delay is "+delay+" and emit time is "+TimeKeeper.getInstance().getEmitTimes().get(tuple.getActualTupleId())+" and completion time is "+CloudSim.clock());
                 
                 TimeKeeper.getInstance().getEmitTimes().remove(tuple.getActualTupleId());
                 
@@ -1060,7 +1183,11 @@ public class FogDevice extends PowerDatacenter {
             module.setNumInstances(instances);
            //saeedeh// System.out.println("module num instance :"+module.getNumInstances());
         }
-
+        String temp=tuple.getDestModuleName();
+        boolean check=false;
+        if (temp=="motion_detector" | temp=="motion_detector_1") {
+        	check=true;
+        }
         TimeKeeper.getInstance().tupleStartedExecution(tuple);
         updateAllocatedMips(moduleName);
         processCloudletSubmit(ev, false);

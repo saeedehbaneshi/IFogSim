@@ -1,0 +1,253 @@
+app_class,scenario,tuple,execution_time
+TwoDCNSApps,Router_Only,"[motion_detector, object_detector, object_tracker]",{'562.9045502645496'}
+TwoDCNSApps,Router_Only,"[object_tracker, PTZ_CONTROL]",{'3.1099999999999577'}
+TwoDCNSApps,Router_Only,"[motion_detector_1, object_detector_1, object_tracker_1]",{'637.9948508020561'}
+TwoDCNSApps,Router_Only,"[object_tracker_1, PTZ_CONTROL_1]",{'3.1099999999999524'}
+TwoDCNSApps,Router_Only,MOTION_VIDEO_STREAM,{'1259.001302362737'}
+TwoDCNSApps,Router_Only,DETECTED_OBJECT,{'0.1111607142856883'}
+TwoDCNSApps,Router_Only,OBJECT_LOCATION,{'9.899999999956435'}
+TwoDCNSApps,Router_Only,CAMERA,{'4.099999999999909'}
+TwoDCNSApps,Router_Only,OBJECT_LOCATION_1,{'9.899999999956435'}
+TwoDCNSApps,Router_Only,MOTION_VIDEO_STREAM_1,{'1258.801302362737'}
+TwoDCNSApps,Router_Only,CAMERA_1,{'4.099999999999909'}
+TwoDCNSApps,Router_Only,DETECTED_OBJECT_1,{'0.1111607142856883'}
+HighResTwoDCNSApps,Router_Only,"[motion_detector, object_detector, object_tracker]",{'584.0478080796048'}
+HighResTwoDCNSApps,Router_Only,"[object_tracker, PTZ_CONTROL]",{'3.1099999999999577'}
+HighResTwoDCNSApps,Router_Only,"[motion_detector_1, object_detector_1, object_tracker_1]",{'556.2140240252788'}
+HighResTwoDCNSApps,Router_Only,"[object_tracker_1, PTZ_CONTROL_1]",{'3.1099999999999524'}
+HighResTwoDCNSApps,Router_Only,MOTION_VIDEO_STREAM,{'1209.2706726013878'}
+HighResTwoDCNSApps,Router_Only,DETECTED_OBJECT,{'0.127321428571463'}
+HighResTwoDCNSApps,Router_Only,OBJECT_LOCATION,{'4.741766233276445'}
+HighResTwoDCNSApps,Router_Only,CAMERA,{'898.7701825360457'}
+HighResTwoDCNSApps,Router_Only,OBJECT_LOCATION_1,{'4.6576490654447475'}
+HighResTwoDCNSApps,Router_Only,MOTION_VIDEO_STREAM_1,{'1084.376775196261'}
+HighResTwoDCNSApps,Router_Only,CAMERA_1,{'4.099999999999909'}
+HighResTwoDCNSApps,Router_Only,DETECTED_OBJECT_1,{'0.1118582589285495'}
+LowResTwoDCNSApps,Router_Only,"[motion_detector, object_detector, object_tracker]",{'31.894375703037646'}
+LowResTwoDCNSApps,Router_Only,"[object_tracker, PTZ_CONTROL]",{'3.1099999999999577'}
+LowResTwoDCNSApps,Router_Only,"[motion_detector_1, object_detector_1, object_tracker_1]",{'730.7071428571409'}
+LowResTwoDCNSApps,Router_Only,"[object_tracker_1, PTZ_CONTROL_1]",{'3.1099999999999524'}
+LowResTwoDCNSApps,Router_Only,MOTION_VIDEO_STREAM,{'35.0'}
+LowResTwoDCNSApps,Router_Only,DETECTED_OBJECT,{'0.10543245037838608'}
+LowResTwoDCNSApps,Router_Only,OBJECT_LOCATION,{'34.90000000000009'}
+LowResTwoDCNSApps,Router_Only,CAMERA,{'4.099999999999909'}
+LowResTwoDCNSApps,Router_Only,OBJECT_LOCATION_1,{'9.899999999997362'}
+LowResTwoDCNSApps,Router_Only,MOTION_VIDEO_STREAM_1,{'1438.7804684518994'}
+LowResTwoDCNSApps,Router_Only,CAMERA_1,{'4.099999999999909'}
+LowResTwoDCNSApps,Router_Only,DETECTED_OBJECT_1,{'0.09941424506048452'}
+TwoDCNSApps,Router_Proxy,"[motion_detector, object_detector, object_tracker]",{'5.357142857142962'}
+TwoDCNSApps,Router_Proxy,"[object_tracker, PTZ_CONTROL]",{'3.1099999999999577'}
+TwoDCNSApps,Router_Proxy,"[motion_detector_1, object_detector_1, object_tracker_1]",{'7.63714285714261'}
+TwoDCNSApps,Router_Proxy,"[object_tracker_1, PTZ_CONTROL_1]",{'5.1109999999999305'}
+TwoDCNSApps,Router_Proxy,MOTION_VIDEO_STREAM,{'2.9571428571427987'}
+TwoDCNSApps,Router_Proxy,DETECTED_OBJECT,{'0.1111607142856883'}
+TwoDCNSApps,Router_Proxy,OBJECT_LOCATION,{'1.5285714285714675'}
+TwoDCNSApps,Router_Proxy,CAMERA,{'4.099999999999909'}
+TwoDCNSApps,Router_Proxy,OBJECT_LOCATION_1,{'1.5285714285714675'}
+TwoDCNSApps,Router_Proxy,MOTION_VIDEO_STREAM_1,{'2.971809523809452'}
+TwoDCNSApps,Router_Proxy,CAMERA_1,{'4.099999999999909'}
+TwoDCNSApps,Router_Proxy,DETECTED_OBJECT_1,{'0.1111607142856883'}
+HighResTwoDCNSApps,Router_Proxy,"[motion_detector, object_detector, object_tracker]",{'17.602609890110134'}
+HighResTwoDCNSApps,Router_Proxy,"[object_tracker, PTZ_CONTROL]",{'3.1099999999999577'}
+HighResTwoDCNSApps,Router_Proxy,"[motion_detector_1, object_detector_1, object_tracker_1]",{'14.525111969111652'}
+HighResTwoDCNSApps,Router_Proxy,"[object_tracker_1, PTZ_CONTROL_1]",{'5.1109999999999305'}
+HighResTwoDCNSApps,Router_Proxy,MOTION_VIDEO_STREAM,{'9.947314632790421'}
+HighResTwoDCNSApps,Router_Proxy,DETECTED_OBJECT,{'0.12232142857146755'}
+HighResTwoDCNSApps,Router_Proxy,OBJECT_LOCATION,{'2.9571428571427987'}
+HighResTwoDCNSApps,Router_Proxy,CAMERA,{'898.7701825360457'}
+HighResTwoDCNSApps,Router_Proxy,OBJECT_LOCATION_1,{'2.9571428571427987'}
+HighResTwoDCNSApps,Router_Proxy,MOTION_VIDEO_STREAM_1,{'9.95613151041125'}
+HighResTwoDCNSApps,Router_Proxy,CAMERA_1,{'4.099999999999909'}
+HighResTwoDCNSApps,Router_Proxy,DETECTED_OBJECT_1,{'0.1111607142856883'}
+LowResTwoDCNSApps,Router_Proxy,"[motion_detector, object_detector, object_tracker]",{'3.8285714285713683'}
+LowResTwoDCNSApps,Router_Proxy,"[object_tracker, PTZ_CONTROL]",{'3.1099999999999577'}
+LowResTwoDCNSApps,Router_Proxy,"[motion_detector_1, object_detector_1, object_tracker_1]",{'7.537142857142508'}
+LowResTwoDCNSApps,Router_Proxy,"[object_tracker_1, PTZ_CONTROL_1]",{'5.1109999999999305'}
+LowResTwoDCNSApps,Router_Proxy,MOTION_VIDEO_STREAM,{'1.5285714285714675'}
+LowResTwoDCNSApps,Router_Proxy,DETECTED_OBJECT,{'0.10558035714279868'}
+LowResTwoDCNSApps,Router_Proxy,OBJECT_LOCATION,{'1.5285714285714675'}
+LowResTwoDCNSApps,Router_Proxy,CAMERA,{'4.099999999999909'}
+LowResTwoDCNSApps,Router_Proxy,OBJECT_LOCATION_1,{'1.5285714285714675'}
+LowResTwoDCNSApps,Router_Proxy,MOTION_VIDEO_STREAM_1,{'2.971809523809452'}
+LowResTwoDCNSApps,Router_Proxy,CAMERA_1,{'4.099999999999909'}
+LowResTwoDCNSApps,Router_Proxy,DETECTED_OBJECT_1,{'0.1111607142856883'}
+TwoDCNSApps,Router_Cloud,"[motion_detector, object_detector, object_tracker]",{'5.357142857142962'}
+TwoDCNSApps,Router_Cloud,"[object_tracker, PTZ_CONTROL]",{'3.1099999999999577'}
+TwoDCNSApps,Router_Cloud,"[motion_detector_1, object_detector_1, object_tracker_1]",{'104.97857142856897'}
+TwoDCNSApps,Router_Cloud,"[object_tracker_1, PTZ_CONTROL_1]",{'105.11199999999991'}
+TwoDCNSApps,Router_Cloud,MOTION_VIDEO_STREAM,{'2.9571428571427987'}
+TwoDCNSApps,Router_Cloud,DETECTED_OBJECT,{'0.1111607142856883'}
+TwoDCNSApps,Router_Cloud,OBJECT_LOCATION,{'1.5285714285714675'}
+TwoDCNSApps,Router_Cloud,CAMERA,{'4.099999999999909'}
+TwoDCNSApps,Router_Cloud,OBJECT_LOCATION_1,{'0.1945173040963535'}
+TwoDCNSApps,Router_Cloud,MOTION_VIDEO_STREAM_1,{'0.2932380952381209'}
+TwoDCNSApps,Router_Cloud,CAMERA_1,{'4.099999999999909'}
+TwoDCNSApps,Router_Cloud,DETECTED_OBJECT_1,{'0.27857142857146755'}
+HighResTwoDCNSApps,Router_Cloud,"[motion_detector, object_detector, object_tracker]",{'17.602609890110134'}
+HighResTwoDCNSApps,Router_Cloud,"[object_tracker, PTZ_CONTROL]",{'3.1099999999999577'}
+HighResTwoDCNSApps,Router_Cloud,"[motion_detector_1, object_detector_1, object_tracker_1]",{'104.92857142857164'}
+HighResTwoDCNSApps,Router_Cloud,"[object_tracker_1, PTZ_CONTROL_1]",{'105.11199999999991'}
+HighResTwoDCNSApps,Router_Cloud,MOTION_VIDEO_STREAM,{'9.947314632790421'}
+HighResTwoDCNSApps,Router_Cloud,DETECTED_OBJECT,{'0.0990317329200999'}
+HighResTwoDCNSApps,Router_Cloud,OBJECT_LOCATION,{'2.9571428571427987'}
+HighResTwoDCNSApps,Router_Cloud,CAMERA,{'898.7701825360457'}
+HighResTwoDCNSApps,Router_Cloud,OBJECT_LOCATION_1,{'0.1945173040963535'}
+HighResTwoDCNSApps,Router_Cloud,MOTION_VIDEO_STREAM_1,{'0.2932380952381209'}
+HighResTwoDCNSApps,Router_Cloud,CAMERA_1,{'4.099999999999909'}
+HighResTwoDCNSApps,Router_Cloud,DETECTED_OBJECT_1,{'0.27857142857146755'}
+LowResTwoDCNSApps,Router_Cloud,"[motion_detector, object_detector, object_tracker]",{'3.8285714285713683'}
+LowResTwoDCNSApps,Router_Cloud,"[object_tracker, PTZ_CONTROL]",{'3.1099999999999577'}
+LowResTwoDCNSApps,Router_Cloud,"[motion_detector_1, object_detector_1, object_tracker_1]",{'104.87857142857266'}
+LowResTwoDCNSApps,Router_Cloud,"[object_tracker_1, PTZ_CONTROL_1]",{'105.11199999999991'}
+LowResTwoDCNSApps,Router_Cloud,MOTION_VIDEO_STREAM,{'1.5285714285714675'}
+LowResTwoDCNSApps,Router_Cloud,DETECTED_OBJECT,{'0.10558035714279868'}
+LowResTwoDCNSApps,Router_Cloud,OBJECT_LOCATION,{'1.5285714285714675'}
+LowResTwoDCNSApps,Router_Cloud,CAMERA,{'4.099999999999909'}
+LowResTwoDCNSApps,Router_Cloud,OBJECT_LOCATION_1,{'0.1945173040963535'}
+LowResTwoDCNSApps,Router_Cloud,MOTION_VIDEO_STREAM_1,{'0.2932380952381209'}
+LowResTwoDCNSApps,Router_Cloud,CAMERA_1,{'4.099999999999909'}
+LowResTwoDCNSApps,Router_Cloud,DETECTED_OBJECT_1,{'0.27857142857146755'}
+TwoDCNSApps,Proxy_Only,"[motion_detector, object_detector, object_tracker]",{'565.5347867803853'}
+TwoDCNSApps,Proxy_Only,"[object_tracker, PTZ_CONTROL]",{'5.110999999999937'}
+TwoDCNSApps,Proxy_Only,"[motion_detector_1, object_detector_1, object_tracker_1]",{'641.0111682808727'}
+TwoDCNSApps,Proxy_Only,"[object_tracker_1, PTZ_CONTROL_1]",{'5.1109999999999305'}
+TwoDCNSApps,Proxy_Only,MOTION_VIDEO_STREAM,{'1254.2889310829992'}
+TwoDCNSApps,Proxy_Only,DETECTED_OBJECT,{'0.1111607142856883'}
+TwoDCNSApps,Proxy_Only,OBJECT_LOCATION,{'9.897924804684774'}
+TwoDCNSApps,Proxy_Only,CAMERA,{'4.099999999999909'}
+TwoDCNSApps,Proxy_Only,OBJECT_LOCATION_1,{'9.898491210937227'}
+TwoDCNSApps,Proxy_Only,MOTION_VIDEO_STREAM_1,{'1254.0883646767466'}
+TwoDCNSApps,Proxy_Only,CAMERA_1,{'4.099999999999909'}
+TwoDCNSApps,Proxy_Only,DETECTED_OBJECT_1,{'0.1111607142856883'}
+HighResTwoDCNSApps,Proxy_Only,"[motion_detector, object_detector, object_tracker]",{'597.632968994029'}
+HighResTwoDCNSApps,Proxy_Only,"[object_tracker, PTZ_CONTROL]",{'5.110999999999937'}
+HighResTwoDCNSApps,Proxy_Only,"[motion_detector_1, object_detector_1, object_tracker_1]",{'553.2228682977451'}
+HighResTwoDCNSApps,Proxy_Only,"[object_tracker_1, PTZ_CONTROL_1]",{'5.1109999999999305'}
+HighResTwoDCNSApps,Proxy_Only,MOTION_VIDEO_STREAM,{'1208.4439553251186'}
+HighResTwoDCNSApps,Proxy_Only,DETECTED_OBJECT,{'0.1224776785714674'}
+HighResTwoDCNSApps,Proxy_Only,OBJECT_LOCATION,{'5.1255097268541014'}
+HighResTwoDCNSApps,Proxy_Only,CAMERA,{'898.7701825360457'}
+HighResTwoDCNSApps,Proxy_Only,OBJECT_LOCATION_1,{'4.3873246192874475'}
+HighResTwoDCNSApps,Proxy_Only,MOTION_VIDEO_STREAM_1,{'1074.5977273728736'}
+HighResTwoDCNSApps,Proxy_Only,CAMERA_1,{'4.099999999999909'}
+HighResTwoDCNSApps,Proxy_Only,DETECTED_OBJECT_1,{'0.1111613954816286'}
+LowResTwoDCNSApps,Proxy_Only,"[motion_detector, object_detector, object_tracker]",{'34.33113610798616'}
+LowResTwoDCNSApps,Proxy_Only,"[object_tracker, PTZ_CONTROL]",{'5.110999999999937'}
+LowResTwoDCNSApps,Proxy_Only,"[motion_detector_1, object_detector_1, object_tracker_1]",{'729.565765920825'}
+LowResTwoDCNSApps,Proxy_Only,"[object_tracker_1, PTZ_CONTROL_1]",{'5.1109999999999305'}
+LowResTwoDCNSApps,Proxy_Only,MOTION_VIDEO_STREAM,{'34.977333333333355'}
+LowResTwoDCNSApps,Proxy_Only,DETECTED_OBJECT,{'0.10558035714279866'}
+LowResTwoDCNSApps,Proxy_Only,OBJECT_LOCATION,{'34.90000000000009'}
+LowResTwoDCNSApps,Proxy_Only,CAMERA,{'4.099999999999909'}
+LowResTwoDCNSApps,Proxy_Only,OBJECT_LOCATION_1,{'9.898859863281341'}
+LowResTwoDCNSApps,Proxy_Only,MOTION_VIDEO_STREAM_1,{'1433.4344464429516'}
+LowResTwoDCNSApps,Proxy_Only,CAMERA_1,{'4.099999999999909'}
+LowResTwoDCNSApps,Proxy_Only,DETECTED_OBJECT_1,{'0.11115446908130774'}
+TwoDCNSApps,Proxy_Cloud,"[motion_detector, object_detector, object_tracker]",{'7.437142857143002'}
+TwoDCNSApps,Proxy_Cloud,"[object_tracker, PTZ_CONTROL]",{'5.110999999999937'}
+TwoDCNSApps,Proxy_Cloud,"[motion_detector_1, object_detector_1, object_tracker_1]",{'104.97857142856897'}
+TwoDCNSApps,Proxy_Cloud,"[object_tracker_1, PTZ_CONTROL_1]",{'105.11199999999991'}
+TwoDCNSApps,Proxy_Cloud,MOTION_VIDEO_STREAM,{'2.971809523809452'}
+TwoDCNSApps,Proxy_Cloud,DETECTED_OBJECT,{'0.1111607142856883'}
+TwoDCNSApps,Proxy_Cloud,OBJECT_LOCATION,{'1.5285714285714675'}
+TwoDCNSApps,Proxy_Cloud,CAMERA,{'4.099999999999909'}
+TwoDCNSApps,Proxy_Cloud,OBJECT_LOCATION_1,{'0.1945173040963535'}
+TwoDCNSApps,Proxy_Cloud,MOTION_VIDEO_STREAM_1,{'0.2932380952381209'}
+TwoDCNSApps,Proxy_Cloud,CAMERA_1,{'4.099999999999909'}
+TwoDCNSApps,Proxy_Cloud,DETECTED_OBJECT_1,{'0.27857142857146755'}
+HighResTwoDCNSApps,Proxy_Cloud,"[motion_detector, object_detector, object_tracker]",{'97.31457070707039'}
+HighResTwoDCNSApps,Proxy_Cloud,"[object_tracker, PTZ_CONTROL]",{'5.110999999999937'}
+HighResTwoDCNSApps,Proxy_Cloud,"[motion_detector_1, object_detector_1, object_tracker_1]",{'104.92857142857164'}
+HighResTwoDCNSApps,Proxy_Cloud,"[object_tracker_1, PTZ_CONTROL_1]",{'105.11199999999991'}
+HighResTwoDCNSApps,Proxy_Cloud,MOTION_VIDEO_STREAM,{'104.90933894021599'}
+HighResTwoDCNSApps,Proxy_Cloud,DETECTED_OBJECT,{'0.09116576854319061'}
+HighResTwoDCNSApps,Proxy_Cloud,OBJECT_LOCATION,{'9.847265625000082'}
+HighResTwoDCNSApps,Proxy_Cloud,CAMERA,{'898.7701825360457'}
+HighResTwoDCNSApps,Proxy_Cloud,OBJECT_LOCATION_1,{'0.1945173040963535'}
+HighResTwoDCNSApps,Proxy_Cloud,MOTION_VIDEO_STREAM_1,{'0.2932380952381209'}
+HighResTwoDCNSApps,Proxy_Cloud,CAMERA_1,{'4.099999999999909'}
+HighResTwoDCNSApps,Proxy_Cloud,DETECTED_OBJECT_1,{'0.27857142857146755'}
+LowResTwoDCNSApps,Proxy_Cloud,"[motion_detector, object_detector, object_tracker]",{'5.8685714285713155'}
+LowResTwoDCNSApps,Proxy_Cloud,"[object_tracker, PTZ_CONTROL]",{'5.110999999999937'}
+LowResTwoDCNSApps,Proxy_Cloud,"[motion_detector_1, object_detector_1, object_tracker_1]",{'104.87857142857266'}
+LowResTwoDCNSApps,Proxy_Cloud,"[object_tracker_1, PTZ_CONTROL_1]",{'105.11199999999991'}
+LowResTwoDCNSApps,Proxy_Cloud,MOTION_VIDEO_STREAM,{'1.5359047619047943'}
+LowResTwoDCNSApps,Proxy_Cloud,DETECTED_OBJECT,{'0.10558035714279868'}
+LowResTwoDCNSApps,Proxy_Cloud,OBJECT_LOCATION,{'1.5285714285714675'}
+LowResTwoDCNSApps,Proxy_Cloud,CAMERA,{'4.099999999999909'}
+LowResTwoDCNSApps,Proxy_Cloud,OBJECT_LOCATION_1,{'0.1945173040963535'}
+LowResTwoDCNSApps,Proxy_Cloud,MOTION_VIDEO_STREAM_1,{'0.2932380952381209'}
+LowResTwoDCNSApps,Proxy_Cloud,CAMERA_1,{'4.099999999999909'}
+LowResTwoDCNSApps,Proxy_Cloud,DETECTED_OBJECT_1,{'0.27857142857146755'}
+TwoDCNSApps,Cloud_Only,"[motion_detector, object_detector, object_tracker]",{'104.7655900621113'}
+TwoDCNSApps,Cloud_Only,"[object_tracker, PTZ_CONTROL]",{'105.11199999999992'}
+TwoDCNSApps,Cloud_Only,"[motion_detector_1, object_detector_1, object_tracker_1]",{'105.14317519937995'}
+TwoDCNSApps,Cloud_Only,"[object_tracker_1, PTZ_CONTROL_1]",{'105.11199999999991'}
+TwoDCNSApps,Cloud_Only,MOTION_VIDEO_STREAM,{'0.32799999999992907'}
+TwoDCNSApps,Cloud_Only,DETECTED_OBJECT,{'0.23393156097245082'}
+TwoDCNSApps,Cloud_Only,OBJECT_LOCATION,{'0.11788984248299098'}
+TwoDCNSApps,Cloud_Only,CAMERA,{'4.099999999999909'}
+TwoDCNSApps,Cloud_Only,OBJECT_LOCATION_1,{'0.19412580679218927'}
+TwoDCNSApps,Cloud_Only,MOTION_VIDEO_STREAM_1,{'0.44431119176801825'}
+TwoDCNSApps,Cloud_Only,CAMERA_1,{'4.099999999999909'}
+TwoDCNSApps,Cloud_Only,DETECTED_OBJECT_1,{'0.27857142857146755'}
+HighResTwoDCNSApps,Cloud_Only,"[motion_detector, object_detector, object_tracker]",{'105.35613275613207'}
+HighResTwoDCNSApps,Cloud_Only,"[object_tracker, PTZ_CONTROL]",{'105.11199999999992'}
+HighResTwoDCNSApps,Cloud_Only,"[motion_detector_1, object_detector_1, object_tracker_1]",{'104.99553571428655'}
+HighResTwoDCNSApps,Cloud_Only,"[object_tracker_1, PTZ_CONTROL_1]",{'105.11199999999991'}
+HighResTwoDCNSApps,Cloud_Only,MOTION_VIDEO_STREAM,{'0.6657732371375223'}
+HighResTwoDCNSApps,Cloud_Only,DETECTED_OBJECT,{'0.263430466270852'}
+HighResTwoDCNSApps,Cloud_Only,OBJECT_LOCATION,{'0.1715187518537234'}
+HighResTwoDCNSApps,Cloud_Only,CAMERA,{'898.7701825360457'}
+HighResTwoDCNSApps,Cloud_Only,OBJECT_LOCATION_1,{'0.2886335150351375'}
+HighResTwoDCNSApps,Cloud_Only,MOTION_VIDEO_STREAM_1,{'0.30374213663754257'}
+HighResTwoDCNSApps,Cloud_Only,CAMERA_1,{'4.099999999999909'}
+HighResTwoDCNSApps,Cloud_Only,DETECTED_OBJECT_1,{'0.24985994397239164'}
+LowResTwoDCNSApps,Cloud_Only,"[motion_detector, object_detector, object_tracker]",{'104.53928571428457'}
+LowResTwoDCNSApps,Cloud_Only,"[object_tracker, PTZ_CONTROL]",{'105.11199999999992'}
+LowResTwoDCNSApps,Cloud_Only,"[motion_detector_1, object_detector_1, object_tracker_1]",{'104.9656503580618'}
+LowResTwoDCNSApps,Cloud_Only,"[object_tracker_1, PTZ_CONTROL_1]",{'105.11199999999991'}
+LowResTwoDCNSApps,Cloud_Only,MOTION_VIDEO_STREAM,{'0.19661904761901497'}
+LowResTwoDCNSApps,Cloud_Only,DETECTED_OBJECT,{'0.3678631219447652'}
+LowResTwoDCNSApps,Cloud_Only,OBJECT_LOCATION,{'0.27859186583767126'}
+LowResTwoDCNSApps,Cloud_Only,CAMERA,{'4.099999999999909'}
+LowResTwoDCNSApps,Cloud_Only,OBJECT_LOCATION_1,{'0.09680618935225709'}
+LowResTwoDCNSApps,Cloud_Only,MOTION_VIDEO_STREAM_1,{'0.35391022443233117'}
+LowResTwoDCNSApps,Cloud_Only,CAMERA_1,{'4.099999999999909'}
+LowResTwoDCNSApps,Cloud_Only,DETECTED_OBJECT_1,{'0.27857142857146755'}
+TwoDCNSApps,ModuleBased_Router_Proxy,"[motion_detector, object_detector, object_tracker]",{'248.1791470299466'}
+TwoDCNSApps,ModuleBased_Router_Proxy,"[object_tracker, PTZ_CONTROL]",{'5.110999999999937'}
+TwoDCNSApps,ModuleBased_Router_Proxy,"[motion_detector_1, object_detector_1, object_tracker_1]",{'262.1808672727269'}
+TwoDCNSApps,ModuleBased_Router_Proxy,"[object_tracker_1, PTZ_CONTROL_1]",{'5.1109999999999305'}
+TwoDCNSApps,ModuleBased_Router_Proxy,MOTION_VIDEO_STREAM,{'484.980463980464'}
+TwoDCNSApps,ModuleBased_Router_Proxy,DETECTED_OBJECT,{'0.1111607142856883'}
+TwoDCNSApps,ModuleBased_Router_Proxy,OBJECT_LOCATION,{'1.627590770637704'}
+TwoDCNSApps,ModuleBased_Router_Proxy,CAMERA,{'4.099999999999909'}
+TwoDCNSApps,ModuleBased_Router_Proxy,OBJECT_LOCATION_1,{'1.6185906097050233'}
+TwoDCNSApps,ModuleBased_Router_Proxy,MOTION_VIDEO_STREAM_1,{'484.49921398046394'}
+TwoDCNSApps,ModuleBased_Router_Proxy,CAMERA_1,{'4.099999999999909'}
+TwoDCNSApps,ModuleBased_Router_Proxy,DETECTED_OBJECT_1,{'0.1111607142856883'}
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,"[motion_detector, object_detector, object_tracker]",{'325.8241901408453'}
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,"[object_tracker, PTZ_CONTROL]",{'5.110999999999937'}
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,"[motion_detector_1, object_detector_1, object_tracker_1]",{'262.15763818181864'}
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,"[object_tracker_1, PTZ_CONTROL_1]",{'5.1109999999999305'}
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,MOTION_VIDEO_STREAM,{'633.5701824711828'}
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,DETECTED_OBJECT,{'0.12232144764495388'}
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,OBJECT_LOCATION,{'1.6224480535011025'}
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,CAMERA,{'898.7701825360457'}
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,OBJECT_LOCATION_1,{'1.5348634546051274'}
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,MOTION_VIDEO_STREAM_1,{'484.51018758870475'}
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,CAMERA_1,{'4.099999999999909'}
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,DETECTED_OBJECT_1,{'0.11116071428569338'}
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,"[motion_detector, object_detector, object_tracker]",{'9.168445921003963'}
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,"[object_tracker, PTZ_CONTROL]",{'5.110999999999937'}
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,"[motion_detector_1, object_detector_1, object_tracker_1]",{'262.0788018181809'}
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,"[object_tracker_1, PTZ_CONTROL_1]",{'5.1109999999999305'}
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,MOTION_VIDEO_STREAM,{'5.0'}
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,DETECTED_OBJECT,{'0.08768526785706854'}
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,OBJECT_LOCATION,{'1.6300110717306413'}
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,CAMERA,{'4.099999999999909'}
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,OBJECT_LOCATION_1,{'2.9578763239906465'}
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,MOTION_VIDEO_STREAM_1,{'484.49921398046394'}
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,CAMERA_1,{'4.099999999999909'}
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,DETECTED_OBJECT_1,{'0.10126562499999384'}

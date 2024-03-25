@@ -53,11 +53,11 @@ public class HighResTwoDCNSApp {
     static int numOfAreas = 1;
     public static int numOfCamerasPerArea = 4;
 
-    private static boolean CLOUD = false;
+    private static boolean CLOUD = true;
     private static boolean USER_BASED = false;
     
     //Saeedeeh added these scenarios
-    private static boolean Router_Only = true;
+    private static boolean Router_Only = false;
     private static boolean Router_Proxy = false;
     private static boolean Router_Cloud = false;
     private static boolean Proxy_Only = false;
@@ -74,6 +74,7 @@ public class HighResTwoDCNSApp {
         if (args.length >= 1) {
             // Parse the first argument (string)
             stringValue = args[0];
+            CLOUD=Router_Only=Router_Proxy=Router_Cloud=Proxy_Only=ModuleBased_Router_Proxy=false;
         }
         if(stringValue.equals("Router_Only")) {
         	Router_Only=true;
@@ -247,7 +248,7 @@ public class HighResTwoDCNSApp {
                             : (new ModulePlacementEdgewards(fogDevices, sensors, actuators, application0, moduleMapping_0)));*/
 			controller.submitApplication(application0, new ModulePlacementMapping(fogDevices, application0, moduleMapping_0));
 
-            controller.submitApplication(application1, 80, new ModulePlacementMapping(fogDevices, application1, moduleMapping_1));
+            controller.submitApplication(application1, new ModulePlacementMapping(fogDevices, application1, moduleMapping_1));
             /*controller.submitApplication(application1, 1000,
                     (CLOUD || USER_BASED) ? (new ModulePlacementMapping(fogDevices, application1, moduleMapping_1))
                             : (new ModulePlacementEdgewards(fogDevices, sensors, actuators, application1, moduleMapping_1)));*/
@@ -270,7 +271,7 @@ public class HighResTwoDCNSApp {
     private static void createEdgeDevices0(int userId, String appId) {
 		for(FogDevice camera : mobiles){
 			String id = camera.getName();
-			Sensor sensor = new Sensor("s-"+id, "CAMERA", userId, appId, new DeterministicDistribution(5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
+			Sensor sensor = new Sensor("s-"+id, "CAMERA", userId, appId, new DeterministicDistribution(4*5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
 			sensors.add(sensor);
 			Actuator ptz = new Actuator("ptz-"+id, userId, appId, "PTZ_CONTROL");
 			actuators.add(ptz);
@@ -284,7 +285,7 @@ public class HighResTwoDCNSApp {
 	private static void createEdgeDevices1(int userId, String appId) {
 		for(FogDevice camera : mobiles){
 			String id = camera.getName();
-			Sensor sensor = new Sensor("s-"+id, "CAMERA_1", userId, appId, new DeterministicDistribution(5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
+			Sensor sensor = new Sensor("s-"+id, "CAMERA_1", userId, appId, new DeterministicDistribution(4*5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
 			sensors.add(sensor);
 			Actuator ptz = new Actuator("ptz-"+id, userId, appId, "PTZ_CONTROL_1");
 			actuators.add(ptz);
@@ -322,12 +323,12 @@ public class HighResTwoDCNSApp {
 			p_band_down=proxy_down_bw;
 		}
 		
-		FogDevice cloud = createFogDevice("cloud", 44800, 40000, c_band_up, c_band_down, 0, 0.01, 16*103, 16*83.25, "Shared",12300,11070);
+		FogDevice cloud = createFogDevice("cloud", 2*44800, 40000, c_band_up, c_band_down, 0, 0.01, 16*103, 16*83.25, "Shared",12300,11070);
 		cloud.setParentId(-1);
 		cloud.setDeviceType("Shared");// Saeedeh added
 		
 		fogDevices.add(cloud);
-		FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, p_band_up, p_band_down, 1, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
+		FogDevice proxy = createFogDevice("proxy-server", 2*2800, 4000, p_band_up, p_band_down, 1, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
 		proxy.setParentId(cloud.getId());
 		proxy.setUplinkLatency(100); // latency of connection between proxy server and cloud is 100 ms
 		proxy.setDeviceType("Shared");// Saeedeh added
@@ -345,7 +346,7 @@ public class HighResTwoDCNSApp {
 			r_band_down=router_down_bw;
 		}
 		
-		FogDevice router = createFogDevice("d-"+id, 2800, 4000, r_band_up, r_band_down, 2, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
+		FogDevice router = createFogDevice("d-"+id, 2*2800, 4000, r_band_up, r_band_down, 2, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
 		fogDevices.add(router);
 		router.setUplinkLatency(2); // latency of connection between router and proxy server is 2 ms
 		router.setDeviceType("Shared");// Saeedeh added
@@ -361,7 +362,7 @@ public class HighResTwoDCNSApp {
 	}
 	
 	private static FogDevice addCamera(String id, int parentId){
-		FogDevice camera = createFogDevice("m-"+id, 500, 100000, 10000, 100, 3, 0, 87.53, 82.44, "CPE", 4.6, 2.8);
+		FogDevice camera = createFogDevice("m-"+id, 3*500, 100000, 10000, 100, 3, 0, 87.53, 82.44, "CPE", 4.6, 2.8);
 		camera.setParentId(parentId);
 		camera.setDeviceType("CPE");// Saeedeh added
 		mobiles.add(camera);
@@ -493,9 +494,9 @@ public class HighResTwoDCNSApp {
 		/*
 		 * Connecting the application modules (vertices) in the application model (directed graph) with edges
 		 */
-		application.addAppEdge("CAMERA_1", "motion_detector_1", 1000, 20000, "CAMERA_1", Tuple.UP, AppEdge.SENSOR); // adding edge from CAMERA (sensor) to Motion Detector module carrying tuples of type CAMERA
-		application.addAppEdge("motion_detector_1", "object_detector_1", 2000, 2000, "MOTION_VIDEO_STREAM_1", Tuple.UP, AppEdge.MODULE); // adding edge from Motion Detector to Object Detector module carrying tuples of type MOTION_VIDEO_STREAM
-		application.addAppEdge("object_detector_1", "user_interface_1", 500, 2000, "DETECTED_OBJECT_1", Tuple.UP, AppEdge.MODULE); // adding edge from Object Detector to User Interface module carrying tuples of type DETECTED_OBJECT
+		application.addAppEdge("CAMERA_1", "motion_detector_1", 2000, 40000, "CAMERA_1", Tuple.UP, AppEdge.SENSOR); // adding edge from CAMERA (sensor) to Motion Detector module carrying tuples of type CAMERA
+		application.addAppEdge("motion_detector_1", "object_detector_1", 4000, 4000, "MOTION_VIDEO_STREAM_1", Tuple.UP, AppEdge.MODULE); // adding edge from Motion Detector to Object Detector module carrying tuples of type MOTION_VIDEO_STREAM
+		application.addAppEdge("object_detector_1", "user_interface_1", 1000, 4000, "DETECTED_OBJECT_1", Tuple.UP, AppEdge.MODULE); // adding edge from Object Detector to User Interface module carrying tuples of type DETECTED_OBJECT
 		application.addAppEdge("object_detector_1", "object_tracker_1", 1000, 100, "OBJECT_LOCATION_1", Tuple.UP, AppEdge.MODULE); // adding edge from Object Detector to Object Tracker module carrying tuples of type OBJECT_LOCATION
 		//*Saeedeh*//this edge from obj tracker to ptz control is periodic and third argument is the periodicity= 100 (it means every 10msec)
 		application.addAppEdge("object_tracker_1", "PTZ_CONTROL_1", 100, 28, 100, "PTZ_PARAMS_1", Tuple.DOWN, AppEdge.ACTUATOR); // adding edge from Object Tracker to PTZ CONTROL (actuator) carrying tuples of type PTZ_PARAMS

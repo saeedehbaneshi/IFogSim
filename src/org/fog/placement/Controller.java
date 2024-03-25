@@ -358,7 +358,7 @@ public class Controller extends SimEntity{
 			Application app = getApplications().get(appId);
 			for(AppLoop loop : app.getLoops()){
 				if(loop.getLoopId() == loopId)
-					return loop.getModules().toString();
+					return appId + " " + loop.getModules().toString();
 			}
 		}
 		return null;
@@ -383,6 +383,7 @@ public class Controller extends SimEntity{
 				System.err.println(average);
 			}
 			System.out.println(getStringForLoopId(loopId) + " --->= "+(average/count));*/
+			
 			System.out.println(getStringForLoopId(loopId) + " --->= "+TimeKeeper.getInstance().getLoopIdToCurrentAverage().get(loopId));
 		}
 		System.out.println("=========================================");
