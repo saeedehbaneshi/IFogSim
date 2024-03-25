@@ -18,6 +18,7 @@ import org.cloudbus.cloudsim.core.CloudSim;
 import org.cloudbus.cloudsim.core.CloudSimTags;
 import org.cloudbus.cloudsim.core.SimEntity;
 import org.cloudbus.cloudsim.core.SimEvent;
+import org.fog.utils.FogEvents;
 
 
 /**
@@ -687,7 +688,7 @@ public class Datacenter extends SimEntity {
 	 * @post $none
 	 */
 	protected void processCloudletSubmit(SimEvent ev, boolean ack) {
-		updateCloudletProcessing();
+		updateCloudletProcessing(ev);
 		try {
 			// gets the Cloudlet object
 			Cloudlet cl = (Cloudlet) ev.getData();
@@ -751,7 +752,15 @@ public class Datacenter extends SimEntity {
 						+estimatedFinishTime, CloudSimTags.VM_DATACENTER_EVENT);
 				/*	edit done	*/
 			}
-
+/////////////////////////////// Saeedeh added this to resolve infinite problem in estimated finish time
+			if (Double.isInfinite(estimatedFinishTime)) {
+				send(getId(), CloudSim.getMinTimeBetweenEvents(), FogEvents.INFINITY_RESOURCE_MGMT);
+			}
+/////////////////////////////// Saeedeh added up if statement to resolve infinite problem in estimated finish time
+			
+			
+			
+			
 			if (ack) {
 				int[] data = new int[3];
 				data[0] = getId();
@@ -770,7 +779,7 @@ public class Datacenter extends SimEntity {
 			e.printStackTrace();
 		}
 
-		checkCloudletCompletion();
+		checkCloudletCompletion(ev);
 	}
 
 	/**
@@ -910,6 +919,40 @@ public class Datacenter extends SimEntity {
 			setLastProcessTime(CloudSim.clock());
 		}
 	}
+	
+	
+	
+	/////////////// Saeedeh added this func with arg
+	protected void updateCloudletProcessing(SimEvent ev) {
+
+		// if some time passed since last processing
+		// R: for term is to allow loop at simulation start. Otherwise, one initial
+		// simulation step is skipped and schedulers are not properly initialized
+		if (CloudSim.clock() < 0.111 || CloudSim.clock() > getLastProcessTime() + CloudSim.getMinTimeBetweenEvents()) {
+			List<? extends Host> list = getVmAllocationPolicy().getHostList();
+			double smallerTime = Double.MAX_VALUE;
+			// for each host...
+			for (int i = 0; i < list.size(); i++) {
+				Host host = list.get(i);
+				// inform VMs to update processing
+				double time = host.updateVmsProcessing(CloudSim.clock());
+				// what time do we expect that the next cloudlet will finish?
+				if (time < smallerTime) {
+					smallerTime = time;
+				}
+			}
+			// gurantees a minimal interval before scheduling the event
+			if (smallerTime < CloudSim.clock() + CloudSim.getMinTimeBetweenEvents() + 0.01) {
+				smallerTime = CloudSim.clock() + CloudSim.getMinTimeBetweenEvents() + 0.01;
+			}
+			if (smallerTime != Double.MAX_VALUE) {
+				schedule(getId(), (smallerTime - CloudSim.clock()), CloudSimTags.VM_DATACENTER_EVENT);
+			}
+			setLastProcessTime(CloudSim.clock());
+		}
+	}
+	
+	
 
 	/**
 	 * Verifies if some cloudlet inside this PowerDatacenter already finished. If yes, send it to
@@ -919,6 +962,21 @@ public class Datacenter extends SimEntity {
 	 * @post $none
 	 */
 	protected void checkCloudletCompletion() {
+		List<? extends Host> list = getVmAllocationPolicy().getHostList();
+		for (int i = 0; i < list.size(); i++) {
+			Host host = list.get(i);
+			for (Vm vm : host.getVmList()) {
+				while (vm.getCloudletScheduler().isFinishedCloudlets()) {
+					Cloudlet cl = vm.getCloudletScheduler().getNextFinishedCloudlet();
+					if (cl != null) {
+						sendNow(cl.getUserId(), CloudSimTags.CLOUDLET_RETURN, cl);
+					}
+				}
+			}
+		}
+	}
+	//////// Saeedeh added this func with arg
+	protected void checkCloudletCompletion(SimEvent ev) {
 		List<? extends Host> list = getVmAllocationPolicy().getHostList();
 		for (int i = 0; i < list.size(); i++) {
 			Host host = list.get(i);

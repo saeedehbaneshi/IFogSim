@@ -67,13 +67,23 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 		
 
 		setCurrentMipsShare(mipsShare);
+		
+		
+		boolean checkmap=false;
+        if (mipsShare.equals(1500)) {
+        	checkmap=true;
+        }
+		
+		
+		
 		double timeSpam = currentTime - getPreviousTime();
+	
+		
 
 		for (ResCloudlet rcl : getCloudletExecList()) {
-			
 			double bb=rcl.getCloudletArrivalTime();
 			rcl.updateCloudletFinishedSoFar((long) (getCapacity(mipsShare) * timeSpam * rcl.getNumberOfPes() * Consts.MILLION));
-					}
+		}
 		
 
 
@@ -320,7 +330,7 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 		}
 
 		getCloudletExecList().add(rcl);
-
+	
 		// use the current capacity to estimate the extra amount of
 		// time to file transferring. It must be added to the cloudlet length
 		double extraSize = getCapacity(getCurrentMipsShare()) * fileTransferTime;

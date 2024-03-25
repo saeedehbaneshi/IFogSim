@@ -53,7 +53,7 @@ public class DCNSFog {
 	static int numOfAreas = 1;
 	public static int numOfCamerasPerArea = 4;
 	
-	private static boolean CLOUD = false;
+	private static boolean CLOUD = true;
 	//private static boolean PROXY = true;
 	private static boolean USER_BASED = false;
 

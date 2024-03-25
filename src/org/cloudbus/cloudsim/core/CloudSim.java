@@ -523,7 +523,7 @@ public class CloudSim {
 	public static boolean runClockTick() {
 		double cc=CloudSim.clock();
 		if (cc%100==0) {
-			System.err.println("clock is "+cc);
+			System.out.println("clock is "+cc);
 		}
 		SimEntity ent;
 		boolean queue_empty;
@@ -799,7 +799,32 @@ public class CloudSim {
 		//return previousSize < future.size();
 		return previousSize > future.size();
 	}
+		
+	
+///////////////////////////////////////// Saeedeh added this to count the number of cancelled events from the future queue
+	
+	public static int cancelAllCount(int src, Predicate p) {
+	    SimEvent ev = null;
+	    //double ccTime = clock();
+	    //int previousSize = future.size();
+	    Iterator<SimEvent> iter = future.iterator();
+	    int cancelledEvents = 0; // Initialize counter for cancelled events
+	    while (iter.hasNext()) {
+	        ev = iter.next();
+	        if (ev.getSource() == src && p.match(ev)) {
+	            iter.remove();
+	            cancelledEvents++; // Increment counter for each cancelled event
+	        }
+	    }
+	    return cancelledEvents; // Return the total number of cancelled events
+	}
 
+
+	
+///////////////////////////////////////// Saeedeh added this to count the number of cancelled events from the future queue
+	
+	
+	
 	//
 	// Private internal methods
 	//
