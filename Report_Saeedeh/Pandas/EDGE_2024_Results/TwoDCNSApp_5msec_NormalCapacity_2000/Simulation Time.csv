@@ -1,0 +1,8 @@
+app_class,scenario,simulation_time
+TwoDCNSApps,Router_Only,25098
+TwoDCNSApps,Router_Proxy,408
+TwoDCNSApps,Router_Cloud,448
+TwoDCNSApps,Proxy_Only,31441
+TwoDCNSApps,Proxy_Cloud,470
+TwoDCNSApps,Cloud_Only,638
+TwoDCNSApps,ModuleBased_Router_Proxy,3510

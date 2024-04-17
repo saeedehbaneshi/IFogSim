@@ -56,7 +56,7 @@ public abstract class ModulePlacement {
 
 		if(canBeCreated(device, module)){
 			System.out.println(module.getAppId()+" ''' module "+module.getName()+" can be created on device "+device.getName());
-			System.out.println("Creating "+module.getNumInstances()+" instances of "+module.getName()+" on device "+device.getName());
+			//System.out.println("Creating "+module.getNumInstances()+" instances of "+module.getName()+" on device "+device.getName());
 			if(!getDeviceToModuleMap().containsKey(device.getId()))
 				getDeviceToModuleMap().put(device.getId(), new ArrayList<AppModule>());
 			getDeviceToModuleMap().get(device.getId()).add(module);

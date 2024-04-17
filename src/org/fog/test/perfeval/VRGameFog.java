@@ -45,7 +45,7 @@ public class VRGameFog {
 	static List<Sensor> sensors = new ArrayList<Sensor>();
 	static List<Actuator> actuators = new ArrayList<Actuator>();
 	
-	static boolean USER_DEFINED = true;
+	static boolean USER_DEFINED = false;
 	static boolean CLOUD = false;
 	//This was 2 I changed it to 1
 	static int numOfDepts = 1;
@@ -137,11 +137,14 @@ public class VRGameFog {
 	 * @param appId
 	 */
 	private static void createFogDevices(int userId, String appId) {
-		FogDevice cloud = createFogDevice("cloud", 44800, 40000, 100, 100000, 0, 0.01, 16*103, 16*83.25); // creates the fog device Cloud at the apex of the hierarchy with level=0
+		FogDevice cloud = createFogDevice("cloud", 44800, 40000, 100, 100000, 0, 0.01, 16*103, 16*83.25, "Shared", 12300, 11070); // creates the fog device Cloud at the apex of the hierarchy with level=0
 		cloud.setParentId(-1);
-		FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, 100000, 100000, 1, 0.0, 107.339, 83.4333); // creates the fog device Proxy Server (level=1)
+		cloud.setDeviceType("Shared");// Saeedeh added
+		FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, 100000, 100000, 1, 0.0, 107.339, 83.4333, "Shared", 4550, 4095); // creates the fog device Proxy Server (level=1)
 		proxy.setParentId(cloud.getId()); // setting Cloud as parent of the Proxy Server
 		proxy.setUplinkLatency(100); // latency of connection from Proxy Server to the Cloud is 100 ms
+		proxy.setDeviceType("Shared");// Saeedeh added
+
 		
 		fogDevices.add(cloud);
 		fogDevices.add(proxy);
@@ -153,10 +156,11 @@ public class VRGameFog {
 	}
 
 	private static FogDevice addGw(String id, int userId, String appId, int parentId){
-		FogDevice dept = createFogDevice("d-"+id, 2800, 4000, 100000, 100000, 1, 0.0, 107.339, 83.4333);
+		FogDevice dept = createFogDevice("d-"+id, 2800, 4000, 100000, 100000, 1, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
 		fogDevices.add(dept);
 		dept.setParentId(parentId);
 		dept.setUplinkLatency(4); // latency of connection between gateways and proxy server is 4 ms
+		dept.setDeviceType("Shared");// Saeedeh added
 		for(int i=0;i<numOfMobilesPerDept;i++){
 			String mobileId = id+"-"+i;
 			FogDevice mobile = addMobile(mobileId, userId, appId, dept.getId()); // adding mobiles to the physical topology. Smartphones have been modeled as fog devices as well.
@@ -167,8 +171,9 @@ public class VRGameFog {
 	}
 	
 	private static FogDevice addMobile(String id, int userId, String appId, int parentId){
-		FogDevice mobile = createFogDevice("m-"+id, 1000, 1000, 10000, 270, 3, 0, 87.53, 82.44);
+		FogDevice mobile = createFogDevice("m-"+id, 1000, 1000, 10000, 270, 3, 0, 87.53, 82.44, "CPE", 4.6, 2.8);
 		mobile.setParentId(parentId);
+		mobile.setDeviceType("CPE");// Saeedeh added
 		Sensor eegSensor = new Sensor("s-"+id, "EEG", userId, appId, new DeterministicDistribution(EEG_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor follows a deterministic distribution
 		sensors.add(eegSensor);
 		Actuator display = new Actuator("a-"+id, userId, appId, "DISPLAY");
@@ -194,7 +199,7 @@ public class VRGameFog {
 	 * @return
 	 */
 	private static FogDevice createFogDevice(String nodeName, long mips,
-			int ram, long upBw, long downBw, int level, double ratePerMips, double busyPower, double idlePower) {
+			int ram, long upBw, long downBw, int level, double ratePerMips, double busyPower, double idlePower, String deviceType, double networkingMaxPower, double networkingIdlePower) {
 		
 		List<Pe> peList = new ArrayList<Pe>();
 
@@ -237,7 +242,7 @@ public class VRGameFog {
 		FogDevice fogdevice = null;
 		try {
 			fogdevice = new FogDevice(nodeName, characteristics, 
-					new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 0, ratePerMips);
+					new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 0, ratePerMips, deviceType, networkingMaxPower, networkingIdlePower);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

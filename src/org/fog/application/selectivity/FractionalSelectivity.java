@@ -18,7 +18,7 @@ public class FractionalSelectivity implements SelectivityModel{
 	int counter= 0;
 	
 	public FractionalSelectivity(double selectivity){
-		System.out.println("reversed_selectivity: "+1/selectivity);
+		//System.out.println("reversed_selectivity: "+1/selectivity);
 		setSelectivity(selectivity);
 	}
 	public double getSelectivity() {

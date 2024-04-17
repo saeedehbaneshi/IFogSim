@@ -58,7 +58,7 @@ public class TwoDCNSApps {
     
     //Saeedeeh added these scenarios
     private static boolean Router_Only = false;
-    private static boolean Router_Proxy = false;
+    private static boolean Router_Proxy = true;
     private static boolean Router_Cloud = false;
     private static boolean Proxy_Only = false;
     private static boolean Proxy_Cloud = false;
@@ -164,7 +164,7 @@ public class TwoDCNSApps {
 
             
             
-     ////// Saeedeh added up scenarios
+     ////// Saeedeh added these scenarios
             
             if (USER_BASED) {
             	moduleMapping_0.addModuleToDevice("object_detector", "proxy-server");
@@ -226,7 +226,7 @@ public class TwoDCNSApps {
                 moduleMapping_1.addModuleToDevice("object_tracker_1", "proxy-server");
             }
             
- ////// Saeedeh added up scenarios
+ ////// Saeedeh added these scenarios
             
             
             
@@ -270,7 +270,7 @@ public class TwoDCNSApps {
     private static void createEdgeDevices0(int userId, String appId) {
 		for(FogDevice camera : mobiles){
 			String id = camera.getName();
-			Sensor sensor = new Sensor("s-"+id, "CAMERA", userId, appId, new DeterministicDistribution(5*5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
+			Sensor sensor = new Sensor("s-"+id, "CAMERA", userId, appId, new DeterministicDistribution(4*5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
 			sensors.add(sensor);
 			Actuator ptz = new Actuator("ptz-"+id, userId, appId, "PTZ_CONTROL");
 			actuators.add(ptz);
@@ -284,7 +284,7 @@ public class TwoDCNSApps {
 	private static void createEdgeDevices1(int userId, String appId) {
 		for(FogDevice camera : mobiles){
 			String id = camera.getName();
-			Sensor sensor = new Sensor("s-"+id, "CAMERA_1", userId, appId, new DeterministicDistribution(5*5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
+			Sensor sensor = new Sensor("s-"+id, "CAMERA_1", userId, appId, new DeterministicDistribution(4*5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
 			sensors.add(sensor);
 			Actuator ptz = new Actuator("ptz-"+id, userId, appId, "PTZ_CONTROL_1");
 			actuators.add(ptz);
@@ -361,7 +361,7 @@ public class TwoDCNSApps {
 	}
 	
 	private static FogDevice addCamera(String id, int parentId){
-		FogDevice camera = createFogDevice("m-"+id, 3*500, 100000, 10000, 100, 3, 0, 87.53, 82.44, "CPE", 4.6, 2.8);
+		FogDevice camera = createFogDevice("m-"+id, 2*500, 100000, 10000, 100, 3, 0, 87.53, 82.44, "CPE", 4.6, 2.8);
 		camera.setParentId(parentId);
 		camera.setDeviceType("CPE");// Saeedeh added
 		mobiles.add(camera);

@@ -136,6 +136,11 @@ public class ModulePlacementEdgewards extends ModulePlacement{
 		List<String> placedModules = new ArrayList<String>();
 		Map<AppEdge, Double> appEdgeToRate = new HashMap<AppEdge, Double>();
 		
+		/*for(AppEdge edge : getApplication().getEdges()){
+			System.err.println(edge.getTupleType());
+		}*/
+		
+		
 		/**
 		 * Periodic edges have a fixed periodicity of tuples, so setting the tuple rate beforehand
 		 */
