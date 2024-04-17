@@ -435,7 +435,7 @@ public class Datacenter extends SimEntity {
 	protected void processVmCreate(SimEvent ev, boolean ack) {
 		Vm vm = (Vm) ev.getData();
 		//saeedeh//System.out.println(" ----------------------------------- we are in datacenter processVmCreate function -------------------------------------");
-		System.out.println(" IT IS VM Id :"+vm.getId()+" this data carried by this event ev= "+ev.getTag()+" for this destination : "+ev.getDestination());
+		//System.out.println(" IT IS VM Id :"+vm.getId()+" this data carried by this event ev= "+ev.getTag()+" for this destination : "+ev.getDestination());
 		//Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         //System.out.println("<><><><><><><><><3<><><><><><><><>");
         //String userName = myObj.nextLine(); 
@@ -457,7 +457,7 @@ public class Datacenter extends SimEntity {
 
 		if (result) {
 			getVmList().add(vm);
-			System.out.println(" Vm list after creation : "+getVmList());
+			//System.out.println(" Vm list after creation : "+getVmList());
 
 			if (vm.isBeingInstantiated()) {
 				vm.setBeingInstantiated(false);
@@ -689,6 +689,7 @@ public class Datacenter extends SimEntity {
 	 */
 	protected void processCloudletSubmit(SimEvent ev, boolean ack) {
 		updateCloudletProcessing(ev);
+		//updateCloudletProcessing();
 		try {
 			// gets the Cloudlet object
 			Cloudlet cl = (Cloudlet) ev.getData();
@@ -750,12 +751,14 @@ public class Datacenter extends SimEntity {
 				//System.out.println(getName()+" : ESTIMATED FINISH TIME ON "+((StreamOperator)vm).getName()+": "+estimatedFinishTime);
 				send(getId(), CloudSim.getMinTimeBetweenEvents()
 						+estimatedFinishTime, CloudSimTags.VM_DATACENTER_EVENT);
+				
+				//send(getId(), estimatedFinishTime, CloudSimTags.VM_DATACENTER_EVENT);
 				/*	edit done	*/
 			}
-/////////////////////////////// Saeedeh added this to resolve infinite problem in estimated finish time
-			if (Double.isInfinite(estimatedFinishTime)) {
+/////////////////////////////// Saeedeh added this to resolve infinite problem in estimated finish time but it didnt work properly so call updateCloudletProcessing() func in datacenter with ev as arg
+			/*if (Double.isInfinite(estimatedFinishTime)) {
 				send(getId(), CloudSim.getMinTimeBetweenEvents(), FogEvents.INFINITY_RESOURCE_MGMT);
-			}
+			}*/
 /////////////////////////////// Saeedeh added up if statement to resolve infinite problem in estimated finish time
 			
 			
@@ -779,7 +782,7 @@ public class Datacenter extends SimEntity {
 			e.printStackTrace();
 		}
 
-		checkCloudletCompletion(ev);
+		checkCloudletCompletion();
 	}
 
 	/**

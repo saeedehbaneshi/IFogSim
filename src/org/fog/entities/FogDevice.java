@@ -412,16 +412,12 @@ public class FogDevice extends PowerDatacenter {
                 //This message is received by the devices to start their clustering
                 processClustering(this.getParentId(), this.getId(), ev);
                 break;
-            case FogEvents.INFINITY_RESOURCE_MGMT:
-            	//updateCloudletProcessing();
+/////////////////////////////// Saeedeh added this to resolve infinite problem in estimated finish time but it didnt work properly so call updateCloudletProcessing() func in datacenter with ev as arg
+            /*case FogEvents.INFINITY_RESOURCE_MGMT:
             	double mintime=updateCloudetProcessingWithoutSchedulingFutureEventsForce();
-            	/*if (mintime != Double.MAX_VALUE) {
-    				CloudSim.cancelAll(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
-            		send(getId(), mintime, CloudSimTags.VM_DATACENTER_EVENT);
-            	}*/
                 infinityManageResources(ev);
                 //updateCloudetProcessingWithoutSchedulingFutureEventsForce();
-                break;
+                break;*/
             default:
                 break;
         }
@@ -716,15 +712,48 @@ public class FogDevice extends PowerDatacenter {
         Log.printLine();
 
         setLastProcessTime(currentTime);
-        //saeedeh//System.out.println("\nLast process time is(output of updateCloudetProcessingWithoutSchedulingFutureEventsForce function) : "+getLastProcessTime()+"\n");
-        //saeedeh//System.out.println("\nmin time is(output of updateCloudetProcessingWithoutSchedulingFutureEventsForce function): "+minTime+"\n");
-
+        
         return minTime;
     }
     
-    
+    protected void checkCloudletCompletion() {
+        boolean cloudletCompleted = false;
+        List<? extends Host> list = getVmAllocationPolicy().getHostList();
+        for (int i = 0; i < list.size(); i++) {
+            Host host = list.get(i);
+            //saeedeh//System.out.println("HOST ID : "+host.getId());
+            for (Vm vm : host.getVmList()) {
+                //saeedeh//System.out.println("VM ID : "+vm.getId());
+                while (vm.getCloudletScheduler().isFinishedCloudlets()) {
+                    Cloudlet cl = vm.getCloudletScheduler().getNextFinishedCloudlet();
+                    if (cl != null) {
 
+                        cloudletCompleted = true;
+                        Tuple tuple = (Tuple) cl;
+                       //saeedeh// System.out.println("TUPLE TYPE : "+tuple.getTupleType());
+                        TimeKeeper.getInstance().tupleEndedExecution(tuple);
+                        Application application = getApplicationMap().get(tuple.getAppId());
+                        Logger.error(getName(), "Completed execution of tuple " + tuple.getCloudletId() + "on " + tuple.getDestModuleName());
+                       //saeede// System.out.println(getName()+ "Completed execution of tuple " + tuple.getTupleType() + "on " + tuple.getDestModuleName());
+                        List<Tuple> resultantTuples = application.getResultantTuples(tuple.getDestModuleName(), tuple, getId(), vm.getId());
+                        for (Tuple resTuple : resultantTuples) {
+                            resTuple.setModuleCopyMap(new HashMap<String, Integer>(tuple.getModuleCopyMap()));
+                            resTuple.getModuleCopyMap().put(((AppModule) vm).getName(), vm.getId());
+                           //saeedeh// System.out.println("Get module copy map of tuple : "+resTuple.getModuleCopyMap());
+                            updateTimingsOnSending(resTuple);
+                            sendToSelf(resTuple);
+                        }
+                        sendNow(cl.getUserId(), CloudSimTags.CLOUDLET_RETURN, cl);
+                    }
+                }
+            }
+        }
+        if (cloudletCompleted)
+            updateAllocatedMips(null);
+        	//updateAllocatedMips(arrivingTuple.getDestModuleName());
+    }
 
+///// Saeedeh added this function with input arg:
     protected void checkCloudletCompletion(SimEvent ev) {
         boolean cloudletCompleted = false;
         ////// Saeedeh added ev as input arg and cast it to cl to call updateAllocatedMips with destination of this event
@@ -906,7 +935,7 @@ public class FogDevice extends PowerDatacenter {
 	        	double VM_share=getLastVmsMipsMap().get(vm)/getHost().getTotalMips();
 	        	
 	        	 boolean checkEnergy=false;
-		            if (operator.getName()=="object_detector") {
+		            if (operator.getName()=="concentration_calculator") {
 		            	checkEnergy=true;
 		            }
 	        	
@@ -1017,6 +1046,15 @@ public class FogDevice extends PowerDatacenter {
             sendTupleToActuator(tuple);
             return;
         }
+        
+        
+        
+        
+        boolean checkArrival=false;
+        if (tuple.getDestModuleName()=="user_interface") {
+        	checkArrival=true;
+        }
+        
         int ss=getHost().getVmList().size();
         
         /*if (getHost().getVmList().size() > 0) {
@@ -1078,9 +1116,6 @@ public class FogDevice extends PowerDatacenter {
        
         
         
-        
-        
-        
         } else {
             if (tuple.getDirection() == Tuple.UP)
                 sendUp(tuple);
@@ -1118,9 +1153,11 @@ public class FogDevice extends PowerDatacenter {
                 //saeedeh//System.out.println(" currentAverage : "+currentAverage);
                //saeedeh// System.out.println(" currentCount : "+currentCount);
                //saeedeh// System.out.println(" delay : "+delay);
-                System.out.println(app.getAppId());
-                System.out.println(" Tuple actual Id "+tuple.getActualTupleId());
-                System.out.println(" Loop count is "+currentCount+" and delay is "+delay+" and emit time is "+TimeKeeper.getInstance().getEmitTimes().get(tuple.getActualTupleId())+" and completion time is "+CloudSim.clock());
+                
+                //////Saeedeh commented this, If you want to use python script to track emission delay you need to uncomment these lines
+                //1// System.out.println(app.getAppId());
+                //2// System.out.println(" Tuple actual Id "+tuple.getActualTupleId());
+                //3// System.out.println(" Loop count is "+currentCount+" and delay is "+delay+" and emit time is "+TimeKeeper.getInstance().getEmitTimes().get(tuple.getActualTupleId())+" and completion time is "+CloudSim.clock());
                 
                 TimeKeeper.getInstance().getEmitTimes().remove(tuple.getActualTupleId());
                 
@@ -1185,7 +1222,7 @@ public class FogDevice extends PowerDatacenter {
         }
         String temp=tuple.getDestModuleName();
         boolean check=false;
-        if (temp=="motion_detector" | temp=="motion_detector_1") {
+        if (temp=="user_interface" | temp=="user_interface_1") {
         	check=true;
         }
         TimeKeeper.getInstance().tupleStartedExecution(tuple);
@@ -1968,13 +2005,14 @@ public class FogDevice extends PowerDatacenter {
     		totalIdleEnergy = powerIdle * Config.MAX_SIMULATION_TIME;
     		totalDeviceNetworkingEnergy= totalActiveEnergy+totalIdleEnergy;
     	}
+    	//* Saeedeh commented this 
+    	//System.out.println("\n\n***************************************************\n");
+    	//System.out.println( getName()+ " Total Idle Networking Energy with Flow-base model = "+ totalIdleEnergy);
     	
-    	System.out.println("\n\n***************************************************\n");
-    	System.out.println( getName()+ " Total Idle Networking Energy with Flow-base model = "+ totalIdleEnergy);
-    	
-    	System.out.println(getName()+ " Total Active Networking Energy with Flow-base model = "+ totalActiveEnergy);
+    	//System.out.println(getName()+ " Total Active Networking Energy with Flow-base model = "+ totalActiveEnergy);
 
-    	System.out.println(getName()+ " Total Device Networking Energy with Flow-base model = "+ totalDeviceNetworkingEnergy);
+    	//System.out.println(getName()+ " Total Device Networking Energy with Flow-base model = "+ totalDeviceNetworkingEnergy);
+    	// Saeedeh commented this 
 
     	return totalDeviceNetworkingEnergy;
     }

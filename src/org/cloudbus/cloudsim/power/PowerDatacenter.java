@@ -151,7 +151,9 @@ public class PowerDatacenter extends Datacenter {
 				CloudSim.cancelAll(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
 				send(getId(), getSchedulingInterval(), CloudSimTags.VM_DATACENTER_EVENT);
 				// Saeedeh commented up line and added bellow line to solve the problem of infinity estimated finish time
-				send(getId(), minTime, CloudSimTags.VM_DATACENTER_EVENT);
+				//send(getId(), (minTime-CloudSim.clock()), CloudSimTags.VM_DATACENTER_EVENT);
+				//schedule(getId(), (minTime-CloudSim.clock()), CloudSimTags.VM_DATACENTER_EVENT);
+
 			}
 
 			setLastProcessTime(currentTime);
@@ -226,7 +228,7 @@ public class PowerDatacenter extends Datacenter {
 				CloudSim.cancelAll(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
 				send(getId(), getSchedulingInterval(), CloudSimTags.VM_DATACENTER_EVENT);
 				// Saeedeh commented up line and added bellow line to solve the problem of infinity estimated finish time
-				send(getId(), minTime, CloudSimTags.VM_DATACENTER_EVENT);
+				//send(getId(), (minTime-CloudSim.clock()), CloudSimTags.VM_DATACENTER_EVENT);
 			}
 
 			setLastProcessTime(currentTime);

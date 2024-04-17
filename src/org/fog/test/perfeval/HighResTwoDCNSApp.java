@@ -53,7 +53,7 @@ public class HighResTwoDCNSApp {
     static int numOfAreas = 1;
     public static int numOfCamerasPerArea = 4;
 
-    private static boolean CLOUD = true;
+    private static boolean CLOUD = false;
     private static boolean USER_BASED = false;
     
     //Saeedeeh added these scenarios
@@ -362,7 +362,7 @@ public class HighResTwoDCNSApp {
 	}
 	
 	private static FogDevice addCamera(String id, int parentId){
-		FogDevice camera = createFogDevice("m-"+id, 3*500, 100000, 10000, 100, 3, 0, 87.53, 82.44, "CPE", 4.6, 2.8);
+		FogDevice camera = createFogDevice("m-"+id, 2*500, 100000, 10000, 100, 3, 0, 87.53, 82.44, "CPE", 4.6, 2.8);
 		camera.setParentId(parentId);
 		camera.setDeviceType("CPE");// Saeedeh added
 		mobiles.add(camera);

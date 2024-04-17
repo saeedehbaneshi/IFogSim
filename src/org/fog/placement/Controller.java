@@ -478,6 +478,7 @@ public class Controller extends SimEntity{
 
 		for(Integer deviceId : deviceToModuleMap.keySet()){
 			System.out.println("^^^^^^^^^^^^^^^DeviceId : "+deviceId);
+			System.out.println("^^^^^^^^^^^^^^^DeviceName : "+getFogDeviceById(deviceId).getName());
 
 			for(AppModule module : deviceToModuleMap.get(deviceId)){
 				System.out.println("^^^^^^^^^^^^^^^ module : "+module.getName());
