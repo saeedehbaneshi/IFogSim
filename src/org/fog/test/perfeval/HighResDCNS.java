@@ -233,7 +233,7 @@ public class HighResDCNS {
 		camera.setParentId(parentId);
 		camera.setDeviceType("CPE");// Saeedeh added
 
-		Sensor sensor = new Sensor("s-"+id, "CAMERA", userId, appId1, new DeterministicDistribution(5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
+		Sensor sensor = new Sensor("s-"+id, "CAMERA", userId, appId1, new DeterministicDistribution(4*5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
 		sensors.add(sensor);
 		Actuator ptz = new Actuator("ptz-"+id, userId, appId1, "PTZ_CONTROL");
 		actuators.add(ptz);

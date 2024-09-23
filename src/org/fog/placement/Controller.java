@@ -35,6 +35,11 @@ public class Controller extends SimEntity{
 
 	private Map<String, ModulePlacement> appModulePlacementPolicy;
 	
+	
+	public static final String ANSI_BLUE = "\u001B[34m";
+	public static final String ANSI_RESET = "\u001B[0m";
+
+	
 	public Controller(String name, List<FogDevice> fogDevices, List<Sensor> sensors, List<Actuator> actuators) {
 		super(name);
 		this.applications = new HashMap<String, Application>();
@@ -113,6 +118,7 @@ public class Controller extends SimEntity{
 			CloudSim.stopSimulation();
 			printTimeDetails();
 			printPowerDetails();
+			printCO2Emissions();
 			printCostDetails();
 			printNetworkUsageDetails();
 			//Saeedeh added following links energy detail functions:
@@ -120,7 +126,8 @@ public class Controller extends SimEntity{
 			//printLinksEnergyDetailsSpecEcofenBased();
 			//printLinksEnergyDetailsMeasuredEcofenBased();
 			//printFlowBasedNetworkingEnergyDetails();
-			printEnergyTimeMapsDetailsForFlowBaseModel();
+			printEnergyTimeMapsDetailsForFlowBaseModelNetworkingEnergy();
+			printNetworkingCO2MapsDetailsForFlowBaseModelNetworkingEnergy();
 			System.exit(0);
 			break;
 			
@@ -169,12 +176,19 @@ public class Controller extends SimEntity{
 	}
 	
 	private void printPowerDetails() {
+		System.out.println("=============================================================================");
+		System.out.println("============== Device, Application, and VMs Energy RESULTS ==================");
+		System.out.println("\n");
+
 		for(FogDevice fogDevice : getFogDevices()){
 			System.out.println(fogDevice.getName() + " : Energy Consumed = "+fogDevice.getEnergyConsumption());
-			//Saeedeh added this code for reporting application Energy
-			System.out.println(fogDevice.getName() + " : Application Energy Consumed = "+fogDevice.getApplicationEnergyConsumption());
-			System.out.println(fogDevice.getName()+ " : Vms Energy Map of device : "+fogDevice.getName()+" "+fogDevice.getVmsEnergyMap());
 			
+			//Saeedeh added this code for reporting application Energy
+			// I commented next line because it is for single application scenarios
+			//System.out.println(fogDevice.getName() + " : Application Energy Consumed = "+fogDevice.getApplicationEnergyConsumption());
+			System.out.println(fogDevice.getName()+ " : Vms Energy Map of device : "+fogDevice.getName()+" "+fogDevice.getVmsEnergyMap());
+
+	        // Calculate and print total energy per application
 			for (String applicationId : fogDevice.getVmsEnergyMap().keySet()) {
 				double totalVmsEnergy=0.0;
 					Map<String ,Double > innerMap= fogDevice.getVmsEnergyMap().get(applicationId);
@@ -183,24 +197,68 @@ public class Controller extends SimEntity{
 						totalVmsEnergy+=VmsEnergy;
 					}
 				System.out.println(fogDevice.getName()+" : Application " +applicationId+ " total Energy = "+ totalVmsEnergy);
+				
 				}
 			if (fogDevice.getVmsEnergyMap().isEmpty()) {
-				double totalVmsEnergy=0.0;
-				System.out.println(fogDevice.getName()+" : Application total Energy = "+ totalVmsEnergy);
-
-
-			}
-			System.out.println(fogDevice.getName() + " : North Link Busy Time = "+fogDevice.getNorthLinkBusyTime());
-			System.out.println(fogDevice.getName() + " : North Link Idle Time = "+fogDevice.getNortLinkIdleTime());
-			System.out.println(fogDevice.getName() + " : South Link Busy Time = "+fogDevice.getSouthLinkBusyTime());
-			System.out.println(fogDevice.getName() + " : South Link Idle Time = "+fogDevice.getSouthLinkIdleTime());
+				double totalEnergyVms=0.0;
+				System.out.println(fogDevice.getName()+" : Application total Energy = "+ totalEnergyVms);
+				}
+			
 		}
+		System.out.println("=========================================");
+	}
+	
+	
+	private void linkUtilizationDetails() {
+		// Print link utilization details
+		for(FogDevice fogDevice : getFogDevices()){
+					System.out.println(fogDevice.getName() + " : North Link Busy Time = "+fogDevice.getNorthLinkBusyTime());
+					System.out.println(fogDevice.getName() + " : North Link Idle Time = "+fogDevice.getNortLinkIdleTime());
+					System.out.println(fogDevice.getName() + " : South Link Busy Time = "+fogDevice.getSouthLinkBusyTime());
+					System.out.println(fogDevice.getName() + " : South Link Idle Time = "+fogDevice.getSouthLinkIdleTime());
+		}
+	}
+	
+	
+	private void printCO2Emissions() {
+		System.out.println("===================================================================================");
+		System.out.println("============== Device, Application, and VMs CO2 Emission RESULTS ==================");
+		System.out.println("\n");
+
+	    for (FogDevice fogDevice : getFogDevices()) {
+	        double totalDeviceCO2 = 0.0;
+
+	        // Print CO2 emissions details
+	        System.out.println(fogDevice.getName() + " : VMs CO2 Emission Map of device: " + fogDevice.getName() + " " + fogDevice.getVmsCO2Map());
+
+	        // Calculate and print total CO2 emissions per application
+	        for (String applicationId : fogDevice.getVmsCO2Map().keySet()) {
+	            double totalVmsCO2 = 0.0;
+	            Map<String, Double> co2InnerMap = fogDevice.getVmsCO2Map().get(applicationId);
+	            for (String vmName : co2InnerMap.keySet()) {
+	                double vmCO2 = co2InnerMap.get(vmName);
+	                totalVmsCO2 += vmCO2;
+	            }
+	            System.out.println(fogDevice.getName() + " : Application " + applicationId + " total CO2 Emissions = " + totalVmsCO2 + " kg");
+	            totalDeviceCO2 += totalVmsCO2; // Accumulate total CO2 for the device
+
+	        }
+
+	        if (fogDevice.getVmsCO2Map().isEmpty()) {
+	            double totalVmsCO2 = 0.0;
+	            System.out.println(fogDevice.getName() + " : Application total CO2 Emissions = " + totalVmsCO2 + " kg");
+	        }
+	        
+	     // Print the total CO2 emissions for the entire device
+	        System.out.println(fogDevice.getName() + " : Total CO2 Emissions for device = " + totalDeviceCO2 + " kg");
+	    }
+		System.out.println("=========================================");
 	}
 	
 	
 	//Saeedeh added
 	
-	private void printLinksEnergyDetailsCombinationWifiWired() {
+	/*private void printLinksEnergyDetailsCombinationWifiWired() {
 		for(FogDevice fogDevice : getFogDevices()){
 			if(fogDevice.getName().startsWith("m")) {
 				double staticEnergy=Config.MAX_SIMULATION_TIME*Config.WiFi_Idle_Power;
@@ -289,10 +347,10 @@ public class Controller extends SimEntity{
 						System.out.println(fogDevice.getName() + " : NIC App Active Energy = "+NIC_App_ActiveEnergy);
 				}
 			}
-		}
+		}*/
 
 	
-	private void printLinksEnergyDetailsMeasuredEcofenBased() {
+	/*private void printLinksEnergyDetailsMeasuredEcofenBased() {
 		
 		System.out.println(" **** This is NIC time tracking results for ECOFEN based model with Measured MAX power parameters **** ");
 
@@ -330,9 +388,9 @@ public class Controller extends SimEntity{
 					
 				}
 			}
-		}
+		}*/
 	
-	private void printFlowBasedNetworkingEnergyDetails() {
+	/*private void printFlowBasedNetworkingEnergyDetails() {
 		System.out.println("\n=========================================");
 		System.out.println("============== SINGLE APPLICATION TIME & ENERGY MAP RESULTS ==================");
 		for(FogDevice fogDevice: getFogDevices()){
@@ -340,18 +398,56 @@ public class Controller extends SimEntity{
 			System.out.println(fogDevice.getName()+" Networking Energy Map : "+ fogDevice.getNetworkingEnergyConsumptionMap());
 		}
 		System.out.println("=========================================\n");
-	}
+	}*/
 	
-	private void printEnergyTimeMapsDetailsForFlowBaseModel() {
+	private void printEnergyTimeMapsDetailsForFlowBaseModelNetworkingEnergy() {
 
-		System.out.println("\n=========================================");
-		System.out.println("============== TIME & ENERGY MAP RESULTS ==================");
+		System.out.println("\n=========================================================");
+		System.out.println("============== Networking TIME & ENERGY MAP RESULTS ==================");
 		for (FogDevice fogDevice: fogDevices) {
 			//System.out.println(fogDevice.getId()+" "+fogDevice.getName() + " Networking Tuples Time Map " + fogDevice.getNetworkingTuplesTimeMap());
 			System.out.println(fogDevice.getId()+" "+fogDevice.getName() + " Networking Tuples energy Map " + fogDevice.getNetworkingTuplesEnergyMap());
+			
+			double totalNetworkingEnergy = 0.0;
+
+	        // Calculate total networking energy for the device
+	        for (String appId : fogDevice.getNetworkingTuplesEnergyMap().keySet()) {
+	            Map<String, Double> energyMap = fogDevice.getNetworkingTuplesEnergyMap().get(appId);
+	            for (double energy : energyMap.values()) {
+	                totalNetworkingEnergy += energy;
+	            }
+	        }
+
+	        // Print the total networking energy for the device
+	        System.out.println(fogDevice.getName() + " : Total Networking Energy Consumption for this device = " + totalNetworkingEnergy + " mJ");
 
 		}
 	}
+	
+	private void printNetworkingCO2MapsDetailsForFlowBaseModelNetworkingEnergy() {
+
+		System.out.println("\n=========================================================");
+		System.out.println("============== Tuples Networking CO2 Emission MAP RESULTS ==================");
+		for (FogDevice fogDevice: fogDevices) {
+			//System.out.println(fogDevice.getId()+" "+fogDevice.getName() + " Networking Tuples Time Map " + fogDevice.getNetworkingTuplesTimeMap());
+			System.out.println(fogDevice.getId()+" "+fogDevice.getName() + " Networking Tuples CO2 Map " + fogDevice.getNetworkingTuplesCO2Map());
+			
+	        double totalNetworkingCO2 = 0.0;
+
+			// Calculate total networking CO2 emissions for the device
+	        for (String appId : fogDevice.getNetworkingTuplesCO2Map().keySet()) {
+	            Map<String, Double> co2Map = fogDevice.getNetworkingTuplesCO2Map().get(appId);
+	            for (double co2 : co2Map.values()) {
+	                totalNetworkingCO2 += co2;
+	            }
+	        }
+
+	        // Print the total networking CO2 emissions for the device
+	        System.out.println(fogDevice.getName() + " : Total Networking CO2 Emissions for this device = " + totalNetworkingCO2 + " kg");
+
+		}
+	}
+	
 	
 	private String getStringForLoopId(int loopId){
 		for(String appId : getApplications().keySet()){

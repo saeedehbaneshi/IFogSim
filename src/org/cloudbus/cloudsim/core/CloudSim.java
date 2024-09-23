@@ -522,9 +522,9 @@ public class CloudSim {
 	 */
 	public static boolean runClockTick() {
 		double cc=CloudSim.clock();
-		if (cc%100==0) {
+		/*if (cc%100==0) {
 			System.out.println("clock is "+cc);
-		}
+		}*/
 		SimEntity ent;
 		boolean queue_empty;
 		//.saeedeh//System.out.println("------- run clock  ------");

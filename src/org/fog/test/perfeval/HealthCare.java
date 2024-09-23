@@ -112,10 +112,10 @@ public class HealthCare {
 	 * @param appId
 	 */
 	private static void createFogDevices(int userId, String appId) {
-		FogDevice cloud = createFogDevice("cloud", 44800, 40000, 100, 10000, 0, 0.01, 16*103, 16*83.25);
+		FogDevice cloud = createFogDevice("cloud", 44800, 40000, 100, 10000, 0, 0.01, 16*103, 16*83.25, "Shared",12300,11070);
 		cloud.setParentId(-1);
 		fogDevices.add(cloud);
-		FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, 10000, 10000, 1, 0.0, 107.339, 83.4333);
+		FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, 10000, 10000, 1, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
 		proxy.setParentId(cloud.getId());
 		proxy.setUplinkLatency(100); // latency of connection between proxy server and cloud is 100 ms
 		fogDevices.add(proxy);
@@ -125,7 +125,7 @@ public class HealthCare {
 	}
 
 	private static FogDevice addArea(String id, int userId, String appId, int parentId){
-		FogDevice router = createFogDevice("r-"+id, 2800, 4000, 10000, 10000, 1, 0.0, 107.339, 83.4333);
+		FogDevice router = createFogDevice("r-"+id, 2800, 4000, 10000, 10000, 1, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
 		fogDevices.add(router);
 		router.setUplinkLatency(2); // latency of connection between router and proxy server is 2 ms
 		for(int i=0;i<numOfSmartphonesPerArea;i++){
@@ -139,7 +139,7 @@ public class HealthCare {
 	}
 	
 	private static FogDevice addSmartPhone(String id, int userId, String appId, int parentId){
-		FogDevice smartphone = createFogDevice("phone-"+id, 500, 1000, 10000, 10000, 3, 0, 87.53, 82.44);
+		FogDevice smartphone = createFogDevice("phone-"+id, 500, 1000, 10000, 10000, 3, 0, 87.53, 82.44, "CPE", 4.6, 2.8);
 		smartphone.setParentId(parentId);
 		Sensor health_sensor = new Sensor("s-"+id, "HEALTH_SENSOR", userId, appId, new DeterministicDistribution(5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
 		sensors.add(health_sensor);
@@ -166,7 +166,7 @@ public class HealthCare {
 	 * @return
 	 */
 	private static FogDevice createFogDevice(String nodeName, long mips,
-			int ram, long upBw, long downBw, int level, double ratePerMips, double busyPower, double idlePower) {
+			int ram, long upBw, long downBw, int level, double ratePerMips, double busyPower, double idlePower, String deviceType, double networkingMaxPower, double networkingIdlePower) {
 		
 		List<Pe> peList = new ArrayList<Pe>();
 
@@ -209,7 +209,7 @@ public class HealthCare {
 		FogDevice fogdevice = null;
 		try {
 			fogdevice = new FogDevice(nodeName, characteristics, 
-					new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 0, ratePerMips);
+					new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 0, ratePerMips, deviceType, networkingMaxPower, networkingIdlePower);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
