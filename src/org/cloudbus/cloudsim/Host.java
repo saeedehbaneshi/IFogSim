@@ -105,7 +105,9 @@ public class Host {
 		}
 		return smallerTime;
 	}
-
+	
+	
+	
 	/**
 	 * Adds the migrating in vm.
 	 * 

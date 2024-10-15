@@ -27,6 +27,11 @@ public class Tuple extends Cloudlet{
 	private double startSendingTupleTime;
 	private double estimatedFinishSendingTupleTime;
 	
+	/// Saeedeh added this to track estimated finish time and compare with actual finish time to track and remove outdated VM DC Events:
+    private double estimatedFinishTime;
+
+	
+	
 	/**
 	 * Map to keep track of which module instances has a tuple traversed.
 	 * 
@@ -184,4 +189,13 @@ public class Tuple extends Cloudlet{
 		return estimatedFinishSendingTupleTime;
 	}
 /// Saeedeh added mentioned functions to this class(4 last functions)
+	
+	/// Saeedeh added this to track estimated finish time and compare with actual finish time to track and remove outdated VM DC Events:
+	public void setEstimatedFinishTime(double time) {
+        this.estimatedFinishTime = time;
+    }
+
+    public double getEstimatedFinishTime() {
+        return this.estimatedFinishTime;
+    }
 }

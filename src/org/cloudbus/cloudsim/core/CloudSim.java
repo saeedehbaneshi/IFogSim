@@ -66,7 +66,7 @@ public class CloudSim {
 	private static double terminateAt = -1;
 
 	/** The minimal time between events. Events within shorter periods after the last event are discarded. */
-	private static double minTimeBetweenEvents = 0.1;
+	private static double minTimeBetweenEvents = 0.001;/// Saeedeh changed this amount from 0.1 to 0.001 
 	
 	/**
 	 * Initialises all the common attributes.

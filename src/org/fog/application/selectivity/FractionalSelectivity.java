@@ -60,6 +60,7 @@ public class FractionalSelectivity implements SelectivityModel{
 		}
 		counter++;
 		if (counter%reversed_selectivity ==0 ) {	
+		//if (counter ==2 ) {
 			//if(selectivity<1) {
 			//	System.out.println("reversed_selectivity: "+reversed_selectivity);
 			//	System.out.println("counter: "+counter);

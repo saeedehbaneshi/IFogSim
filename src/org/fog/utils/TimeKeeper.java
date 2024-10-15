@@ -61,8 +61,11 @@ public class TimeKeeper {
 		if(!tupleIdToCpuStartTime.containsKey(tuple.getCloudletId()))
 			return;
 		double executionTime = CloudSim.clock() - tupleIdToCpuStartTime.get(tuple.getCloudletId());
-		//saeedeh//
-		//sshh//System.out.println("TuplE ID : "+tuple.getCloudletId()+" execution time is "+executionTime+" with Start time of : "+tupleIdToCpuStartTime.get(tuple.getCloudletId()));
+		//saeedeh added this to consider adding 0.1 for early finished events://
+		/*if (executionTime<0.1)
+			executionTime+=0.1;*/
+		////////////////////////////finish/////////////////////////////////////////
+		
 		if(!tupleTypeToAverageCpuTime.containsKey(tuple.getTupleType())){
 			tupleTypeToAverageCpuTime.put(tuple.getTupleType(), executionTime);
 			tupleTypeToExecutedTupleCount.put(tuple.getTupleType(), 1);
