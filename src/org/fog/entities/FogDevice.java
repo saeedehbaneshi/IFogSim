@@ -21,7 +21,8 @@ import org.fog.policy.AppModuleAllocationPolicy;
 import org.fog.scheduler.StreamOperatorScheduler;
 import org.fog.utils.*;
 import org.json.simple.JSONObject;
- 
+
+import org.cloudbus.cloudsim.core.predicates.PredicateBetweenTimes;
 
 import java.util.*;
 
@@ -737,6 +738,16 @@ public class FogDevice extends PowerDatacenter {
 
                         cloudletCompleted = true;
                         Tuple tuple = (Tuple) cl;
+                        
+                     // Saeedeh added these lines to handle early finished cloudlets and their outdated finish event
+                        double currentTime = CloudSim.clock();
+                        double estimatedFinishTime = tuple.getEstimatedFinishTime();
+                        // Compare actual and estimated finish times
+                        if (currentTime < estimatedFinishTime) {
+                            // Cancel outdated events
+                            cancelOutdatedEvents(currentTime, estimatedFinishTime);
+                        }
+                                                
                        //saeedeh// System.out.println("TUPLE TYPE : "+tuple.getTupleType());
                         TimeKeeper.getInstance().tupleEndedExecution(tuple);
                         Application application = getApplicationMap().get(tuple.getAppId());
@@ -757,10 +768,9 @@ public class FogDevice extends PowerDatacenter {
         }
         if (cloudletCompleted)
             updateAllocatedMips(null);
-        	//updateAllocatedMips(arrivingTuple.getDestModuleName());
     }
 
-///// Saeedeh added this function with input arg:
+///// Saeedeh added this function with input argument to solve the infinity estimated finish time problem:
     protected void checkCloudletCompletion(SimEvent ev) {
         boolean cloudletCompleted = false;
         ////// Saeedeh added ev as input arg and cast it to cl to call updateAllocatedMips with destination of this event
@@ -777,6 +787,16 @@ public class FogDevice extends PowerDatacenter {
 
                         cloudletCompleted = true;
                         Tuple tuple = (Tuple) cl;
+                        
+                        // aeedeh added these lines to handle early finished cloudlets and their outdated finish event
+                        double currentTime = CloudSim.clock();
+                        double estimatedFinishTime = tuple.getEstimatedFinishTime();
+                        // Compare actual and estimated finish times
+                        if (currentTime < estimatedFinishTime) {
+                            // Cancel outdated events
+                            cancelOutdatedEvents(currentTime, estimatedFinishTime);
+                        }
+                        
                        //saeedeh// System.out.println("TUPLE TYPE : "+tuple.getTupleType());
                         TimeKeeper.getInstance().tupleEndedExecution(tuple);
                         Application application = getApplicationMap().get(tuple.getAppId());
@@ -799,6 +819,9 @@ public class FogDevice extends PowerDatacenter {
             //updateAllocatedMips(null);
         	updateAllocatedMips(arrivingTuple.getDestModuleName());
     }
+    
+
+    
 
     protected void updateTimingsOnSending(Tuple resTuple) {
         // TODO ADD CODE FOR UPDATING TIMINGS WHEN A TUPLE IS GENERATED FROM A PREVIOUSLY RECIEVED TUPLE.
@@ -1255,7 +1278,7 @@ public class FogDevice extends PowerDatacenter {
                 instances = Math.max(module.getDownInstanceIdsMaps().get(_moduleName).size(), instances);
             }
             module.setNumInstances(instances);
-           //saeedeh// System.out.println("module num instance :"+module.getNumInstances());
+           //saeedeh// System.out.println("module number instance :"+module.getNumInstances());
         }
         String temp=tuple.getDestModuleName();
         boolean check=false;
@@ -1263,6 +1286,10 @@ public class FogDevice extends PowerDatacenter {
         	check=true;
         }
         TimeKeeper.getInstance().tupleStartedExecution(tuple);
+        //Saeedeh
+        for (Vm vm : getVmList()) {
+			vm.updateVmProcessing(CloudSim.clock(),getHost().getVmScheduler().getAllocatedMipsForVm(vm));
+		}
         updateAllocatedMips(moduleName);
         processCloudletSubmit(ev, false);
         updateAllocatedMips(moduleName);
@@ -1661,6 +1688,367 @@ public class FogDevice extends PowerDatacenter {
     	
     	previous_networking_update_state_time = CloudSim.clock();
     }
+    
+    ///// Saeedeh override this function to track and removing outdated VM DC events without changing the core
+    @Override
+	protected void processCloudletSubmit(SimEvent ev, boolean ack) {
+		//updateCloudletProcessing(ev);
+		//updateCloudletProcessing();
+		try {
+			// gets the Cloudlet object
+			Cloudlet cl = (Cloudlet) ev.getData();
+			// checks whether this Cloudlet has finished or not
+			if (cl.isFinished()) {
+				String name = CloudSim.getEntityName(cl.getUserId());
+				Log.printLine(getName() + ": Warning - Cloudlet #" + cl.getCloudletId() + " owned by " + name
+						+ " is already completed/finished.");
+				Log.printLine("Therefore, it is not being executed again");
+				Log.printLine();
+
+				
+				
+				System.out.println(getName() + ": Warning - Cloudlet #" + cl.getCloudletId() + " owned by " + name
+						+ " is already completed/finished.");
+				System.out.println("Therefore, it is not being executed again");
+				
+				
+				
+				// NOTE: If a Cloudlet has finished, then it won't be processed.
+				// So, if ack is required, this method sends back a result.
+				// If ack is not required, this method don't send back a result.
+				// Hence, this might cause CloudSim to be hanged since waiting
+				// for this Cloudlet back.
+				if (ack) {
+					int[] data = new int[3];
+					data[0] = getId();
+					data[1] = cl.getCloudletId();
+					data[2] = CloudSimTags.FALSE;
+
+					// unique tag = operation tag
+					int tag = CloudSimTags.CLOUDLET_SUBMIT_ACK;
+					sendNow(cl.getUserId(), tag, data);
+				}
+
+				sendNow(cl.getUserId(), CloudSimTags.CLOUDLET_RETURN, cl);
+
+				return;
+			}
+
+			// process this Cloudlet to this CloudResource
+			cl.setResourceParameter(getId(), getCharacteristics().getCostPerSecond(), getCharacteristics()
+					.getCostPerBw());
+
+			int userId = cl.getUserId();
+			int vmId = cl.getVmId();
+						// time to transfer the files
+			double fileTransferTime = predictFileTransferTime(cl.getRequiredFiles());
+			Host host = getVmAllocationPolicy().getHost(vmId, userId);
+			Vm vm = host.getVm(vmId, userId);
+			CloudletScheduler scheduler = vm.getCloudletScheduler();
+			double estimatedFinishTime = scheduler.cloudletSubmit(cl, fileTransferTime);
+			
+			// if this cloudlet is in the exec queue
+			if (estimatedFinishTime > 0.0 && !Double.isInfinite(estimatedFinishTime)) {
+				estimatedFinishTime += fileTransferTime;
+				/*	edited by HARSHIT	*/
+				//if(getName().equals("gateway-3"))
+				//System.out.println(getName()+" : ESTIMATED FINISH TIME ON "+((StreamOperator)vm).getName()+": "+estimatedFinishTime);
+				
+				
+				///Saeedeh commented this line to all events created for a time more than min time (To unified the logic of simulator with what is happening in cloudletscheduler time share when calculate estimated finish time)
+				 //This line was the original adding event event for estimated finish time of Cloudlet
+				//send(getId(), CloudSim.getMinTimeBetweenEvents()
+						//+estimatedFinishTime, CloudSimTags.VM_DATACENTER_EVENT);
+
+				
+				// Saeedeh added this round up short estimated finish timees to the min time between events based on simulators logic
+                if (estimatedFinishTime<CloudSim.getMinTimeBetweenEvents()) {
+                	send(getId(), CloudSim.getMinTimeBetweenEvents(), CloudSimTags.VM_DATACENTER_EVENT);
+                }else {
+                	send(getId(), estimatedFinishTime, CloudSimTags.VM_DATACENTER_EVENT);
+                }
+				
+			}
+
+			////************************************************************************************
+			/////Saeedeh [Bug] added this because in mintime calculation this new arriving cloudlet (that is submitted above with scheduler.cloudletSubmit(cl, fileTransferTime);) is not considered
+			///// Now after submitting new cl to exec list we again call updateCloudletProcessing(ev);
+			updateCloudletProcessing(ev);
+			
+			
+
+			
+			if (ack) {
+				int[] data = new int[3];
+				data[0] = getId();
+				data[1] = cl.getCloudletId();
+				data[2] = CloudSimTags.TRUE;
+
+				// unique tag = operation tag
+				int tag = CloudSimTags.CLOUDLET_SUBMIT_ACK;
+				sendNow(cl.getUserId(), tag, data);
+			}
+		} catch (ClassCastException c) {
+			Log.printLine(getName() + ".processCloudletSubmit(): " + "ClassCastException error.");
+			c.printStackTrace();
+		} catch (Exception e) {
+			Log.printLine(getName() + ".processCloudletSubmit(): " + "Exception error.");
+			e.printStackTrace();
+		}
+
+		checkCloudletCompletion();
+		setCloudletSubmitted(CloudSim.clock());
+	}
+    
+    
+
+    
+    @Override
+    protected void updateCloudletProcessing() {
+
+        double currentTime = CloudSim.clock();
+
+        if (currentTime > getLastProcessTime()) {
+            double minTime = updateCloudetProcessingWithoutSchedulingFutureEventsForce();
+
+            // Handle early completed cloudlets
+            /*for (Host host : getVmAllocationPolicy().getHostList()) {
+                for (Vm vm : host.getVmList()) {
+                    CloudletScheduler scheduler = vm.getCloudletScheduler();
+
+                    // Get the list of finished cloudlets
+                    List<Cloudlet> finishedCloudlets = new ArrayList<>();
+                    Cloudlet cloudlet;
+                    while ((cloudlet = scheduler.getNextFinishedCloudlet()) != null) {
+                        finishedCloudlets.add(cloudlet);
+                    }
+
+                    // Process each finished cloudlet
+                    for (Cloudlet cl : finishedCloudlets) {
+                        double estimatedFinishTime = Double.MAX_VALUE;
+                        if (cl instanceof Tuple) {
+                            estimatedFinishTime = ((Tuple) cl).getEstimatedFinishTime();
+                        }
+
+                        // Compare actual and estimated finish times
+                        if (currentTime < estimatedFinishTime) {
+                            // Cancel outdated events
+                            cancelOutdatedEvents(currentTime, estimatedFinishTime);
+                        }
+
+                        // Send the finished cloudlet back to the user
+                        sendNow(cl.getUserId(), CloudSimTags.CLOUDLET_RETURN, cl);
+                    }
+                }
+            }*/
+            
+            //Saeedeh: minTime should be calculated based on future capacities(previous minTime was based on previous capacity data)
+            //(in checkcloudletcompletion the capacities are updated but the mintime is based on outdated capacities; so we repeat mintime calculation now:)
+            
+            
+            
+            minTime = Double.MAX_VALUE;
+            for (final Vm vm : getHost().getVmList()) {
+                AppModule operator = (AppModule) vm;
+                double nextEventTime=operator.updateVmProcessing(CloudSim.clock(), getVmAllocationPolicy().getHost(operator).getVmScheduler()
+                        .getAllocatedMipsForVm(operator));
+                if(nextEventTime > 0.0 && nextEventTime<minTime) {
+                	minTime=nextEventTime;
+                }
+            }
+
+            // Reschedule the next event based on minTime
+            if (minTime != Double.MAX_VALUE) {
+            	int removedEvents = 0;
+                double delay = minTime - currentTime;
+                if (delay < CloudSim.getMinTimeBetweenEvents()) {
+                    delay = CloudSim.getMinTimeBetweenEvents();
+                }
+            	removedEvents=CloudSim.cancelAllCount(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
+                send(getId(), delay, CloudSimTags.VM_DATACENTER_EVENT);
+            }
+
+            setLastProcessTime(currentTime);
+        }
+    }
+
+    ///Saeedeh added this function to resolve the infinity estimated finish time problem. This problem happens when arriving a tuple cause finish of other tuples and checkCloudLetCompletion function should call with (ev)
+    /// To consider mips allocation for arriving tuple 
+    @Override
+    protected void updateCloudletProcessing(SimEvent ev) {
+    	int removedEvents = 0;
+		if (getCloudletSubmitted() == -1 || getCloudletSubmitted() == CloudSim.clock()) {
+		//if (getCloudletSubmitted() == -1) {
+			removedEvents=CloudSim.cancelAllCount(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
+			///////////////// Saeedeh added this
+			//if (removedEvents>0)
+				//schedule(getId(), CloudSim.getMinTimeBetweenEvents(), CloudSimTags.VM_DATACENTER_EVENT);
+			///////////////// Saeedeh added
+			double minTime = updateCloudetProcessingWithoutSchedulingFutureEventsForce(ev);
+			if (minTime != Double.MAX_VALUE) {
+                double delay = minTime - CloudSim.clock();
+                if (delay < CloudSim.getMinTimeBetweenEvents()) {
+                    delay = CloudSim.getMinTimeBetweenEvents();
+                }
+                send(getId(), delay, CloudSimTags.VM_DATACENTER_EVENT);
+            }else
+            	schedule(getId(), getSchedulingInterval(), CloudSimTags.VM_DATACENTER_EVENT);
+			return;
+		}
+        double currentTime = CloudSim.clock();
+
+        if (currentTime > getLastProcessTime()) {
+            double minTime = updateCloudetProcessingWithoutSchedulingFutureEventsForce(ev);
+            
+            if (!isDisableMigrations()) {
+				List<Map<String, Object>> migrationMap = getVmAllocationPolicy().optimizeAllocation(
+						getVmList());
+
+				if (migrationMap != null) {
+					for (Map<String, Object> migrate : migrationMap) {
+						Vm vm = (Vm) migrate.get("vm");
+						PowerHost targetHost = (PowerHost) migrate.get("host");
+						PowerHost oldHost = (PowerHost) vm.getHost();
+
+						if (oldHost == null) {
+							Log.formatLine(
+									"%.2f: Migration of VM #%d to Host #%d is started",
+									currentTime,
+									vm.getId(),
+									targetHost.getId());
+						} else {
+							Log.formatLine(
+									"%.2f: Migration of VM #%d from Host #%d to Host #%d is started",
+									currentTime,
+									vm.getId(),
+									oldHost.getId(),
+									targetHost.getId());
+						}
+
+						targetHost.addMigratingInVm(vm);
+						incrementMigrationCount();
+
+						/** VM migration delay = RAM / bandwidth **/
+						// we use BW / 2 to model BW available for migration purposes, the other
+						// half of BW is for VM communication
+						// around 16 seconds for 1024 MB using 1 Gbit/s network
+						send(
+								getId(),
+								vm.getRam() / ((double) targetHost.getBw() / (2 * 8000)),
+								CloudSimTags.VM_MIGRATE,
+								migrate);
+					}
+				}
+			}
+
+            // Reschedule the next event based on minTime
+            if (minTime != Double.MAX_VALUE) {
+                double delay = minTime - currentTime;
+                if (delay < CloudSim.getMinTimeBetweenEvents()) {
+                    delay = CloudSim.getMinTimeBetweenEvents();
+                }
+                CloudSim.cancelAll(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
+                send(getId(), delay, CloudSimTags.VM_DATACENTER_EVENT);
+            }
+
+            setLastProcessTime(currentTime);
+        }
+    }
+    
+    
+    
+    
+    
+    protected void updateCloudletProcessing(SimEvent ev, double arrivingEstimatedFinishTime) {
+    	int removedEvents = 0;
+		if (getCloudletSubmitted() == -1 || getCloudletSubmitted() == CloudSim.clock()) {
+		//if (getCloudletSubmitted() == -1) {
+			removedEvents=CloudSim.cancelAllCount(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
+			///////////////// Saeedeh added this
+			//if (removedEvents>0)
+				//schedule(getId(), CloudSim.getMinTimeBetweenEvents(), CloudSimTags.VM_DATACENTER_EVENT);
+			///////////////// Saeedeh added
+			double minTime = updateCloudetProcessingWithoutSchedulingFutureEventsForce(ev);
+			if (minTime != Double.MAX_VALUE) {
+                double delay = minTime - CloudSim.clock();
+                if (delay < CloudSim.getMinTimeBetweenEvents()) {
+                    delay = CloudSim.getMinTimeBetweenEvents();
+                }
+                send(getId(), delay, CloudSimTags.VM_DATACENTER_EVENT);
+            }else
+            	schedule(getId(), getSchedulingInterval(), CloudSimTags.VM_DATACENTER_EVENT);
+			return;
+		}
+        double currentTime = CloudSim.clock();
+
+        if (currentTime > getLastProcessTime()) {
+            double minTime = updateCloudetProcessingWithoutSchedulingFutureEventsForce(ev);
+            
+            if (!isDisableMigrations()) {
+				List<Map<String, Object>> migrationMap = getVmAllocationPolicy().optimizeAllocation(
+						getVmList());
+
+				if (migrationMap != null) {
+					for (Map<String, Object> migrate : migrationMap) {
+						Vm vm = (Vm) migrate.get("vm");
+						PowerHost targetHost = (PowerHost) migrate.get("host");
+						PowerHost oldHost = (PowerHost) vm.getHost();
+
+						if (oldHost == null) {
+							Log.formatLine(
+									"%.2f: Migration of VM #%d to Host #%d is started",
+									currentTime,
+									vm.getId(),
+									targetHost.getId());
+						} else {
+							Log.formatLine(
+									"%.2f: Migration of VM #%d from Host #%d to Host #%d is started",
+									currentTime,
+									vm.getId(),
+									oldHost.getId(),
+									targetHost.getId());
+						}
+
+						targetHost.addMigratingInVm(vm);
+						incrementMigrationCount();
+
+						/** VM migration delay = RAM / bandwidth **/
+						// we use BW / 2 to model BW available for migration purposes, the other
+						// half of BW is for VM communication
+						// around 16 seconds for 1024 MB using 1 Gbit/s network
+						send(
+								getId(),
+								vm.getRam() / ((double) targetHost.getBw() / (2 * 8000)),
+								CloudSimTags.VM_MIGRATE,
+								migrate);
+					}
+				}
+			}
+
+            // Reschedule the next event based on minTime
+            if (minTime != Double.MAX_VALUE && (minTime - currentTime) <= arrivingEstimatedFinishTime) {
+                double delay = minTime - currentTime;
+                if (delay < CloudSim.getMinTimeBetweenEvents()) {
+                    delay = CloudSim.getMinTimeBetweenEvents();
+                }
+                CloudSim.cancelAll(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
+                send(getId(), delay, CloudSimTags.VM_DATACENTER_EVENT);
+            }
+            else {
+            	double ttt=0;
+            }
+
+            setLastProcessTime(currentTime);
+        }
+    }
+    
+    
+    
+    private void cancelOutdatedEvents(double actualFinishTime, double estimatedFinishTime) {
+        // Cancel VM_DATACENTER_EVENTs scheduled between actualFinishTime and estimatedFinishTime
+        CloudSim.cancelAll(getId(), new PredicateBetweenTimes(CloudSimTags.VM_DATACENTER_EVENT, actualFinishTime, estimatedFinishTime));
+    }
+    
     
     
     

@@ -23,6 +23,7 @@ import org.fog.entities.Tuple;
  * @since CloudSim Toolkit 1.0
  */
 public class CloudletSchedulerTimeShared extends CloudletScheduler {
+	
 
 	/** The cloudlet exec list. */
 	private List<? extends ResCloudlet> cloudletExecList;
@@ -109,13 +110,15 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 		for (ResCloudlet rcl : getCloudletExecList()) {
 
 			
-			
-			double estimatedFinishTime = currentTime
-					+ (rcl.getRemainingCloudletLength() / (getCapacity(mipsShare) * rcl.getNumberOfPes()));
+			double remaining=rcl.getRemainingCloudletLength();
+			double capacity=getCapacity(mipsShare) * rcl.getNumberOfPes();
+			double remaining_time=remaining/capacity;
+			double estimatedFinishTime = currentTime + remaining_time;
 			if (estimatedFinishTime - currentTime < CloudSim.getMinTimeBetweenEvents()) {
 				estimatedFinishTime = currentTime + CloudSim.getMinTimeBetweenEvents();
 
 			}
+			((Tuple) rcl.getCloudlet()).setEstimatedFinishTime(estimatedFinishTime);
 
 			if (estimatedFinishTime < nextEvent) {
 				nextEvent = estimatedFinishTime;
@@ -465,6 +468,18 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 	protected <T extends ResCloudlet> List<T> getCloudletExecList() {
 		return (List<T>) cloudletExecList;
 	}
+	
+	// In CloudletSchedulerTimeShared.java
+	public List<? extends ResCloudlet> getCloudletExecListPublic() {
+	    return getCloudletExecList();
+	}
+
+	public double getCapacityPublic(List<Double> mipsShare) {
+	    return getCapacity(mipsShare);
+	}
+
+	// Similarly in CloudletSchedulerSpaceShared.java
+
 
 	/**
 	 * Sets the cloudlet exec list.
