@@ -1,0 +1,85 @@
+app_class,scenario,app,loop_name,delay
+TwoDCNSApps,Router_Only,dcns_0,"[motion_detector, object_detector, object_tracker]",5.5571428571428365
+TwoDCNSApps,Router_Only,dcns_0,"[object_tracker, PTZ_CONTROL]",3.149999999999924
+TwoDCNSApps,Router_Only,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",5.5571428571428365
+TwoDCNSApps,Router_Only,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",3.1099999999999577
+HighResTwoDCNSApps,Router_Only,dcns_0,"[motion_detector, object_detector, object_tracker]",8.814285714285699
+HighResTwoDCNSApps,Router_Only,dcns_0,"[object_tracker, PTZ_CONTROL]",3.149999999999924
+HighResTwoDCNSApps,Router_Only,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",8.814285714285699
+HighResTwoDCNSApps,Router_Only,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",3.1099999999999577
+LowResTwoDCNSApps,Router_Only,dcns_0,"[motion_detector, object_detector, object_tracker]",3.9285714285713067
+LowResTwoDCNSApps,Router_Only,dcns_0,"[object_tracker, PTZ_CONTROL]",3.149999999999924
+LowResTwoDCNSApps,Router_Only,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",3.9285714285713067
+LowResTwoDCNSApps,Router_Only,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",3.1099999999999577
+TwoDCNSApps,Router_Proxy,dcns_0,"[motion_detector, object_detector, object_tracker]",3.928571428571415
+TwoDCNSApps,Router_Proxy,dcns_0,"[object_tracker, PTZ_CONTROL]",3.1099999999999577
+TwoDCNSApps,Router_Proxy,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",6.2085714285713856
+TwoDCNSApps,Router_Proxy,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",5.110999999999937
+HighResTwoDCNSApps,Router_Proxy,dcns_0,"[motion_detector, object_detector, object_tracker]",5.557142857142824
+HighResTwoDCNSApps,Router_Proxy,dcns_0,"[object_tracker, PTZ_CONTROL]",3.1099999999999577
+HighResTwoDCNSApps,Router_Proxy,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",8.117142857142724
+HighResTwoDCNSApps,Router_Proxy,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",5.110999999999937
+LowResTwoDCNSApps,Router_Proxy,dcns_0,"[motion_detector, object_detector, object_tracker]",3.1142857142855784
+LowResTwoDCNSApps,Router_Proxy,dcns_0,"[object_tracker, PTZ_CONTROL]",3.1099999999999577
+LowResTwoDCNSApps,Router_Proxy,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",5.254285714285511
+LowResTwoDCNSApps,Router_Proxy,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",5.110999999999937
+TwoDCNSApps,Router_Cloud,dcns_0,"[motion_detector, object_detector, object_tracker]",3.928571428571415
+TwoDCNSApps,Router_Cloud,dcns_0,"[object_tracker, PTZ_CONTROL]",3.1099999999999577
+TwoDCNSApps,Router_Cloud,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",104.77999999999975
+TwoDCNSApps,Router_Cloud,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",105.11199999999992
+HighResTwoDCNSApps,Router_Cloud,dcns_0,"[motion_detector, object_detector, object_tracker]",5.557142857142824
+HighResTwoDCNSApps,Router_Cloud,dcns_0,"[object_tracker, PTZ_CONTROL]",3.1099999999999577
+HighResTwoDCNSApps,Router_Cloud,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",105.30999999999999
+HighResTwoDCNSApps,Router_Cloud,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",105.11199999999992
+LowResTwoDCNSApps,Router_Cloud,dcns_0,"[motion_detector, object_detector, object_tracker]",3.1142857142855784
+LowResTwoDCNSApps,Router_Cloud,dcns_0,"[object_tracker, PTZ_CONTROL]",3.1099999999999577
+LowResTwoDCNSApps,Router_Cloud,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",104.51500000000047
+LowResTwoDCNSApps,Router_Cloud,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",105.11199999999992
+TwoDCNSApps,Proxy_Only,dcns_0,"[motion_detector, object_detector, object_tracker]",7.637142857142824
+TwoDCNSApps,Proxy_Only,dcns_0,"[object_tracker, PTZ_CONTROL]",5.150999999999904
+TwoDCNSApps,Proxy_Only,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",7.637142857142824
+TwoDCNSApps,Proxy_Only,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",5.110999999999937
+HighResTwoDCNSApps,Proxy_Only,dcns_0,"[motion_detector, object_detector, object_tracker]",10.9742857142856
+HighResTwoDCNSApps,Proxy_Only,dcns_0,"[object_tracker, PTZ_CONTROL]",5.150999999999904
+HighResTwoDCNSApps,Proxy_Only,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",10.9742857142856
+HighResTwoDCNSApps,Proxy_Only,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",5.110999999999937
+LowResTwoDCNSApps,Proxy_Only,dcns_0,"[motion_detector, object_detector, object_tracker]",5.968571428571272
+LowResTwoDCNSApps,Proxy_Only,dcns_0,"[object_tracker, PTZ_CONTROL]",5.150999999999904
+LowResTwoDCNSApps,Proxy_Only,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",5.968571428571272
+LowResTwoDCNSApps,Proxy_Only,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",5.110999999999937
+TwoDCNSApps,Proxy_Cloud,dcns_0,"[motion_detector, object_detector, object_tracker]",6.00857142857138
+TwoDCNSApps,Proxy_Cloud,dcns_0,"[object_tracker, PTZ_CONTROL]",5.110999999999937
+TwoDCNSApps,Proxy_Cloud,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",104.77999999999975
+TwoDCNSApps,Proxy_Cloud,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",105.1509999999999
+HighResTwoDCNSApps,Proxy_Cloud,dcns_0,"[motion_detector, object_detector, object_tracker]",7.717142857142775
+HighResTwoDCNSApps,Proxy_Cloud,dcns_0,"[object_tracker, PTZ_CONTROL]",5.110999999999937
+HighResTwoDCNSApps,Proxy_Cloud,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",105.30999999999999
+HighResTwoDCNSApps,Proxy_Cloud,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",105.1509999999999
+LowResTwoDCNSApps,Proxy_Cloud,dcns_0,"[motion_detector, object_detector, object_tracker]",5.154285714285542
+LowResTwoDCNSApps,Proxy_Cloud,dcns_0,"[object_tracker, PTZ_CONTROL]",5.110999999999937
+LowResTwoDCNSApps,Proxy_Cloud,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",104.51500000000047
+LowResTwoDCNSApps,Proxy_Cloud,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",105.1509999999999
+TwoDCNSApps,Cloud_Only,dcns_0,"[motion_detector, object_detector, object_tracker]",104.56999999999975
+TwoDCNSApps,Cloud_Only,dcns_0,"[object_tracker, PTZ_CONTROL]",105.15199999999989
+TwoDCNSApps,Cloud_Only,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",104.82950268126943
+TwoDCNSApps,Cloud_Only,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",105.11199999999992
+HighResTwoDCNSApps,Cloud_Only,dcns_0,"[motion_detector, object_detector, object_tracker]",104.9094535519125
+HighResTwoDCNSApps,Cloud_Only,dcns_0,"[object_tracker, PTZ_CONTROL]",105.15199999999989
+HighResTwoDCNSApps,Cloud_Only,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",105.45682888539996
+HighResTwoDCNSApps,Cloud_Only,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",105.11199999999992
+LowResTwoDCNSApps,Cloud_Only,dcns_0,"[motion_detector, object_detector, object_tracker]",104.3999999999992
+LowResTwoDCNSApps,Cloud_Only,dcns_0,"[object_tracker, PTZ_CONTROL]",105.15199999999989
+LowResTwoDCNSApps,Cloud_Only,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",104.49999999999984
+LowResTwoDCNSApps,Cloud_Only,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",105.11199999999992
+TwoDCNSApps,ModuleBased_Router_Proxy,dcns_0,"[motion_detector, object_detector, object_tracker]",7.560632440476144
+TwoDCNSApps,ModuleBased_Router_Proxy,dcns_0,"[object_tracker, PTZ_CONTROL]",5.150999999999904
+TwoDCNSApps,ModuleBased_Router_Proxy,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",7.56859077380939
+TwoDCNSApps,ModuleBased_Router_Proxy,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",5.110999999999937
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,dcns_0,"[motion_detector, object_detector, object_tracker]",10.818764880952344
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,dcns_0,"[object_tracker, PTZ_CONTROL]",5.150999999999904
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",10.830681547618918
+HighResTwoDCNSApps,ModuleBased_Router_Proxy,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",5.110999999999937
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,dcns_0,"[motion_detector, object_detector, object_tracker]",5.931561119292908
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,dcns_0,"[object_tracker, PTZ_CONTROL]",5.150999999999904
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,dcns_1,"[motion_detector_1, object_detector_1, object_tracker_1]",5.937519882179425
+LowResTwoDCNSApps,ModuleBased_Router_Proxy,dcns_1,"[object_tracker_1, PTZ_CONTROL_1]",5.110999999999937

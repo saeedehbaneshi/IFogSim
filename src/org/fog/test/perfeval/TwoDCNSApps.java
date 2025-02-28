@@ -322,12 +322,12 @@ public class TwoDCNSApps {
 			p_band_down=proxy_down_bw;
 		}
 		
-		FogDevice cloud = createFogDevice("cloud", 1*44800, 40000, c_band_up, c_band_down, 0, 0.01, 16*103, 16*83.25, "Shared",12300,11070);
+		FogDevice cloud = createFogDevice("cloud", 2*44800, 40000, c_band_up, c_band_down, 0, 0.01, 16*103, 16*83.25, "Shared",12300,11070);
 		cloud.setParentId(-1);
 		cloud.setDeviceType("Shared");// Saeedeh added
 		
 		fogDevices.add(cloud);
-		FogDevice proxy = createFogDevice("proxy-server", 1*2800, 4000, p_band_up, p_band_down, 1, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
+		FogDevice proxy = createFogDevice("proxy-server", 2*2800, 4000, p_band_up, p_band_down, 1, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
 		proxy.setParentId(cloud.getId());
 		proxy.setUplinkLatency(100); // latency of connection between proxy server and cloud is 100 ms
 		proxy.setDeviceType("Shared");// Saeedeh added
@@ -345,7 +345,7 @@ public class TwoDCNSApps {
 			r_band_down=router_down_bw;
 		}
 		
-		FogDevice router = createFogDevice("d-"+id, 1*2800, 4000, r_band_up, r_band_down, 2, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
+		FogDevice router = createFogDevice("d-"+id, 2*2800, 4000, r_band_up, r_band_down, 2, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
 		fogDevices.add(router);
 		router.setUplinkLatency(2); // latency of connection between router and proxy server is 2 ms
 		router.setDeviceType("Shared");// Saeedeh added
@@ -361,7 +361,7 @@ public class TwoDCNSApps {
 	}
 	
 	private static FogDevice addCamera(String id, int parentId){
-		FogDevice camera = createFogDevice("m-"+id, 1*500, 100000, 10000, 100, 3, 0, 87.53, 82.44, "CPE", 4.6, 2.8);
+		FogDevice camera = createFogDevice("m-"+id, 2*500, 100000, 10000, 100, 3, 0, 87.53, 82.44, "CPE", 4.6, 2.8);
 		camera.setParentId(parentId);
 		camera.setDeviceType("CPE");// Saeedeh added
 		mobiles.add(camera);

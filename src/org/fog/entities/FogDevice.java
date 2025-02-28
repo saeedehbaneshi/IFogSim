@@ -1574,10 +1574,33 @@ public class FogDevice extends PowerDatacenter {
 
     				
     				// Update timing map
-					updateNetworkingTuplesTimeMap(tuple, intervalTime);
+					//updateNetworkingTuplesTimeMap(tuple, intervalTime);
+	    			 if (!networkingTuplesTimeMap.containsKey(tuple.getAppId())) {
+		    			 networkingTuplesTimeMap.put(tuple.getAppId(), new HashMap<>());
+		    		 }
+	
+		    		 Map<String, Double> timeInnerMap = networkingTuplesTimeMap.get(tuple.getAppId());
+	
+		    		 if (!timeInnerMap.containsKey(tuple.getTupleType())) {
+		    		     timeInnerMap.put(tuple.getTupleType(), 0.0);
+		    		 }
+	
+		    		 double currentActiveTime = timeInnerMap.get(tuple.getTupleType());
+		    		 timeInnerMap.put(tuple.getTupleType(), currentActiveTime + intervalTime);
 		    		
 		    		 /// update Energy Map
-		             updateTuplesEnergyMap(tuple, intervalActiveEnergy);
+		             //updateTuplesEnergyMap(tuple, intervalActiveEnergy);
+		    		 if (!networkingTuplesEnergyMap.containsKey(tuple.getAppId())) {
+		    			 networkingTuplesEnergyMap.put(tuple.getAppId(), new HashMap<>());
+		    		 }
+	
+		    		 Map<String, Double> energyInnerMap = networkingTuplesEnergyMap.get(tuple.getAppId());
+	
+		    		 if (!energyInnerMap.containsKey(tuple.getTupleType())) {
+		    			 energyInnerMap.put(tuple.getTupleType(), 0.0);
+		    		 }
+		    		 double currentEnergy = energyInnerMap.get(tuple.getTupleType());
+		    		 energyInnerMap.put(tuple.getTupleType(), currentEnergy + intervalActiveEnergy);
 		    		 
 		    		 ///Update Idle energy Map
 		    		 if (!networkingTuplesIdleEnergyMap.containsKey(tuple.getAppId())) {
@@ -1675,21 +1698,343 @@ public class FogDevice extends PowerDatacenter {
     			}
 		    		
 		    		
-		    		// Update timing map
-    				updateNetworkingTuplesTimeMap(tuple, intervalTime);
-		    		 
-		    		 /// update Tuples Energy Map
-		             updateTuplesEnergyMap(tuple, intervalActiveEnergy + intervalIdleEnergy);
-		             
-		             // Update CO2 Emission Map
-		             updateTuplesCO2Map(tuple, intervalActiveEnergy + intervalIdleEnergy);
-    		}
-    	}
-    	
-    	previous_networking_update_state_time = CloudSim.clock();
+						/*
+						 * uplinkTotalActiveEnergy += (uplinkBandwidth *
+						 * intervalTime)*(networkingMaxPower-networkingIdlePower)/aggregateBandwidth;
+						 * downlinkTotalActiveEnergy += (downlinkBandwidth *
+						 * intervalTime)*(networkingMaxPower-networkingIdlePower)/aggregateBandwidth;
+						 * double uplinkNewActiveEnergy = (uplinkBandwidth *
+						 * intervalTime)*(networkingMaxPower-networkingIdlePower)/aggregateBandwidth;
+						 * double downlinkNewActiveEnergy = (downlinkBandwidth *
+						 * intervalTime)*(networkingMaxPower-networkingIdlePower)/aggregateBandwidth;
+		
+						 * uplinkTotalIdleEnergy += (uplinkBandwidth *
+						 * intervalTime)*(networkingIdlePower/active_BW); downlinkTotalIdleEnergy +=
+						 * (downlinkBandwidth * intervalTime)*(networkingIdlePower/active_BW); double
+						 * uplinkNewIdleEnergy = (uplinkBandwidth *
+						 * intervalTime)*(networkingIdlePower/active_BW); double downlinkNewIdleEnergy =
+						 * (downlinkBandwidth * intervalTime)*(networkingIdlePower/active_BW);
+						 */
+			    		
+			    		// Update timing map
+			    		 if (!networkingTuplesTimeMap.containsKey(tuple.getAppId())) {
+			    			 networkingTuplesTimeMap.put(tuple.getAppId(), new HashMap<>());
+			    		 }
+		
+			    		 Map<String, Double> timeInnerMap = networkingTuplesTimeMap.get(tuple.getAppId());
+		
+			    		 if (!timeInnerMap.containsKey(tuple.getTupleType())) {
+			    		     timeInnerMap.put(tuple.getTupleType(), 0.0);
+			    		 }
+		
+			    		 double currentActiveTime = timeInnerMap.get(tuple.getTupleType());
+			    		 timeInnerMap.put(tuple.getTupleType(), currentActiveTime + intervalTime);
+			    		 
+			    		 /// update Energy Map
+			    		 if (!networkingTuplesEnergyMap.containsKey(tuple.getAppId())) {
+			    			 networkingTuplesEnergyMap.put(tuple.getAppId(), new HashMap<>());
+			    		 }
+		
+			    		 Map<String, Double> energyInnerMap = networkingTuplesEnergyMap.get(tuple.getAppId());
+		
+			    		 if (!energyInnerMap.containsKey(tuple.getTupleType())) {
+			    			 energyInnerMap.put(tuple.getTupleType(), 0.0);
+			    		 }
+		
+			    		 // Update the value in the inner map
+			    		 double currentEnergy = energyInnerMap.get(tuple.getTupleType());
+			    		 energyInnerMap.put(tuple.getTupleType(), currentEnergy + intervalActiveEnergy + intervalIdleEnergy);
+			    		 // Update CO2 Emission Map
+			    		 updateTuplesCO2Map(tuple, intervalActiveEnergy + intervalIdleEnergy);
+			    		 
+			   		/* }else if(isNorthLinkBusy && !isSouthLinkBusy) {
+			   			double active_BW = uplinkBandwidth;
+			   			
+			   			uplinkTotalActiveEnergy += (uplinkBandwidth * intervalTime)*(networkingMaxPower-networkingIdlePower)/aggregateBandwidth;	
+			    		double uplinkNewActiveEnergy = (uplinkBandwidth * intervalTime)*(networkingMaxPower-networkingIdlePower)/aggregateBandwidth;	
+		
+			    		uplinkTotalIdleEnergy += (uplinkBandwidth * intervalTime)*(networkingIdlePower/active_BW);	
+			    		double uplinkNewIdleEnergy = (uplinkBandwidth * intervalTime)*(networkingIdlePower/active_BW);	
+		
+			    		
+			    		///// Update timing map
+			    		 if (!networkingTuplesTimeMap.containsKey(tuple.getAppId())) {
+			    			 networkingTuplesTimeMap.put(tuple.getAppId(), new HashMap<>());
+			    		 }
+		
+			    		 Map<String, Double> timeInnerMap = networkingTuplesTimeMap.get(tuple.getAppId());
+		
+			    		 if (!timeInnerMap.containsKey(tuple.getTupleType())) {
+			    		     timeInnerMap.put(tuple.getTupleType(), 0.0);
+			    		 }
+		
+			    		 double currentActiveTime = timeInnerMap.get(tuple.getTupleType());
+			    		 timeInnerMap.put(tuple.getTupleType(), currentActiveTime + intervalTime);
+			    		 
+			    		 ///// Update energy map
+			    		 if (!networkingTuplesEnergyMap.containsKey(tuple.getAppId())) {
+			    			 networkingTuplesEnergyMap.put(tuple.getAppId(), new HashMap<>());
+			    		 }
+		
+			    		 Map<String, Double> energyInnerMap = networkingTuplesEnergyMap.get(tuple.getAppId());
+		
+			    		 if (!energyInnerMap.containsKey(tuple.getTupleType())) {
+			    			 energyInnerMap.put(tuple.getTupleType(), 0.0);
+			    		 }
+		
+			    		 // Update the value in the inner map
+			    		 double currentEnergy = energyInnerMap.get(tuple.getTupleType());
+			    		 energyInnerMap.put(tuple.getTupleType(), currentEnergy + uplinkNewActiveEnergy + uplinkNewIdleEnergy);
+			    		 
+			    			
+			   		}else if(!isNorthLinkBusy && isSouthLinkBusy ) {
+			   			double active_BW = downlinkBandwidth;
+			   			downlinkTotalActiveEnergy += (downlinkBandwidth * intervalTime)*(networkingMaxPower-networkingIdlePower)/aggregateBandwidth;	
+			    		double downlinkNewActiveEnergy = (downlinkBandwidth * intervalTime)*(networkingMaxPower-networkingIdlePower)/aggregateBandwidth;	
+		
+			    		downlinkTotalIdleEnergy += (downlinkBandwidth * intervalTime)*(networkingIdlePower/active_BW);	
+			    		double downlinkNewIdleEnergy = (downlinkBandwidth * intervalTime)*(networkingIdlePower/active_BW);	
+		
+			    		
+			    		///// Update timing map
+			    		 if (!networkingTuplesTimeMap.containsKey(tuple.getAppId())) {
+			    			 networkingTuplesTimeMap.put(tuple.getAppId(), new HashMap<>());
+			    		 }
+		
+			    		 Map<String, Double> timeInnerMap = networkingTuplesTimeMap.get(tuple.getAppId());
+		
+			    		 if (!timeInnerMap.containsKey(tuple.getTupleType())) {
+			    		     timeInnerMap.put(tuple.getTupleType(), 0.0);
+			    		 }
+		
+			    		 double currentActiveTime = timeInnerMap.get(tuple.getTupleType());
+			    		 timeInnerMap.put(tuple.getTupleType(), currentActiveTime + intervalTime);
+			    		 
+			    		 ///// Update energy map
+			    		 if (!networkingTuplesEnergyMap.containsKey(tuple.getAppId())) {
+			    			 networkingTuplesEnergyMap.put(tuple.getAppId(), new HashMap<>());
+			    		 }
+		
+			    		 Map<String, Double> energyInnerMap = networkingTuplesEnergyMap.get(tuple.getAppId());
+		
+			    		 if (!energyInnerMap.containsKey(tuple.getTupleType())) {
+			    			 energyInnerMap.put(tuple.getTupleType(), 0.0);
+			    		 }
+		
+			    		 // Update the value in the inner map
+			    		 double currentEnergy = energyInnerMap.get(tuple.getTupleType());
+			    		 energyInnerMap.put(tuple.getTupleType(), currentEnergy + downlinkNewActiveEnergy + downlinkNewIdleEnergy);	
+			   			
+		    		}*/		    		 
+				}
+				
+		
+			}
+			
+			previous_networking_update_state_time = CloudSim.clock();
+		}		    		
+    
+    
+    
+    
+    
+    
+    /*private void updateTuplesEnergyMap(Tuple tuple, double energy) {
+        if (!networkingTuplesEnergyMap.containsKey(tuple.getAppId())) {
+            networkingTuplesEnergyMap.put(tuple.getAppId(), new HashMap<>());
+        }
+
+        Map<String, Double> energyInnerMap = networkingTuplesEnergyMap.get(tuple.getAppId());
+
+        if (!energyInnerMap.containsKey(tuple.getTupleType())) {
+            energyInnerMap.put(tuple.getTupleType(), 0.0);
+        }
+
+        double currentEnergy = energyInnerMap.get(tuple.getTupleType());
+        energyInnerMap.put(tuple.getTupleType(), currentEnergy + energy);
+    }*/
+    
+    
+    
+    private void updateTuplesCO2Map(Tuple tuple, double energy) {
+        if (!networkingTuplesCO2Map.containsKey(tuple.getAppId())) {
+            networkingTuplesCO2Map.put(tuple.getAppId(), new HashMap<>());
+        }
+
+        Map<String, Double> co2InnerMap = networkingTuplesCO2Map.get(tuple.getAppId());
+
+        if (!co2InnerMap.containsKey(tuple.getTupleType())) {
+            co2InnerMap.put(tuple.getTupleType(), 0.0);
+        }
+
+        double currentCO2 = co2InnerMap.get(tuple.getTupleType());
+        double co2Emissions = calculateCO2Emissions(energy);
+        co2InnerMap.put(tuple.getTupleType(), currentCO2 + co2Emissions);
     }
     
-    ///// Saeedeh override this function to track and removing outdated VM DC events without changing the core
+    public Map<String, Map<String, Double>> getVmsCO2Map() {
+        return VmsCO2Map;
+    }
+    
+    public Map<String, Map<String, Double>> getNetworkingTuplesCO2Map() {
+        return networkingTuplesCO2Map;
+    }
+    
+ //  Method to update the networking tuples time map
+   /* private void updateNetworkingTuplesTimeMap(Tuple tuple, double intervalTime) {
+        if (!networkingTuplesTimeMap.containsKey(tuple.getAppId())) {
+            networkingTuplesTimeMap.put(tuple.getAppId(), new HashMap<>());
+        }
+
+        Map<String, Double> timeInnerMap = networkingTuplesTimeMap.get(tuple.getAppId());
+
+        if (!timeInnerMap.containsKey(tuple.getTupleType())) {
+            timeInnerMap.put(tuple.getTupleType(), 0.0);
+        }
+
+        double currentActiveTime = timeInnerMap.get(tuple.getTupleType());
+        timeInnerMap.put(tuple.getTupleType(), currentActiveTime + intervalTime);
+    }*/
+    
+    
+    // Saeedeh added this for network energy consumption of flow based model
+    public double calculateNetworkingEnergyConsumptionForCPE(double transmissionTime) {
+    	//	calculatedNetworkingEnergy=(Config.CPE_Idle_Power_Fast_Ethernet_Gateway*Config.MAX_SIMULATION_TIME);
+    	double partialTotalTime = CloudSim.clock() - previous_update_networking_time_CPE;
+    	previous_update_networking_time_CPE = CloudSim.clock();
+    	double calculatedNetworkingEnergy = partialTotalTime * Config.CPE_Idle_Power_Fast_Ethernet_Gateway;
+    	calculatedNetworkingEnergy += (Config.CPE_Max_Power_Fast_Ethernet_Gateway-Config.CPE_Idle_Power_Fast_Ethernet_Gateway)*transmissionTime;
+    	return calculatedNetworkingEnergy;
+    }
+    
+    public static double calculateNetworkingEnergyConsumptionForSharedEdgeEquipment(double transmissionTime) {
+    	double calculatedNetworkingEnergy = Config.Shared_Edge_Equipment_Idle_Power*transmissionTime+(Config.Shared_Edge_Equipment_Max_Power-Config.Shared_Edge_Equipment_Idle_Power)*transmissionTime;
+    	return calculatedNetworkingEnergy;
+    }
+    
+    public void updateNetworkingEnergyConsumptionMap(String appId, Tuple tuple, double transmissionTime, double deviceId, String deviceName) {
+    	String tupleType=tuple.getTupleType();
+    	double calculatedNetworkingEnergy=0.0;
+    	if (deviceName.startsWith("m")) {
+    		 calculatedNetworkingEnergy=calculateNetworkingEnergyConsumptionForCPE (transmissionTime);
+    		
+    	}else if(deviceName.startsWith("c")){
+    		 calculatedNetworkingEnergy = Config.Shared_Core_Equipment_Idle_Power*transmissionTime+(Config.Shared_Core_Equipment_Max_Power-Config.Shared_Core_Equipment_Idle_Power)*transmissionTime;
+    	}else {
+    		calculatedNetworkingEnergy= calculateNetworkingEnergyConsumptionForSharedEdgeEquipment(transmissionTime);
+		}
+    	
+    	
+    	if(tuple.getDirection()==1) {
+    		calculatedNetworkingEnergy = calculatedNetworkingEnergy*(uplinkBandwidth/aggregateBandwidth);
+		} else {
+			calculatedNetworkingEnergy = calculatedNetworkingEnergy*(downlinkBandwidth/aggregateBandwidth);
+		}
+    
+    	
+    	
+    	
+    	
+	    if (!networkingEnergyConsumptionMap.containsKey(appId))
+	    	networkingEnergyConsumptionMap.put(appId, new HashMap<String, Double>());
+	    Map<String, Double> innerMap = networkingEnergyConsumptionMap.get(appId);
+
+	    if(!networkingEnergyConsumptionMap.get(appId).containsKey(tupleType))
+		    networkingEnergyConsumptionMap.get(appId).put(tupleType, 0.0);
+
+	    double currentNetworkingEnergy = networkingEnergyConsumptionMap.get(appId).get(tupleType);
+	    innerMap.put(tupleType, currentNetworkingEnergy + calculatedNetworkingEnergy);
+
+	    networkingEnergyConsumptionMap.get(appId).put(tupleType, innerMap.get(tupleType));
+	    
+	    
+	   
+
+	 // Check if the outer map contains the key
+	 if (!networkingTimeMap.containsKey(appId)) {
+	     networkingTimeMap.put(appId, new HashMap<>());
+	 }
+
+	 // Get the inner map
+	 Map<String, Double> timeInnerMap = networkingTimeMap.get(appId);
+
+	 // Check if the inner map contains the key
+	 if (!timeInnerMap.containsKey(tupleType)) {
+	     timeInnerMap.put(tupleType, 0.0);
+	 }
+
+	 // Update the value in the inner map
+	 double currentActiveTime = timeInnerMap.get(tupleType);
+	 timeInnerMap.put(tupleType, currentActiveTime + transmissionTime);
+
+	 // Optional: You can remove the last line since the value is already updated in the inner map
+	 // networkingTimeMap.get(appId).put(tupleType, timeInnerMap.get(tupleType));
+    
+	    
+    }
+
+    
+    public double calculateFlowBasedModelNetworkingEnergy() {
+    	String deviceType= "shared";
+    	double powerIdle=0.0;
+    	double powerActive=0.0;
+    	String deviceName=getName();
+    	if (deviceName.startsWith("m")) {
+    		powerIdle=Config.CPE_Idle_Power_Fast_Ethernet_Gateway;
+    		powerActive= Config.CPE_Max_Power_Fast_Ethernet_Gateway-Config.CPE_Idle_Power_Fast_Ethernet_Gateway;
+    		deviceType="CPE";
+    	}else if(deviceName.startsWith("c")){
+    		powerIdle = Config.Shared_Core_Equipment_Idle_Power;
+    		powerActive = Config.Shared_Core_Equipment_Max_Power-Config.Shared_Core_Equipment_Idle_Power;
+    	}else {
+    		powerIdle = Config.Shared_Edge_Equipment_Idle_Power;
+    		powerActive = Config.Shared_Edge_Equipment_Max_Power-Config.Shared_Edge_Equipment_Idle_Power;
+   		}
+   
+    	double totalActiveEnergy=0.0;
+    	double totalIdleEnergy=0.0;
+    	double totalDeviceNetworkingEnergy=0.0;
+    	
+    	if(deviceType == "shared") {
+	    	double sharedBusyTime = northLinkBusyTime+southLinkBusyTime-totalNetworkInterfaceCardBusyTime;
+	    	double northLinkIdleEnergy=(northLinkBusyTime-sharedBusyTime)*powerIdle+
+	    			sharedBusyTime*powerIdle*(uplinkBandwidth/(uplinkBandwidth+downlinkBandwidth));
+	    	
+	    	double southLinkIdleEnergy=(southLinkBusyTime-sharedBusyTime)*powerIdle+
+	    			sharedBusyTime*powerIdle*(downlinkBandwidth/(uplinkBandwidth+downlinkBandwidth));
+	    	
+	    	double northLinkActiveEnergy = northLinkBusyTime*powerActive*(uplinkBandwidth/(uplinkBandwidth+downlinkBandwidth));
+	    	
+	    	double southLinkActiveEnergy = southLinkBusyTime*powerActive*(downlinkBandwidth/(uplinkBandwidth+downlinkBandwidth));
+	    	
+	    	totalActiveEnergy= northLinkActiveEnergy+southLinkActiveEnergy;
+	    			
+	    	totalIdleEnergy= northLinkIdleEnergy+southLinkIdleEnergy;
+	    	
+	    	totalDeviceNetworkingEnergy= totalActiveEnergy+totalIdleEnergy;
+    	}
+    	
+    	if(deviceType == "CPE") {
+    		totalActiveEnergy = powerActive * (totalNetworkInterfaceCardBusyTime);
+    		totalIdleEnergy = powerIdle * Config.MAX_SIMULATION_TIME;
+    		totalDeviceNetworkingEnergy= totalActiveEnergy+totalIdleEnergy;
+    	}
+    	// Saeedeh commented this 
+    	//System.out.println("\n\n***************************************************\n");
+    	//System.out.println( getName()+ " Total Idle Networking Energy with Flow-base model = "+ totalIdleEnergy);
+    	
+    	//System.out.println(getName()+ " Total Active Networking Energy with Flow-base model = "+ totalActiveEnergy);
+
+    	//System.out.println(getName()+ " Total Device Networking Energy with Flow-base model = "+ totalDeviceNetworkingEnergy);
+    	// Saeedeh commented this 
+
+    	return totalDeviceNetworkingEnergy;
+    }
+    
+    
+    
+    
+///// Saeedeh override this function to track and removing outdated VM DC events without changing the core
     @Override
 	protected void processCloudletSubmit(SimEvent ev, boolean ack) {
 		//updateCloudletProcessing(ev);
@@ -2050,192 +2395,6 @@ public class FogDevice extends PowerDatacenter {
     }
     
     
-    
-    
-    private void updateTuplesEnergyMap(Tuple tuple, double energy) {
-        if (!networkingTuplesEnergyMap.containsKey(tuple.getAppId())) {
-            networkingTuplesEnergyMap.put(tuple.getAppId(), new HashMap<>());
-        }
-
-        Map<String, Double> energyInnerMap = networkingTuplesEnergyMap.get(tuple.getAppId());
-
-        if (!energyInnerMap.containsKey(tuple.getTupleType())) {
-            energyInnerMap.put(tuple.getTupleType(), 0.0);
-        }
-
-        double currentEnergy = energyInnerMap.get(tuple.getTupleType());
-        energyInnerMap.put(tuple.getTupleType(), currentEnergy + energy);
-    }
-    
-    
-    
-    private void updateTuplesCO2Map(Tuple tuple, double energy) {
-        if (!networkingTuplesCO2Map.containsKey(tuple.getAppId())) {
-            networkingTuplesCO2Map.put(tuple.getAppId(), new HashMap<>());
-        }
-
-        Map<String, Double> co2InnerMap = networkingTuplesCO2Map.get(tuple.getAppId());
-
-        if (!co2InnerMap.containsKey(tuple.getTupleType())) {
-            co2InnerMap.put(tuple.getTupleType(), 0.0);
-        }
-
-        double currentCO2 = co2InnerMap.get(tuple.getTupleType());
-        double co2Emissions = calculateCO2Emissions(energy);
-        co2InnerMap.put(tuple.getTupleType(), currentCO2 + co2Emissions);
-    }
-    
- //  Method to update the networking tuples time map
-    private void updateNetworkingTuplesTimeMap(Tuple tuple, double intervalTime) {
-        if (!networkingTuplesTimeMap.containsKey(tuple.getAppId())) {
-            networkingTuplesTimeMap.put(tuple.getAppId(), new HashMap<>());
-        }
-
-        Map<String, Double> timeInnerMap = networkingTuplesTimeMap.get(tuple.getAppId());
-
-        if (!timeInnerMap.containsKey(tuple.getTupleType())) {
-            timeInnerMap.put(tuple.getTupleType(), 0.0);
-        }
-
-        double currentActiveTime = timeInnerMap.get(tuple.getTupleType());
-        timeInnerMap.put(tuple.getTupleType(), currentActiveTime + intervalTime);
-    }
-    
-    
-    // Saeedeh added this for network energy consumption of flow based model
-    public double calculateNetworkingEnergyConsumptionForCPE(double transmissionTime) {
-    	//	calculatedNetworkingEnergy=(Config.CPE_Idle_Power_Fast_Ethernet_Gateway*Config.MAX_SIMULATION_TIME);
-    	double partialTotalTime = CloudSim.clock() - previous_update_networking_time_CPE;
-    	previous_update_networking_time_CPE = CloudSim.clock();
-    	double calculatedNetworkingEnergy = partialTotalTime * Config.CPE_Idle_Power_Fast_Ethernet_Gateway;
-    	calculatedNetworkingEnergy += (Config.CPE_Max_Power_Fast_Ethernet_Gateway-Config.CPE_Idle_Power_Fast_Ethernet_Gateway)*transmissionTime;
-    	return calculatedNetworkingEnergy;
-    }
-    
-    public static double calculateNetworkingEnergyConsumptionForSharedEdgeEquipment(double transmissionTime) {
-    	double calculatedNetworkingEnergy = Config.Shared_Edge_Equipment_Idle_Power*transmissionTime+(Config.Shared_Edge_Equipment_Max_Power-Config.Shared_Edge_Equipment_Idle_Power)*transmissionTime;
-    	return calculatedNetworkingEnergy;
-    }
-    
-    public void updateNetworkingEnergyConsumptionMap(String appId, Tuple tuple, double transmissionTime, double deviceId, String deviceName) {
-    	String tupleType=tuple.getTupleType();
-    	double calculatedNetworkingEnergy=0.0;
-    	if (deviceName.startsWith("m")) {
-    		 calculatedNetworkingEnergy=calculateNetworkingEnergyConsumptionForCPE (transmissionTime);
-    		
-    	}else if(deviceName.startsWith("c")){
-    		 calculatedNetworkingEnergy = Config.Shared_Core_Equipment_Idle_Power*transmissionTime+(Config.Shared_Core_Equipment_Max_Power-Config.Shared_Core_Equipment_Idle_Power)*transmissionTime;
-    	}else {
-    		calculatedNetworkingEnergy= calculateNetworkingEnergyConsumptionForSharedEdgeEquipment(transmissionTime);
-		}
-    	
-    	
-    	if(tuple.getDirection()==1) {
-    		calculatedNetworkingEnergy = calculatedNetworkingEnergy*(uplinkBandwidth/aggregateBandwidth);
-		} else {
-			calculatedNetworkingEnergy = calculatedNetworkingEnergy*(downlinkBandwidth/aggregateBandwidth);
-		}
-    
-    	
-    	
-    	
-    	
-	    if (!networkingEnergyConsumptionMap.containsKey(appId))
-	    	networkingEnergyConsumptionMap.put(appId, new HashMap<String, Double>());
-	    Map<String, Double> innerMap = networkingEnergyConsumptionMap.get(appId);
-
-	    if(!networkingEnergyConsumptionMap.get(appId).containsKey(tupleType))
-		    networkingEnergyConsumptionMap.get(appId).put(tupleType, 0.0);
-
-	    double currentNetworkingEnergy = networkingEnergyConsumptionMap.get(appId).get(tupleType);
-	    innerMap.put(tupleType, currentNetworkingEnergy + calculatedNetworkingEnergy);
-
-	    networkingEnergyConsumptionMap.get(appId).put(tupleType, innerMap.get(tupleType));
-	    
-	    
-	   
-
-	 // Check if the outer map contains the key
-	 if (!networkingTimeMap.containsKey(appId)) {
-	     networkingTimeMap.put(appId, new HashMap<>());
-	 }
-
-	 // Get the inner map
-	 Map<String, Double> timeInnerMap = networkingTimeMap.get(appId);
-
-	 // Check if the inner map contains the key
-	 if (!timeInnerMap.containsKey(tupleType)) {
-	     timeInnerMap.put(tupleType, 0.0);
-	 }
-
-	 // Update the value in the inner map
-	 double currentActiveTime = timeInnerMap.get(tupleType);
-	 timeInnerMap.put(tupleType, currentActiveTime + transmissionTime);
-
-	 // Optional: You can remove the last line since the value is already updated in the inner map
-	 // networkingTimeMap.get(appId).put(tupleType, timeInnerMap.get(tupleType));
-    
-	    
-    }
-
-    
-    public double calculateFlowBasedModelNetworkingEnergy() {
-    	String deviceType= "shared";
-    	double powerIdle=0.0;
-    	double powerActive=0.0;
-    	String deviceName=getName();
-    	if (deviceName.startsWith("m")) {
-    		powerIdle=Config.CPE_Idle_Power_Fast_Ethernet_Gateway;
-    		powerActive= Config.CPE_Max_Power_Fast_Ethernet_Gateway-Config.CPE_Idle_Power_Fast_Ethernet_Gateway;
-    		deviceType="CPE";
-    	}else if(deviceName.startsWith("c")){
-    		powerIdle = Config.Shared_Core_Equipment_Idle_Power;
-    		powerActive = Config.Shared_Core_Equipment_Max_Power-Config.Shared_Core_Equipment_Idle_Power;
-    	}else {
-    		powerIdle = Config.Shared_Edge_Equipment_Idle_Power;
-    		powerActive = Config.Shared_Edge_Equipment_Max_Power-Config.Shared_Edge_Equipment_Idle_Power;
-   		}
-   
-    	double totalActiveEnergy=0.0;
-    	double totalIdleEnergy=0.0;
-    	double totalDeviceNetworkingEnergy=0.0;
-    	
-    	if(deviceType == "shared") {
-	    	double sharedBusyTime = northLinkBusyTime+southLinkBusyTime-totalNetworkInterfaceCardBusyTime;
-	    	double northLinkIdleEnergy=(northLinkBusyTime-sharedBusyTime)*powerIdle+
-	    			sharedBusyTime*powerIdle*(uplinkBandwidth/(uplinkBandwidth+downlinkBandwidth));
-	    	
-	    	double southLinkIdleEnergy=(southLinkBusyTime-sharedBusyTime)*powerIdle+
-	    			sharedBusyTime*powerIdle*(downlinkBandwidth/(uplinkBandwidth+downlinkBandwidth));
-	    	
-	    	double northLinkActiveEnergy = northLinkBusyTime*powerActive*(uplinkBandwidth/(uplinkBandwidth+downlinkBandwidth));
-	    	
-	    	double southLinkActiveEnergy = southLinkBusyTime*powerActive*(downlinkBandwidth/(uplinkBandwidth+downlinkBandwidth));
-	    	
-	    	totalActiveEnergy= northLinkActiveEnergy+southLinkActiveEnergy;
-	    			
-	    	totalIdleEnergy= northLinkIdleEnergy+southLinkIdleEnergy;
-	    	
-	    	totalDeviceNetworkingEnergy= totalActiveEnergy+totalIdleEnergy;
-    	}
-    	
-    	if(deviceType == "CPE") {
-    		totalActiveEnergy = powerActive * (totalNetworkInterfaceCardBusyTime);
-    		totalIdleEnergy = powerIdle * Config.MAX_SIMULATION_TIME;
-    		totalDeviceNetworkingEnergy= totalActiveEnergy+totalIdleEnergy;
-    	}
-    	//* Saeedeh commented this 
-    	//System.out.println("\n\n***************************************************\n");
-    	//System.out.println( getName()+ " Total Idle Networking Energy with Flow-base model = "+ totalIdleEnergy);
-    	
-    	//System.out.println(getName()+ " Total Active Networking Energy with Flow-base model = "+ totalActiveEnergy);
-
-    	//System.out.println(getName()+ " Total Device Networking Energy with Flow-base model = "+ totalDeviceNetworkingEnergy);
-    	// Saeedeh commented this 
-
-    	return totalDeviceNetworkingEnergy;
-    }
-    
     protected void sendToSelf(Tuple tuple) {
         send(getId(), CloudSim.getMinTimeBetweenEvents(), FogEvents.TUPLE_ARRIVAL, tuple);
     }
@@ -2590,13 +2749,7 @@ public class FogDevice extends PowerDatacenter {
         return VmsEnergyMap;
     }
     
-    public Map<String, Map<String, Double>> getVmsCO2Map() {
-        return VmsCO2Map;
-    }
     
-    public Map<String, Map<String, Double>> getNetworkingTuplesCO2Map() {
-        return networkingTuplesCO2Map;
-    }
     
     public Map<Vm, Double> getLastVmsMipsMap() {
         return lastVmsMipsMap;

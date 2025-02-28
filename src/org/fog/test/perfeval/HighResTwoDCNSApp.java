@@ -271,7 +271,7 @@ public class HighResTwoDCNSApp {
     private static void createEdgeDevices0(int userId, String appId) {
 		for(FogDevice camera : mobiles){
 			String id = camera.getName();
-			Sensor sensor = new Sensor("s-"+id, "CAMERA", userId, appId, new DeterministicDistribution(2*5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
+			Sensor sensor = new Sensor("s-"+id, "CAMERA", userId, appId, new DeterministicDistribution(4*5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
 			sensors.add(sensor);
 			Actuator ptz = new Actuator("ptz-"+id, userId, appId, "PTZ_CONTROL");
 			actuators.add(ptz);
@@ -285,7 +285,7 @@ public class HighResTwoDCNSApp {
 	private static void createEdgeDevices1(int userId, String appId) {
 		for(FogDevice camera : mobiles){
 			String id = camera.getName();
-			Sensor sensor = new Sensor("s-"+id, "CAMERA_1", userId, appId, new DeterministicDistribution(2*5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
+			Sensor sensor = new Sensor("s-"+id, "CAMERA_1", userId, appId, new DeterministicDistribution(4*5)); // inter-transmission time of camera (sensor) follows a deterministic distribution
 			sensors.add(sensor);
 			Actuator ptz = new Actuator("ptz-"+id, userId, appId, "PTZ_CONTROL_1");
 			actuators.add(ptz);
