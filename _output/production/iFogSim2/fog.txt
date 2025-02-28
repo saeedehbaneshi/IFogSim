@@ -1,0 +1,81 @@
+@Override
+protected void updateCloudletProcessing(SimEvent ev) {
+int removedEvents = 0;
+	if (getCloudletSubmitted() == -1 || getCloudletSubmitted() == CloudSim.clock()) {
+	//if (getCloudletSubmitted() == -1) {
+		removedEvents=CloudSim.cancelAllCount(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
+		///////////////// Saeedeh added this
+		//if (removedEvents>0)
+			//schedule(getId(), CloudSim.getMinTimeBetweenEvents(), CloudSimTags.VM_DATACENTER_EVENT);
+		///////////////// Saeedeh added
+		double minTime = updateCloudetProcessingWithoutSchedulingFutureEventsForce(ev);
+		if (minTime != Double.MAX_VALUE) {
+		double delay = minTime - CloudSim.clock();
+		if (delay < CloudSim.getMinTimeBetweenEvents()) {
+			delay = CloudSim.getMinTimeBetweenEvents();
+		}
+		send(getId(), delay, CloudSimTags.VM_DATACENTER_EVENT);
+	}else
+		schedule(getId(), getSchedulingInterval(), CloudSimTags.VM_DATACENTER_EVENT);
+		return;
+	}
+double currentTime = CloudSim.clock();
+
+if (currentTime > getLastProcessTime()) {
+	double minTime = updateCloudetProcessingWithoutSchedulingFutureEventsForce(ev);
+	
+	if (!isDisableMigrations()) {
+			List<Map<String, Object>> migrationMap = getVmAllocationPolicy().optimizeAllocation(
+					getVmList());
+
+			if (migrationMap != null) {
+				for (Map<String, Object> migrate : migrationMap) {
+					Vm vm = (Vm) migrate.get("vm");
+					PowerHost targetHost = (PowerHost) migrate.get("host");
+					PowerHost oldHost = (PowerHost) vm.getHost();
+
+					if (oldHost == null) {
+						Log.formatLine(
+								"%.2f: Migration of VM #%d to Host #%d is started",
+								currentTime,
+								vm.getId(),
+								targetHost.getId());
+					} else {
+						Log.formatLine(
+								"%.2f: Migration of VM #%d from Host #%d to Host #%d is started",
+								currentTime,
+								vm.getId(),
+								oldHost.getId(),
+								targetHost.getId());
+					}
+
+					targetHost.addMigratingInVm(vm);
+					incrementMigrationCount();
+
+					/** VM migration delay = RAM / bandwidth **/
+					// we use BW / 2 to model BW available for migration purposes, the other
+					// half of BW is for VM communication
+					// around 16 seconds for 1024 MB using 1 Gbit/s network
+					send(
+							getId(),
+							vm.getRam() / ((double) targetHost.getBw() / (2 * 8000)),
+							CloudSimTags.VM_MIGRATE,
+							migrate);
+				}
+			}
+		}
+
+	// Reschedule the next event based on minTime
+	if (minTime != Double.MAX_VALUE) {
+		double delay = minTime - currentTime;
+		if (delay < CloudSim.getMinTimeBetweenEvents()) {
+			delay = CloudSim.getMinTimeBetweenEvents();
+		}
+		CloudSim.cancelAll(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
+		send(getId(), delay, CloudSimTags.VM_DATACENTER_EVENT);
+	}
+
+	setLastProcessTime(currentTime);
+}
+}
+

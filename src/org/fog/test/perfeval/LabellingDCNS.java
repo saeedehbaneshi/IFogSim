@@ -63,9 +63,20 @@ public class LabellingDCNS {
     private static boolean Router_Cloud = false;
     private static boolean Proxy_Only = false;
     private static boolean Proxy_Cloud = false;
-    private static boolean CLOUD = false;
-    private static boolean EDGE = false;
-    private static boolean Cloud_Based = true;
+    private static boolean CLOUD_Only = false;
+    private static boolean EDGE_Based = false;
+    private static boolean Cloud_Based = false;
+    private static boolean Router_Based = false;
+    private static boolean Proxy_Based = false;
+    private static boolean Router_Router_Proxy = false;
+    private static boolean Router_Router_Cloud = false;
+    private static boolean Proxy_Proxy_Cloud = false;
+    private static boolean Router_Proxy_Proxy = false;
+    private static boolean Router_Cloud_Cloud = false;
+    private static boolean Proxy_Cloud_Cloud = false;
+    private static boolean Edge_Edge_Router = false;
+    private static boolean Edge_Edge_Proxy = false;
+    private static boolean Edge_Edge_Cloud = false;
 
 	public static void main(String[] args) {
 
@@ -74,7 +85,7 @@ public class LabellingDCNS {
         if (args.length >= 1) {
             // Parse the first argument (string)
             stringValue = args[0];
-            CLOUD=Router_Only=Router_Proxy=Router_Cloud=Proxy_Only=EDGE=false;
+            CLOUD_Only=Router_Only=Router_Proxy=Router_Cloud=Proxy_Only=EDGE_Based=false;
         }
         if(stringValue.equals("Router_Only")) {
         	Router_Only=true;
@@ -92,14 +103,49 @@ public class LabellingDCNS {
         	Proxy_Cloud=true;
         }
         if(stringValue.equals("Cloud_Only")) {
-        	CLOUD=true;
+        	CLOUD_Only=true;
         }
         if(stringValue.equals("Edge_Based")) {
-        	EDGE=true;
+        	EDGE_Based=true;
         }
         if(stringValue.equals("Cloud_Based")) {
         	Cloud_Based=true;
         }
+        if(stringValue.equals("Router_Based")) {
+        	Router_Based=true;
+        }
+        if(stringValue.equals("Proxy_Based")) {
+        	Proxy_Based=true;
+        }
+        if(stringValue.equals("Router_Router_Proxy")) {
+        	Router_Router_Proxy=true;
+        }
+        if(stringValue.equals("Router_Router_Cloud")) {
+        	Router_Router_Cloud=true;
+        }
+        if(stringValue.equals("Proxy_Proxy_Cloud")) {
+        	Proxy_Proxy_Cloud=true;
+        }
+        if(stringValue.equals("Router_Proxy_Proxy")) {
+        	Router_Proxy_Proxy=true;
+        }
+        if(stringValue.equals("Router_Cloud_Cloud")) {
+        	Router_Cloud_Cloud=true;
+        }
+        if(stringValue.equals("Proxy_Cloud_Cloud")) {
+        	Proxy_Cloud_Cloud=true;
+        }
+        if(stringValue.equals("Edge_Edge_Router")) {
+        	Edge_Edge_Router=true;
+        }
+        if(stringValue.equals("Edge_Edge_Proxy")) {
+        	Edge_Edge_Proxy=true;
+        }
+        if(stringValue.equals("Edge_Edge_Cloud")) {
+        	Edge_Edge_Cloud=true;
+        }
+        
+        
         
         
         if(Router_Only)
@@ -112,12 +158,37 @@ public class LabellingDCNS {
         	Log.printLine("Scenario Proxy_Only");
         if(Proxy_Cloud)
         	Log.printLine("Scenario Proxy_Cloud");
-        if(CLOUD)
+        if(CLOUD_Only)
         	Log.printLine("Scenario Cloud_Only");
-        if(EDGE)
+        if(EDGE_Based)
         	Log.printLine("Scenario Edge_Based");
         if(Cloud_Based)
         	Log.printLine("Scenario Cloud_Based");
+        if(Router_Based)
+        	Log.printLine("Scenario Router_Based");
+        if(Proxy_Based)
+        	Log.printLine("Scenario Proxy_Based");
+        if(Router_Router_Proxy)
+        	Log.printLine("Scenario Router_Router_Proxy");
+        if(Router_Router_Cloud)
+        	Log.printLine("Scenario Router_Router_Cloud");
+        if(Proxy_Proxy_Cloud)
+        	Log.printLine("Scenario Proxy_Proxy_Cloud");
+        if(Router_Proxy_Proxy)
+        	Log.printLine("Scenario Router_Proxy_Proxy");
+        if(Router_Cloud_Cloud)
+        	Log.printLine("Scenario Router_Cloud_Cloud");
+        if(Proxy_Cloud_Cloud)
+        	Log.printLine("Scenario Proxy_Cloud_Cloud");
+        if(Edge_Edge_Router)
+        	Log.printLine("Scenario Edge_Edge_Router");
+        if(Edge_Edge_Proxy)
+        	Log.printLine("Scenario Edge_Edge_Proxy");
+        if(Edge_Edge_Cloud)
+        	Log.printLine("Scenario Edge_Edge_Cloud");
+        
+        
+        
         
 		try {
 			Log.disable();
@@ -144,19 +215,24 @@ public class LabellingDCNS {
 			//*Saeedeh*//addModuleToDevice function add device name and module name to a map with name: moduleMapping <deviceName, list<moduleName>>
 			ModuleMapping moduleMapping = ModuleMapping.createModuleMapping(); // initializing a module mapping
 			
-			if (Cloud_Based==false){
+			/*if (Cloud_Based==false){
 				for(FogDevice device : fogDevices){
 					if(device.getName().startsWith("m")){ // names of all Smart Cameras start with 'm' 
 						moduleMapping.addModuleToDevice("motion_detector", device.getName());  // fixing 1 instance of the Motion Detector module to each Smart Camera
 					}
 				}
-			}
+			}*/
 			
 			moduleMapping.addModuleToDevice("user_interface", "cloud"); // fixing instances of User Interface module in the Cloud
 			
 						
 			
-			if(CLOUD){
+			if(CLOUD_Only){
+				for(FogDevice device : fogDevices){
+					if(device.getName().startsWith("m")){ // names of all Smart Cameras start with 'm' 
+						moduleMapping.addModuleToDevice("motion_detector", device.getName());  // fixing 1 instance of the Motion Detector module to each Smart Camera
+					}
+				}
 				// if the mode of deployment is cloud-only
 				moduleMapping.addModuleToDevice("object_detector", "cloud"); // placing all instances of Object Detector module in the Cloud
 				moduleMapping.addModuleToDevice("object_tracker", "cloud"); // placing all instances of Object Tracker module in the Cloud
@@ -164,15 +240,17 @@ public class LabellingDCNS {
 			
 			if(Cloud_Based){
 				// if the mode of deployment is cloud-based
+				moduleMapping.addModuleToDevice("motion_detector", "cloud");// placing all instances of Motion detector on cloud
 				moduleMapping.addModuleToDevice("object_detector", "cloud"); // placing all instances of Object Detector module in the Cloud
 				moduleMapping.addModuleToDevice("object_tracker", "cloud"); // placing all instances of Object Tracker module in the Cloud
-				moduleMapping.addModuleToDevice("motion_detector", "cloud");// placing all instances of Motion detector on cloud
+				
 				USER_BASED= true;
 			}
 
-			if(EDGE){
+			if(EDGE_Based){
 				for(FogDevice device : fogDevices){
 					if(device.getName().startsWith("m")){ // names of all Smart Cameras start with 'm' 
+						moduleMapping.addModuleToDevice("motion_detector", device.getName());
 						moduleMapping.addModuleToDevice("object_detector", device.getName());  // fixing 1 instance of the Motion Detector module to each Smart Camera
 						moduleMapping.addModuleToDevice("object_tracker", device.getName());
 					}
@@ -181,13 +259,36 @@ public class LabellingDCNS {
 			}
 			
 			if (Router_Only) {
+				for(FogDevice device : fogDevices){
+					if(device.getName().startsWith("m")){ // names of all Smart Cameras start with 'm' 
+						moduleMapping.addModuleToDevice("motion_detector", device.getName());  // fixing 1 instance of the Motion Detector module to each Smart Camera
+					}
+				}
+            	moduleMapping.addModuleToDevice("object_detector", "d-0");
+                moduleMapping.addModuleToDevice("object_tracker", "d-0");
+                USER_BASED= true;
+			}
+			
+			if (Router_Based) {
+				moduleMapping.addModuleToDevice("motion_detector", "d-0");
             	moduleMapping.addModuleToDevice("object_detector", "d-0");
                 moduleMapping.addModuleToDevice("object_tracker", "d-0");
                 USER_BASED= true;
 			}
             
+			if (Proxy_Based) {
+				moduleMapping.addModuleToDevice("motion_detector", "proxy-server");
+            	moduleMapping.addModuleToDevice("object_detector", "proxy-server");
+                moduleMapping.addModuleToDevice("object_tracker", "proxy-server");
+                USER_BASED= true;
+			}
             
             if (Router_Proxy) {
+            	for(FogDevice device : fogDevices){
+					if(device.getName().startsWith("m")){ // names of all Smart Cameras start with 'm' 
+						moduleMapping.addModuleToDevice("motion_detector", device.getName());  // fixing 1 instance of the Motion Detector module to each Smart Camera
+					}
+				}
             	moduleMapping.addModuleToDevice("object_detector", "d-0");
                 moduleMapping.addModuleToDevice("object_tracker", "proxy-server");
                 USER_BASED= true;
@@ -195,6 +296,11 @@ public class LabellingDCNS {
             
             
             if (Router_Cloud) {
+            	for(FogDevice device : fogDevices){
+					if(device.getName().startsWith("m")){ // names of all Smart Cameras start with 'm' 
+						moduleMapping.addModuleToDevice("motion_detector", device.getName());  // fixing 1 instance of the Motion Detector module to each Smart Camera
+					}
+				}
             	moduleMapping.addModuleToDevice("object_detector", "d-0");
                 moduleMapping.addModuleToDevice("object_tracker", "cloud");
                 USER_BASED= true;
@@ -202,6 +308,11 @@ public class LabellingDCNS {
             
             
             if (Proxy_Only) {
+            	for(FogDevice device : fogDevices){
+					if(device.getName().startsWith("m")){ // names of all Smart Cameras start with 'm' 
+						moduleMapping.addModuleToDevice("motion_detector", device.getName());  // fixing 1 instance of the Motion Detector module to each Smart Camera
+					}
+				}
             	moduleMapping.addModuleToDevice("object_detector", "proxy-server");
                 moduleMapping.addModuleToDevice("object_tracker", "proxy-server");
                 USER_BASED= true;
@@ -209,10 +320,93 @@ public class LabellingDCNS {
             }
             
             if (Proxy_Cloud) {
+            	for(FogDevice device : fogDevices){
+					if(device.getName().startsWith("m")){ // names of all Smart Cameras start with 'm' 
+						moduleMapping.addModuleToDevice("motion_detector", device.getName());  // fixing 1 instance of the Motion Detector module to each Smart Camera
+					}
+				}
             	moduleMapping.addModuleToDevice("object_detector", "proxy-server");
                 moduleMapping.addModuleToDevice("object_tracker", "cloud");
                 USER_BASED= true;
             }
+            
+            if (Router_Router_Proxy) {
+				moduleMapping.addModuleToDevice("motion_detector", "d-0");
+            	moduleMapping.addModuleToDevice("object_detector", "d-0");
+                moduleMapping.addModuleToDevice("object_tracker", "proxy-server");
+                USER_BASED= true;
+			}
+            
+            if (Router_Router_Cloud) {
+				moduleMapping.addModuleToDevice("motion_detector", "d-0");
+            	moduleMapping.addModuleToDevice("object_detector", "d-0");
+                moduleMapping.addModuleToDevice("object_tracker", "cloud");
+                USER_BASED= true;
+			}
+            
+            if (Proxy_Proxy_Cloud) {
+				moduleMapping.addModuleToDevice("motion_detector", "proxy-server");
+            	moduleMapping.addModuleToDevice("object_detector", "proxy-server");
+                moduleMapping.addModuleToDevice("object_tracker", "cloud");
+                USER_BASED= true;
+			}
+            
+            if (Router_Proxy_Proxy) {
+				moduleMapping.addModuleToDevice("motion_detector", "d-0");
+            	moduleMapping.addModuleToDevice("object_detector", "proxy-server");
+                moduleMapping.addModuleToDevice("object_tracker", "proxy-server");
+                USER_BASED= true;
+			}
+            
+            if (Router_Cloud_Cloud) {
+				moduleMapping.addModuleToDevice("motion_detector", "d-0");
+            	moduleMapping.addModuleToDevice("object_detector", "cloud");
+                moduleMapping.addModuleToDevice("object_tracker", "cloud");
+                USER_BASED= true;
+			}
+            
+            if (Proxy_Cloud_Cloud) {
+				moduleMapping.addModuleToDevice("motion_detector", "proxy-server");
+            	moduleMapping.addModuleToDevice("object_detector", "cloud");
+                moduleMapping.addModuleToDevice("object_tracker", "cloud");
+                USER_BASED= true;
+			}
+            
+            if (Edge_Edge_Router) {
+            	for(FogDevice device : fogDevices){
+					if(device.getName().startsWith("m")){ // names of all Smart Cameras start with 'm' 
+						moduleMapping.addModuleToDevice("motion_detector", device.getName());  // fixing 1 instance of the Motion Detector module to each Smart Camera
+						moduleMapping.addModuleToDevice("object_detector", device.getName());
+					}
+				}
+				
+                moduleMapping.addModuleToDevice("object_tracker", "d-0");
+                USER_BASED= true;
+			}
+            
+            if (Edge_Edge_Proxy) {
+            	for(FogDevice device : fogDevices){
+					if(device.getName().startsWith("m")){ // names of all Smart Cameras start with 'm' 
+						moduleMapping.addModuleToDevice("motion_detector", device.getName());  // fixing 1 instance of the Motion Detector module to each Smart Camera
+						moduleMapping.addModuleToDevice("object_detector", device.getName());
+					}
+				}
+                moduleMapping.addModuleToDevice("object_tracker", "proxy-server");
+                USER_BASED= true;
+			}
+            
+            if (Edge_Edge_Cloud) {
+            	for(FogDevice device : fogDevices){
+					if(device.getName().startsWith("m")){ // names of all Smart Cameras start with 'm' 
+						moduleMapping.addModuleToDevice("motion_detector", device.getName());  // fixing 1 instance of the Motion Detector module to each Smart Camera
+						moduleMapping.addModuleToDevice("object_detector", device.getName());
+					}
+				}
+                moduleMapping.addModuleToDevice("object_tracker", "cloud");
+                USER_BASED= true;
+			}
+            
+            
 			
 			
 			controller = new Controller("master-controller", fogDevices, sensors, 
@@ -223,7 +417,7 @@ public class LabellingDCNS {
 			}
 			System.out.println("\n\n\n\n*****************************\n\n\n");
 			controller.submitApplication(application, 
-					(CLOUD || USER_BASED)?(new ModulePlacementMapping(fogDevices, application, moduleMapping))
+					(CLOUD_Only || USER_BASED)?(new ModulePlacementMapping(fogDevices, application, moduleMapping))
 							:(new ModulePlacementEdgewards(fogDevices, sensors, actuators, application, moduleMapping)));
 							//:(new ModulePlacementEdgewardsOrginal(fogDevices, sensors, actuators, application, moduleMapping)));
 			
@@ -282,12 +476,16 @@ public class LabellingDCNS {
 			p_band_down=proxy_down_bw;
 		}
 		
-		FogDevice cloud = createFogDevice("cloud", 44800, 40000, c_band_up, c_band_down, 0, 0.01, 16*103, 16*83.25, "Shared",12300,11070);
+		//FogDevice cloud = createFogDevice("cloud", 44800, 40000, c_band_up, c_band_down, 0, 0.01, 16*103, 16*83.25, "Shared",12300,11070);
+		FogDevice cloud = createFogDevice("cloud", 11200, 40000, c_band_up, c_band_down, 0, 0.01, 0.25*16*103, 0.25*16*83.25, "Shared",12300,11070);
+
 		cloud.setParentId(-1);
 		cloud.setDeviceType("Shared");// Saeedeh added
 		
 		fogDevices.add(cloud);
-		FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, p_band_up, p_band_down, 1, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
+		//FogDevice proxy = createFogDevice("proxy-server", 2800, 4000, p_band_up, p_band_down, 1, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
+		FogDevice proxy = createFogDevice("proxy-server", 700, 4000, p_band_up, p_band_down, 1, 0.0, 0.25*107.339, 0.25*83.4333, "Shared", 4550, 4095);
+
 		proxy.setParentId(cloud.getId());
 		proxy.setUplinkLatency(100); // latency of connection between proxy server and cloud is 100 ms
 		proxy.setDeviceType("Shared");// Saeedeh added
@@ -305,7 +503,9 @@ public class LabellingDCNS {
 			r_band_down=router_down_bw;
 		}
 		
-		FogDevice router = createFogDevice("d-"+id, 2800, 4000, r_band_up, r_band_down, 2, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
+		//FogDevice router = createFogDevice("d-"+id, 2800, 4000, r_band_up, r_band_down, 2, 0.0, 107.339, 83.4333, "Shared", 4550, 4095);
+		FogDevice router = createFogDevice("d-"+id, 700, 4000, r_band_up, r_band_down, 2, 0.0, 0.25*107.339, 0.25*83.4333, "Shared", 4550, 4095);
+		
 		fogDevices.add(router);
 		router.setUplinkLatency(2); // latency of connection between router and proxy server is 2 ms
 		router.setDeviceType("Shared");// Saeedeh added
@@ -321,7 +521,9 @@ public class LabellingDCNS {
 	}
 	
 	private static FogDevice addCamera(String id, int userId, String appId1, int parentId){
-		FogDevice camera = createFogDevice("m-"+id, 500, 100000, 10000, 100, 3, 0, 87.53, 82.44, "CPE", 4.6, 2.8);
+		//FogDevice camera = createFogDevice("m-"+id, 500, 100000, 10000, 100, 3, 0, 87.53, 82.44, "CPE", 4.6, 2.8);
+		FogDevice camera = createFogDevice("m-"+id, 125, 100000, 10000, 100, 3, 0, 0.25*87.53, 0.25*82.44, "CPE", 4.6, 2.8);
+		
 		camera.setParentId(parentId);
 		camera.setDeviceType("CPE");// Saeedeh added
 
@@ -436,12 +638,12 @@ public class LabellingDCNS {
 		/*
 		 * Connecting the application modules (vertices) in the application model (directed graph) with edges
 		 */
-		application.addAppEdge("CAMERA", "motion_detector", 1*1000, 2*20000, "CAMERA", Tuple.UP, AppEdge.SENSOR); // adding edge from CAMERA (sensor) to Motion Detector module carrying tuples of type CAMERA
-		application.addAppEdge("motion_detector", "object_detector", 1*2000, 2*2000, "MOTION_VIDEO_STREAM", Tuple.UP, AppEdge.MODULE); // adding edge from Motion Detector to Object Detector module carrying tuples of type MOTION_VIDEO_STREAM
-		application.addAppEdge("object_detector", "user_interface", 1*500, 2*2000, "DETECTED_OBJECT", Tuple.UP, AppEdge.MODULE); // adding edge from Object Detector to User Interface module carrying tuples of type DETECTED_OBJECT
-		application.addAppEdge("object_detector", "object_tracker", 1*1000, 2*100, "OBJECT_LOCATION", Tuple.UP, AppEdge.MODULE); // adding edge from Object Detector to Object Tracker module carrying tuples of type OBJECT_LOCATION
+		application.addAppEdge("CAMERA", "motion_detector", 1*1000, 1*20000, "CAMERA", Tuple.UP, AppEdge.SENSOR); // adding edge from CAMERA (sensor) to Motion Detector module carrying tuples of type CAMERA
+		application.addAppEdge("motion_detector", "object_detector", 1*2000, 1*2000, "MOTION_VIDEO_STREAM", Tuple.UP, AppEdge.MODULE); // adding edge from Motion Detector to Object Detector module carrying tuples of type MOTION_VIDEO_STREAM
+		application.addAppEdge("object_detector", "user_interface", 1*500, 1*2000, "DETECTED_OBJECT", Tuple.UP, AppEdge.MODULE); // adding edge from Object Detector to User Interface module carrying tuples of type DETECTED_OBJECT
+		application.addAppEdge("object_detector", "object_tracker", 1*1000, 1*100, "OBJECT_LOCATION", Tuple.UP, AppEdge.MODULE); // adding edge from Object Detector to Object Tracker module carrying tuples of type OBJECT_LOCATION
 		//*Saeedeh*//this edge from obj tracker to ptz control is periodic and third argument is the periodicity= 100 (it means every 10msec)
-		application.addAppEdge("object_tracker", "PTZ_CONTROL", 100, 1*28, 2*100, "PTZ_PARAMS", Tuple.DOWN, AppEdge.ACTUATOR); // adding edge from Object Tracker to PTZ CONTROL (actuator) carrying tuples of type PTZ_PARAMS
+		application.addAppEdge("object_tracker", "PTZ_CONTROL", 100, 1*28, 1*100, "PTZ_PARAMS", Tuple.DOWN, AppEdge.ACTUATOR); // adding edge from Object Tracker to PTZ CONTROL (actuator) carrying tuples of type PTZ_PARAMS
 		
 		/*
 		 * Defining the input-output relationships (represented by selectivity) of the application modules. 

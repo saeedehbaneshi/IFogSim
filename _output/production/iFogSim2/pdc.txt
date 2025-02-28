@@ -1,0 +1,73 @@
+
+@Override
+protected void updateCloudletProcessing(SimEvent ev) {
+	int removedEvents = 0;
+	if (getCloudletSubmitted() == -1 || getCloudletSubmitted() == CloudSim.clock()) {
+		removedEvents=CloudSim.cancelAllCount(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
+		///////////////// Saeedeh added this
+		//if (removedEvents>0)
+			//schedule(getId(), CloudSim.getMinTimeBetweenEvents(), CloudSimTags.VM_DATACENTER_EVENT);
+		///////////////// Saeedeh added
+		schedule(getId(), getSchedulingInterval(), CloudSimTags.VM_DATACENTER_EVENT);
+		return;
+	}
+	
+	double currentTime = CloudSim.clock();
+
+	// if some time passed since last processing
+	if (currentTime > getLastProcessTime()) {
+		
+		double minTime = updateCloudetProcessingWithoutSchedulingFutureEventsForce(ev);
+		if (!isDisableMigrations()) {
+			List<Map<String, Object>> migrationMap = getVmAllocationPolicy().optimizeAllocation(
+					getVmList());
+
+			if (migrationMap != null) {
+				for (Map<String, Object> migrate : migrationMap) {
+					Vm vm = (Vm) migrate.get("vm");
+					PowerHost targetHost = (PowerHost) migrate.get("host");
+					PowerHost oldHost = (PowerHost) vm.getHost();
+
+					if (oldHost == null) {
+						Log.formatLine(
+								"%.2f: Migration of VM #%d to Host #%d is started",
+								currentTime,
+								vm.getId(),
+								targetHost.getId());
+					} else {
+						Log.formatLine(
+								"%.2f: Migration of VM #%d from Host #%d to Host #%d is started",
+								currentTime,
+								vm.getId(),
+								oldHost.getId(),
+								targetHost.getId());
+					}
+
+					targetHost.addMigratingInVm(vm);
+					incrementMigrationCount();
+
+					/** VM migration delay = RAM / bandwidth **/
+					// we use BW / 2 to model BW available for migration purposes, the other
+					// half of BW is for VM communication
+					// around 16 seconds for 1024 MB using 1 Gbit/s network
+					send(
+							getId(),
+							vm.getRam() / ((double) targetHost.getBw() / (2 * 8000)),
+							CloudSimTags.VM_MIGRATE,
+							migrate);
+				}
+			}
+		}
+
+		// schedules an event to the next time
+		if (minTime != Double.MAX_VALUE) {
+			CloudSim.cancelAll(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
+			send(getId(), getSchedulingInterval(), CloudSimTags.VM_DATACENTER_EVENT);
+			// Saeedeh commented up line and added bellow line to solve the problem of infinity estimated finish time
+			//send(getId(), (minTime-CloudSim.clock()), CloudSimTags.VM_DATACENTER_EVENT);
+		}
+
+		setLastProcessTime(currentTime);
+	}
+}
+

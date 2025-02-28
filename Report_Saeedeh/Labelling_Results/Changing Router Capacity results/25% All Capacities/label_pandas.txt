@@ -1,0 +1,2755 @@
+Starting Labelling DCNS...
+Scenario Edge_Based
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module motion_detector can be created on device m-0-2
+dcns ''' module object_detector can be created on device m-0-2
+dcns ''' module object_tracker can be created on device m-0-2
+dcns ''' module motion_detector can be created on device m-0-1
+dcns ''' module object_detector can be created on device m-0-1
+dcns ''' module object_tracker can be created on device m-0-1
+dcns ''' module motion_detector can be created on device m-0-3
+dcns ''' module object_detector can be created on device m-0-3
+dcns ''' module object_tracker can be created on device m-0-3
+dcns ''' module motion_detector can be created on device m-0-0
+dcns ''' module object_detector can be created on device m-0-0
+dcns ''' module object_tracker can be created on device m-0-0
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^DeviceId : 6
+^^^^^^^^^^^^^^^DeviceName : m-0-0
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^DeviceName : m-0-1
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 12
+^^^^^^^^^^^^^^^DeviceName : m-0-2
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 15
+^^^^^^^^^^^^^^^DeviceName : m-0-3
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+periodic edge source (from initialize periodic tuple): object_tracker
+periodic edge source (from initialize periodic tuple): object_tracker
+periodic edge source (from initialize periodic tuple): object_tracker
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 28012
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 6902.02879124654
+dcns [object_tracker, PTZ_CONTROL] --->= 1.0010000000001782
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 13809.96589827514
+DETECTED_OBJECT --->= 0.0446428571412989
+OBJECT_LOCATION --->= 22.48662412396342
+CAMERA --->= 24.26963146570418
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6488475.225110594
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=1103.5714285678052}}
+cloud : Application dcns total Energy = 1103.5714285678052
+proxy-server : Energy Consumed = 0.0
+proxy-server : Vms Energy Map of device : proxy-server {}
+proxy-server : Application total Energy = 0.0
+d-0 : Energy Consumed = 0.0
+d-0 : Vms Energy Map of device : d-0 {}
+d-0 : Application total Energy = 0.0
+m-0-0 : Energy Consumed = 436004.5977874065
+m-0-0 : Vms Energy Map of device : m-0-0 {dcns={motion_detector=174287.4983578769, object_tracker=53196.816294244585, object_detector=204048.14643117908}}
+m-0-0 : Application dcns total Energy = 431532.4610833005
+m-0-1 : Energy Consumed = 436004.5977874065
+m-0-1 : Vms Energy Map of device : m-0-1 {dcns={motion_detector=174287.4983578769, object_tracker=53196.816294244585, object_detector=204048.14643117908}}
+m-0-1 : Application dcns total Energy = 431532.4610833005
+m-0-2 : Energy Consumed = 436004.5977874065
+m-0-2 : Vms Energy Map of device : m-0-2 {dcns={motion_detector=174287.4983578769, object_tracker=53196.816294244585, object_detector=204048.14643117908}}
+m-0-2 : Application dcns total Energy = 431532.4610833005
+m-0-3 : Energy Consumed = 436004.5977874065
+m-0-3 : Vms Energy Map of device : m-0-3 {dcns={motion_detector=174287.4983578769, object_tracker=53196.816294244585, object_detector=204048.14643117908}}
+m-0-3 : Application dcns total Energy = 431532.4610833005
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=1.4561011904714088E-7}}
+cloud : Application dcns total CO2 Emissions = 1.4561011904714088E-7 kg
+cloud : Total CO2 Emissions for device = 1.4561011904714088E-7 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {}
+proxy-server : Application total CO2 Emissions = 0.0 kg
+proxy-server : Total CO2 Emissions for device = 0.0 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {}
+d-0 : Application total CO2 Emissions = 0.0 kg
+d-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {dcns={motion_detector=2.2996267144441986E-5, object_tracker=7.019024372157295E-6, object_detector=2.6923019320780184E-5}}
+m-0-0 : Application dcns total CO2 Emissions = 5.6938310837379466E-5 kg
+m-0-0 : Total CO2 Emissions for device = 5.6938310837379466E-5 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {dcns={motion_detector=2.2996267144441986E-5, object_tracker=7.019024372157295E-6, object_detector=2.6923019320780184E-5}}
+m-0-1 : Application dcns total CO2 Emissions = 5.6938310837379466E-5 kg
+m-0-1 : Total CO2 Emissions for device = 5.6938310837379466E-5 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {dcns={motion_detector=2.2996267144441986E-5, object_tracker=7.019024372157295E-6, object_detector=2.6923019320780184E-5}}
+m-0-2 : Application dcns total CO2 Emissions = 5.6938310837379466E-5 kg
+m-0-2 : Total CO2 Emissions for device = 5.6938310837379466E-5 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {dcns={motion_detector=2.2996267144441986E-5, object_tracker=7.019024372157295E-6, object_detector=2.6923019320780184E-5}}
+m-0-3 : Application dcns total CO2 Emissions = 5.6938310837379466E-5 kg
+m-0-3 : Total CO2 Emissions for device = 5.6938310837379466E-5 kg
+=========================================
+Cost of execution in cloud = 9614.497419353851
+Total network usage = 624.0
+Total network Energy = 23266.368000000028
+Total networking Time = 14.399999999999949
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {}
+cloud : Total Networking Energy Consumption for this device = 0.0 mJ
+4 proxy-server Networking Tuples energy Map {dcns={DETECTED_OBJECT=5187.000000089633}}
+proxy-server : Total Networking Energy Consumption for this device = 5187.000000089633 mJ
+5 d-0 Networking Tuples energy Map {dcns={DETECTED_OBJECT=5410.363636457135}}
+d-0 : Total Networking Energy Consumption for this device = 5410.363636457135 mJ
+6 m-0-0 Networking Tuples energy Map {}
+m-0-0 : Total Networking Energy Consumption for this device = 0.0 mJ
+9 m-0-1 Networking Tuples energy Map {}
+m-0-1 : Total Networking Energy Consumption for this device = 0.0 mJ
+12 m-0-2 Networking Tuples energy Map {}
+m-0-2 : Total Networking Energy Consumption for this device = 0.0 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={DETECTED_OBJECT=56021.3861386139}}
+m-0-3 : Total Networking Energy Consumption for this device = 56021.3861386139 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {}
+cloud : Total Networking CO2 Emissions for this device = 0.0 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={DETECTED_OBJECT=6.8439583334516E-7}}
+proxy-server : Total Networking CO2 Emissions for this device = 6.8439583334516E-7 kg
+5 d-0 Networking Tuples CO2 Map {dcns={DETECTED_OBJECT=7.138674242547608E-7}}
+d-0 : Total Networking CO2 Emissions for this device = 7.138674242547608E-7 kg
+6 m-0-0 Networking Tuples CO2 Map {}
+m-0-0 : Total Networking CO2 Emissions for this device = 0.0 kg
+9 m-0-1 Networking Tuples CO2 Map {}
+m-0-1 : Total Networking CO2 Emissions for this device = 0.0 kg
+12 m-0-2 Networking Tuples CO2 Map {}
+m-0-2 : Total Networking CO2 Emissions for this device = 0.0 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={DETECTED_OBJECT=7.3917106710671114E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.3917106710671114E-6 kg
+Starting Labelling DCNS...
+Scenario Router_Only
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module motion_detector can be created on device m-0-2
+dcns ''' module motion_detector can be created on device m-0-1
+dcns ''' module motion_detector can be created on device m-0-3
+dcns ''' module motion_detector can be created on device m-0-0
+dcns ''' module object_detector can be created on device d-0
+dcns ''' module object_tracker can be created on device d-0
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^DeviceId : 5
+^^^^^^^^^^^^^^^DeviceName : d-0
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 6
+^^^^^^^^^^^^^^^DeviceName : m-0-0
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^DeviceName : m-0-1
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 12
+^^^^^^^^^^^^^^^DeviceName : m-0-2
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 15
+^^^^^^^^^^^^^^^DeviceName : m-0-3
+^^^^^^^^^^^^^^^ module : motion_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 461
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 13.630571428570505
+dcns [object_tracker, PTZ_CONTROL] --->= 3.0110000000000476
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 11.428571428572468
+DETECTED_OBJECT --->= 0.04464285714129801
+OBJECT_LOCATION --->= 5.714285714286234
+CAMERA --->= 8.0
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6560813.169642828
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=3641.7857142742423}}
+cloud : Application dcns total Energy = 3641.7857142742423
+proxy-server : Energy Consumed = 0.0
+proxy-server : Vms Energy Map of device : proxy-server {}
+proxy-server : Application total Energy = 0.0
+d-0 : Energy Consumed = 517481.44764402247
+d-0 : Vms Energy Map of device : d-0 {dcns={object_tracker=152728.06285714693, object_detector=305456.1257142874}}
+d-0 : Application dcns total Energy = 458184.18857143435
+m-0-0 : Energy Consumed = 420865.54000000254
+m-0-0 : Vms Energy Map of device : m-0-0 {dcns={motion_detector=174534.81999999823}}
+m-0-0 : Application dcns total Energy = 174534.81999999823
+m-0-1 : Energy Consumed = 420865.54000000254
+m-0-1 : Vms Energy Map of device : m-0-1 {dcns={motion_detector=174534.81999999823}}
+m-0-1 : Application dcns total Energy = 174534.81999999823
+m-0-2 : Energy Consumed = 420865.54000000254
+m-0-2 : Vms Energy Map of device : m-0-2 {dcns={motion_detector=174534.81999999823}}
+m-0-2 : Application dcns total Energy = 174534.81999999823
+m-0-3 : Energy Consumed = 420865.54000000254
+m-0-3 : Vms Energy Map of device : m-0-3 {dcns={motion_detector=174534.81999999823}}
+m-0-3 : Application dcns total Energy = 174534.81999999823
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=4.805133928556279E-7}}
+cloud : Application dcns total CO2 Emissions = 4.805133928556279E-7 kg
+cloud : Total CO2 Emissions for device = 4.805133928556279E-7 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {}
+proxy-server : Application total CO2 Emissions = 0.0 kg
+proxy-server : Total CO2 Emissions for device = 0.0 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {dcns={object_tracker=2.015161940476304E-5, object_detector=4.030323880952396E-5}}
+d-0 : Application dcns total CO2 Emissions = 6.0454858214287E-5 kg
+d-0 : Total CO2 Emissions for device = 6.0454858214287E-5 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-0 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-0 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-1 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-1 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-2 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-2 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-3 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-3 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+=========================================
+Cost of execution in cloud = 6483.411428568309
+Total network usage = 2835.36
+Total network Energy = 108175.96319999188
+Total networking Time = 805.5600000000414
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {}
+cloud : Total Networking Energy Consumption for this device = 0.0 mJ
+4 proxy-server Networking Tuples energy Map {dcns={DETECTED_OBJECT=17203.550000297033}}
+proxy-server : Total Networking Energy Consumption for this device = 17203.550000297033 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32925.45454501554, DETECTED_OBJECT=17944.37272758253}}
+d-0 : Total Networking Energy Consumption for this device = 50869.82727259807 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-0 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-1 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-2 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-3 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {}
+cloud : Total Networking CO2 Emissions for this device = 0.0 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={DETECTED_OBJECT=2.2699128472614115E-6}}
+proxy-server : Total Networking CO2 Emissions for this device = 2.2699128472614115E-6 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.344330808022792E-6, DETECTED_OBJECT=2.3676602904449125E-6}}
+d-0 : Total Networking CO2 Emissions for this device = 6.7119910984677045E-6 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+Starting Labelling DCNS...
+Scenario Router_Proxy
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module motion_detector can be created on device m-0-2
+dcns ''' module motion_detector can be created on device m-0-1
+dcns ''' module motion_detector can be created on device m-0-3
+dcns ''' module motion_detector can be created on device m-0-0
+dcns ''' module object_detector can be created on device d-0
+dcns ''' module object_tracker can be created on device proxy-server
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^DeviceId : 4
+^^^^^^^^^^^^^^^DeviceName : proxy-server
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 5
+^^^^^^^^^^^^^^^DeviceName : d-0
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^DeviceId : 6
+^^^^^^^^^^^^^^^DeviceName : m-0-0
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^DeviceName : m-0-1
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 12
+^^^^^^^^^^^^^^^DeviceName : m-0-2
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 15
+^^^^^^^^^^^^^^^DeviceName : m-0-3
+^^^^^^^^^^^^^^^ module : motion_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 569
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 15.63407042455682
+dcns [object_tracker, PTZ_CONTROL] --->= 5.0120000000002305
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 11.428571428572468
+DETECTED_OBJECT --->= 0.04464285714129801
+OBJECT_LOCATION --->= 5.696923798624111
+CAMERA --->= 8.0
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6560813.169642826
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=3641.7857142742423}}
+cloud : Application dcns total Energy = 3641.7857142742423
+proxy-server : Energy Consumed = 449046.5514001378
+proxy-server : Vms Energy Map of device : proxy-server {dcns={object_tracker=152509.9576762113}}
+proxy-server : Application dcns total Energy = 152509.9576762113
+d-0 : Energy Consumed = 483347.8403571362
+d-0 : Vms Energy Map of device : d-0 {dcns={object_detector=305456.1257142874}}
+d-0 : Application dcns total Energy = 305456.1257142874
+m-0-0 : Energy Consumed = 420865.54000000254
+m-0-0 : Vms Energy Map of device : m-0-0 {dcns={motion_detector=174534.81999999823}}
+m-0-0 : Application dcns total Energy = 174534.81999999823
+m-0-1 : Energy Consumed = 420865.54000000254
+m-0-1 : Vms Energy Map of device : m-0-1 {dcns={motion_detector=174534.81999999823}}
+m-0-1 : Application dcns total Energy = 174534.81999999823
+m-0-2 : Energy Consumed = 420865.54000000254
+m-0-2 : Vms Energy Map of device : m-0-2 {dcns={motion_detector=174534.81999999823}}
+m-0-2 : Application dcns total Energy = 174534.81999999823
+m-0-3 : Energy Consumed = 420865.54000000254
+m-0-3 : Vms Energy Map of device : m-0-3 {dcns={motion_detector=174534.81999999823}}
+m-0-3 : Application dcns total Energy = 174534.81999999823
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=4.805133928556279E-7}}
+cloud : Application dcns total CO2 Emissions = 4.805133928556279E-7 kg
+cloud : Total CO2 Emissions for device = 4.805133928556279E-7 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {dcns={object_tracker=2.012284163783453E-5}}
+proxy-server : Application dcns total CO2 Emissions = 2.012284163783453E-5 kg
+proxy-server : Total CO2 Emissions for device = 2.012284163783453E-5 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {dcns={object_detector=4.030323880952396E-5}}
+d-0 : Application dcns total CO2 Emissions = 4.030323880952396E-5 kg
+d-0 : Total CO2 Emissions for device = 4.030323880952396E-5 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-0 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-0 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-1 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-1 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-2 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-2 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-3 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-3 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+=========================================
+Cost of execution in cloud = 6483.47142856831
+Total network usage = 2877.19
+Total network Energy = 137831.74367998703
+Total networking Time = 809.5439999999819
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {}
+cloud : Total Networking Energy Consumption for this device = 0.0 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=860.1775001558304, DETECTED_OBJECT=17203.550000297033}}
+proxy-server : Total Networking Energy Consumption for this device = 18063.727500452864 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32925.45454501554, DETECTED_OBJECT=17944.37272758253, OBJECT_LOCATION=17962.407275989404}}
+d-0 : Total Networking Energy Consumption for this device = 68832.23454858747 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-0 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-1 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-2 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-3 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {}
+cloud : Total Networking CO2 Emissions for this device = 0.0 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.134956423816718E-7, DETECTED_OBJECT=2.2699128472614115E-6}}
+proxy-server : Total Networking CO2 Emissions for this device = 2.383408489643083E-6 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.344330808022792E-6, DETECTED_OBJECT=2.3676602904449125E-6, OBJECT_LOCATION=2.370039848915278E-6}}
+d-0 : Total Networking CO2 Emissions for this device = 9.082030947382983E-6 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+Starting Labelling DCNS...
+Scenario Router_Cloud
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module object_tracker can be created on device cloud
+dcns ''' module motion_detector can be created on device m-0-2
+dcns ''' module motion_detector can be created on device m-0-1
+dcns ''' module motion_detector can be created on device m-0-3
+dcns ''' module motion_detector can be created on device m-0-0
+dcns ''' module object_detector can be created on device d-0
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 5
+^^^^^^^^^^^^^^^DeviceName : d-0
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^DeviceId : 6
+^^^^^^^^^^^^^^^DeviceName : m-0-0
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^DeviceName : m-0-1
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 12
+^^^^^^^^^^^^^^^DeviceName : m-0-2
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 15
+^^^^^^^^^^^^^^^DeviceName : m-0-3
+^^^^^^^^^^^^^^^ module : motion_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 507
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 115.63601946086527
+dcns [object_tracker, PTZ_CONTROL] --->= 105.0130000000004
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 11.428571428572468
+DETECTED_OBJECT --->= 0.08921428571557044
+OBJECT_LOCATION --->= 0.35554345336009147
+CAMERA --->= 8.0
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6622207.969357354
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=3638.872285719251, object_tracker=145979.02335732663}}
+cloud : Application dcns total Energy = 149617.8956430459
+proxy-server : Energy Consumed = 0.0
+proxy-server : Vms Energy Map of device : proxy-server {}
+proxy-server : Application total Energy = 0.0
+d-0 : Energy Consumed = 483347.8403571362
+d-0 : Vms Energy Map of device : d-0 {dcns={object_detector=305456.1257142874}}
+d-0 : Application dcns total Energy = 305456.1257142874
+m-0-0 : Energy Consumed = 420865.54000000254
+m-0-0 : Vms Energy Map of device : m-0-0 {dcns={motion_detector=174534.81999999823}}
+m-0-0 : Application dcns total Energy = 174534.81999999823
+m-0-1 : Energy Consumed = 420865.54000000254
+m-0-1 : Vms Energy Map of device : m-0-1 {dcns={motion_detector=174534.81999999823}}
+m-0-1 : Application dcns total Energy = 174534.81999999823
+m-0-2 : Energy Consumed = 420865.54000000254
+m-0-2 : Vms Energy Map of device : m-0-2 {dcns={motion_detector=174534.81999999823}}
+m-0-2 : Application dcns total Energy = 174534.81999999823
+m-0-3 : Energy Consumed = 420865.54000000254
+m-0-3 : Vms Energy Map of device : m-0-3 {dcns={motion_detector=174534.81999999823}}
+m-0-3 : Application dcns total Energy = 174534.81999999823
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=4.801289821435125E-7, object_tracker=1.9261121137426276E-5}}
+cloud : Application dcns total CO2 Emissions = 1.974125011956979E-5 kg
+cloud : Total CO2 Emissions for device = 1.974125011956979E-5 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {}
+proxy-server : Application total CO2 Emissions = 0.0 kg
+proxy-server : Total CO2 Emissions for device = 0.0 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {dcns={object_detector=4.030323880952396E-5}}
+d-0 : Application dcns total CO2 Emissions = 4.030323880952396E-5 kg
+d-0 : Total CO2 Emissions for device = 4.030323880952396E-5 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-0 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-0 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-1 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-1 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-2 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-2 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-3 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-3 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+=========================================
+Cost of execution in cloud = 48458.12885719451
+Total network usage = 4968.64
+Total network Energy = 1619894.5641598958
+Total networking Time = 813.5279999999219
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {dcns={PTZ_PARAMS=2447.4554749688605}}
+cloud : Total Networking Energy Consumption for this device = 2447.4554749688605 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=855.8550001558099, DETECTED_OBJECT=17203.550000297033, OBJECT_LOCATION=17220.84000312787}}
+proxy-server : Total Networking Energy Consumption for this device = 35280.24500358071 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32759.999999560918, DETECTED_OBJECT=17944.37272758253, OBJECT_LOCATION=17962.407275989404}}
+d-0 : Total Networking Energy Consumption for this device = 68666.78000313285 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-0 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-1 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-2 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-3 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {dcns={PTZ_PARAMS=3.2292815294728106E-7}}
+cloud : Total Networking CO2 Emissions for this device = 3.2292815294728106E-7 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.1292531252055798E-7, DETECTED_OBJECT=2.2699128472614115E-6, OBJECT_LOCATION=2.2721941670795607E-6}}
+proxy-server : Total Networking CO2 Emissions for this device = 4.65503232686153E-6 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.322499999941971E-6, DETECTED_OBJECT=2.3676602904449125E-6, OBJECT_LOCATION=2.370039848915278E-6}}
+d-0 : Total Networking CO2 Emissions for this device = 9.060200139302161E-6 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+Starting Labelling DCNS...
+Scenario Proxy_Only
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module motion_detector can be created on device m-0-2
+dcns ''' module motion_detector can be created on device m-0-1
+dcns ''' module motion_detector can be created on device m-0-3
+dcns ''' module motion_detector can be created on device m-0-0
+dcns ''' module object_detector can be created on device proxy-server
+dcns ''' module object_tracker can be created on device proxy-server
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^DeviceId : 4
+^^^^^^^^^^^^^^^DeviceName : proxy-server
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 6
+^^^^^^^^^^^^^^^DeviceName : m-0-0
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^DeviceName : m-0-1
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 12
+^^^^^^^^^^^^^^^DeviceName : m-0-2
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 15
+^^^^^^^^^^^^^^^DeviceName : m-0-3
+^^^^^^^^^^^^^^^ module : motion_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 593
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 15.674214285716983
+dcns [object_tracker, PTZ_CONTROL] --->= 5.0120000000002305
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 11.443980952379691
+DETECTED_OBJECT --->= 0.04464285714129801
+OBJECT_LOCATION --->= 5.630638095238343
+CAMERA --->= 8.0
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6560813.169642826
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=3641.7857142742423}}
+cloud : Application dcns total Energy = 3641.7857142742423
+proxy-server : Energy Consumed = 517303.1552801848
+proxy-server : Vms Energy Map of device : proxy-server {dcns={object_tracker=152516.00699560557, object_detector=305395.03448919056}}
+proxy-server : Application dcns total Energy = 457911.0414847961
+d-0 : Energy Consumed = 0.0
+d-0 : Vms Energy Map of device : d-0 {}
+d-0 : Application total Energy = 0.0
+m-0-0 : Energy Consumed = 420865.54000000254
+m-0-0 : Vms Energy Map of device : m-0-0 {dcns={motion_detector=174534.81999999823}}
+m-0-0 : Application dcns total Energy = 174534.81999999823
+m-0-1 : Energy Consumed = 420865.54000000254
+m-0-1 : Vms Energy Map of device : m-0-1 {dcns={motion_detector=174534.81999999823}}
+m-0-1 : Application dcns total Energy = 174534.81999999823
+m-0-2 : Energy Consumed = 420865.54000000254
+m-0-2 : Vms Energy Map of device : m-0-2 {dcns={motion_detector=174534.81999999823}}
+m-0-2 : Application dcns total Energy = 174534.81999999823
+m-0-3 : Energy Consumed = 420865.54000000254
+m-0-3 : Vms Energy Map of device : m-0-3 {dcns={motion_detector=174534.81999999823}}
+m-0-3 : Application dcns total Energy = 174534.81999999823
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=4.805133928556279E-7}}
+cloud : Application dcns total CO2 Emissions = 4.805133928556279E-7 kg
+cloud : Total CO2 Emissions for device = 4.805133928556279E-7 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {dcns={object_tracker=2.0123639811919808E-5, object_detector=4.0295178161767524E-5}}
+proxy-server : Application dcns total CO2 Emissions = 6.0418817973687336E-5 kg
+proxy-server : Total CO2 Emissions for device = 6.0418817973687336E-5 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {}
+d-0 : Application total CO2 Emissions = 0.0 kg
+d-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-0 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-0 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-1 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-1 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-2 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-2 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-3 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-3 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+=========================================
+Cost of execution in cloud = 6485.071428568311
+Total network usage = 3594.35
+Total network Energy = 136617.9671999886
+Total networking Time = 881.2600000000089
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {}
+cloud : Total Networking Energy Consumption for this device = 0.0 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=860.1775001558304, DETECTED_OBJECT=17203.550000297033}}
+proxy-server : Total Networking Energy Consumption for this device = 18063.727500452864 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32925.45454501554, MOTION_VIDEO_STREAM=359248.1454607128}}
+d-0 : Total Networking Energy Consumption for this device = 392173.6000057283 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-0 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-1 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-2 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-3 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {}
+cloud : Total Networking CO2 Emissions for this device = 0.0 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.134956423816718E-7, DETECTED_OBJECT=2.2699128472614115E-6}}
+proxy-server : Total Networking CO2 Emissions for this device = 2.383408489643083E-6 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.344330808022792E-6, MOTION_VIDEO_STREAM=4.740079697051268E-5}}
+d-0 : Total Networking CO2 Emissions for this device = 5.1745127778535474E-5 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+Starting Labelling DCNS...
+Scenario Proxy_Cloud
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module object_tracker can be created on device cloud
+dcns ''' module motion_detector can be created on device m-0-2
+dcns ''' module motion_detector can be created on device m-0-1
+dcns ''' module motion_detector can be created on device m-0-3
+dcns ''' module motion_detector can be created on device m-0-0
+dcns ''' module object_detector can be created on device proxy-server
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 4
+^^^^^^^^^^^^^^^DeviceName : proxy-server
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^DeviceId : 6
+^^^^^^^^^^^^^^^DeviceName : m-0-0
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^DeviceName : m-0-1
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 12
+^^^^^^^^^^^^^^^DeviceName : m-0-2
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 15
+^^^^^^^^^^^^^^^DeviceName : m-0-3
+^^^^^^^^^^^^^^^ module : motion_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 542
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 115.62078470520832
+dcns [object_tracker, PTZ_CONTROL] --->= 105.0130000000004
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 11.370476190476863
+DETECTED_OBJECT --->= 0.08921428571557044
+OBJECT_LOCATION --->= 0.2659159243342281
+CAMERA --->= 8.0
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6622169.1728573805
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=3638.872285748209, object_tracker=145777.7466431394}}
+cloud : Application dcns total Energy = 149416.61892888762
+proxy-server : Energy Consumed = 483339.3069605578
+proxy-server : Vms Energy Map of device : proxy-server {dcns={object_detector=305417.94369862584}}
+proxy-server : Application dcns total Energy = 305417.94369862584
+d-0 : Energy Consumed = 0.0
+d-0 : Vms Energy Map of device : d-0 {}
+d-0 : Application total Energy = 0.0
+m-0-0 : Energy Consumed = 420865.54000000254
+m-0-0 : Vms Energy Map of device : m-0-0 {dcns={motion_detector=174534.81999999823}}
+m-0-0 : Application dcns total Energy = 174534.81999999823
+m-0-1 : Energy Consumed = 420865.54000000254
+m-0-1 : Vms Energy Map of device : m-0-1 {dcns={motion_detector=174534.81999999823}}
+m-0-1 : Application dcns total Energy = 174534.81999999823
+m-0-2 : Energy Consumed = 420865.54000000254
+m-0-2 : Vms Energy Map of device : m-0-2 {dcns={motion_detector=174534.81999999823}}
+m-0-2 : Application dcns total Energy = 174534.81999999823
+m-0-3 : Energy Consumed = 420865.54000000254
+m-0-3 : Vms Energy Map of device : m-0-3 {dcns={motion_detector=174534.81999999823}}
+m-0-3 : Application dcns total Energy = 174534.81999999823
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=4.801289821473339E-7, object_tracker=1.9234563793191565E-5}}
+cloud : Application dcns total CO2 Emissions = 1.97146927753389E-5 kg
+cloud : Total CO2 Emissions for device = 1.97146927753389E-5 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {dcns={object_detector=4.02982009046807E-5}}
+proxy-server : Application dcns total CO2 Emissions = 4.02982009046807E-5 kg
+proxy-server : Total CO2 Emissions for device = 4.02982009046807E-5 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {}
+d-0 : Application total CO2 Emissions = 0.0 kg
+d-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-0 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-0 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-1 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-1 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-2 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-2 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-3 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-3 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+=========================================
+Cost of execution in cloud = 48400.63000008478
+Total network usage = 5685.8
+Total network Energy = 1618680.7876797426
+Total networking Time = 885.2439999999461
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {dcns={PTZ_PARAMS=2447.4554749688605}}
+cloud : Total Networking Energy Consumption for this device = 2447.4554749688605 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=855.8550001558099, DETECTED_OBJECT=17203.550000297033, OBJECT_LOCATION=17220.84000312787}}
+proxy-server : Total Networking Energy Consumption for this device = 35280.24500358071 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32759.999999560918, MOTION_VIDEO_STREAM=359248.1454607128}}
+d-0 : Total Networking Energy Consumption for this device = 392008.1454602737 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-0 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-1 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-2 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-3 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {dcns={PTZ_PARAMS=3.2292815294728106E-7}}
+cloud : Total Networking CO2 Emissions for this device = 3.2292815294728106E-7 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.1292531252055798E-7, DETECTED_OBJECT=2.2699128472614115E-6, OBJECT_LOCATION=2.2721941670795607E-6}}
+proxy-server : Total Networking CO2 Emissions for this device = 4.65503232686153E-6 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.322499999941971E-6, MOTION_VIDEO_STREAM=4.740079697051268E-5}}
+d-0 : Total Networking CO2 Emissions for this device = 5.1723296970454656E-5 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+Starting Labelling DCNS...
+Scenario Cloud_Only
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module object_detector can be created on device cloud
+dcns ''' module object_tracker can be created on device cloud
+dcns ''' module motion_detector can be created on device m-0-2
+dcns ''' module motion_detector can be created on device m-0-1
+dcns ''' module motion_detector can be created on device m-0-3
+dcns ''' module motion_detector can be created on device m-0-0
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 6
+^^^^^^^^^^^^^^^DeviceName : m-0-0
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^DeviceName : m-0-1
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 12
+^^^^^^^^^^^^^^^DeviceName : m-0-2
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^DeviceId : 15
+^^^^^^^^^^^^^^^DeviceName : m-0-3
+^^^^^^^^^^^^^^^ module : motion_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 636
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 104.98193750000299
+dcns [object_tracker, PTZ_CONTROL] --->= 105.0130000000004
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 0.7321476190501319
+DETECTED_OBJECT --->= 0.089285714286234
+OBJECT_LOCATION --->= 0.2781705568096085
+CAMERA --->= 8.0
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6678306.677465118
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=3641.785714295425, object_tracker=145760.24400007853, object_detector=291542.3607862687}}
+cloud : Application dcns total Energy = 440944.3905006427
+proxy-server : Energy Consumed = 0.0
+proxy-server : Vms Energy Map of device : proxy-server {}
+proxy-server : Application total Energy = 0.0
+d-0 : Energy Consumed = 0.0
+d-0 : Vms Energy Map of device : d-0 {}
+d-0 : Application total Energy = 0.0
+m-0-0 : Energy Consumed = 420865.54000000254
+m-0-0 : Vms Energy Map of device : m-0-0 {dcns={motion_detector=174534.81999999823}}
+m-0-0 : Application dcns total Energy = 174534.81999999823
+m-0-1 : Energy Consumed = 420865.54000000254
+m-0-1 : Vms Energy Map of device : m-0-1 {dcns={motion_detector=174534.81999999823}}
+m-0-1 : Application dcns total Energy = 174534.81999999823
+m-0-2 : Energy Consumed = 420865.54000000254
+m-0-2 : Vms Energy Map of device : m-0-2 {dcns={motion_detector=174534.81999999823}}
+m-0-2 : Application dcns total Energy = 174534.81999999823
+m-0-3 : Energy Consumed = 420865.54000000254
+m-0-3 : Vms Energy Map of device : m-0-3 {dcns={motion_detector=174534.81999999823}}
+m-0-3 : Application dcns total Energy = 174534.81999999823
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=4.805133928584214E-7, object_tracker=1.9232254416676713E-5, object_detector=3.8467394825965944E-5}}
+cloud : Application dcns total CO2 Emissions = 5.818016263550108E-5 kg
+cloud : Total CO2 Emissions for device = 5.818016263550108E-5 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {}
+proxy-server : Application total CO2 Emissions = 0.0 kg
+proxy-server : Total CO2 Emissions for device = 0.0 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {}
+d-0 : Application total CO2 Emissions = 0.0 kg
+d-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-0 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-0 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-1 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-1 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-2 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-2 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {dcns={motion_detector=2.302889986111084E-5}}
+m-0-3 : Application dcns total CO2 Emissions = 2.302889986111084E-5 kg
+m-0-3 : Total CO2 Emissions for device = 2.302889986111084E-5 kg
+=========================================
+Cost of execution in cloud = 130862.83800018119
+Total network usage = 41543.8
+Total network Energy = 1544919.5711999289
+Total networking Time = 956.9599999999705
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {dcns={PTZ_PARAMS=2447.4554749688605}}
+cloud : Total Networking Energy Consumption for this device = 2447.4554749688605 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=855.8550001558099, MOTION_VIDEO_STREAM=344416.8000059562}}
+proxy-server : Total Networking Energy Consumption for this device = 345272.655006112 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32759.999999560918, MOTION_VIDEO_STREAM=359248.1454607128}}
+d-0 : Total Networking Energy Consumption for this device = 392008.1454602737 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-0 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-1 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-2 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={MOTION_VIDEO_STREAM=56355.366336634324}}
+m-0-3 : Total Networking Energy Consumption for this device = 56355.366336634324 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {dcns={PTZ_PARAMS=3.2292815294728106E-7}}
+cloud : Total Networking CO2 Emissions for this device = 3.2292815294728106E-7 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.1292531252055798E-7, MOTION_VIDEO_STREAM=4.5443883334112906E-5}}
+proxy-server : Total Networking CO2 Emissions for this device = 4.555680864663346E-5 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.322499999941971E-6, MOTION_VIDEO_STREAM=4.740079697051268E-5}}
+d-0 : Total Networking CO2 Emissions for this device = 5.1723296970454656E-5 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={MOTION_VIDEO_STREAM=7.435777502750363E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.435777502750363E-6 kg
+Starting Labelling DCNS...
+Scenario Cloud_Based
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module motion_detector can be created on device cloud
+dcns ''' module object_detector can be created on device cloud
+dcns ''' module object_tracker can be created on device cloud
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 817
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 0.4438437500008867
+dcns [object_tracker, PTZ_CONTROL] --->= 105.0130000000004
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 0.4790333333367016
+DETECTED_OBJECT --->= 0.089285714286234
+OBJECT_LOCATION --->= 0.1631115896895087
+CAMERA --->= 0.21719047619238457
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6713166.150572331
+cloud : Vms Energy Map of device : cloud {dcns={motion_detector=145900.49697696787, user_interface=3641.785714295425, object_tracker=145936.5211431082, object_detector=291902.7026913232}}
+cloud : Application dcns total Energy = 587381.5065256946
+proxy-server : Energy Consumed = 0.0
+proxy-server : Vms Energy Map of device : proxy-server {}
+proxy-server : Application total Energy = 0.0
+d-0 : Energy Consumed = 0.0
+d-0 : Vms Energy Map of device : d-0 {}
+d-0 : Application total Energy = 0.0
+m-0-0 : Energy Consumed = 0.0
+m-0-0 : Vms Energy Map of device : m-0-0 {}
+m-0-0 : Application total Energy = 0.0
+m-0-1 : Energy Consumed = 0.0
+m-0-1 : Vms Energy Map of device : m-0-1 {}
+m-0-1 : Application total Energy = 0.0
+m-0-2 : Energy Consumed = 0.0
+m-0-2 : Vms Energy Map of device : m-0-2 {}
+m-0-2 : Application total Energy = 0.0
+m-0-3 : Energy Consumed = 0.0
+m-0-3 : Vms Energy Map of device : m-0-3 {}
+m-0-3 : Application total Energy = 0.0
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={motion_detector=1.9250760017795226E-5, user_interface=4.805133928584214E-7, object_tracker=1.9255513206385223E-5, object_detector=3.8514939938434314E-5}}
+cloud : Application dcns total CO2 Emissions = 7.750172655547318E-5 kg
+cloud : Total CO2 Emissions for device = 7.750172655547318E-5 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {}
+proxy-server : Application total CO2 Emissions = 0.0 kg
+proxy-server : Total CO2 Emissions for device = 0.0 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {}
+d-0 : Application total CO2 Emissions = 0.0 kg
+d-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {}
+m-0-0 : Application total CO2 Emissions = 0.0 kg
+m-0-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {}
+m-0-1 : Application total CO2 Emissions = 0.0 kg
+m-0-1 : Total CO2 Emissions for device = 0.0 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {}
+m-0-2 : Application total CO2 Emissions = 0.0 kg
+m-0-2 : Total CO2 Emissions for device = 0.0 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {}
+m-0-3 : Application total CO2 Emissions = 0.0 kg
+m-0-3 : Total CO2 Emissions for device = 0.0 kg
+=========================================
+Cost of execution in cloud = 173870.25600028475
+Total network usage = 414861.4
+Total network Energy = 1578482.3039996042
+Total networking Time = 9571.19999999996
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {dcns={PTZ_PARAMS=2447.4554749688605}}
+cloud : Total Networking Energy Consumption for this device = 2447.4554749688605 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=855.8550001558099, CAMERA=3447626.000006148}}
+proxy-server : Total Networking Energy Consumption for this device = 3448481.855006304 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32759.999999560918, CAMERA=3596088.363642858}}
+d-0 : Total Networking Energy Consumption for this device = 3628848.3636424188 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-0 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-1 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-2 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-3 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {dcns={PTZ_PARAMS=3.2292815294728106E-7}}
+cloud : Total Networking CO2 Emissions for this device = 3.2292815294728106E-7 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.1292531252055798E-7, CAMERA=4.548950972231075E-4}}
+proxy-server : Total Networking CO2 Emissions for this device = 4.5500802253562806E-4 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.322499999941971E-6, CAMERA=4.744838813140522E-4}}
+d-0 : Total Networking CO2 Emissions for this device = 4.788063813139942E-4 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+Starting Labelling DCNS...
+Scenario Router_Based
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module motion_detector can be created on device d-0
+dcns ''' module object_detector can be created on device d-0
+dcns ''' module object_tracker can be created on device d-0
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^DeviceId : 5
+^^^^^^^^^^^^^^^DeviceName : d-0
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 58601
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 2431.0147472737244
+dcns [object_tracker, PTZ_CONTROL] --->= 3.0110000000000476
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 4866.808917122404
+DETECTED_OBJECT --->= 0.04464285714129801
+OBJECT_LOCATION --->= 14.825648027764737
+CAMERA --->= 14.801933543368044
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6546397.056046279
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=2740.535714277263}}
+cloud : Application dcns total Energy = 2740.535714277263
+proxy-server : Energy Consumed = 0.0
+proxy-server : Vms Energy Map of device : proxy-server {}
+proxy-server : Application total Energy = 0.0
+d-0 : Energy Consumed = 534548.2020707357
+d-0 : Vms Energy Map of device : d-0 {dcns={motion_detector=152685.56619698327, object_tracker=115258.95280842959, object_detector=266305.5464710756}}
+d-0 : Application dcns total Energy = 534250.0654764886
+m-0-0 : Energy Consumed = 0.0
+m-0-0 : Vms Energy Map of device : m-0-0 {}
+m-0-0 : Application total Energy = 0.0
+m-0-1 : Energy Consumed = 0.0
+m-0-1 : Vms Energy Map of device : m-0-1 {}
+m-0-1 : Application total Energy = 0.0
+m-0-2 : Energy Consumed = 0.0
+m-0-2 : Vms Energy Map of device : m-0-2 {}
+m-0-2 : Application total Energy = 0.0
+m-0-3 : Energy Consumed = 0.0
+m-0-3 : Vms Energy Map of device : m-0-3 {}
+m-0-3 : Application total Energy = 0.0
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=3.6159846230047206E-7}}
+cloud : Application dcns total CO2 Emissions = 3.6159846230047206E-7 kg
+cloud : Total CO2 Emissions for device = 3.6159846230047206E-7 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {}
+proxy-server : Application total CO2 Emissions = 0.0 kg
+proxy-server : Total CO2 Emissions for device = 0.0 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {dcns={motion_detector=2.014601220654634E-5, object_tracker=1.5207778495556795E-5, object_detector=3.513753738160045E-5}}
+d-0 : Application dcns total CO2 Emissions = 7.049132808370358E-5 kg
+d-0 : Total CO2 Emissions for device = 7.049132808370358E-5 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {}
+m-0-0 : Application total CO2 Emissions = 0.0 kg
+m-0-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {}
+m-0-1 : Application total CO2 Emissions = 0.0 kg
+m-0-1 : Total CO2 Emissions for device = 0.0 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {}
+m-0-2 : Application total CO2 Emissions = 0.0 kg
+m-0-2 : Total CO2 Emissions for device = 0.0 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {}
+m-0-3 : Application total CO2 Emissions = 0.0 kg
+m-0-3 : Total CO2 Emissions for device = 0.0 kg
+=========================================
+Cost of execution in cloud = 6599.560662168151
+Total network usage = 9513.96
+Total network Energy = 116279.7600000053
+Total networking Time = 7982.000000000061
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {}
+cloud : Total Networking Energy Consumption for this device = 0.0 mJ
+4 proxy-server Networking Tuples energy Map {dcns={DETECTED_OBJECT=12967.500000224207}}
+proxy-server : Total Networking Energy Consumption for this device = 12967.500000224207 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32925.45454501554, DETECTED_OBJECT=13525.909091142972}}
+d-0 : Total Networking Energy Consumption for this device = 46451.363636158516 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-0 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-1 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-2 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-3 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {}
+cloud : Total Networking CO2 Emissions for this device = 0.0 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={DETECTED_OBJECT=1.7109895833629162E-6}}
+proxy-server : Total Networking CO2 Emissions for this device = 1.7109895833629162E-6 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.344330808022792E-6, DETECTED_OBJECT=1.7846685606369196E-6}}
+d-0 : Total Networking CO2 Emissions for this device = 6.128999368659712E-6 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+Starting Labelling DCNS...
+Scenario Proxy_Based
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module motion_detector can be created on device proxy-server
+dcns ''' module object_detector can be created on device proxy-server
+dcns ''' module object_tracker can be created on device proxy-server
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^DeviceId : 4
+^^^^^^^^^^^^^^^DeviceName : proxy-server
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 79178
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 2430.722079558734
+dcns [object_tracker, PTZ_CONTROL] --->= 5.0120000000002305
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 4865.5356571585235
+DETECTED_OBJECT --->= 0.04464285714129801
+OBJECT_LOCATION --->= 14.59126894967071
+CAMERA --->= 13.984804298533998
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6545858.023576637
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=2740.535714277263}}
+cloud : Application dcns total Energy = 2740.535714277263
+proxy-server : Energy Consumed = 534564.3208500076
+proxy-server : Vms Energy Map of device : proxy-server {dcns={motion_detector=152662.12315477186, object_tracker=115289.43215615343, object_detector=266313.3474194694}}
+proxy-server : Application dcns total Energy = 534264.9027303946
+d-0 : Energy Consumed = 0.0
+d-0 : Vms Energy Map of device : d-0 {}
+d-0 : Application total Energy = 0.0
+m-0-0 : Energy Consumed = 0.0
+m-0-0 : Vms Energy Map of device : m-0-0 {}
+m-0-0 : Application total Energy = 0.0
+m-0-1 : Energy Consumed = 0.0
+m-0-1 : Vms Energy Map of device : m-0-1 {}
+m-0-1 : Application total Energy = 0.0
+m-0-2 : Energy Consumed = 0.0
+m-0-2 : Vms Energy Map of device : m-0-2 {}
+m-0-2 : Application total Energy = 0.0
+m-0-3 : Energy Consumed = 0.0
+m-0-3 : Vms Energy Map of device : m-0-3 {}
+m-0-3 : Application total Energy = 0.0
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=3.6159846230047206E-7}}
+cloud : Application dcns total CO2 Emissions = 3.6159846230047206E-7 kg
+cloud : Total CO2 Emissions for device = 3.6159846230047206E-7 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {dcns={motion_detector=2.0142919027365915E-5, object_tracker=1.5211800076160294E-5, object_detector=3.513856667340087E-5}}
+proxy-server : Application dcns total CO2 Emissions = 7.049328577692708E-5 kg
+proxy-server : Total CO2 Emissions for device = 7.049328577692708E-5 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {}
+d-0 : Application total CO2 Emissions = 0.0 kg
+d-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {}
+m-0-0 : Application total CO2 Emissions = 0.0 kg
+m-0-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {}
+m-0-1 : Application total CO2 Emissions = 0.0 kg
+m-0-1 : Total CO2 Emissions for device = 0.0 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {}
+m-0-2 : Application total CO2 Emissions = 0.0 kg
+m-0-2 : Total CO2 Emissions for device = 0.0 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {}
+m-0-3 : Application total CO2 Emissions = 0.0 kg
+m-0-3 : Total CO2 Emissions for device = 0.0 kg
+=========================================
+Cost of execution in cloud = 6631.934984669682
+Total network usage = 17461.95
+Total network Energy = 147790.3920000025
+Total networking Time = 8776.599999999751
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {}
+cloud : Total Networking Energy Consumption for this device = 0.0 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=860.1775001558304, DETECTED_OBJECT=12967.500000224207}}
+proxy-server : Total Networking Energy Consumption for this device = 13827.677500380038 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32925.45454501554, CAMERA=3596088.363642858}}
+d-0 : Total Networking Energy Consumption for this device = 3629013.8181878733 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-0 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-1 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-2 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-3 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {}
+cloud : Total Networking CO2 Emissions for this device = 0.0 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.134956423816718E-7, DETECTED_OBJECT=1.7109895833629162E-6}}
+proxy-server : Total Networking CO2 Emissions for this device = 1.8244852257445879E-6 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.344330808022792E-6, CAMERA=4.744838813140522E-4}}
+d-0 : Total Networking CO2 Emissions for this device = 4.78828212122075E-4 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+Starting Labelling DCNS...
+Scenario Router_Router_Proxy
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module motion_detector can be created on device d-0
+dcns ''' module object_detector can be created on device d-0
+dcns ''' module object_tracker can be created on device proxy-server
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^DeviceId : 4
+^^^^^^^^^^^^^^^DeviceName : proxy-server
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 5
+^^^^^^^^^^^^^^^DeviceName : d-0
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 462
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 13.434070424556607
+dcns [object_tracker, PTZ_CONTROL] --->= 5.0120000000002305
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 11.428571428572468
+DETECTED_OBJECT --->= 0.04464285714129801
+OBJECT_LOCATION --->= 5.707638094557128
+CAMERA --->= 5.714285714286234
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6560813.169642849
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=3641.7857142742423}}
+cloud : Application dcns total Energy = 3641.7857142742423
+proxy-server : Energy Consumed = 449199.7394872813
+proxy-server : Vms Energy Map of device : proxy-server {dcns={object_tracker=152663.1457633544}}
+proxy-server : Application dcns total Energy = 152663.1457633544
+d-0 : Energy Consumed = 517541.0219999831
+d-0 : Vms Energy Map of device : d-0 {dcns={motion_detector=152728.06285714693, object_detector=305456.1257142873}}
+d-0 : Application dcns total Energy = 458184.18857143424
+m-0-0 : Energy Consumed = 0.0
+m-0-0 : Vms Energy Map of device : m-0-0 {}
+m-0-0 : Application total Energy = 0.0
+m-0-1 : Energy Consumed = 0.0
+m-0-1 : Vms Energy Map of device : m-0-1 {}
+m-0-1 : Application total Energy = 0.0
+m-0-2 : Energy Consumed = 0.0
+m-0-2 : Vms Energy Map of device : m-0-2 {}
+m-0-2 : Application total Energy = 0.0
+m-0-3 : Energy Consumed = 0.0
+m-0-3 : Vms Energy Map of device : m-0-3 {}
+m-0-3 : Application total Energy = 0.0
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=4.805133928556279E-7}}
+cloud : Application dcns total CO2 Emissions = 4.805133928556279E-7 kg
+cloud : Total CO2 Emissions for device = 4.805133928556279E-7 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {dcns={object_tracker=2.0143053954888097E-5}}
+proxy-server : Application dcns total CO2 Emissions = 2.0143053954888097E-5 kg
+proxy-server : Total CO2 Emissions for device = 2.0143053954888097E-5 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {dcns={motion_detector=2.0151619404763036E-5, object_detector=4.0303238809523856E-5}}
+d-0 : Application dcns total CO2 Emissions = 6.0454858214286896E-5 kg
+d-0 : Total CO2 Emissions for device = 6.0454858214286896E-5 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {}
+m-0-0 : Application total CO2 Emissions = 0.0 kg
+m-0-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {}
+m-0-1 : Application total CO2 Emissions = 0.0 kg
+m-0-1 : Total CO2 Emissions for device = 0.0 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {}
+m-0-2 : Application total CO2 Emissions = 0.0 kg
+m-0-2 : Total CO2 Emissions for device = 0.0 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {}
+m-0-3 : Application total CO2 Emissions = 0.0 kg
+m-0-3 : Total CO2 Emissions for device = 0.0 kg
+=========================================
+Cost of execution in cloud = 6473.757142854025
+Total network usage = 10055.59
+Total network Energy = 164535.39168001225
+Total networking Time = 7987.944000000665
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {}
+cloud : Total Networking Energy Consumption for this device = 0.0 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=860.1775001558304, DETECTED_OBJECT=17203.550000297033}}
+proxy-server : Total Networking Energy Consumption for this device = 18063.727500452864 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32925.45454501554, DETECTED_OBJECT=17944.37272758253, OBJECT_LOCATION=17962.407275989404}}
+d-0 : Total Networking Energy Consumption for this device = 68832.23454858747 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-0 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-1 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-2 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-3 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {}
+cloud : Total Networking CO2 Emissions for this device = 0.0 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.134956423816718E-7, DETECTED_OBJECT=2.2699128472614115E-6}}
+proxy-server : Total Networking CO2 Emissions for this device = 2.383408489643083E-6 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.344330808022792E-6, DETECTED_OBJECT=2.3676602904449125E-6, OBJECT_LOCATION=2.370039848915278E-6}}
+d-0 : Total Networking CO2 Emissions for this device = 9.082030947382983E-6 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+Starting Labelling DCNS...
+Scenario Router_Router_Cloud
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module object_tracker can be created on device cloud
+dcns ''' module motion_detector can be created on device d-0
+dcns ''' module object_detector can be created on device d-0
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 5
+^^^^^^^^^^^^^^^DeviceName : d-0
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 553
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 113.43601946086538
+dcns [object_tracker, PTZ_CONTROL] --->= 105.0130000000004
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 11.428571428572468
+DETECTED_OBJECT --->= 0.08921428571557044
+OBJECT_LOCATION --->= 0.35554345336009147
+CAMERA --->= 5.714285714286234
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6622207.969357326
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=3638.8722857191574, object_tracker=145979.023357326}}
+cloud : Application dcns total Energy = 149617.89564304514
+proxy-server : Energy Consumed = 0.0
+proxy-server : Vms Energy Map of device : proxy-server {}
+proxy-server : Application total Energy = 0.0
+d-0 : Energy Consumed = 517541.0219999831
+d-0 : Vms Energy Map of device : d-0 {dcns={motion_detector=152728.06285714693, object_detector=305456.1257142873}}
+d-0 : Application dcns total Energy = 458184.18857143424
+m-0-0 : Energy Consumed = 0.0
+m-0-0 : Vms Energy Map of device : m-0-0 {}
+m-0-0 : Application total Energy = 0.0
+m-0-1 : Energy Consumed = 0.0
+m-0-1 : Vms Energy Map of device : m-0-1 {}
+m-0-1 : Application total Energy = 0.0
+m-0-2 : Energy Consumed = 0.0
+m-0-2 : Vms Energy Map of device : m-0-2 {}
+m-0-2 : Application total Energy = 0.0
+m-0-3 : Energy Consumed = 0.0
+m-0-3 : Vms Energy Map of device : m-0-3 {}
+m-0-3 : Application total Energy = 0.0
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=4.801289821435003E-7, object_tracker=1.9261121137426188E-5}}
+cloud : Application dcns total CO2 Emissions = 1.974125011956969E-5 kg
+cloud : Total CO2 Emissions for device = 1.974125011956969E-5 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {}
+proxy-server : Application total CO2 Emissions = 0.0 kg
+proxy-server : Total CO2 Emissions for device = 0.0 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {dcns={motion_detector=2.0151619404763036E-5, object_detector=4.0303238809523856E-5}}
+d-0 : Application dcns total CO2 Emissions = 6.0454858214286896E-5 kg
+d-0 : Total CO2 Emissions for device = 6.0454858214286896E-5 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {}
+m-0-0 : Application total CO2 Emissions = 0.0 kg
+m-0-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {}
+m-0-1 : Application total CO2 Emissions = 0.0 kg
+m-0-1 : Total CO2 Emissions for device = 0.0 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {}
+m-0-2 : Application total CO2 Emissions = 0.0 kg
+m-0-2 : Total CO2 Emissions for device = 0.0 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {}
+m-0-3 : Application total CO2 Emissions = 0.0 kg
+m-0-3 : Total CO2 Emissions for device = 0.0 kg
+=========================================
+Cost of execution in cloud = 48438.700285765735
+Total network usage = 12147.04
+Total network Energy = 1646598.21215988
+Total networking Time = 7991.9280000012495
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {dcns={PTZ_PARAMS=2447.4554749688605}}
+cloud : Total Networking Energy Consumption for this device = 2447.4554749688605 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=855.8550001558099, DETECTED_OBJECT=17203.550000297033, OBJECT_LOCATION=17220.84000312787}}
+proxy-server : Total Networking Energy Consumption for this device = 35280.24500358071 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32759.999999560918, DETECTED_OBJECT=17944.37272758253, OBJECT_LOCATION=17962.407275989404}}
+d-0 : Total Networking Energy Consumption for this device = 68666.78000313285 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-0 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-1 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-2 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-3 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {dcns={PTZ_PARAMS=3.2292815294728106E-7}}
+cloud : Total Networking CO2 Emissions for this device = 3.2292815294728106E-7 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.1292531252055798E-7, DETECTED_OBJECT=2.2699128472614115E-6, OBJECT_LOCATION=2.2721941670795607E-6}}
+proxy-server : Total Networking CO2 Emissions for this device = 4.65503232686153E-6 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.322499999941971E-6, DETECTED_OBJECT=2.3676602904449125E-6, OBJECT_LOCATION=2.370039848915278E-6}}
+d-0 : Total Networking CO2 Emissions for this device = 9.060200139302161E-6 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+Starting Labelling DCNS...
+Scenario Proxy_Proxy_Cloud
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module object_tracker can be created on device cloud
+dcns ''' module motion_detector can be created on device proxy-server
+dcns ''' module object_detector can be created on device proxy-server
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 4
+^^^^^^^^^^^^^^^DeviceName : proxy-server
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 601
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 110.59621327663119
+dcns [object_tracker, PTZ_CONTROL] --->= 105.0130000000004
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 10.611590476188333
+DETECTED_OBJECT --->= 0.08921428571557044
+OBJECT_LOCATION --->= 0.14358649663897502
+CAMERA --->= 5.901695238095514
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6622782.728393407
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=3638.872285719333, object_tracker=145814.20128591347}}
+cloud : Application dcns total Energy = 149453.0735716328
+proxy-server : Energy Consumed = 517529.91133319476
+proxy-server : Vms Energy Map of device : proxy-server {dcns={motion_detector=152683.0724820571, object_detector=305395.03448916855}}
+proxy-server : Application dcns total Energy = 458078.10697122564
+d-0 : Energy Consumed = 0.0
+d-0 : Vms Energy Map of device : d-0 {}
+d-0 : Application total Energy = 0.0
+m-0-0 : Energy Consumed = 0.0
+m-0-0 : Vms Energy Map of device : m-0-0 {}
+m-0-0 : Application total Energy = 0.0
+m-0-1 : Energy Consumed = 0.0
+m-0-1 : Vms Energy Map of device : m-0-1 {}
+m-0-1 : Application total Energy = 0.0
+m-0-2 : Energy Consumed = 0.0
+m-0-2 : Vms Energy Map of device : m-0-2 {}
+m-0-2 : Application total Energy = 0.0
+m-0-3 : Energy Consumed = 0.0
+m-0-3 : Vms Energy Map of device : m-0-3 {}
+m-0-3 : Application total Energy = 0.0
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=4.801289821435233E-7, object_tracker=1.9239373780781076E-5}}
+cloud : Application dcns total CO2 Emissions = 1.97195027629246E-5 kg
+cloud : Total CO2 Emissions for device = 1.97195027629246E-5 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {dcns={motion_detector=2.014568317471539E-5, object_detector=4.029517816176166E-5}}
+proxy-server : Application dcns total CO2 Emissions = 6.0440861336477055E-5 kg
+proxy-server : Total CO2 Emissions for device = 6.0440861336477055E-5 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {}
+d-0 : Application total CO2 Emissions = 0.0 kg
+d-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {}
+m-0-0 : Application total CO2 Emissions = 0.0 kg
+m-0-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {}
+m-0-1 : Application total CO2 Emissions = 0.0 kg
+m-0-1 : Total CO2 Emissions for device = 0.0 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {}
+m-0-2 : Application total CO2 Emissions = 0.0 kg
+m-0-2 : Total CO2 Emissions for device = 0.0 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {}
+m-0-3 : Application total CO2 Emissions = 0.0 kg
+m-0-3 : Total CO2 Emissions for device = 0.0 kg
+=========================================
+Cost of execution in cloud = 48320.717142914604
+Total network usage = 20043.4
+Total network Energy = 1648084.858079635
+Total networking Time = 8781.564000000366
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {dcns={PTZ_PARAMS=2447.4554749688605}}
+cloud : Total Networking Energy Consumption for this device = 2447.4554749688605 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=855.8550001558099, DETECTED_OBJECT=17203.550000297033, OBJECT_LOCATION=17220.84000312787}}
+proxy-server : Total Networking Energy Consumption for this device = 35280.24500358071 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32759.999999560918, CAMERA=3596088.363642858}}
+d-0 : Total Networking Energy Consumption for this device = 3628848.3636424188 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-0 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-1 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-2 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-3 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {dcns={PTZ_PARAMS=3.2292815294728106E-7}}
+cloud : Total Networking CO2 Emissions for this device = 3.2292815294728106E-7 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.1292531252055798E-7, DETECTED_OBJECT=2.2699128472614115E-6, OBJECT_LOCATION=2.2721941670795607E-6}}
+proxy-server : Total Networking CO2 Emissions for this device = 4.65503232686153E-6 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.322499999941971E-6, CAMERA=4.744838813140522E-4}}
+d-0 : Total Networking CO2 Emissions for this device = 4.788063813139942E-4 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+Starting Labelling DCNS...
+Scenario Router_Proxy_Proxy
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module motion_detector can be created on device d-0
+dcns ''' module object_detector can be created on device proxy-server
+dcns ''' module object_tracker can be created on device proxy-server
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^DeviceId : 4
+^^^^^^^^^^^^^^^DeviceName : proxy-server
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 5
+^^^^^^^^^^^^^^^DeviceName : d-0
+^^^^^^^^^^^^^^^ module : motion_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 506
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 13.474214285716055
+dcns [object_tracker, PTZ_CONTROL] --->= 5.0120000000002305
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 11.443980952379691
+DETECTED_OBJECT --->= 0.04464285714129801
+OBJECT_LOCATION --->= 5.630638095238343
+CAMERA --->= 5.714285714286234
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6560813.169642826
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=3641.7857142742423}}
+cloud : Application dcns total Energy = 3641.7857142742423
+proxy-server : Energy Consumed = 517454.1199166133
+proxy-server : Vms Energy Map of device : proxy-server {dcns={object_tracker=152666.97163203417, object_detector=305395.03448919056}}
+proxy-server : Application dcns total Energy = 458062.0061212247
+d-0 : Energy Consumed = 449512.2300000004
+d-0 : Vms Energy Map of device : d-0 {dcns={motion_detector=152728.06285714693}}
+d-0 : Application dcns total Energy = 152728.06285714693
+m-0-0 : Energy Consumed = 0.0
+m-0-0 : Vms Energy Map of device : m-0-0 {}
+m-0-0 : Application total Energy = 0.0
+m-0-1 : Energy Consumed = 0.0
+m-0-1 : Vms Energy Map of device : m-0-1 {}
+m-0-1 : Application total Energy = 0.0
+m-0-2 : Energy Consumed = 0.0
+m-0-2 : Vms Energy Map of device : m-0-2 {}
+m-0-2 : Application total Energy = 0.0
+m-0-3 : Energy Consumed = 0.0
+m-0-3 : Vms Energy Map of device : m-0-3 {}
+m-0-3 : Application total Energy = 0.0
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=4.805133928556279E-7}}
+cloud : Application dcns total CO2 Emissions = 4.805133928556279E-7 kg
+cloud : Total CO2 Emissions for device = 4.805133928556279E-7 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {dcns={object_tracker=2.0143558757004116E-5, object_detector=4.0295178161767524E-5}}
+proxy-server : Application dcns total CO2 Emissions = 6.0438736918771643E-5 kg
+proxy-server : Total CO2 Emissions for device = 6.0438736918771643E-5 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {dcns={motion_detector=2.0151619404763036E-5}}
+d-0 : Application dcns total CO2 Emissions = 2.0151619404763036E-5 kg
+d-0 : Total CO2 Emissions for device = 2.0151619404763036E-5 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {}
+m-0-0 : Application total CO2 Emissions = 0.0 kg
+m-0-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {}
+m-0-1 : Application total CO2 Emissions = 0.0 kg
+m-0-1 : Total CO2 Emissions for device = 0.0 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {}
+m-0-2 : Application total CO2 Emissions = 0.0 kg
+m-0-2 : Total CO2 Emissions for device = 0.0 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {}
+m-0-3 : Application total CO2 Emissions = 0.0 kg
+m-0-3 : Total CO2 Emissions for device = 0.0 kg
+=========================================
+Cost of execution in cloud = 6475.357142854026
+Total network usage = 10772.75
+Total network Energy = 163321.6151999982
+Total networking Time = 8059.660000000862
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {}
+cloud : Total Networking Energy Consumption for this device = 0.0 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=860.1775001558304, DETECTED_OBJECT=17203.550000297033}}
+proxy-server : Total Networking Energy Consumption for this device = 18063.727500452864 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32925.45454501554, MOTION_VIDEO_STREAM=359248.1454607128}}
+d-0 : Total Networking Energy Consumption for this device = 392173.6000057283 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-0 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-1 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-2 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-3 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {}
+cloud : Total Networking CO2 Emissions for this device = 0.0 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.134956423816718E-7, DETECTED_OBJECT=2.2699128472614115E-6}}
+proxy-server : Total Networking CO2 Emissions for this device = 2.383408489643083E-6 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.344330808022792E-6, MOTION_VIDEO_STREAM=4.740079697051268E-5}}
+d-0 : Total Networking CO2 Emissions for this device = 5.1745127778535474E-5 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+Starting Labelling DCNS...
+Scenario Router_Cloud_Cloud
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module object_detector can be created on device cloud
+dcns ''' module object_tracker can be created on device cloud
+dcns ''' module motion_detector can be created on device d-0
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 5
+^^^^^^^^^^^^^^^DeviceName : d-0
+^^^^^^^^^^^^^^^ module : motion_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 606
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 102.78193750000598
+dcns [object_tracker, PTZ_CONTROL] --->= 105.0130000000004
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 0.7321476190501319
+DETECTED_OBJECT --->= 0.089285714286234
+OBJECT_LOCATION --->= 0.2781705568096085
+CAMERA --->= 5.714285714286234
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6678306.677465122
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=3641.785714295425, object_tracker=145760.24400007888, object_detector=291542.36078626715}}
+cloud : Application dcns total Energy = 440944.3905006414
+proxy-server : Energy Consumed = 0.0
+proxy-server : Vms Energy Map of device : proxy-server {}
+proxy-server : Application total Energy = 0.0
+d-0 : Energy Consumed = 449512.2300000004
+d-0 : Vms Energy Map of device : d-0 {dcns={motion_detector=152728.06285714693}}
+d-0 : Application dcns total Energy = 152728.06285714693
+m-0-0 : Energy Consumed = 0.0
+m-0-0 : Vms Energy Map of device : m-0-0 {}
+m-0-0 : Application total Energy = 0.0
+m-0-1 : Energy Consumed = 0.0
+m-0-1 : Vms Energy Map of device : m-0-1 {}
+m-0-1 : Application total Energy = 0.0
+m-0-2 : Energy Consumed = 0.0
+m-0-2 : Vms Energy Map of device : m-0-2 {}
+m-0-2 : Application total Energy = 0.0
+m-0-3 : Energy Consumed = 0.0
+m-0-3 : Vms Energy Map of device : m-0-3 {}
+m-0-3 : Application total Energy = 0.0
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=4.805133928584214E-7, object_tracker=1.923225441667676E-5, object_detector=3.846739482596575E-5}}
+cloud : Application dcns total CO2 Emissions = 5.818016263550093E-5 kg
+cloud : Total CO2 Emissions for device = 5.818016263550093E-5 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {}
+proxy-server : Application total CO2 Emissions = 0.0 kg
+proxy-server : Total CO2 Emissions for device = 0.0 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {dcns={motion_detector=2.0151619404763036E-5}}
+d-0 : Application dcns total CO2 Emissions = 2.0151619404763036E-5 kg
+d-0 : Total CO2 Emissions for device = 2.0151619404763036E-5 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {}
+m-0-0 : Application total CO2 Emissions = 0.0 kg
+m-0-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {}
+m-0-1 : Application total CO2 Emissions = 0.0 kg
+m-0-1 : Total CO2 Emissions for device = 0.0 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {}
+m-0-2 : Application total CO2 Emissions = 0.0 kg
+m-0-2 : Total CO2 Emissions for device = 0.0 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {}
+m-0-3 : Application total CO2 Emissions = 0.0 kg
+m-0-3 : Total CO2 Emissions for device = 0.0 kg
+=========================================
+Cost of execution in cloud = 130833.69514303803
+Total network usage = 48722.2
+Total network Energy = 1571623.2191999122
+Total networking Time = 8135.360000001661
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {dcns={PTZ_PARAMS=2447.4554749688605}}
+cloud : Total Networking Energy Consumption for this device = 2447.4554749688605 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=855.8550001558099, MOTION_VIDEO_STREAM=344416.8000059562}}
+proxy-server : Total Networking Energy Consumption for this device = 345272.655006112 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32759.999999560918, MOTION_VIDEO_STREAM=359248.1454607128}}
+d-0 : Total Networking Energy Consumption for this device = 392008.1454602737 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-0 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-1 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-2 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-3 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {dcns={PTZ_PARAMS=3.2292815294728106E-7}}
+cloud : Total Networking CO2 Emissions for this device = 3.2292815294728106E-7 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.1292531252055798E-7, MOTION_VIDEO_STREAM=4.5443883334112906E-5}}
+proxy-server : Total Networking CO2 Emissions for this device = 4.555680864663346E-5 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.322499999941971E-6, MOTION_VIDEO_STREAM=4.740079697051268E-5}}
+d-0 : Total Networking CO2 Emissions for this device = 5.1723296970454656E-5 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+Starting Labelling DCNS...
+Scenario Proxy_Cloud_Cloud
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module object_detector can be created on device cloud
+dcns ''' module object_tracker can be created on device cloud
+dcns ''' module motion_detector can be created on device proxy-server
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 4
+^^^^^^^^^^^^^^^DeviceName : proxy-server
+^^^^^^^^^^^^^^^ module : motion_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 1141
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 100.30720535714687
+dcns [object_tracker, PTZ_CONTROL] --->= 105.0130000000004
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 0.3490571428599651
+DETECTED_OBJECT --->= 0.089285714286234
+OBJECT_LOCATION --->= 0.1537259692591915
+CAMERA --->= 5.148190476189484
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6678434.461607095
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=3641.785714295425, object_tracker=145782.11678603874, object_detector=291607.9791429081}}
+cloud : Application dcns total Energy = 441031.8816432423
+proxy-server : Energy Consumed = 449519.8272509758
+proxy-server : Vms Energy Map of device : proxy-server {dcns={motion_detector=152705.98169148143}}
+proxy-server : Application dcns total Energy = 152705.98169148143
+d-0 : Energy Consumed = 0.0
+d-0 : Vms Energy Map of device : d-0 {}
+d-0 : Application total Energy = 0.0
+m-0-0 : Energy Consumed = 0.0
+m-0-0 : Vms Energy Map of device : m-0-0 {}
+m-0-0 : Application total Energy = 0.0
+m-0-1 : Energy Consumed = 0.0
+m-0-1 : Vms Energy Map of device : m-0-1 {}
+m-0-1 : Application total Energy = 0.0
+m-0-2 : Energy Consumed = 0.0
+m-0-2 : Vms Energy Map of device : m-0-2 {}
+m-0-2 : Application total Energy = 0.0
+m-0-3 : Energy Consumed = 0.0
+m-0-3 : Vms Energy Map of device : m-0-3 {}
+m-0-3 : Application total Energy = 0.0
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=4.805133928584214E-7, object_tracker=1.9235140409269956E-5, object_detector=3.847605280358092E-5}}
+cloud : Application dcns total CO2 Emissions = 5.81917066057093E-5 kg
+cloud : Total CO2 Emissions for device = 5.81917066057093E-5 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {dcns={motion_detector=2.0148705917624506E-5}}
+proxy-server : Application dcns total CO2 Emissions = 2.0148705917624506E-5 kg
+proxy-server : Total CO2 Emissions for device = 2.0148705917624506E-5 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {}
+d-0 : Application total CO2 Emissions = 0.0 kg
+d-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {}
+m-0-0 : Application total CO2 Emissions = 0.0 kg
+m-0-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {}
+m-0-1 : Application total CO2 Emissions = 0.0 kg
+m-0-1 : Total CO2 Emissions for device = 0.0 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {}
+m-0-2 : Application total CO2 Emissions = 0.0 kg
+m-0-2 : Total CO2 Emissions for device = 0.0 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {}
+m-0-3 : Application total CO2 Emissions = 0.0 kg
+m-0-3 : Total CO2 Emissions for device = 0.0 kg
+=========================================
+Cost of execution in cloud = 130816.1648572564
+Total network usage = 55901.4
+Total network Energy = 1574323.6415998393
+Total networking Time = 8853.280000000648
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {dcns={PTZ_PARAMS=2447.4554749688605}}
+cloud : Total Networking Energy Consumption for this device = 2447.4554749688605 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=855.8550001558099, MOTION_VIDEO_STREAM=344416.8000059562}}
+proxy-server : Total Networking Energy Consumption for this device = 345272.655006112 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32759.999999560918, CAMERA=3596088.363642858}}
+d-0 : Total Networking Energy Consumption for this device = 3628848.3636424188 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-0 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-1 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-2 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={CAMERA=59553.663366336696}}
+m-0-3 : Total Networking Energy Consumption for this device = 59553.663366336696 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {dcns={PTZ_PARAMS=3.2292815294728106E-7}}
+cloud : Total Networking CO2 Emissions for this device = 3.2292815294728106E-7 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.1292531252055798E-7, MOTION_VIDEO_STREAM=4.5443883334112906E-5}}
+proxy-server : Total Networking CO2 Emissions for this device = 4.555680864663346E-5 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.322499999941971E-6, CAMERA=4.744838813140522E-4}}
+d-0 : Total Networking CO2 Emissions for this device = 4.788063813139942E-4 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={CAMERA=7.85777502750276E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.85777502750276E-6 kg
+Starting Labelling DCNS...
+Scenario Edge_Edge_Router
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module motion_detector can be created on device m-0-2
+dcns ''' module object_detector can be created on device m-0-2
+dcns ''' module motion_detector can be created on device m-0-1
+dcns ''' module object_detector can be created on device m-0-1
+dcns ''' module motion_detector can be created on device m-0-3
+dcns ''' module object_detector can be created on device m-0-3
+dcns ''' module motion_detector can be created on device m-0-0
+dcns ''' module object_detector can be created on device m-0-0
+dcns ''' module object_tracker can be created on device d-0
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^DeviceId : 5
+^^^^^^^^^^^^^^^DeviceName : d-0
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 6
+^^^^^^^^^^^^^^^DeviceName : m-0-0
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^DeviceName : m-0-1
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^DeviceId : 12
+^^^^^^^^^^^^^^^DeviceName : m-0-2
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^DeviceId : 15
+^^^^^^^^^^^^^^^DeviceName : m-0-3
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 16953
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 4645.397179332965
+dcns [object_tracker, PTZ_CONTROL] --->= 3.0110000000000476
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 9290.037379572439
+DETECTED_OBJECT --->= 0.04464285714129801
+OBJECT_LOCATION --->= 5.706116063637893
+CAMERA --->= 16.1290322580644
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6531032.349822569
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=1931.2499999939812}}
+cloud : Application dcns total Energy = 1931.2499999939812
+proxy-server : Energy Consumed = 0.0
+proxy-server : Vms Energy Map of device : proxy-server {}
+proxy-server : Application total Energy = 0.0
+d-0 : Energy Consumed = 432904.1925661828
+d-0 : Vms Energy Map of device : d-0 {dcns={object_tracker=81420.23502357322}}
+d-0 : Application dcns total Energy = 81420.23502357322
+m-0-0 : Energy Consumed = 435899.3974549842
+m-0-0 : Vms Energy Map of device : m-0-0 {dcns={motion_detector=174359.75999999905, object_detector=258731.57736403105}}
+m-0-0 : Application dcns total Energy = 433091.33736403007
+m-0-1 : Energy Consumed = 435899.3974549842
+m-0-1 : Vms Energy Map of device : m-0-1 {dcns={motion_detector=174359.75999999905, object_detector=258731.57736403105}}
+m-0-1 : Application dcns total Energy = 433091.33736403007
+m-0-2 : Energy Consumed = 435899.3974549842
+m-0-2 : Vms Energy Map of device : m-0-2 {dcns={motion_detector=174359.75999999905, object_detector=258731.57736403105}}
+m-0-2 : Application dcns total Energy = 433091.33736403007
+m-0-3 : Energy Consumed = 435899.3974549842
+m-0-3 : Vms Energy Map of device : m-0-3 {dcns={motion_detector=174359.75999999905, object_detector=258731.57736403105}}
+m-0-3 : Application dcns total Energy = 433091.33736403007
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=2.5481770833253915E-7}}
+cloud : Application dcns total CO2 Emissions = 2.5481770833253915E-7 kg
+cloud : Total CO2 Emissions for device = 2.5481770833253915E-7 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {}
+proxy-server : Application total CO2 Emissions = 0.0 kg
+proxy-server : Total CO2 Emissions for device = 0.0 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {dcns={object_tracker=1.0742947676721605E-5}}
+d-0 : Application dcns total CO2 Emissions = 1.0742947676721605E-5 kg
+d-0 : Total CO2 Emissions for device = 1.0742947676721605E-5 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {dcns={motion_detector=2.3005801666666377E-5, object_detector=3.413819423553239E-5}}
+m-0-0 : Application dcns total CO2 Emissions = 5.7143995902198767E-5 kg
+m-0-0 : Total CO2 Emissions for device = 5.7143995902198767E-5 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {dcns={motion_detector=2.3005801666666377E-5, object_detector=3.413819423553239E-5}}
+m-0-1 : Application dcns total CO2 Emissions = 5.7143995902198767E-5 kg
+m-0-1 : Total CO2 Emissions for device = 5.7143995902198767E-5 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {dcns={motion_detector=2.3005801666666377E-5, object_detector=3.413819423553239E-5}}
+m-0-2 : Application dcns total CO2 Emissions = 5.7143995902198767E-5 kg
+m-0-2 : Total CO2 Emissions for device = 5.7143995902198767E-5 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {dcns={motion_detector=2.3005801666666377E-5, object_detector=3.413819423553239E-5}}
+m-0-3 : Application dcns total CO2 Emissions = 5.7143995902198767E-5 kg
+m-0-3 : Total CO2 Emissions for device = 5.7143995902198767E-5 kg
+=========================================
+Cost of execution in cloud = 7293.045806449977
+Total network usage = 1131.6
+Total network Energy = 56985.48960000161
+Total networking Time = 46.67999999999989
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {}
+cloud : Total Networking Energy Consumption for this device = 0.0 mJ
+4 proxy-server Networking Tuples energy Map {dcns={DETECTED_OBJECT=9163.70000015887}}
+proxy-server : Total Networking Energy Consumption for this device = 9163.70000015887 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32925.45454501554, DETECTED_OBJECT=9558.309091074814}}
+d-0 : Total Networking Energy Consumption for this device = 42483.763636090356 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={OBJECT_LOCATION=56009.46336633651}}
+m-0-0 : Total Networking Energy Consumption for this device = 56009.46336633651 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={OBJECT_LOCATION=56009.46336633651}}
+m-0-1 : Total Networking Energy Consumption for this device = 56009.46336633651 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={OBJECT_LOCATION=56009.46336633651}}
+m-0-2 : Total Networking Energy Consumption for this device = 56009.46336633651 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={DETECTED_OBJECT=44820.882895065064, OBJECT_LOCATION=11226.362649489332}}
+m-0-3 : Total Networking Energy Consumption for this device = 56047.2455445544 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {}
+cloud : Total Networking CO2 Emissions for this device = 0.0 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={DETECTED_OBJECT=1.2090993055765172E-6}}
+proxy-server : Total Networking CO2 Emissions for this device = 1.2090993055765172E-6 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.344330808022792E-6, DETECTED_OBJECT=1.2611657828501486E-6}}
+d-0 : Total Networking CO2 Emissions for this device = 5.605496590872941E-6 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={OBJECT_LOCATION=7.390137527502733E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.390137527502733E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={OBJECT_LOCATION=7.390137527502733E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.390137527502733E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={OBJECT_LOCATION=7.390137527502733E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.390137527502733E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={DETECTED_OBJECT=5.913866493098862E-6, OBJECT_LOCATION=1.4812561829187313E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.395122676017593E-6 kg
+Starting Labelling DCNS...
+Scenario Edge_Edge_Proxy
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module motion_detector can be created on device m-0-2
+dcns ''' module object_detector can be created on device m-0-2
+dcns ''' module motion_detector can be created on device m-0-1
+dcns ''' module object_detector can be created on device m-0-1
+dcns ''' module motion_detector can be created on device m-0-3
+dcns ''' module object_detector can be created on device m-0-3
+dcns ''' module motion_detector can be created on device m-0-0
+dcns ''' module object_detector can be created on device m-0-0
+dcns ''' module object_tracker can be created on device proxy-server
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^DeviceId : 4
+^^^^^^^^^^^^^^^DeviceName : proxy-server
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 6
+^^^^^^^^^^^^^^^DeviceName : m-0-0
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^DeviceName : m-0-1
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^DeviceId : 12
+^^^^^^^^^^^^^^^DeviceName : m-0-2
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^DeviceId : 15
+^^^^^^^^^^^^^^^DeviceName : m-0-3
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 16655
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 4647.400028673855
+dcns [object_tracker, PTZ_CONTROL] --->= 5.0120000000002305
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 9290.037379572439
+DETECTED_OBJECT --->= 0.04464285714129801
+OBJECT_LOCATION --->= 5.7000839578888876
+CAMERA --->= 16.1290322580644
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6531032.349822569
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=1931.2499999939812}}
+cloud : Application dcns total Energy = 1931.2499999939812
+proxy-server : Energy Consumed = 432897.2417176105
+proxy-server : Vms Energy Map of device : proxy-server {dcns={object_tracker=81389.27922267582}}
+proxy-server : Application dcns total Energy = 81389.27922267582
+d-0 : Energy Consumed = 0.0
+d-0 : Vms Energy Map of device : d-0 {}
+d-0 : Application total Energy = 0.0
+m-0-0 : Energy Consumed = 435899.3974549842
+m-0-0 : Vms Energy Map of device : m-0-0 {dcns={motion_detector=174359.75999999905, object_detector=258731.57736403105}}
+m-0-0 : Application dcns total Energy = 433091.33736403007
+m-0-1 : Energy Consumed = 435899.3974549842
+m-0-1 : Vms Energy Map of device : m-0-1 {dcns={motion_detector=174359.75999999905, object_detector=258731.57736403105}}
+m-0-1 : Application dcns total Energy = 433091.33736403007
+m-0-2 : Energy Consumed = 435899.3974549842
+m-0-2 : Vms Energy Map of device : m-0-2 {dcns={motion_detector=174359.75999999905, object_detector=258731.57736403105}}
+m-0-2 : Application dcns total Energy = 433091.33736403007
+m-0-3 : Energy Consumed = 435899.3974549842
+m-0-3 : Vms Energy Map of device : m-0-3 {dcns={motion_detector=174359.75999999905, object_detector=258731.57736403105}}
+m-0-3 : Application dcns total Energy = 433091.33736403007
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=2.5481770833253915E-7}}
+cloud : Application dcns total CO2 Emissions = 2.5481770833253915E-7 kg
+cloud : Total CO2 Emissions for device = 2.5481770833253915E-7 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {dcns={object_tracker=1.0738863230770242E-5}}
+proxy-server : Application dcns total CO2 Emissions = 1.0738863230770242E-5 kg
+proxy-server : Total CO2 Emissions for device = 1.0738863230770242E-5 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {}
+d-0 : Application total CO2 Emissions = 0.0 kg
+d-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {dcns={motion_detector=2.3005801666666377E-5, object_detector=3.413819423553239E-5}}
+m-0-0 : Application dcns total CO2 Emissions = 5.7143995902198767E-5 kg
+m-0-0 : Total CO2 Emissions for device = 5.7143995902198767E-5 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {dcns={motion_detector=2.3005801666666377E-5, object_detector=3.413819423553239E-5}}
+m-0-1 : Application dcns total CO2 Emissions = 5.7143995902198767E-5 kg
+m-0-1 : Total CO2 Emissions for device = 5.7143995902198767E-5 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {dcns={motion_detector=2.3005801666666377E-5, object_detector=3.413819423553239E-5}}
+m-0-2 : Application dcns total CO2 Emissions = 5.7143995902198767E-5 kg
+m-0-2 : Total CO2 Emissions for device = 5.7143995902198767E-5 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {dcns={motion_detector=2.3005801666666377E-5, object_detector=3.413819423553239E-5}}
+m-0-3 : Application dcns total CO2 Emissions = 5.7143995902198767E-5 kg
+m-0-3 : Total CO2 Emissions for device = 5.7143995902198767E-5 kg
+=========================================
+Cost of execution in cloud = 7293.045806449977
+Total network usage = 1154.83
+Total network Energy = 72795.9508800017
+Total networking Time = 48.80399999999879
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {}
+cloud : Total Networking Energy Consumption for this device = 0.0 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=860.1775001558304, DETECTED_OBJECT=9163.70000015887}}
+proxy-server : Total Networking Energy Consumption for this device = 10023.8775003147 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32925.45454501554, DETECTED_OBJECT=9558.309091074814, OBJECT_LOCATION=9576.343638100088}}
+d-0 : Total Networking Energy Consumption for this device = 52060.10727419044 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={OBJECT_LOCATION=56009.46336633651}}
+m-0-0 : Total Networking Energy Consumption for this device = 56009.46336633651 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={OBJECT_LOCATION=56009.46336633651}}
+m-0-1 : Total Networking Energy Consumption for this device = 56009.46336633651 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={OBJECT_LOCATION=56009.46336633651}}
+m-0-2 : Total Networking Energy Consumption for this device = 56009.46336633651 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={DETECTED_OBJECT=44820.882895065064, OBJECT_LOCATION=11226.362649489332}}
+m-0-3 : Total Networking Energy Consumption for this device = 56047.2455445544 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {}
+cloud : Total Networking CO2 Emissions for this device = 0.0 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.134956423816718E-7, DETECTED_OBJECT=1.2090993055765172E-6}}
+proxy-server : Total Networking CO2 Emissions for this device = 1.322594947958189E-6 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.344330808022792E-6, DETECTED_OBJECT=1.2611657828501486E-6, OBJECT_LOCATION=1.263545341138241E-6}}
+d-0 : Total Networking CO2 Emissions for this device = 6.8690419320111815E-6 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={OBJECT_LOCATION=7.390137527502733E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.390137527502733E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={OBJECT_LOCATION=7.390137527502733E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.390137527502733E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={OBJECT_LOCATION=7.390137527502733E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.390137527502733E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={DETECTED_OBJECT=5.913866493098862E-6, OBJECT_LOCATION=1.4812561829187313E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.395122676017593E-6 kg
+Starting Labelling DCNS...
+Scenario Edge_Edge_Cloud
+object_detector
+motion_detector
+object_tracker
+user_interface
+
+
+
+
+*****************************
+
+
+
+dcns ''' module user_interface can be created on device cloud
+dcns ''' module object_tracker can be created on device cloud
+dcns ''' module motion_detector can be created on device m-0-2
+dcns ''' module object_detector can be created on device m-0-2
+dcns ''' module motion_detector can be created on device m-0-1
+dcns ''' module object_detector can be created on device m-0-1
+dcns ''' module motion_detector can be created on device m-0-3
+dcns ''' module object_detector can be created on device m-0-3
+dcns ''' module motion_detector can be created on device m-0-0
+dcns ''' module object_detector can be created on device m-0-0
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO
+0.0 Submitted application dcns
+^^^^^^^^^^^^^^^DeviceId : 3
+^^^^^^^^^^^^^^^DeviceName : cloud
+^^^^^^^^^^^^^^^ module : user_interface
+^^^^^^^^^^^^^^^ module : object_tracker
+^^^^^^^^^^^^^^^DeviceId : 6
+^^^^^^^^^^^^^^^DeviceName : m-0-0
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^DeviceId : 9
+^^^^^^^^^^^^^^^DeviceName : m-0-1
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^DeviceId : 12
+^^^^^^^^^^^^^^^DeviceName : m-0-2
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+^^^^^^^^^^^^^^^DeviceId : 15
+^^^^^^^^^^^^^^^DeviceName : m-0-3
+^^^^^^^^^^^^^^^ module : motion_detector
+^^^^^^^^^^^^^^^ module : object_detector
+periodic edge source (from initialize periodic tuple): object_tracker
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME = 14238
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+dcns [motion_detector, object_detector, object_tracker] --->= 4721.106600775919
+dcns [object_tracker, PTZ_CONTROL] --->= 105.0130000000004
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+MOTION_VIDEO_STREAM --->= 9290.037379572439
+DETECTED_OBJECT --->= 0.08921428571557044
+OBJECT_LOCATION --->= 0.3544911888239367
+CAMERA --->= 16.1290322580644
+=========================================
+=============================================================================
+============== Device, Application, and VMs Energy RESULTS ==================
+
+
+cloud : Energy Consumed = 6597759.670679787
+cloud : Vms Energy Map of device : cloud {dcns={user_interface=1929.705000002519, object_tracker=77775.49864294863}}
+cloud : Application dcns total Energy = 79705.20364295115
+proxy-server : Energy Consumed = 0.0
+proxy-server : Vms Energy Map of device : proxy-server {}
+proxy-server : Application total Energy = 0.0
+d-0 : Energy Consumed = 0.0
+d-0 : Vms Energy Map of device : d-0 {}
+d-0 : Application total Energy = 0.0
+m-0-0 : Energy Consumed = 435899.3974549842
+m-0-0 : Vms Energy Map of device : m-0-0 {dcns={motion_detector=174359.75999999905, object_detector=258731.57736403105}}
+m-0-0 : Application dcns total Energy = 433091.33736403007
+m-0-1 : Energy Consumed = 435899.3974549842
+m-0-1 : Vms Energy Map of device : m-0-1 {dcns={motion_detector=174359.75999999905, object_detector=258731.57736403105}}
+m-0-1 : Application dcns total Energy = 433091.33736403007
+m-0-2 : Energy Consumed = 435899.3974549842
+m-0-2 : Vms Energy Map of device : m-0-2 {dcns={motion_detector=174359.75999999905, object_detector=258731.57736403105}}
+m-0-2 : Application dcns total Energy = 433091.33736403007
+m-0-3 : Energy Consumed = 435899.3974549842
+m-0-3 : Vms Energy Map of device : m-0-3 {dcns={motion_detector=174359.75999999905, object_detector=258731.57736403105}}
+m-0-3 : Application dcns total Energy = 433091.33736403007
+=========================================
+===================================================================================
+============== Device, Application, and VMs CO2 Emission RESULTS ==================
+
+
+cloud : VMs CO2 Emission Map of device: cloud {dcns={user_interface=2.5461385416699914E-7, object_tracker=1.0262044959833895E-5}}
+cloud : Application dcns total CO2 Emissions = 1.0516658814000894E-5 kg
+cloud : Total CO2 Emissions for device = 1.0516658814000894E-5 kg
+proxy-server : VMs CO2 Emission Map of device: proxy-server {}
+proxy-server : Application total CO2 Emissions = 0.0 kg
+proxy-server : Total CO2 Emissions for device = 0.0 kg
+d-0 : VMs CO2 Emission Map of device: d-0 {}
+d-0 : Application total CO2 Emissions = 0.0 kg
+d-0 : Total CO2 Emissions for device = 0.0 kg
+m-0-0 : VMs CO2 Emission Map of device: m-0-0 {dcns={motion_detector=2.3005801666666377E-5, object_detector=3.413819423553239E-5}}
+m-0-0 : Application dcns total CO2 Emissions = 5.7143995902198767E-5 kg
+m-0-0 : Total CO2 Emissions for device = 5.7143995902198767E-5 kg
+m-0-1 : VMs CO2 Emission Map of device: m-0-1 {dcns={motion_detector=2.3005801666666377E-5, object_detector=3.413819423553239E-5}}
+m-0-1 : Application dcns total CO2 Emissions = 5.7143995902198767E-5 kg
+m-0-1 : Total CO2 Emissions for device = 5.7143995902198767E-5 kg
+m-0-2 : VMs CO2 Emission Map of device: m-0-2 {dcns={motion_detector=2.3005801666666377E-5, object_detector=3.413819423553239E-5}}
+m-0-2 : Application dcns total CO2 Emissions = 5.7143995902198767E-5 kg
+m-0-2 : Total CO2 Emissions for device = 5.7143995902198767E-5 kg
+m-0-3 : VMs CO2 Emission Map of device: m-0-3 {dcns={motion_detector=2.3005801666666377E-5, object_detector=3.413819423553239E-5}}
+m-0-3 : Application dcns total CO2 Emissions = 5.7143995902198767E-5 kg
+m-0-3 : Total CO2 Emissions for device = 5.7143995902198767E-5 kg
+=========================================
+Cost of execution in cloud = 29790.534645186854
+Total network usage = 2316.28
+Total network Energy = 862931.8521599771
+Total networking Time = 50.92799999999729
+
+=========================================================
+============== Networking TIME & ENERGY MAP RESULTS ==================
+3 cloud Networking Tuples energy Map {dcns={PTZ_PARAMS=2447.4554749688605}}
+cloud : Total Networking Energy Consumption for this device = 2447.4554749688605 mJ
+4 proxy-server Networking Tuples energy Map {dcns={PTZ_PARAMS=855.8550001558099, DETECTED_OBJECT=9163.70000015887, OBJECT_LOCATION=9180.990001664512}}
+proxy-server : Total Networking Energy Consumption for this device = 19200.54500197919 mJ
+5 d-0 Networking Tuples energy Map {dcns={PTZ_PARAMS=32759.999999560918, DETECTED_OBJECT=9558.309091074814, OBJECT_LOCATION=9576.343638100088}}
+d-0 : Total Networking Energy Consumption for this device = 51894.65272873582 mJ
+6 m-0-0 Networking Tuples energy Map {dcns={OBJECT_LOCATION=56009.46336633651}}
+m-0-0 : Total Networking Energy Consumption for this device = 56009.46336633651 mJ
+9 m-0-1 Networking Tuples energy Map {dcns={OBJECT_LOCATION=56009.46336633651}}
+m-0-1 : Total Networking Energy Consumption for this device = 56009.46336633651 mJ
+12 m-0-2 Networking Tuples energy Map {dcns={OBJECT_LOCATION=56009.46336633651}}
+m-0-2 : Total Networking Energy Consumption for this device = 56009.46336633651 mJ
+15 m-0-3 Networking Tuples energy Map {dcns={DETECTED_OBJECT=44820.882895065064, OBJECT_LOCATION=11226.362649489332}}
+m-0-3 : Total Networking Energy Consumption for this device = 56047.2455445544 mJ
+
+=========================================================
+============== Tuples Networking CO2 Emission MAP RESULTS ==================
+3 cloud Networking Tuples CO2 Map {dcns={PTZ_PARAMS=3.2292815294728106E-7}}
+cloud : Total Networking CO2 Emissions for this device = 3.2292815294728106E-7 kg
+4 proxy-server Networking Tuples CO2 Map {dcns={PTZ_PARAMS=1.1292531252055798E-7, DETECTED_OBJECT=1.2090993055765172E-6, OBJECT_LOCATION=1.211380625219667E-6}}
+proxy-server : Total Networking CO2 Emissions for this device = 2.5334052433167423E-6 kg
+5 d-0 Networking Tuples CO2 Map {dcns={PTZ_PARAMS=4.322499999941971E-6, DETECTED_OBJECT=1.2611657828501486E-6, OBJECT_LOCATION=1.263545341138241E-6}}
+d-0 : Total Networking CO2 Emissions for this device = 6.847211123930361E-6 kg
+6 m-0-0 Networking Tuples CO2 Map {dcns={OBJECT_LOCATION=7.390137527502733E-6}}
+m-0-0 : Total Networking CO2 Emissions for this device = 7.390137527502733E-6 kg
+9 m-0-1 Networking Tuples CO2 Map {dcns={OBJECT_LOCATION=7.390137527502733E-6}}
+m-0-1 : Total Networking CO2 Emissions for this device = 7.390137527502733E-6 kg
+12 m-0-2 Networking Tuples CO2 Map {dcns={OBJECT_LOCATION=7.390137527502733E-6}}
+m-0-2 : Total Networking CO2 Emissions for this device = 7.390137527502733E-6 kg
+15 m-0-3 Networking Tuples CO2 Map {dcns={DETECTED_OBJECT=5.913866493098862E-6, OBJECT_LOCATION=1.4812561829187313E-6}}
+m-0-3 : Total Networking CO2 Emissions for this device = 7.395122676017593E-6 kg
