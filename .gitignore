@@ -5,5 +5,3 @@ bin/
 .project
 # Ignore Maven target directory
 target/
-# Ignore large Zenodo file
-EnergyLabelingFramework.zip
