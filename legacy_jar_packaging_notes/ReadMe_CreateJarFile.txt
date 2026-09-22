@@ -1,0 +1,7 @@
+MANIFEST.MF:
+Manifest-Version: 1.0
+Main-Class: org.fog.test.perfeval.LabellingDCNS
+Class-Path: jars/cloudsim-3.0.3.jar jars/cloudsim-3.0.3-sources.jar jars/cloudsim-examples-3.0.3.jar jars/cloudsim-examples-3.0.3-sources.jar jars/commons-math3-3.5/commons-math3-3.5.jar jars/guava-18.0.jar jars/json-simple-1.1.1.jar
+
+Then run this:
+jar cvfm LabellingDCNS.jar MANIFEST.MF -C /media/saeedeh/Data/PhD/Simulators/iFog_Simulator/IFogSim/_output/production/iFogSim2 .

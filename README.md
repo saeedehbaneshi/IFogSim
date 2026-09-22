@@ -1,68 +1,14 @@
-# iFogSim2 (The New Version)
-A Toolkit for Modeling and Simulation of Resource Management Techniques in Internet of Things, Edge and Fog Computing Environments with the following new features:
- * Mobility-support and Migration Management
-   * Supporting real mobility datasets
-   * Implementing different random mobility models 
- * Microservice Orchestration
- * Dynamic Distributed Clustering
- * Any Combinations of Above-mentioned Features
- * Full Compatibility with the Latest Version of the CloudSim (i.e., [CloudSim 5](https://github.com/Cloudslab/cloudsim/releases)) and [Previous iFogSim Version](https://github.com/Cloudslab/iFogSim1) and Tutorials
+# IFogSim Energy Labeling
 
-iFogSim2 currently encompasses several new usecases such as:
- * Audio Translation Scenario
- * Healthcare Scenario
- * Crowd-sensing Scenario
+Energy-labeling work on top of [IFogSim](https://github.com/saeedehbaneshi/IFogSim) (a CloudSim-based fog/edge computing simulator): running DCNS and VR-game topologies, extracting per-app/per-VM energy results, and producing labeled datasets (equal-width / percentile binning) for downstream analysis.
 
-# Cite IFogSim2
-```
-@article{ifogsim2preprint,
-  title={IFogSim2: An Extended iFogSim Simulator for Mobility, Clustering, and Microservice Management in Edge and Fog Computing Environments},
-  author={Mahmud, Redowan and Pallewatta, Samodha and Goudarzi, Mohammad and Buyya, Rajkumar},
-  journal={arXiv preprint arXiv:2109.05636},
-  year={2021}
-}
+This folder is the canonical, up-to-date copy of this work — it matches `origin/main` on GitHub exactly (commit `26d04e4`, tag `EnergyLabeling-v2`) and has a clean working tree.
 
-@article{ifogsim2JSS,
-  title={Ifogsim2: An extended ifogsim simulator for mobility, clustering, and microservice management in edge and fog computing environments},
-  author={Mahmud, Redowan and Pallewatta, Samodha and Goudarzi, Mohammad and Buyya, Rajkumar},
-  journal={Journal of Systems and Software},
-  pages={111351},
-  year={2022},
-  publisher={Elsevier}
-}
-```
+## History note
 
-# How to run iFogSim2 ?
-* Eclipse IDE:
-  * Create a Java project
-  * Inside the project directory, initialize an empty Git repository with the following command:
-  ```
-  git init
-  ```
-  * Add the Git repository of iFogSim2 as the `origin` remote:
-  ```
-  git remote add origin https://github.com/Cloudslab/iFogSim
-  ```
-  * Pull the contents of the repository to your machine:
-  ```
-  git pull origin main
-  ```
-  * Include the JARs to your project  
-  * Run the example files (e.g. TranslationServiceFog_Clustering.java, CrowdSensing_Microservices_RandomMobility_Clustering.java) to get started
+This project previously existed as **6 separate local clones** (`Simulators/iFog_Simulator/{IFogSim,IFogSimBackup,IFogSim_EnergyLabelingBackup,previous/iFogSim}`, `~/test`, `~/Downloads/test`) that had drifted apart over time — a symptom of not being tracked cleanly in git. Consolidated here on 2026-09-22:
 
-* IntelliJ IDEA:
-  * Clone the iFogSim2 Git repository to desired folder:
-  ```
-  git clone https://github.com/Cloudslab/iFogSim
-  ```
-  * Select "project from existing resources" from the "File" drop-down menu
-  * Verify the Java version
-  * Verify the external libraries in the "JARs" Folder are added to the project
-  * Run the example files (e.g. TranslationServiceFog_Clustering.java, CrowdSensing_Microservices_RandomMobility_Clustering.java) to get started
+- `legacy_jar_packaging_notes/` — a few small helper files (jar manifest, build readme, run script) found uncommitted in one of the old clones; kept for reference, never made it into a commit.
+- `Report_Saeedeh/.../Final/alternate_variants/` — an alternate version of one results spreadsheet found in an old clone, differs from the committed version; kept in case it matters, not verified which is "correct."
 
-
-# References
- * (Latest Version) Redowan Mahmud, Samodha Pallewatta , Mohammad Goudarzi, and Rajkumar Buyya, <A href="https://arxiv.org/abs/2109.05636">iFogSim2: An Extended iFogSim Simulator for Mobility, Clustering, and Microservice Management in Edge and Fog Computing Environments</A>, April 2022 (Accepted in Journal of Systems and Software) (Latest Version)
- * Harshit Gupta, Amir Vahid Dastjerdi , Soumya K. Ghosh, and Rajkumar Buyya, <A href="http://www.buyya.com/papers/iFogSim.pdf">iFogSim: A Toolkit for Modeling and Simulation of Resource Management Techniques in Internet of Things, Edge and Fog Computing Environments</A>, Software: Practice and Experience (SPE), Volume 47, Issue 9, Pages: 1275-1296, ISSN: 0038-0644, Wiley Press, New York, USA, September 2017.
- * Redowan Mahmud and Rajkumar Buyya, <A href="http://www.buyya.com/papers/iFogSim-Tut.pdf">Modelling and Simulation of Fog and Edge Computing Environments using iFogSim Toolkit</A>, Fog and Edge Computing: Principles and Paradigms, R. Buyya and S. Srirama (eds), 433-466pp, ISBN: 978-111-95-2498-4, Wiley Press, New York, USA, January 2019.
-
+**Not yet merged in:** `Simulators/iFog_Simulator/IFogSimBackup`, `previous/iFogSim`, and `IFogSim_EnergyLabelingBackup` still sit in their old location. They contain git history that was **never pushed to GitHub** (a separate local-only line of commits, tip `17352b1`, "Updated Energy Labeling with added JAR files" — pom.xml/Zenodo-packaging flavored work). Once GitHub auth is set up, that history should be pushed as an archive branch before those folders are cleaned up, so it isn't lost. `IFogSimBackup` also has some uncommitted analysis output (`LabellingResultParser.ipynb`, `Total_Labelling.csv`, a couple of results folders) worth reviewing before removal.
