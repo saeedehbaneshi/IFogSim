@@ -1,0 +1,103 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software, please cite the paper in preferred-citation. This repository is a
+  modified version of iFogSim2 (CLOUDS Laboratory, University of Melbourne), which builds on
+  iFogSim and CloudSim; please also cite iFogSim2 and iFogSim (see references). The author
+  listed below wrote the changes made in this repository since May 2023; the rest of the code
+  comes from iFogSim2 and the projects it builds on. This file describes the repository as a
+  whole; the archived version used for CCGrid 2025 is identified under identifiers.
+title: "iFogSim with application-level and communication energy accounting"
+type: software
+repository-code: "https://github.com/saeedehbaneshi/IFogSim"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.14944696"
+    description: "Zenodo concept DOI for all archived (tagged) versions of this repository"
+  - type: doi
+    value: "10.5281/zenodo.14969629"
+    description: >-
+      Zenodo archive of tag EnergyLabeling-v2 (commit 26d04e4, 2025-03-05), the version used
+      for CCGrid 2025. The default branch can contain later changes.
+authors:
+  - family-names: Baneshi
+    given-names: Saeedeh
+    orcid: "https://orcid.org/0000-0003-3899-5018"
+    affiliation: "University of Amsterdam"
+keywords:
+  - iFogSim
+  - CloudSim
+  - edge computing
+  - fog computing
+  - energy consumption
+  - simulation
+preferred-citation:
+  type: conference-paper
+  title: "Analyzing Per-Application Energy Consumption in a Multi-Application Computing Continuum"
+  authors:
+    - family-names: Baneshi
+      given-names: Saeedeh
+    - family-names: Pathania
+      given-names: Anuj
+    - family-names: Akesson
+      given-names: Benny
+    - family-names: Pimentel
+      given-names: Andy
+    - family-names: Varbanescu
+      given-names: Ana-Lucia
+  collection-title: "2024 9th International Conference on Fog and Mobile Edge Computing (FMEC)"
+  year: 2024
+  start: 30
+  end: 37
+  doi: "10.1109/FMEC62297.2024.10710253"
+references:
+  - type: article
+    title: "iFogSim2: An extended iFogSim simulator for mobility, clustering, and microservice management in edge and fog computing environments"
+    authors:
+      - family-names: Mahmud
+        given-names: Redowan
+      - family-names: Pallewatta
+        given-names: Samodha
+      - family-names: Goudarzi
+        given-names: Mohammad
+      - family-names: Buyya
+        given-names: Rajkumar
+    journal: "Journal of Systems and Software"
+    volume: 190
+    year: 2022
+    doi: "10.1016/j.jss.2022.111351"
+  - type: article
+    title: "iFogSim: A toolkit for modeling and simulation of resource management techniques in the Internet of Things, Edge and Fog computing environments"
+    authors:
+      - family-names: Gupta
+        given-names: Harshit
+      - family-names: Dastjerdi
+        given-names: Amir Vahid
+      - family-names: Ghosh
+        given-names: Soumya K.
+      - family-names: Buyya
+        given-names: Rajkumar
+    journal: "Software: Practice and Experience"
+    volume: 47
+    issue: 9
+    start: 1275
+    end: 1296
+    year: 2017
+    doi: "10.1002/spe.2509"
+  - type: conference-paper
+    title: "Empowering Sustainability: Energy Labeling of Digital Services Using Simulation"
+    authors:
+      - family-names: Baneshi
+        given-names: Saeedeh
+      - family-names: Pathania
+        given-names: Anuj
+      - family-names: Akesson
+        given-names: Benny
+      - family-names: Pimentel
+        given-names: Andy
+      - family-names: Varbanescu
+        given-names: Ana-Lucia
+    collection-title: "2025 IEEE 25th International Symposium on Cluster, Cloud and Internet Computing (CCGrid)"
+    year: 2025
+    start: 580
+    end: 585
+    doi: "10.1109/CCGRID64434.2025.00047"
